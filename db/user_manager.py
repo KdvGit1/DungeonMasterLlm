@@ -1,15 +1,7 @@
 import sqlite3
 import bcrypt
 import config
-
-# ─── BAĞLANTI ──────────────────────────────────────────────
-
-def get_connection():
-    conn = sqlite3.connect(config.sq_lite_path)
-    # tuple yerine sözlük gibi erişim sağlar
-    # örnek: user['username'] şeklinde erişebilirsin
-    conn.row_factory = sqlite3.Row
-    return conn
+from db.database import get_connection
 
 # ─── KAYIT ─────────────────────────────────────────────────
 

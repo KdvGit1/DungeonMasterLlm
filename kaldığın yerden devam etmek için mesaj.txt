@@ -1,0 +1,311 @@
+Harika düşünce! İşte o mesaj:
+
+---
+
+> Ben seninle birlikte Python ile yerel LLM destekli bir DnD Game Master sistemi geliştiriyorum. Aşağıdaki teknik detayları kullanıyorum:
+>
+> **Sistem:**
+> - OS: Windows (veya Linux)
+> - GPU: RTX 3060 12GB
+> - Model: qwen3.5:2b (Ollama üzerinde)
+> - Context length: 32768
+> - Embedding modeli: nomic-embed-text (Ollama)
+>
+> **Kullanılan kütüphaneler:** LangChain, ChromaDB, SQLite, bcrypt, PyPDF
+>
+> **Proje yapısı:**
+> ```
+> dnd-gm/
+> ├── main.py
+> ├── config.py
+> ├── game/
+> │   ├── game_state.py
+> │   ├── character_manager.py
+> │   └── dice.py
+> ├── rag/
+> │   ├── ingest.py
+> │   ├── retriever.py
+> │   └── vectorstore/
+> ├── db/
+> │   ├── database.py
+> │   ├── user_manager.py
+> │   └── session_manager.py
+> ├── prompts/
+> │   ├── system_prompt.py
+> │   └── templates.py
+> └── data/
+>     ├── rules/
+>     ├── characters/
+>     └── sessions/
+> ```
+>
+> **Tamamlanan modüller:**
+>
+> `config.py` ✅
+> ```python
+> MODEL = 'qwen3.5:2b'
+> BASE_URL = 'http://localhost:11434'
+> CONTEXT_LENGTH = 32768
+> TEMP = 0.9
+> SQ_LITE_PATH = 'data/dnd_gm.db'
+> CHROMA_PATH = 'rag/vector_store/'
+> EMBEDDING_MODEL = 'nomic-embed-text'
+> CHUNK_SIZE = 500
+> CHUNK_OVERLAP = 50
+> RETRIEVE_COUNT = 3
+> MESSAGE_HISTORY_SIZE = 20
+> CHARACTER_DIR = 'data/characters/'
+> RULES_DIR = 'data/rules/'
+> SESSION_DIR = 'data/sessions/'
+> ```
+>
+> `db/database.py` ✅
+> ```python
+> import sqlite3
+> import os
+> import config
+>
+> def get_connection():
+>     conn = sqlite3.connect(config.SQ_LITE_PATH)
+>     conn.row_factory = sqlite3.Row
+>     return conn
+>
+> def create_users_table(cursor):
+>     cursor.execute('''
+>         CREATE TABLE IF NOT EXISTS users (
+>             id INTEGER PRIMARY KEY AUTOINCREMENT,
+>             username TEXT UNIQUE NOT NULL,
+>             password_hash TEXT NOT NULL,
+>             role TEXT CHECK(role IN ('gm', 'player')) NOT NULL,
+>             created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+>         )
+>     ''')
+>
+> def create_characters_table(cursor):
+>     cursor.execute('''
+>         CREATE TABLE IF NOT EXISTS characters (
+>             id INTEGER PRIMARY KEY AUTOINCREMENT,
+>             user_id INTEGER NOT NULL,
+>             name TEXT NOT NULL,
+>             data TEXT NOT NULL,
+>             updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+>             FOREIGN KEY (user_id) REFERENCES users(id)
+>         )
+>     ''')
+>
+> def create_sessions_table(cursor):
+>     cursor.execute('''
+>         CREATE TABLE IF NOT EXISTS sessions (
+>             id INTEGER PRIMARY KEY AUTOINCREMENT,
+>             session_name TEXT NOT NULL,
+>             created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+>             is_active INTEGER DEFAULT 1
+>         )
+>     ''')
+>
+> def create_messages_table(cursor):
+>     cursor.execute('''
+>         CREATE TABLE IF NOT EXISTS messages (
+>             id INTEGER PRIMARY KEY AUTOINCREMENT,
+>             session_id INTEGER NOT NULL,
+>             user_id INTEGER,
+>             role TEXT CHECK(role IN ('user', 'assistant', 'system')) NOT NULL,
+>             content TEXT NOT NULL,
+>             timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+>             FOREIGN KEY (session_id) REFERENCES sessions(id),
+>             FOREIGN KEY (user_id) REFERENCES users(id)
+>         )
+>     ''')
+>
+> def initialize_db():
+>     os.makedirs(os.path.dirname(config.SQ_LITE_PATH), exist_ok=True)
+>     conn = get_connection()
+>     cursor = conn.cursor()
+>     create_users_table(cursor)
+>     create_characters_table(cursor)
+>     create_sessions_table(cursor)
+>     create_messages_table(cursor)
+>     conn.commit()
+>     conn.close()
+>     print("Veritabanı hazır.")
+> ```
+>
+> `db/user_manager.py` ✅
+> ```python
+> import sqlite3
+> import bcrypt
+> import config
+> from db.database import get_connection
+>
+> def register_user(username, password, role):
+>     password_hash = bcrypt.hashpw(
+>         password.encode('utf-8'),
+>         bcrypt.gensalt()
+>     )
+>     try:
+>         conn = get_connection()
+>         cursor = conn.cursor()
+>         cursor.execute('''
+>             INSERT INTO users (username, password_hash, role)
+>             VALUES (?, ?, ?)
+>         ''', (username, password_hash, role))
+>         conn.commit()
+>         conn.close()
+>         print(f"'{username}' kaydedildi.")
+>         return True
+>     except sqlite3.IntegrityError:
+>         print(f"'{username}' kullanıcı adı zaten alınmış.")
+>         return None
+>
+> def login_user(username, password):
+>     conn = get_connection()
+>     cursor = conn.cursor()
+>     cursor.execute('SELECT * FROM users WHERE username = ?', (username,))
+>     user = cursor.fetchone()
+>     conn.close()
+>     if user is None:
+>         print("Kullanıcı bulunamadı.")
+>         return None
+>     password_correct = bcrypt.checkpw(
+>         password.encode('utf-8'),
+>         user['password_hash']
+>     )
+>     if password_correct:
+>         print(f"Hoş geldin, {username}!")
+>         return dict(user)
+>     else:
+>         print("Şifre yanlış.")
+>         return None
+>
+> def get_user_by_id(user_id):
+>     conn = get_connection()
+>     cursor = conn.cursor()
+>     cursor.execute('SELECT * FROM users WHERE id = ?', (user_id,))
+>     user = cursor.fetchone()
+>     conn.close()
+>     if user is None:
+>         return None
+>     return dict(user)
+>
+> def is_gm(user):
+>     return user['role'] == 'gm'
+> ```
+>
+> `game/dice.py` ✅
+> ```python
+> import random
+>
+> def d4() -> int:
+>     return random.randint(1, 4)
+>
+> def d6() -> int:
+>     return random.randint(1, 6)
+>
+> def d8() -> int:
+>     return random.randint(1, 8)
+>
+> def d10() -> int:
+>     return random.randint(1, 10)
+>
+> def d12() -> int:
+>     return random.randint(1, 12)
+>
+> def d20() -> int:
+>     return random.randint(1, 20)
+>
+> def d100() -> int:
+>     return random.randint(1, 100)
+>
+> def roll(count, sides) -> int:
+>     total = 0
+>     for i in range(count):
+>         total += random.randint(1, sides)
+>     return total
+>
+> def roll_with_advantage() -> int:
+>     return max(d20(), d20())
+>
+> def roll_with_disadvantage() -> int:
+>     return min(d20(), d20())
+>
+> def get_modifier(score) -> int:
+>     return (score - 10) // 2
+>
+> def ability_check(modifier, dc) -> dict:
+>     roll_result = d20()
+>     total = roll_result + modifier
+>     return {
+>         "roll": roll_result,
+>         "modifier": modifier,
+>         "total": total,
+>         "dc": dc,
+>         "success": total >= dc
+>     }
+> ```
+>
+> `rag/ingest.py` ✅
+> ```python
+> import os
+> from langchain_community.document_loaders import PyPDFLoader, TextLoader
+> from langchain.text_splitter import RecursiveCharacterTextSplitter
+> from langchain_ollama import OllamaEmbeddings
+> from langchain_community.vectorstores import Chroma
+> import config
+>
+> def load_documents():
+>     documents = []
+>     for filename in os.listdir(config.RULES_DIR):
+>         filepath = os.path.join(config.RULES_DIR, filename)
+>         if filename.endswith('.pdf'):
+>             loader = PyPDFLoader(filepath)
+>             documents.extend(loader.load())
+>         elif filename.endswith('.txt'):
+>             loader = TextLoader(filepath, encoding='utf-8')
+>             documents.extend(loader.load())
+>     print(f"{len(documents)} döküman yüklendi.")
+>     return documents
+>
+> def split_documents(documents):
+>     splitter = RecursiveCharacterTextSplitter(
+>         chunk_size=config.CHUNK_SIZE,
+>         chunk_overlap=config.CHUNK_OVERLAP
+>     )
+>     chunks = splitter.split_documents(documents)
+>     print(f"{len(chunks)} chunk oluşturuldu.")
+>     return chunks
+>
+> def create_vectorstore(chunks):
+>     embeddings = OllamaEmbeddings(
+>         model=config.EMBEDDING_MODEL,
+>         base_url=config.BASE_URL
+>     )
+>     vectorstore = Chroma.from_documents(
+>         documents=chunks,
+>         embedding=embeddings,
+>         persist_directory=config.CHROMA_PATH
+>     )
+>     print(f"ChromaDB'ye kaydedildi → {config.CHROMA_PATH}")
+>
+> def ingest():
+>     if not os.path.exists(config.RULES_DIR) or not os.listdir(config.RULES_DIR):
+>         print("Kural dosyası bulunamadı.")
+>         return
+>     if os.path.exists(config.CHROMA_PATH) and os.listdir(config.CHROMA_PATH):
+>         print("VektörDB zaten mevcut, ingest atlanıyor.")
+>         return
+>     documents = load_documents()
+>     chunks = split_documents(documents)
+>     create_vectorstore(chunks)
+>     print("İngest tamamlandı!")
+>
+> if __name__ == "__main__":
+>     ingest()
+> ```
+>
+> **Sıradaki modül: `rag/retriever.py` (6. modül)**
+>
+> Buradan devam et. Modülleri geliştirme sırasına göre teker teker açıklayarak ilerle. Ben DnD hakkında çok az bilgim var, bu yüzden DnD mekaniklerini de açıklayarak ilerle. Gerektiğinde kodu sen yaz, gerektiğinde benden yazmanı iste.
+
+---
+
+Bu mesajı bir yere kaydet, yeni sohbette yapıştırınca kaldığın yerden devam ederiz! 🎲
