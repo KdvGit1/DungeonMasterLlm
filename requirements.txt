@@ -1,0 +1,7 @@
+langchain-chroma
+langchain-ollama
+langchain-community
+langchain-text-splitters
+requests
+PyYAML
+bcrypt
