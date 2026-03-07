@@ -1,0 +1,16 @@
+abilities:
+  charisma: 10
+  constitution: 16
+  dexterity: 14
+  intelligence: 11
+  strength: 16
+  wisdom: 10
+armor_class: 12
+background: drunk bar fighter
+class: Savaşçı
+hp: 13
+level: 1
+max_hp: 13
+name: kdv
+race: İnsan
+skills: []

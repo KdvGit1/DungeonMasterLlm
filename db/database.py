@@ -3,7 +3,9 @@ import os
 import config
 
 def get_connection():
-    return sqlite3.connect(config.sq_lite_path)
+    conn = sqlite3.connect(config.sq_lite_path)
+    conn.row_factory = sqlite3.Row  # satırları dict gibi erişilebilir yap
+    return conn
 
 # ─── TABLO OLUŞTURMA ───────────────────────────────────────
 

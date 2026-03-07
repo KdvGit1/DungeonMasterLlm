@@ -1,7 +1,8 @@
-model = 'qwen3.5:2b'
+model = 'qwen3.5:2b-q4_K_M'
 base_url = 'http://localhost:11434'
 context_length = 32768
-temp = 0.9
+temp = 0.6
+num_predict = 1000
 
 sq_lite_path = 'data/dnd_gm.db'
 
