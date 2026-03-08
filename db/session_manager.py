@@ -67,15 +67,13 @@ def load_messages(session_id):
     return [{"role": row["role"], "content": row["content"]} for row in rows]
 
 # ─── SON N MESAJI GETİR ────────────────────────────────────
-
 def get_recent_messages(session_id):
     conn = get_connection()
-    rows = conn.execute(
-        # önce en yeni mesajları al (DESC), sonra ters çevir (eskiden yeniye)
-        "SELECT role, content FROM messages WHERE session_id = ? ORDER BY timestamp DESC LIMIT ?",
-        (session_id, config.message_history_size)
-    ).fetchall()
+    rows = conn.execute('''
+        SELECT role, content FROM messages
+        WHERE session_id = ?
+        ORDER BY id DESC
+        LIMIT ?
+    ''', (session_id, config.message_history_size)).fetchall()
     conn.close()
-    # listeyi ters çevir, eskiden yeniye sıralı olsun
-    messages = [{"role": row["role"], "content": row["content"]} for row in rows]
-    return list(reversed(messages))
+    return [{"role": row["role"], "content": row["content"]} for row in reversed(rows)]

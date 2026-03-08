@@ -9,7 +9,9 @@ from db.session_manager import (
 )
 from game.character_manager import load_character_from_yaml
 from game.game_state import GameState
-from game.dice import ability_check
+import re
+from game.dice import d20, get_modifier
+from game.npc_manager import parse_and_save_npcs          
 from prompts.system_prompt import build_system_prompt
 from rag.ingest import ingest
 from game.character_creator import create_character
@@ -27,7 +29,7 @@ def ask_gm(messages, system_prompt):
             "messages": messages,
             "system": system_prompt,
             "stream": True,
-            "think": False,
+            "think": False,                               # ← thinking kapalı
             "options": {
                 "num_ctx": config.context_length,
                 "temperature": config.temp,
@@ -38,11 +40,11 @@ def ask_gm(messages, system_prompt):
     )
 
     full_response = ""
-    full_thinking = ""
     prompt_tokens = 0
     response_tokens = 0
     first_chunk_time = None
-    thinking_started = False
+
+    print("\n🧙 GM: ", end="", flush=True)
 
     for line in response.iter_lines():
         if not line:
@@ -54,22 +56,9 @@ def ask_gm(messages, system_prompt):
             first_chunk_time = time.time() - start
 
         message = chunk.get("message", {})
-        thinking = message.get("thinking", "")
         content = message.get("content", "")
 
-        # thinking ayrı field'dan geliyor
-        if thinking:
-            if not thinking_started:
-                print("\n💭 Thinking: ", end="", flush=True)
-                thinking_started = True
-            print(thinking, end="", flush=True)
-            full_thinking += thinking
-
-        # asıl cevap
         if content:
-            if thinking_started and not full_response:
-                # thinking bitti, cevap başlıyor
-                print("\n\n🧙 GM: ", end="", flush=True)
             print(content, end="", flush=True)
             full_response += content
 
@@ -82,6 +71,54 @@ def ask_gm(messages, system_prompt):
     print(f"📊 Prompt : {prompt_tokens} token  |  Cevap: {response_tokens} token")
 
     return full_response
+
+# ─── ZAR AT ────────────────────────────────────────────────
+
+def handle_roll(gm_response, player_name, game_state, session_id, user):
+    """
+    GM cevabından ROLL d20 + [ability] vs DC [number] parse eder,
+    dice.py ile otomatik atar, sonucu DB'ye kaydeder.
+    """
+    pattern = r'ROLL\s+d20\s*\+\s*(\w+)\s+vs\s+DC\s+(\d+)'
+    match = re.search(pattern, gm_response, re.IGNORECASE)
+
+    if not match:
+        return None  # ROLL var ama format tutarsız
+
+    ability = match.group(1).lower()
+    dc = int(match.group(2))
+
+    # karakterden ability score çek
+    char = game_state.characters[0]
+    abilities = char.get("abilities", {})
+    score = abilities.get(ability, 10)
+    modifier = get_modifier(score)
+
+    # zar at
+    roll_result = d20()
+    total = roll_result + modifier
+
+    # sonucu ekrana yaz
+    print("\n" + "─" * 50)
+    print(f"🎲 {ability.capitalize()} check vs DC {dc}")
+    print(f"   Zar: {roll_result} | Modifier: {modifier:+d} | Toplam: {total} | DC: {dc}")
+
+    if roll_result == 20:
+        print("   ⭐ KRİTİK BAŞARI!")
+    elif roll_result == 1:
+        print("   💀 KRİTİK BAŞARISIZLIK!")
+    elif total >= dc:
+        print("   ✅ BAŞARILI")
+    else:
+        print("   ❌ BAŞARISIZ")
+
+    outcome = "SUCCESS" if total >= dc else "FAIL"
+    roll_message = (
+        f"{player_name} rolled {ability}: "
+        f"{roll_result} + {modifier} = {total} vs DC {dc} ({outcome})"
+    )
+    save_message(session_id, user.get("id"), "user", roll_message)
+    return roll_message
 
 # ─── GİRİŞ EKRANI ──────────────────────────────────────────
 
@@ -176,33 +213,45 @@ def game_loop(user, session_id, game_state):
     valid_names = [c['name'].lower() for c in game_state.characters]
     names_display = ", ".join([c['name'] for c in game_state.characters])
 
-    # intro system prompt'a gömülü, mesaj geçmişine kaydedilmiyor
-    intro_message = "Begin the adventure. Set the opening scene."
-
-    system_prompt = build_system_prompt(
-        game_state.characters, intro_message, game_state
+    intro_message = (
+        "The players have just begun their adventure. "
+        "Set the scene in English. Maximum 3 sentences. "
+        "Describe where they are and end with an open situation."
     )
 
-    print("⏳ GM sahneyi hazırlıyor...\n")
+    rag_query = "begin adventure exploration"
+
+    system_prompt = build_system_prompt(
+        game_state.characters, rag_query, game_state
+    )
+
+    print("⏳ GM başlangıç sahnesini hazırlıyor...\n")
     gm_intro = ask_gm(
         [{"role": "user", "content": intro_message}],
         system_prompt
     )
+    gm_intro = parse_and_save_npcs(gm_intro) 
+    game_state.set_scene(gm_intro[:100])             
+
     print("\n" + "─" * 50)
 
-    # intro'yu kaydet ama kısa tut
     save_message(session_id, None, "user", intro_message)
     save_message(session_id, None, "assistant", gm_intro)
 
     while True:
+
+        # ── Karakter adı kontrolü ──
         while True:
             print(f"\nAktif karakterler: {names_display}")
             player_name = input("Karakter adı (veya 'quit'): ").strip()
+
             if player_name.lower() == "quit":
                 return
+
             if not player_name:
                 print("⚠️  Karakter adı boş olamaz.")
                 continue
+
             if player_name.lower() in valid_names:
                 player_name = next(
                     c['name'] for c in game_state.characters
@@ -212,10 +261,13 @@ def game_loop(user, session_id, game_state):
             else:
                 print(f"⚠️  '{player_name}' bulunamadı. Geçerli: {names_display}")
 
+        # ── Eylem ──
         action = input(f"{player_name} ne yapıyor? > ").strip()
+
         if not action:
             print("⚠️  Eylem boş olamaz.")
             continue
+
         if action.lower() == "quit":
             return
 
@@ -223,28 +275,30 @@ def game_loop(user, session_id, game_state):
         save_message(session_id, user.get("id"), "user", user_message)
 
         recent_messages = get_recent_messages(session_id)
+        print(f"\nDEBUG mesaj sayısı: {len(recent_messages)}")
+        for m in recent_messages:
+            print(f"  [{m['role']}]: {m['content'][:60]}")
+
         system_prompt = build_system_prompt(
             game_state.characters, action, game_state
         )
 
         print("\n⏳ GM düşünüyor...\n")
         gm_response = ask_gm(recent_messages, system_prompt)
+        gm_response = parse_and_save_npcs(gm_response)
+        game_state.set_scene(gm_response[:100])    # ← YENİ
 
+        # ── Zar gerekli mi? ──
         if "ROLL" in gm_response.upper():
-            print("\n" + "─" * 50)
-            print("🎲 Zar atma zamanı!")
-            try:
-                roll_input = int(input("Zarını at (1-20): ").strip())
-                modifier = int(input("Modifier (bilmiyorsan 0): ").strip())
-                total = roll_input + modifier
-                print(f"Toplam: {roll_input} + {modifier} = {total}")
-                roll_message = f"{player_name} rolled: {roll_input} + {modifier} = {total}"
-                save_message(session_id, user.get("id"), "user", roll_message)
+            roll_result = handle_roll(
+                gm_response, player_name, game_state, session_id, user
+            )
+            if roll_result:
                 recent_messages = get_recent_messages(session_id)
                 print("\n⏳ GM sonucu değerlendiriyor...\n")
                 gm_response = ask_gm(recent_messages, system_prompt)
-            except ValueError:
-                print("⚠️  Geçersiz sayı.")
+                gm_response = parse_and_save_npcs(gm_response)
+                game_state.set_scene(gm_response[:100])
 
         print("\n" + "─" * 50)
         save_message(session_id, None, "assistant", gm_response)

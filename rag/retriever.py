@@ -40,3 +40,21 @@ def get_relevant_rules(query):
         rules_text += f"Kural {i}:\n{doc.page_content}\n\n"
 
     return rules_text
+
+if __name__ == "__main__":
+    test_queries = [
+        "attack roll",
+        "poison damage",
+        "initiative combat",
+        "saving throw"
+    ]
+    
+    print("RAG Test Başlıyor...\n")
+    for query in test_queries:
+        print(f"🔍 Sorgu: '{query}'")
+        result = get_relevant_rules(query)
+        if result:
+            print(f"✅ Sonuç:\n{result[:300]}...")
+        else:
+            print("❌ Sonuç bulunamadı")
+        print("─" * 50)
