@@ -1,0 +1,35 @@
+id: 02c_bandit_ambush
+title: "The Wolf's Snare"
+
+scene: >
+  A whistle rings out through the trees. Suddenly, three men wearing ragged 
+  cloaks and wooden wolf masks emerge from the fog. They have crossbows 
+  leveled at your chest. "The Master demands a toll for walking in his woods," 
+  one of them sneers. "Your gold, or your blood. Your choice, traveler."
+
+gm_instructions: >
+  This is a tactical encounter. The bandits are arrogant but disciplined. 
+  They are not just thieves; they are cultists. They will try to take 
+  the players alive as 'sacrifices' if they can, but will fight to the death 
+  if the players mention the Dragon or the children.
+
+available_actions: >
+  - Attack immediately: ROLL for Initiative
+  - Intimidate them: ROLL d20 + Charisma vs DC 16 (One bandit might flee)
+  - Pay the toll: Costs all your gold; they let you pass but will stalk you
+  - Deceive them: "I'm here to join the Master." ROLL d20 + Deception vs DC 15
+
+npcs:
+  - name: Kraz
+    role: Bandit Leader
+    appearance: Tall, wiry, wearing a necklace of human ears
+    personality: Cruel, talkative, fanatically loyal to Xaradon
+    secret: He has a map in his pocket leading to the 'Hatchery' in the bandit camp.
+
+triggers:
+  - condition: "player defeats the bandits and loots the map"
+    next_node: "03_bandit_camp"
+  - condition: "player is defeated/captured"
+    next_node: "03b_prison_cages"
+  - condition: "player successfully deceives them and follows them to camp"
+    next_node: "03_bandit_camp"

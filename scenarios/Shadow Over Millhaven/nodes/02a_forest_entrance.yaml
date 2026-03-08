@@ -1,0 +1,32 @@
+id: 02a_forest_entrance
+title: "The Edge of Silence"
+
+scene: >
+  As you leave the safety of Millhaven's walls, the natural sounds of the night 
+  abruptly stop. The trees here are twisted, their leaves a sickly, oily grey. 
+  A thick, low-hanging mist clings to the ground, smelling of wet earth and 
+  something metallic. You see several paths, but the one leading deeper into 
+  the woods is marked by broken branches and heavy bootprints.
+
+gm_instructions: >
+  The forest should feel alive and hostile. Describe the "unnatural" silence. 
+  If the player has a high passive perception, mention they feel like the trees 
+  are leaning toward them. This is where the tracking begins.
+
+available_actions: >
+  - Track the bootprints: ROLL d20 + Survival vs DC 12 (Leads directly to the ambush)
+  - Look for signs of the children: ROLL d20 + Investigation vs DC 14 (Finds a scrap of Leo's tunic on a thorn bush)
+  - Move quietly: ROLL d20 + Stealth vs DC 13 (Gives advantage if an ambush occurs)
+  - Listen to the forest: ROLL d20 + Perception vs DC 15 (Hear distant, rhythmic chanting or a low growl)
+
+npcs: []
+
+triggers:
+  - condition: "player follows the main tracks or moves deeper"
+    next_node: "02c_bandit_ambush"
+  - condition: "player wanders off the path to investigate the smell"
+    next_node: "02b_corrupted_grove"
+  - condition: "player gets scared and returns to the village"
+    next_node: "00_village_gates"
+  - condition: "player follows a different path avoiding the main tracks"
+    next_node: "02d_bandit_road"

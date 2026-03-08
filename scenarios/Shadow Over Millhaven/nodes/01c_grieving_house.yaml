@@ -1,0 +1,31 @@
+id: 01c_grieving_house
+title: "The Weaver's Cottage"
+
+scene: >
+  You knock on the door of a small, unkempt cottage. Inside, the hearth is cold. 
+  Yarn and unfinished fabrics are scattered everywhere. A woman, Elara, sits in 
+  a rocking chair, staring blankly at a small, wooden toy sword on the floor. 
+  She looks up, her eyes red and hollow.
+
+gm_instructions: >
+  Focus on the emotional weight of the missing children. Elara is broken. 
+  She doesn't care about gold; she just wants her son, Leo, back. She holds a 
+  crucial piece of the puzzle: the bandits didn't take him, something worse did.
+
+available_actions: >
+  - Gently question Elara about the night Leo vanished: She will cry and explain.
+  - Look around the boy's room: ROLL d20 + Investigation vs DC 12 (Find strange, muddy footprints that look almost reptilian, not human boots)
+  - Offer to help: She promises her family heirloom, a "Ring of Warmth", if they bring Leo back.
+
+npcs:
+  - name: Elara
+    role: Grieving Mother / Weaver
+    appearance: Pale, messy hair, wearing a dark shawl
+    personality: Depressed, angry at the town's inaction, desperate
+    secret: She saw what actually happened. "It wasn't wolves. It wasn't men. A shadow blotted out the moon, and the wind smelled of sickness. Men in wolf masks bowed to it."
+
+triggers:
+  - condition: "player vows to find the boy and heads to the dangerous forest"
+    next_node: "02a_forest_entrance"
+  - condition: "player goes back to confront the innkeeper or guards"
+    next_node: "01_tavern"

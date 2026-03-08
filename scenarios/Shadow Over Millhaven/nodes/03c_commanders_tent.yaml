@@ -1,0 +1,26 @@
+id: 03c_commanders_tent
+title: "The Shadow Command"
+
+scene: >
+  This tent is filled with stolen riches, but also strange alchemical 
+  equipment. On a large oak table lies a map of the region, but Millhaven 
+  is crossed out with a green wax seal. A letter, half-written, lies open. 
+  The air here is thick with the smell of sulfur and poisonous herbs.
+
+gm_instructions: >
+  This is the 'Investigation' node of the camp. The letter is proof of 
+  the village leadership's betrayal. If players find it, they have 
+  leverage over the village after the dragon is dealt with.
+
+available_actions: >
+  - Read the half-written letter: Reveals that the Mayor was promised eternal life in exchange for the children.
+  - Search for loot: ROLL d20 + Investigation vs DC 14 (Finds a 'Potion of Poison Resistance' - VERY useful for the dragon!)
+  - Examine the map: ROLL d20 + Perception vs DC 13 (Finds a secret path leading up the 'Acid Peaks')
+
+npcs: []
+
+triggers:
+  - condition: "player finishes investigating and leaves the tent"
+    next_node: "03_bandit_camp"
+  - condition: "player takes the secret path on the map"
+    next_node: "04_mountain_climb"

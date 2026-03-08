@@ -1,0 +1,29 @@
+id: 03d_cultist_altar
+title: "The Altar of Emerald Breath"
+
+scene: >
+  Hidden behind the main camp is a stone altar carved with draconic runes. 
+  A hooded cult leader is chanting in Draconic, holding a vial of green 
+  liquid over a pile of silver dragon scales. The scales are smoking and 
+  turning black as he pours the liquid.
+
+gm_instructions: >
+  This is a 'pre-boss' fight. The cult leader is preparing a ritual to 
+  buff the dragon Xaradon. If the players stop him here, the final 
+  dragon fight will be slightly easier.
+
+available_actions: >
+  - Interrupt the ritual with an attack: Surprise round if Stealth > 14
+  - Sabotage the altar: ROLL d20 + Arcana vs DC 15 (Causes an explosion, damaging the cultists)
+  - Listen to the chant: ROLL d20 + History/Religion vs DC 14 (Understand that they are "unmaking" the Silver Protector's soul)
+
+npcs:
+  - name: "High Priest Malakor"
+    role: Cult Leader
+    appearance: Thin, pale, eyes glowing with a faint green light
+    personality: Fanatical, speaks in whispers, thinks he is becoming a dragon
+    secret: He is the one who poisoned the Silver Dragon originally.
+
+triggers:
+  - condition: "Malakor is defeated or players flee upward"
+    next_node: "04_mountain_climb"

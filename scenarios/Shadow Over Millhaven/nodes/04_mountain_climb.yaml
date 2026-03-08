@@ -1,0 +1,34 @@
+id: 04_mountain_climb
+title: "The Acid Peaks"
+
+scene: >
+  The air grows thin and yellow here. Thick clouds of chlorine gas swirl 
+  around the jagged rock faces. You see the remains of a once-beautiful 
+  silver dragon's wing pinned to the cliffside by massive iron harpoons. 
+  The entrance to the lair—a gaping hole that looks like a screaming mouth—
+  is just a hundred feet above, guarded by two elite cultists in heavy armor.
+
+gm_instructions: >
+  Environmental hazard is key here. Every 2 turns, the gas shifts. 
+  Unless players have protection, they take minor poison damage. 
+  The atmosphere should feel like they are entering the belly of a beast. 
+  Describe the "hissing" sound of the acid rain.
+
+available_actions: >
+  - Use the poison resistance potion: Grants immunity to the gas for the climb.
+  - Scale the cliff: ROLL d20 + Athletics vs DC 16 (Avoids the front guards)
+  - Bluff the guards: "We have more sacrifices." ROLL d20 + Deception vs DC 17
+  - Inspect the silver wing: ROLL d20 + Arcana/History vs DC 13 (Realize the silver dragon's soul is being used as a battery for the green fog)
+
+npcs:
+  - name: "The Silence"
+    role: Elite Guards
+    appearance: Two silent giants in full plate, their visors glowing green
+    personality: Mechanical, obedient, do not speak
+    secret: They are undead shells, piloted by Xaradon's minor magic.
+
+triggers:
+  - condition: "player enters the cave mouth"
+    next_node: "04b_dragons_lair"
+  - condition: "player falls or retreats"
+    next_node: "03_bandit_camp"

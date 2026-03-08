@@ -1,0 +1,24 @@
+id: 01_tavern_cellar
+title: "The Rusty Flagon - Cellar"
+
+scene: >
+  The cellar is cold and smells of damp earth and sour ale. Rows of heavy barrels 
+  line the walls. In the far corner, behind a stack of empty crates, you notice 
+  a small, flickering green candle burning on a makeshift altar made of a 
+  shipping crate. A list of names—villagers' names—is pinned to the wall.
+
+gm_instructions: >
+  This is the 'smoking gun' for Borin's betrayal. The list shows who was 
+  "offered" to the Black Wolves. If Borin is here, he is pleading for his life. 
+  If players are sneaking, they find evidence of a tunnel entrance.
+
+available_actions: >
+  - Search the altar: Find a "Wolf-Head Ring" (Used to bypass some bandit checks)
+  - Examine the list: Realize the Mayor's name is at the bottom, signed in green ink.
+  - Confront Borin: He confesses the cult threatened to burn the inn first.
+
+triggers:
+  - condition: "player investigates the tunnel entrance behind the barrels"
+    next_node: "cult_tunnel"
+  - condition: "player goes back upstairs"
+    next_node: "01_tavern"

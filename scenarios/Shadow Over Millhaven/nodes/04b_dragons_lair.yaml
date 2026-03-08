@@ -1,0 +1,40 @@
+id: 04b_dragons_lair
+title: "Xaradon's Emerald Sanctum"
+
+scene: >
+  The interior of the mountain is a massive cavern filled with piles 
+  of rusted armor and corroded silver coins. In the center, a large 
+  pool of bubbling green acid serves as a throne. Atop a mound of 
+  treasure, a young green dragon with sleek, emerald scales and 
+  intelligent, golden eyes watches you. He doesn't attack immediately. 
+  Instead, he lets out a puff of toxic smoke and chuckles. 
+  "So... the village sent more 'heroes' to pay the debt? Or have you 
+  come to offer me a better deal?"
+
+gm_instructions: >
+  Xaradon is highly intelligent and arrogant. He prefers to corrupt 
+  heroes rather than kill them. He will offer them gold, power, or 
+  even the "truth" about the village leaders' cowardice to turn them 
+  to his side. Only attacks if insulted or if players move toward 
+  the ritual circle at the back.
+
+available_actions: >
+  - Negotiate with Xaradon: He offers 5,000 gold and a title if they leave now.
+  - Provoke him: "We know you're just a parasite on the silver dragon's grave." (Starts combat)
+  - Search for a tactical advantage: ROLL d20 + Perception vs DC 15 (Notice a loose stalactite above his head)
+  - Attack from the shadows: Sneak attack if Stealth > 16
+
+npcs:
+  - name: Xaradon
+    role: Young Green Dragon / Final Boss
+    appearance: Sleek green scales, long neck, jagged horns, toxic breath
+    personality: Manipulative, cruel, enjoys psychological torture
+    secret: He is actually wounded from the previous fight with the Silver Dragon and is bluffing about his full strength.
+
+triggers:
+  - condition: "combat starts and dragon is reduced to 0 HP"
+    next_node: "ending_hero"
+  - condition: "player accepts Xaradon's offer to join him"
+    next_node: "ending_dark"
+  - condition: "player flees the cavern in terror"
+    next_node: "ending_flee"

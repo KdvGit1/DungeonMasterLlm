@@ -1,0 +1,43 @@
+id: 01_tavern
+title: "The Rusty Flagon"
+
+scene: >
+  The tavern is surprisingly quiet. A few locals sit hunched over their tankards, 
+  avoiding eye contact. The smell of stale ale and burnt stew hangs in the air. 
+  Behind the bar, a sweaty, overweight dwarf furiously scrubs a mug that is 
+  already clean. A notice board sits in the corner, mostly empty except for a 
+  torn drawing of a missing child.
+
+gm_instructions: >
+  Borin is nervous. He wants the players gone before the Black Wolves come for 
+  their weekly tribute. He will lie and say the roads are safe during the day. 
+  Let players freely talk to locals. If they snoop around the bar, they might 
+  notice Borin hiding something.
+
+available_actions: >
+  - Ask Borin for a room: 1 silver piece. Borin insists they lock their doors at night.
+  - Ask Borin about the missing children: He gets defensive, blames wild wolves.
+  - Eavesdrop on the locals: ROLL d20 + Perception vs DC 13 (Hear whispers about "tribute" and "The Weaver's daughter")
+  - Snoop behind the counter: ROLL d20 + Stealth vs DC 15 (Finds a hidden ledger with names and gold amounts, plus a crude wooden wolf amulet)
+
+npcs:
+  - name: Borin
+    role: Innkeeper
+    appearance: Sweaty dwarf, greasy beard, wearing a tight apron
+    personality: Falsely cheerful, easily flustered, tries to divert conversation
+    secret: He is paying the Black Wolves cult to leave the tavern alone. He even tipped them off about which houses to take the children from.
+  - name: Old Silas
+    role: Town Drunk / Former Priest
+    appearance: Rags, smells of cheap wine, missing an eye
+    personality: Rambles, speaks in riddles, grabs players' sleeves
+    secret: "He knows the silver dragon is dead. He whispers: 'The silver scales rusted, the green breath chokes the roots.'"
+
+triggers:
+  - condition: "player decides to visit the missing children's families or asks about the Weaver"
+    next_node: "01c_grieving_house"
+  - condition: "player forces Borin to confess or attacks him"
+    next_node: "01_tavern_cellar"
+  - condition: "player goes outside to explore the ruined temple Silas mentioned"
+    next_node: "01b_abandoned_temple"
+  - condition: "player leaves the village to hunt the bandits"
+    next_node: "02a_forest_entrance"

@@ -1,0 +1,36 @@
+id: 00_village_gates
+title: "The Gates of Millhaven"
+
+scene: >
+  Heavy, unnaturally cold rain beats down on the muddy road leading to Millhaven. 
+  The village is surrounded by a rotting wooden palisade. Two guards stand by 
+  the heavy iron gate, shivering in their cloaks. They clutch their spears 
+  tightly, aiming them not at you, but nervously at the dark treeline behind you. 
+  Beyond the gates, the faint glow of a tavern sign swings in the wind.
+
+gm_instructions: >
+  Set a paranoid and oppressive mood. The guards are terrified of the dark. 
+  They don't want to let heavily armed strangers in, but they also don't want 
+  to stay outside talking. If players ask about the woods, guards whisper about 
+  "The Black Wolves" and "things that take you in the fog."
+
+available_actions: >
+  - Persuade the guards to open the gate: ROLL d20 + Charisma vs DC 12
+  - Bribe the guards: Costs 2 gold, automatic success
+  - Intimidate: ROLL d20 + Strength vs DC 15 (Guards open it but warn the tavern)
+  - Examine the wooden palisade: ROLL d20 + Investigation vs DC 13 (Notice deep, acidic burn marks, not regular rot)
+
+npcs:
+  - name: Garret
+    role: Gate Guard
+    appearance: Young, pale, dark circles under his eyes, rusty chainmail
+    personality: Jumpy, stammers when speaking, desperate to lock the gate
+    secret: He saw green lightning strike the woods the night the children vanished, but the Mayor told him to keep his mouth shut.
+
+triggers:
+  - condition: "player successfully enters the village and walks towards the inn"
+    next_node: "01_tavern"
+  - condition: "player asks about a place to pray or the old ruins"
+    next_node: "01b_abandoned_temple"
+  - condition: "player turns around and walks straight into the dark woods"
+    next_node: "02a_forest_entrance"

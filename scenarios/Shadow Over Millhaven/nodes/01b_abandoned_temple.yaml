@@ -1,0 +1,29 @@
+id: 01b_abandoned_temple
+title: "Shrine of the Silver Scale"
+
+scene: >
+  At the edge of the village sits a ruined stone shrine. The roof has caved in. 
+  A stone statue of a majestic dragon, once painted silver, is now covered in 
+  thick, unnatural green moss. The air here smells faintly of bleach and acid. 
+  The large iron doors to the catacombs below are chained shut from the outside.
+
+gm_instructions: >
+  This area is for investigation and world-building. The green moss is actually 
+  corrosive. Players who touch it without care will get burned. The chained doors 
+  suggest something is being kept IN, rather than keeping people out.
+
+available_actions: >
+  - Inspect the statue closely: ROLL d20 + Religion vs DC 12 (Recognize Bahamut or a local Silver Dragon deity of protection)
+  - Examine the green moss/acid smell: ROLL d20 + Nature vs DC 14 (Realize this is residue from a Green Dragon's poison breath)
+  - Examine the chains on the door: ROLL d20 + Investigation vs DC 13 (The lock has a symbol of a Black Wolf carved into it)
+  - Try to break the chains: ROLL d20 + Strength vs DC 16 (Opens the path to the catacombs)
+
+npcs: []
+
+triggers:
+  - condition: "player breaks the chains and enters the dark catacombs below"
+    next_node: "cult_tunnel"
+  - condition: "player returns to the tavern with this new information"
+    next_node: "01_tavern"
+  - condition: "player goes to speak with the missing children's families"
+    next_node: "01c_grieving_house"

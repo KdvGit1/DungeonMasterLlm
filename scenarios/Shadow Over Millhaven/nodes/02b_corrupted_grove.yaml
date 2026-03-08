@@ -1,0 +1,32 @@
+id: 02b_corrupted_grove
+title: "The Choking Grove"
+
+scene: >
+  You stumble into a clearing where the water in a small pond has turned 
+  a bubbling, neon green. Dead fish float on the surface, and the skeletons 
+  of deer lie dissolved near the bank. In the center of the pond stands 
+  a dying treant, its bark melting away as if by acid. The air is hard to breathe.
+
+gm_instructions: >
+  This is a 'hazard' node. The air is toxic. If players stay too long or 
+  touch the water, they should take minor acid damage. The Treant is 
+  barely conscious but can provide a massive lore dump if saved or spoken to.
+
+available_actions: >
+  - Investigate the water: ROLL d20 + Nature vs DC 15 (Confirm it's Green Dragon's acidic breath residue)
+  - Try to heal the Treant: Use 'Lesser Restoration' or ROLL d20 + Medicine vs DC 18
+  - Loot the skeletons: ROLL d20 + Investigation vs DC 13 (Find a 'Dagger of Venom' or old coins)
+  - End the Treant's suffering: A mercy kill that grants a "Forest's Blessing" (+1 to next Nature roll)
+
+npcs:
+  - name: Gnarlroot
+    role: Dying Treant
+    appearance: A massive oak tree with a weeping, wooden face, dripping green sap
+    personality: Pain-racked, ancient, mournful
+    secret: "The Silver One didn't fly away. He was brought down by treachery from within the village before the Green One finished him."
+
+triggers:
+  - condition: "player leaves the grove to find the source of the poison"
+    next_node: "02d_bandit_road"
+  - condition: "player heads back toward the main forest path"
+    next_node: "02a_forest_entrance"

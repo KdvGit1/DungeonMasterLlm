@@ -1,0 +1,27 @@
+id: 02d_bandit_road
+title: "The Trail of Shadows"
+
+scene: >
+  The path narrows, flanked by steep rocky cliffs. You see torches flickering 
+  in the distance. This is clearly the main approach to the Black Wolves' 
+  stronghold. Sentries are posted on the ledges above. You can hear the 
+  sound of heavy iron cages being dragged and the faint, heart-wrenching 
+  cry of a child.
+
+gm_instructions: >
+  Focus on the sounds. The cries of the children should motivate the players. 
+  The area is heavily guarded. This node serves as a transition to the 
+  Region 3 (The Camp).
+
+available_actions: >
+  - Scout the camp from a distance: ROLL d20 + Perception vs DC 14 (See the camp layout and 4 guards)
+  - Sneak past the sentries: ROLL d20 + Stealth vs DC 15
+  - Create a distraction (fire, noise): Facilitates an easier entry
+
+npcs: []
+
+triggers:
+  - condition: "player approaches the torches or enters the camp area"
+    next_node: "03_bandit_camp"
+  - condition: "player is spotted by sentries"
+    next_node: "02c_bandit_ambush"

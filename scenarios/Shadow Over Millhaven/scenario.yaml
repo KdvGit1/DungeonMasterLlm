@@ -1,0 +1,29 @@
+title: "Shadow Over Millhaven"
+description: >
+  A once-peaceful valley protected by a silver dragon has fallen into decay. 
+  A young green dragon, Xaradon, now rules from the shadows, using a bandit 
+  cult called the Black Wolves to drain the village's resources and kidnap 
+  its children for a dark ritual. The players must uncover the betrayal 
+  within the village and face the corruption in the Whispering Woods.
+
+start_node: "00_village_gates"
+level: 1
+
+endings:
+  - id: "ending_hero"
+    description: >
+      The dragon Xaradon is defeated, the missing children are returned to 
+      their families, and the ancient Silver Scale shrine is purified. 
+      Millhaven begins its slow recovery.
+
+  - id: "ending_flee"
+    description: >
+      The players abandoned the village to its fate. Millhaven was eventually 
+      consumed by the poisonous green fog, and the Black Wolves expanded 
+      their reign of terror to the neighboring kingdoms.
+
+  - id: "ending_dark"
+    description: >
+      The players chose power over heroics. By joining the Black Wolves cult 
+      or making a deal with Xaradon, they helped complete the ritual, 
+      becoming lieutenants in a new draconic empire.

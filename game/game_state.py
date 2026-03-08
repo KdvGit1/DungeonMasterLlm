@@ -24,6 +24,9 @@ class GameState:
         # kaçıncı tur olduğunu sayar
         self.turn_count = 0
 
+        # aktif senaryo node'unun başlığı (scenario_manager tarafından güncellenir)
+        self.current_node = None          # ← YENİ
+
     # ─── OYUNCU EKLEME ─────────────────────────────────────
 
     def add_player(self, user, character):
@@ -105,11 +108,15 @@ class GameState:
             [c['name'] for c in self.characters]
         ) if self.characters else "No players"
 
+        # aktif node bilgisi
+        node_info = f"\nCurrent Location: {self.current_node}" if self.current_node else ""
+
         summary = (
             f"[CURRENT GAME STATE]\n"
             f"Scene: {self.current_scene}\n"
             f"Players: {player_names}\n"
             f"{combat_status}"
+            f"{node_info}"
         )
 
         return summary

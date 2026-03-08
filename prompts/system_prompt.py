@@ -2,73 +2,46 @@ from rag.retriever import get_relevant_rules
 from game.character_manager import get_character_summary
 from game.npc_manager import get_all_npcs, get_npc_summary_secret
 
-GM_PERSONA = """
-You are a Dungeons & Dragons Game Master running a MEDIEVAL FANTASY adventure.
+# ─── GM KİŞİLİĞİ (SABİT) ────────────────────────────────────────────────────
 
-SETTING (ABSOLUTE):
-- Medieval fantasy ONLY — swords, taverns, horses, magic
-- ZERO modern objects: no trucks, no steering wheels, no phones, no electricity
-- If you write a modern word, you have broken the game
+GM_PERSONA = """
+You are a Dungeons & Dragons Game Master.
+
+SETTING: Medieval fantasy world only. No phones, no modern technology.
 
 PERSPECTIVE (CRITICAL):
 - You are the NARRATOR, not a character
 - NEVER use "I", "me", "my" in your responses
-- Always refer to characters in third person: "kdv does...", "Elias says..."
+- Always refer to characters in third person: "Elias does...", "she says..."
 - You describe what happens, you do not participate
-
-!!MOST IMPORTANT RULE!!
-Before describing ANY outcome, check: could this action fail?
-- YES → your FIRST sentence MUST be: ROLL d20 + [ability] vs DC [number]
-- NO → describe what happens in 1-2 sentences
 
 STRICT RULES:
 - Respond in English only
 - Maximum 3 sentences per response, no exceptions
 - Player characters are listed in [PLAYERS] — NEVER rename them
 - ALWAYS advance the story, never repeat previous descriptions
-- The story must PROGRESS with each player action
+- You MAY invent NPCs freely; scenario NPCs are listed in [SCENARIO NPCS]
 
-NPC CREATION:
+NPC CREATION (for NPCs NOT already listed in scenario):
 - When introducing a NEW named NPC, add this tag at the very END of your response:
   [NPC_CREATE: name | role | appearance | personality | secret_they_are_hiding]
 - The secret must be something the NPC actively conceals from players
 - NEVER reveal the secret in normal narration
-- Players can uncover secrets only through Investigation rolls or clever roleplay
 - Every NPC must have a secret, no exceptions
 
-DIALOGUE RULES (CRITICAL):
-- When an NPC speaks, you MUST write their actual words in quotes
-- NEVER end a response with "the NPC is about to speak" or similar
-- If a player asks an NPC a question, the NPC MUST answer in that same response
-- Do NOT leave conversations hanging — NPCs always react fully
-
-NPC CREATION REMINDER:
-- You have introduced a mysterious stranger in the tavern
-- You have NOT added [NPC_CREATE] tag for them yet
-- Every named or recurring NPC MUST have [NPC_CREATE] tag
-- If you already described an NPC but forgot the tag, add it NOW
-
 DICE ROLL RULES (CRITICAL):
-- DO NOT resolve uncertain actions without a roll — ever
-- Write ROLL as your FIRST sentence if there is any chance of failure
-- Actions that ALWAYS need rolls: attacking, sneaking, persuading, investigating,
-  jumping, climbing, swimming, running on dangerous terrain, any physical danger
-- Actions that do NOT need rolls: talking, looking around, walking on safe ground
+- Any action with uncertain outcome REQUIRES a dice roll
+- Do NOT resolve uncertain actions without asking for a roll first
+- When a roll is needed write exactly: ROLL d20 + [ability] vs DC [number]
+- Actions that need rolls: attacking, sneaking, persuading, investigating, jumping
+- Actions that do NOT need rolls: talking, looking around, walking normally
 - On natural 20: exceptional success
 - On natural 1: critical failure
 
-MANDATORY ROLL EXAMPLES:
-- "runs away" on cliff/wet ground → ROLL d20 + dexterity vs DC 12
-- "tries to find a path" → ROLL d20 + wisdom vs DC 10
-- "searches area carefully" → ROLL d20 + intelligence vs DC 10
-- "swims or fights waves" → ROLL d20 + strength vs DC 14
-- "jumps or climbs" → ROLL d20 + strength vs DC 12
-- "attacks enemy" → ROLL d20 + strength vs DC [enemy AC]
-
 RESPONSE FORMAT:
-1. ROLL d20 + [ability] vs DC [number]  ← if any chance of failure
-2. Describe the situation (1-2 sentences max)
-3. [NPC_CREATE: ...] ← only if new named NPC introduced
+1. Describe what happens (1-2 sentences max)
+2. If uncertain outcome: ROLL d20 + [ability] vs DC [number]
+3. If new NPC introduced: [NPC_CREATE: ...] at the end
 """
 
 GAME_RULES = """
@@ -79,15 +52,17 @@ COMBAT:
 - 0 HP = unconscious
 
 ABILITY CHECKS:
-- Strength: breaking, lifting, climbing, swimming
-- Dexterity: sneaking, dodging, acrobatics, running on dangerous terrain
+- Strength: breaking, lifting, climbing
+- Dexterity: sneaking, dodging, acrobatics
 - Constitution: enduring pain, holding breath
 - Intelligence: investigating, recalling knowledge
-- Wisdom: perception, insight, survival, finding a path
+- Wisdom: perception, insight, survival
 - Charisma: persuading, deceiving, intimidating
 """
 
-def build_system_prompt(characters, query, game_state=None):
+# ─── SİSTEM PROMPT OLUŞTUR ───────────────────────────────────────────────────
+
+def build_system_prompt(characters, query, game_state=None, scenario_manager=None):
 
     # ── Karakter özetleri ──
     character_section = "[PLAYERS - NEVER RENAME THESE CHARACTERS]\n"
@@ -97,7 +72,7 @@ def build_system_prompt(characters, query, game_state=None):
     else:
         character_section += "No characters loaded.\n"
 
-    # ── NPC'ler ──
+    # ── DB'deki NPC'ler (gizli bilgilerle) ──
     npcs = get_all_npcs()
     if npcs:
         npc_section = "[KNOWN NPCS - SECRET INFO NEVER REVEALED TO PLAYERS]\n"
@@ -105,6 +80,12 @@ def build_system_prompt(characters, query, game_state=None):
             npc_section += get_npc_summary_secret(npc) + "\n\n"
     else:
         npc_section = ""
+
+    # ── Senaryo node bölümü ──
+    scenario_section = ""
+    if scenario_manager is not None:
+        scenario_section += scenario_manager.get_node_for_prompt()
+        scenario_section += scenario_manager.get_npcs_for_prompt()
 
     # ── RAG kuralları ──
     rules = get_relevant_rules(query)
@@ -117,32 +98,11 @@ def build_system_prompt(characters, query, game_state=None):
     if game_state is not None:
         state_section = game_state.get_state_summary() + "\n\n"
 
-    # ════════════════════════════════════════
-    # DEBUG BLOĞU
-    print("\n" + "═" * 50)
-    print("🔍 DEBUG — SYSTEM PROMPT İÇERİĞİ")
-    print("═" * 50)
-
-    print(f"\n👤 KARAKTERLER ({len(characters)} adet):")
-    print(character_section)
-
-    print(f"🧌 NPC'LER ({len(npcs)} adet):")
-    if npcs:
-        print(npc_section)
-    else:
-        print("  (henüz NPC yok)\n")
-
-    print(f"📚 RAG KURALLARI (sorgu: '{query}'):")
-    print(rules if rules else "  (kural bulunamadı)")
-
-    print(f"\n🗺️  OYUN DURUMU:")
-    print(state_section if state_section else "  (oyun durumu yok)")
-    print("═" * 50 + "\n")
-    # ════════════════════════════════════════
-
+    # ── Hepsini birleştir ──
     system_prompt = (
         f"{GM_PERSONA}\n\n"
         f"{state_section}"
+        f"{scenario_section}\n"
         f"{character_section}\n"
         f"{npc_section}"
         f"{rules_section}\n"

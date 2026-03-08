@@ -1,0 +1,22 @@
+id: cult_tunnel
+title: "The Root-Choked Tunnel"
+
+scene: >
+  This narrow, hand-dug tunnel is reinforced with rotting timber. Thick, 
+  glowing green roots from the forest above have pierced the ceiling, 
+  dripping a caustic sap that hisses when it hits the floor. It's a long, 
+  claustrophobic crawl, and you can hear chanting echoing from the far end.
+
+gm_instructions: >
+  This is a shortcut that bypasses the forest (Region 2) but is dangerous. 
+  The air is thin. Use the dripping sap as a hazard.
+
+available_actions: >
+  - Move carefully: ROLL d20 + Acrobatics vs DC 14 to avoid acid damage.
+  - Listen to the echoes: ROLL d20 + Perception vs DC 13 (Hear Malakor's voice).
+
+triggers:
+  - condition: "player follows the tunnel to its end"
+    next_node: "03d_cultist_altar"
+  - condition: "player turns back"
+    next_node: "01b_abandoned_temple"

@@ -1,0 +1,32 @@
+id: 03b_prison_cages
+title: "The Iron Cages"
+
+scene: >
+  Three iron cages hang a few feet off the ground. Inside the largest one, 
+  you see four children huddling together for warmth. Among them is Leo, 
+  clutching his knees. A guard stands nearby, lazily tossing meat to a 
+  monstrously large wolf with glowing green eyes.
+
+gm_instructions: >
+  Leo is the priority for the players. If they make too much noise, the 
+  wolf (a Corrupted Dire Wolf) will attack. The children are terrified 
+  and will cry out if the players don't calm them down first.
+
+available_actions: >
+  - Pick the lock: ROLL d20 + Thieves' Tools vs DC 14
+  - Calm the children: ROLL d20 + Persuasion or Animal Handling (to keep them quiet) vs DC 12
+  - Take down the guard silently: ROLL d20 + Stealth vs Attack roll
+  - Interrogate the guard: He has the key and knows about the "Ascension Ritual."
+
+npcs:
+  - name: Leo
+    role: Weaver's Son
+    appearance: 8 years old, messy blonde hair, wearing a torn tunic
+    personality: Brave but trembling, tries to protect the younger children
+    secret: He saw the "Dragon Master" (a cultist) taking one of the children toward the mountain peaks an hour ago.
+
+triggers:
+  - condition: "player frees the children and asks them to hide"
+    next_node: "03_bandit_camp"
+  - condition: "player decides to head toward the mountain immediately"
+    next_node: "04_mountain_climb"

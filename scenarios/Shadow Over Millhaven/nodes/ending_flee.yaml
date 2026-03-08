@@ -1,0 +1,12 @@
+id: ending_flee
+title: "The Ash and the Fog"
+scene: >
+  You walk away, the orange glow of a burning village at your back. 
+  The screams of Millhaven are eventually drowned out by a deafening 
+  draconic roar. You survived, but the guilt—and the poison in the wind—
+  will follow you wherever you go. The Black Wolves have won.
+
+gm_instructions: >
+  Read the ending scene dramatically. This is the conclusion.
+  Ask the player if they want to start a new adventure.
+triggers: []

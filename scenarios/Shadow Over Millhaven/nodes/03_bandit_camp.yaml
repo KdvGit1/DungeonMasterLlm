@@ -1,0 +1,37 @@
+id: 03_bandit_camp
+title: "The Black Wolves' Den"
+
+scene: >
+  The camp is built into a natural stone amphitheater. Dozens of black tents 
+  surround a massive central bonfire that burns with an eerie, green-tinged 
+  flame. You see bandits sharpening blades, while large, dark-furred wolves 
+  gnaw on bones near the entrance. In the center, a large wooden platform 
+  holds several heavy iron cages.
+
+gm_instructions: >
+  This is a high-risk area. If players are caught, the whole camp will 
+  alert unless they act fast. The 'Green Fire' is a sign of Xaradon's 
+  influence. Use the sound of the wolves' low growls to keep players on edge.
+
+available_actions: >
+  - Sneak through the shadows: ROLL d20 + Stealth vs DC 15
+  - Disguise as a bandit: ROLL d20 + Deception vs DC 14 (Needs a wolf mask/cloak)
+  - Poison the communal stew: ROLL d20 + Sleight of Hand vs DC 13
+  - Create a stampede (release the wolves): ROLL d20 + Animal Handling vs DC 16
+
+npcs:
+  - name: "Scar-Face" Varek
+    role: Camp Warden
+    appearance: A massive man with a jagged scar across his throat, wearing heavy plate
+    personality: Brutal, short-tempered, hates magic users
+    secret: He is actually a fallen paladin who believes Xaradon is a god of "The Natural End."
+
+triggers:
+  - condition: "player approaches the cages to free the prisoners"
+    next_node: "03b_prison_cages"
+  - condition: "player enters the large, ornate tent at the back"
+    next_node: "03c_commanders_tent"
+  - condition: "player is captured"
+    next_node: "03b_prison_cages"
+  - condition: "player searches behind the camp or investigates the chanting"
+    next_node: "03d_cultist_altar"

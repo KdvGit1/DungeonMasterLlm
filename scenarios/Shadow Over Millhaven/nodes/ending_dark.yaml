@@ -1,0 +1,12 @@
+id: ending_dark
+title: "Lords of the Shadow"
+scene: >
+  You stand beside Xaradon as the ritual completes. The green fire consumes 
+  the last of the silver scales. Millhaven is no longer a village, but a 
+  breeding ground for Xaradon's new brood. You sit at the dragon's right 
+  hand, feared by all, as the Shadow Over Millhaven expands to the next kingdom.
+
+gm_instructions: >
+  Read the ending scene dramatically. This is the conclusion.
+  Ask the player if they want to start a new adventure.
+triggers: []

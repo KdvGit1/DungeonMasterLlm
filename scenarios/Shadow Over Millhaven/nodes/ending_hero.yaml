@@ -1,0 +1,12 @@
+id: ending_hero
+title: "The Valley Breathes Again"
+scene: >
+  With Xaradon's final breath, the green fog dissipates. The children are 
+  returned to Millhaven, and though the scars on the land remain, the air 
+  is clear for the first time in a decade. You are hailed as the Liberators 
+  of Millhaven. Elara gives you the promised heirloom, and the village 
+  begins to rebuild the Shrine of the Silver Scale.
+gm_instructions: >
+  Read the ending scene dramatically. This is the conclusion.
+  Ask the player if they want to start a new adventure.
+triggers: []
