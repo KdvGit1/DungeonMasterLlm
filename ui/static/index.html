@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚔️ Dungeon Master AI</title>
+    <meta name="description" content="AI-powered Dungeon Master for D&D adventures">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;500;600&family=MedievalSharp&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <!-- ═══ LOGIN SCREEN ═══ -->
+    <div id="screen-login" class="screen active">
+        <div class="login-container">
+            <div class="login-logo">⚔️</div>
+            <h1 class="login-title">Dungeon Master AI</h1>
+            <p class="login-subtitle">Maceranız burada başlıyor</p>
+            <div class="login-form">
+                <input type="text" id="login-username" placeholder="Kullanıcı adı" autocomplete="off">
+                <input type="password" id="login-password" placeholder="Şifre">
+                <div class="login-buttons">
+                    <button id="btn-login" class="btn btn-primary">Giriş Yap</button>
+                    <button id="btn-register" class="btn btn-secondary">Kayıt Ol</button>
+                </div>
+                <div id="login-error" class="error-message"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ SESSION SCREEN ═══ -->
+    <div id="screen-session" class="screen">
+        <div class="setup-container">
+            <h2 class="setup-title">📜 Oturum</h2>
+            <div id="active-session-box" class="setup-box" style="display:none">
+                <p>Aktif oturum: <strong id="active-session-name"></strong></p>
+                <button id="btn-continue-session" class="btn btn-primary">Devam Et</button>
+                <button id="btn-new-session" class="btn btn-secondary">Yeni Oturum</button>
+            </div>
+            <div id="new-session-box" class="setup-box">
+                <input type="text" id="session-name-input" placeholder="Oturum adı">
+                <button id="btn-create-session" class="btn btn-primary">Oluştur</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ CHARACTER SCREEN ═══ -->
+    <div id="screen-character" class="screen">
+        <div class="setup-container">
+            <h2 class="setup-title">🧙 Karakter Seç</h2>
+            <div id="character-list" class="card-grid"></div>
+            <button id="btn-new-character" class="btn btn-secondary" style="margin-top:1rem">Yeni Karakter Oluştur</button>
+        </div>
+
+        <!-- Karakter Oluşturma Formu -->
+        <div id="character-creator" class="setup-container" style="display:none; margin-top:2rem">
+            <h2 class="setup-title">⚔️ Karakter Oluştur</h2>
+            <div class="creator-form">
+                <input type="text" id="cc-name" placeholder="Karakter ismi">
+                <div class="creator-row">
+                    <div class="creator-col">
+                        <label>Irk</label>
+                        <select id="cc-race"></select>
+                    </div>
+                    <div class="creator-col">
+                        <label>Sınıf</label>
+                        <select id="cc-class"></select>
+                    </div>
+                </div>
+                <input type="text" id="cc-background" placeholder="Arka plan (ör: gezgin savaşçı)">
+                <div id="cc-abilities" class="abilities-grid"></div>
+                <button id="btn-create-char" class="btn btn-primary">Karakteri Oluştur</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ SCENARIO SCREEN ═══ -->
+    <div id="screen-scenario" class="screen">
+        <div class="setup-container">
+            <h2 class="setup-title">📖 Senaryo Seç</h2>
+            <div id="scenario-list" class="card-grid"></div>
+            <button id="btn-free-play" class="btn btn-secondary" style="margin-top:1rem">Serbest Macera</button>
+        </div>
+    </div>
+
+    <!-- ═══ GAME SCREEN ═══ -->
+    <div id="screen-game" class="screen">
+
+        <!-- Scenario Title Bar -->
+        <div id="game-header">
+            <h1 id="scenario-title" class="scenario-title">Macera</h1>
+            <span id="node-title" class="node-title"></span>
+        </div>
+
+        <!-- Three Column Layout -->
+        <div id="game-layout">
+
+            <!-- LEFT: NPC Panel -->
+            <aside id="panel-npcs" class="game-panel">
+                <h2 class="panel-title">👥 NPC'ler</h2>
+                <div id="npc-list" class="panel-content"></div>
+            </aside>
+
+            <!-- CENTER: Chat -->
+            <main id="panel-chat">
+                <div id="chat-bg-overlay"></div>
+                <div id="chat-messages"></div>
+                <div id="chat-input-area">
+                    <input type="text" id="chat-input" placeholder="Ne yapıyorsun?" autocomplete="off">
+                    <button id="btn-send" class="btn btn-send" title="Gönder">⚔️</button>
+                </div>
+            </main>
+
+            <!-- RIGHT: Character Panel -->
+            <aside id="panel-character" class="game-panel">
+                <h2 class="panel-title">🛡️ Karakter</h2>
+                <div id="character-sheet" class="panel-content"></div>
+            </aside>
+
+        </div>
+
+        <!-- Music Volume Control -->
+        <div id="music-control">
+            <span class="music-icon" id="music-icon">🎵</span>
+            <input type="range" id="volume-slider" min="0" max="100" value="30" title="Müzik Ses Seviyesi">
+            <span id="volume-label" class="volume-label">30%</span>
+        </div>
+
+    </div>
+
+    <!-- Background Music -->
+    <audio id="bg-music" loop preload="auto">
+        <source src="/assets/music.mp3" type="audio/mpeg">
+        <source src="/assets/music.ogg" type="audio/ogg">
+        <source src="/assets/music.wav" type="audio/wav">
+    </audio>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay" style="display:none">
+        <div class="loading-spinner"></div>
+        <p class="loading-text">GM düşünüyor...</p>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
