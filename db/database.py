@@ -79,6 +79,46 @@ def migrate(conn):
         )
         print("Migration: type sütunu eklendi.")
 
+    # session_id yoksa ekle (NPC'leri oturuma bağlamak için)
+    if "session_id" not in columns:
+        cursor.execute(
+            "ALTER TABLE characters ADD COLUMN session_id INTEGER REFERENCES sessions(id)"
+        )
+        print("Migration: session_id sütunu eklendi.")
+
+    # user_id NOT NULL constraint'ini kaldır (NPC'ler user_id=NULL olabilmeli)
+    cursor.execute("PRAGMA table_info(characters)")
+    needs_rebuild = False
+    for row in cursor.fetchall():
+        # PRAGMA table_info döner: (cid, name, type, notnull, dflt_value, pk)
+        if row[1] == "user_id" and row[3] == 1:
+            needs_rebuild = True
+            break
+
+    if needs_rebuild:
+        print("Migration: user_id NOT NULL kaldırılıyor (tablo yeniden oluşturuluyor)...")
+        cursor.execute('''
+            CREATE TABLE characters_new (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER,
+                name TEXT NOT NULL,
+                data TEXT NOT NULL,
+                secret_info TEXT,
+                type TEXT CHECK(type IN ('player', 'npc')) DEFAULT 'player',
+                updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                session_id INTEGER REFERENCES sessions(id),
+                FOREIGN KEY (user_id) REFERENCES users(id)
+            )
+        ''')
+        cursor.execute('''
+            INSERT INTO characters_new (id, user_id, name, data, secret_info, type, updated_at, session_id)
+            SELECT id, user_id, name, data, secret_info, type, updated_at, session_id
+            FROM characters
+        ''')
+        cursor.execute("DROP TABLE characters")
+        cursor.execute("ALTER TABLE characters_new RENAME TO characters")
+        print("Migration: characters tablosu yeniden oluşturuldu (user_id artık nullable).")
+
     conn.commit()
 
 # ─── INITIALIZE ────────────────────────────────────────────

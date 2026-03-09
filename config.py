@@ -1,4 +1,4 @@
-model = 'qwen3.5:2b-q4_K_M'
+model = 'qwen3.5:9b'
 base_url = 'http://localhost:11434'
 context_length = 32768
 temp = 0.6

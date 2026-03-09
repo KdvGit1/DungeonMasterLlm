@@ -1,0 +1,1073 @@
+============================================================
+🤖 DnD GM — OTOMATİK TEST
+   Tarih   : 2026-03-09 06:18:41
+   Log     : logs/test_20260309_061841.txt
+   Tur     : 10
+   Senaryo : Shadow Over Millhaven
+   Karakter: kdv
+============================================================
+
+
+============================================================
+🚀 OYUN BAŞLIYOR
+============================================================
+
+Migration: session_id sütunu eklendi.
+Veritabanı hazır.
+VektörDB zaten mevcut, ingest atlanıyor.
+
+⚔️  DUNGEON MASTER AI  ⚔️
+──────────────────────────────
+1. Giriş yap
+2. Kayıt ol
+
+[INPUT MOCK] Prompt: '
+Seçim: '
+[INPUT MOCK] Setup cevabı: '1'
+
+[INPUT MOCK] Prompt: 'Kullanıcı adı: '
+[INPUT MOCK] Setup cevabı: 'kdv'
+
+[INPUT MOCK] Prompt: 'Şifre: '
+[INPUT MOCK] Setup cevabı: '2002'
+Hoş geldin, kdv!
+
+Hoş geldin kdv! Rol: player
+
+[INPUT MOCK] Prompt: 'Oturum adı: '
+[INPUT MOCK] Setup cevabı: 'h'
+Oturum oluşturuldu: h (ID: 29)
+DEBUG session_id: 29
+
+🧙 KARAKTER YÜKLE
+──────────────────────────────
+1. Yeni karakter oluştur
+2. Mevcut karakter yükle
+
+[INPUT MOCK] Prompt: '
+Seçim (1/2): '
+[INPUT MOCK] Setup cevabı: 'test_20260309_061841'
+⚠️  Geçersiz seçim.
+
+🧙 KARAKTER YÜKLE
+──────────────────────────────
+1. Yeni karakter oluştur
+2. Mevcut karakter yükle
+
+[INPUT MOCK] Prompt: '
+Seçim (1/2): '
+[INPUT MOCK] Setup cevabı: 'test_20260309_061841'
+⚠️  Geçersiz seçim.
+
+🧙 KARAKTER YÜKLE
+──────────────────────────────
+1. Yeni karakter oluştur
+2. Mevcut karakter yükle
+
+[INPUT MOCK] Prompt: '
+Seçim (1/2): '
+[INPUT MOCK] Setup cevabı: '2'
+
+Karakter dosyaları:
+  1. kdv.yaml
+
+[INPUT MOCK] Prompt: 'Numara veya dosya adı: '
+[INPUT MOCK] Setup cevabı: '1'
+kdv oyuna katıldı.
+✅ kdv oyuna katıldı!
+
+[INPUT MOCK] Prompt: 'Başka karakter eklemek ister misin? (e/h): '
+[INPUT MOCK] Setup cevabı: 'h'
+
+DEBUG yüklenen karakterler (1 adet):
+   • kdv | Savaşçı | abilities: {'charisma': 10, 'constitution': 16, 'dexterity': 14, 'intelligence': 11, 'strength': 16, 'wisdom': 10}
+
+📖 SENARYO
+──────────────────────────────
+
+[INPUT MOCK] Prompt: 'Bir senaryo takip etmek istiyor musun? (e/h): '
+[INPUT MOCK] Setup cevabı: 'e'
+
+Mevcut senaryolar:
+  1. Shadow Over Millhaven
+     A once-peaceful valley protected by a silver dragon has fall...
+
+[INPUT MOCK] Prompt: '
+Numara ile seçin: '
+[INPUT MOCK] Setup cevabı: '1'
+
+📍 Yeni lokasyon: The Gates of Millhaven
+✅ Senaryo yüklendi: Shadow Over Millhaven
+
+DEBUG senaryo: Shadow Over Millhaven
+DEBUG başlangıç node: 00_village_gates
+
+🎲 Macera başlıyor...
+
+──────────────────────────────────────────────────
+VektörDB yüklendi.
+
+══════════════════════════════════════════════════
+🔍 DEBUG — SYSTEM PROMPT (ilk 800 karakter)
+══════════════════════════════════════════════════
+
+You are a Dungeons & Dragons Game Master.
+
+SETTING: Medieval fantasy world only. No phones, no modern technology.
+
+PERSPECTIVE (CRITICAL):
+- You are the NARRATOR, not a character
+- NEVER use "I", "me", "my" in your responses
+- Always refer to characters in third person: "Elias does...", "she says..."
+- You describe what happens, you do not participate
+
+STRICT RULES:
+- Respond in English only
+- Maximum 3 sentences per response, no exceptions
+- Player characters are listed in [PLAYERS] — NEVER rename them
+- ALWAYS advance the story, never repeat previous descriptions
+- You MAY invent NPCs freely; scenario NPCs are listed in [SCENARIO NPCS]
+- When introducing important NPCs, ALWAYS give them a proper name (e.g. "Garret the guard", not just "a guard")
+
+DICE ROLL RULES:
+- The dice system handl
+══════════════════════════════════════════════════
+
+🔍 DEBUG — BAŞLANGIÇ NPC'LERİ (0 adet):
+   (henüz NPC yok)
+
+⏳ GM başlangıç sahnesini hazırlıyor...
+
+
+🧙 GM: Sunlight filters through the ancient stone arches of the Gates of Millhaven, illuminating dust motes dancing in the crisp morning air. A lone traveler steps forward onto the cobblestones, their boots crunching softly on gravel as they prepare to leave the safety of the town behind. Ahead, the winding road disappears into a misty forest where rumors of ancient magic and lurking dangers whisper from the shadows.
+
+⏱️  Toplam : 12.92s  |  İlk token: 10.69s
+📊 Prompt : 34 token  |  Cevap: 83 token
+
+🔎 NPC Extractor — AI ham cevap: []
+
+🔎 NPC Extractor — intro sonrası NPC sayısı: 0
+
+──────────────────────────────────────────────────
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 1/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I tighten my pack straps and step off the cobblestones, venturing down the misty road toward the edge of the forest. As I pass a weathered stone marker on my left, I cast a keen eye toward the treeline to spot any signs of movement before we proceed further.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 00_village_gates — The Gates of Millhaven
+   Trigger için son 3 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Persuade the guards to open the gate: ROLL d20 + Charisma vs DC 12 - Bribe the guards: Costs 2 gold, automatic success - Intimidate: ROLL d20 + Strength vs DC 15 (Guards open it but warn the tavern)
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I tighten my pack straps and step off the cobblestones, venturing down the misty road toward the edge of the forest. As I pass a weathered stone marker on my left, I cast a keen eye toward the treeline to spot any signs of movement before we proceed further.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   ⏭️  Zar atılmadı
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (3 mesaj):
+     👤 [user]: The adventure begins. Location: The Gates of Millhaven. Set the openin
+     🧙 [assistant]: Sunlight filters through the ancient stone arches of the Gates of Mill
+     👤 [user]: kdv: I tighten my pack straps and step off the cobblestones, venturing
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5588 karakter
+   Roll bilgisi GM'e gitti mi: HAYIR
+   Aktif node: 00_village_gates — The Gates of Millhaven
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: The wind rustles through the dry leaves of the ancient oaks as you pause at the marker, your breath catching slightly against the sudden chill. Shadows seem to stretch unnaturally long between the trees, making it difficult to distinguish a shifting branch from something watching from the periphery. You force yourself to focus on the path ahead, knowing that every rustle in the mist could be the first step toward an encounter you are not yet prepared for.
+
+⏱️  Toplam : 13.38s  |  İlk token: 11.03s
+📊 Prompt : 188 token  |  Cevap: 90 token
+
+🔎 NPC Extractor — AI ham cevap: []
+
+🔎 NPC Extractor — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'The wind rustles through the dry leaves of the ancient oaks as you pause at the '
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 2/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I take a cautious step closer to the treeline, scanning the misty shadows for any unnatural movements before venturing deeper into the forest.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 00_village_gates — The Gates of Millhaven
+   Trigger için son 5 mesaj kullanılıyor
+   Trigger sonucu: 02a_forest_entrance
+   🚀 Sahne geçişi: 00_village_gates → 02a_forest_entrance
+
+📍 Yeni lokasyon: The Edge of Silence
+   Yeni node yüklendi: 02a_forest_entrance — The Edge of Silence
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Track the bootprints: ROLL d20 + Survival vs DC 12 (Leads directly to the ambush) - Look for signs of the children: ROLL d20 + Investigation vs DC 14 (Finds a scrap of Leo's tunic on a thorn bush) -
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I take a cautious step closer to the treeline, scanning the misty shadows for any unnatural movements before venturing deeper into the forest.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   ⏭️  Zar atılmadı
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (6 mesaj):
+     👤 [user]: The adventure begins. Location: The Gates of Millhaven. Set the openin
+     🧙 [assistant]: Sunlight filters through the ancient stone arches of the Gates of Mill
+     👤 [user]: kdv: I tighten my pack straps and step off the cobblestones, venturing
+     🧙 [assistant]: The wind rustles through the dry leaves of the ancient oaks as you pau
+     👤 [user]: kdv: I take a cautious step closer to the treeline, scanning the misty
+     👤 [user]: [SCENE TRANSITION: players have arrived at The Edge of Silence]
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5214 karakter
+   Roll bilgisi GM'e gitti mi: HAYIR
+   Aktif node: 02a_forest_entrance — The Edge of Silence
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: The dense canopy above suddenly thickens, blotting out the sun and plunging you into a profound, unnatural silence that seems to swallow all sound instantly. As you cross the threshold into this new zone, the air grows heavy with damp earth and the scent of ancient decay, while the ground beneath your boots feels strangely soft and yielding. In this hushed realm, every instinct screams for caution, as the forest itself appears to be holding its breath, waiting to see if you will survive the quiet.
+
+⏱️  Toplam : 12.23s  |  İlk token: 9.60s
+📊 Prompt : 338 token  |  Cevap: 101 token
+
+🔎 NPC Extractor — AI ham cevap: []
+
+🔎 NPC Extractor — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'The dense canopy above suddenly thickens, blotting out the sun and plunging you '
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 3/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I press forward slowly despite the oppressive silence, keeping one hand near my weapon while casting a wary glance at the soft, yielding ground beneath my feet.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 02a_forest_entrance — The Edge of Silence
+   Trigger için son 8 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Track the bootprints: ROLL d20 + Survival vs DC 12 (Leads directly to the ambush) - Look for signs of the children: ROLL d20 + Investigation vs DC 14 (Finds a scrap of Leo's tunic on a thorn bush) -
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I press forward slowly despite the oppressive silence, keeping one hand near my weapon while casting a wary glance at the soft, yielding ground beneath my feet.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   ⏭️  Zar atılmadı
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (8 mesaj):
+     👤 [user]: The adventure begins. Location: The Gates of Millhaven. Set the openin
+     🧙 [assistant]: Sunlight filters through the ancient stone arches of the Gates of Mill
+     👤 [user]: kdv: I tighten my pack straps and step off the cobblestones, venturing
+     🧙 [assistant]: The wind rustles through the dry leaves of the ancient oaks as you pau
+     👤 [user]: kdv: I take a cautious step closer to the treeline, scanning the misty
+     👤 [user]: [SCENE TRANSITION: players have arrived at The Edge of Silence]
+     🧙 [assistant]: The dense canopy above suddenly thickens, blotting out the sun and plu
+     👤 [user]: kdv: I press forward slowly despite the oppressive silence, keeping on
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5208 karakter
+   Roll bilgisi GM'e gitti mi: HAYIR
+   Aktif node: 02a_forest_entrance — The Edge of Silence
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: The silence here is not merely an absence of noise but a tangible pressure that seems to dampen your very thoughts, making every rustle of dry leaves sound like a thunderclap in your ears. As you press onward, the soft, spongy earth beneath your boots shifts with a subtle resistance, as if the forest itself is testing the weight and intent of those who trespass within its borders. Your hand tightens instinctively on your weapon, ready to strike, yet the only sound remains the oppressive quiet that wraps around you like a cold, invisible shroud.
+
+⏱️  Toplam : 12.54s  |  İlk token: 9.48s
+📊 Prompt : 481 token  |  Cevap: 115 token
+
+🔎 NPC Extractor — AI ham cevap: []
+
+🔎 NPC Extractor — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'The silence here is not merely an absence of noise but a tangible pressure that '
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 4/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I step firmly over a patch of soft earth to test its give, then move toward a cluster of twisted roots at the edge of the clearing to investigate any faint disturbances in the mist.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 02a_forest_entrance — The Edge of Silence
+   Trigger için son 10 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Track the bootprints: ROLL d20 + Survival vs DC 12 (Leads directly to the ambush) - Look for signs of the children: ROLL d20 + Investigation vs DC 14 (Finds a scrap of Leo's tunic on a thorn bush) -
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I step firmly over a patch of soft earth to test its give, then move toward a cluster of twisted roots at the edge of the clearing to investigate any faint disturbances in the mist.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   ⏭️  Zar atılmadı
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (10 mesaj):
+     👤 [user]: The adventure begins. Location: The Gates of Millhaven. Set the openin
+     🧙 [assistant]: Sunlight filters through the ancient stone arches of the Gates of Mill
+     👤 [user]: kdv: I tighten my pack straps and step off the cobblestones, venturing
+     🧙 [assistant]: The wind rustles through the dry leaves of the ancient oaks as you pau
+     👤 [user]: kdv: I take a cautious step closer to the treeline, scanning the misty
+     👤 [user]: [SCENE TRANSITION: players have arrived at The Edge of Silence]
+     🧙 [assistant]: The dense canopy above suddenly thickens, blotting out the sun and plu
+     👤 [user]: kdv: I press forward slowly despite the oppressive silence, keeping on
+     🧙 [assistant]: The silence here is not merely an absence of noise but a tangible pres
+     👤 [user]: kdv: I step firmly over a patch of soft earth to test its give, then m
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5212 karakter
+   Roll bilgisi GM'e gitti mi: HAYIR
+   Aktif node: 02a_forest_entrance — The Edge of Silence
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: Your boot sinks slightly into the yielding soil with a wet squelch that echoes unnaturally loud in the silent void, confirming the ground's treacherous nature. As you approach the cluster of gnarled roots, they seem to writhe subtly beneath your gaze, twisting as if reacting to your presence rather than growing naturally. The mist swirling around the roots thickens into a viscous fog that smells faintly of iron and old blood, hinting that whatever caused the disturbance is already awake and watching from within the shadows.
+
+⏱️  Toplam : 14.29s  |  İlk token: 11.49s
+📊 Prompt : 645 token  |  Cevap: 107 token
+
+🔎 NPC Extractor — AI ham cevap: []
+
+🔎 NPC Extractor — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'Your boot sinks slightly into the yielding soil with a wet squelch that echoes u'
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 5/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I reach out with a gloved hand to brush aside the iron-scented mist and inspect the twisting roots for any sign of movement or trapped creatures.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 02a_forest_entrance — The Edge of Silence
+   Trigger için son 12 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Track the bootprints: ROLL d20 + Survival vs DC 12 (Leads directly to the ambush) - Look for signs of the children: ROLL d20 + Investigation vs DC 14 (Finds a scrap of Leo's tunic on a thorn bush) -
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I reach out with a gloved hand to brush aside the iron-scented mist and inspect the twisting roots for any sign of movement or trapped creatures.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   ⏭️  Zar atılmadı
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (12 mesaj):
+     👤 [user]: The adventure begins. Location: The Gates of Millhaven. Set the openin
+     🧙 [assistant]: Sunlight filters through the ancient stone arches of the Gates of Mill
+     👤 [user]: kdv: I tighten my pack straps and step off the cobblestones, venturing
+     🧙 [assistant]: The wind rustles through the dry leaves of the ancient oaks as you pau
+     👤 [user]: kdv: I take a cautious step closer to the treeline, scanning the misty
+     👤 [user]: [SCENE TRANSITION: players have arrived at The Edge of Silence]
+     🧙 [assistant]: The dense canopy above suddenly thickens, blotting out the sun and plu
+     👤 [user]: kdv: I press forward slowly despite the oppressive silence, keeping on
+     🧙 [assistant]: The silence here is not merely an absence of noise but a tangible pres
+     👤 [user]: kdv: I step firmly over a patch of soft earth to test its give, then m
+     🧙 [assistant]: Your boot sinks slightly into the yielding soil with a wet squelch tha
+     👤 [user]: kdv: I reach out with a gloved hand to brush aside the iron-scented mi
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5235 karakter
+   Roll bilgisi GM'e gitti mi: HAYIR
+   Aktif node: 02a_forest_entrance — The Edge of Silence
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: The moment your gloved fingers pierce the viscous fog, a sudden chill snakes up your arm, nearly freezing you in place as if the mist itself is trying to pull you back into its embrace. Beneath the swirling vapor, the twisted roots snap together with the sound of breaking bone rather than wood, revealing no trapped creatures but rather hollow, dark cavities that seem to mock your curiosity. As you pull your hand back, a low, guttural vibration hums through the soles of your boots, signaling that whatever lies within those root networks has just acknowledged your presence.
+
+⏱️  Toplam : 14.32s  |  İlk token: 11.20s
+📊 Prompt : 795 token  |  Cevap: 119 token
+
+🔎 NPC Extractor — AI ham cevap: []
+
+🔎 NPC Extractor — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'The moment your gloved fingers pierce the viscous fog, a sudden chill snakes up '
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 6/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I quickly retreat from the snapping roots and sprint toward the edge of the clearing where the mist seems thinnest, scanning the horizon for any sign of an exit or approaching danger.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 02a_forest_entrance — The Edge of Silence
+   Trigger için son 14 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Track the bootprints: ROLL d20 + Survival vs DC 12 (Leads directly to the ambush) - Look for signs of the children: ROLL d20 + Investigation vs DC 14 (Finds a scrap of Leo's tunic on a thorn bush) -
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I quickly retreat from the snapping roots and sprint toward the edge of the clearing where the mist seems thinnest, scanning the horizon for any sign of an exit or approaching danger.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   ⏭️  Zar atılmadı
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (14 mesaj):
+     👤 [user]: The adventure begins. Location: The Gates of Millhaven. Set the openin
+     🧙 [assistant]: Sunlight filters through the ancient stone arches of the Gates of Mill
+     👤 [user]: kdv: I tighten my pack straps and step off the cobblestones, venturing
+     🧙 [assistant]: The wind rustles through the dry leaves of the ancient oaks as you pau
+     👤 [user]: kdv: I take a cautious step closer to the treeline, scanning the misty
+     👤 [user]: [SCENE TRANSITION: players have arrived at The Edge of Silence]
+     🧙 [assistant]: The dense canopy above suddenly thickens, blotting out the sun and plu
+     👤 [user]: kdv: I press forward slowly despite the oppressive silence, keeping on
+     🧙 [assistant]: The silence here is not merely an absence of noise but a tangible pres
+     👤 [user]: kdv: I step firmly over a patch of soft earth to test its give, then m
+     🧙 [assistant]: Your boot sinks slightly into the yielding soil with a wet squelch tha
+     👤 [user]: kdv: I reach out with a gloved hand to brush aside the iron-scented mi
+     🧙 [assistant]: The moment your gloved fingers pierce the viscous fog, a sudden chill 
+     👤 [user]: kdv: I quickly retreat from the snapping roots and sprint toward the e
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5182 karakter
+   Roll bilgisi GM'e gitti mi: HAYIR
+   Aktif node: 02a_forest_entrance — The Edge of Silence
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: Your boots pound against the yielding earth as you flee the snapping roots, the sudden burst of movement momentarily shattering the oppressive silence with the heavy rhythm of your breathing. The mist at the clearing's edge swirls violently around you, forming a thick, churning wall that seems to resist your escape, refusing to part even as you dash toward the faint hint of sunlight beyond. Glancing back, you see the twisted roots coil and extend like grasping fingers, now clearly alive and hunting, forcing you to push harder than ever before to find a way out of this silent trap.
+
+⏱️  Toplam : 14.72s  |  İlk token: 11.59s
+📊 Prompt : 962 token  |  Cevap: 117 token
+
+🔎 NPC Extractor — AI ham cevap: []
+
+🔎 NPC Extractor — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'Your boots pound against the yielding earth as you flee the snapping roots, the '
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 7/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I dive into the churning mist near the clearing's edge and attempt to shout for help while scanning the faint sunlight for any sign of allies or a safe path.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 02a_forest_entrance — The Edge of Silence
+   Trigger için son 16 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Track the bootprints: ROLL d20 + Survival vs DC 12 (Leads directly to the ambush) - Look for signs of the children: ROLL d20 + Investigation vs DC 14 (Finds a scrap of Leo's tunic on a thorn bush) -
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I dive into the churning mist near the clearing's edge and attempt to shout for help while scanning the faint sunlight for any sign of allies or a safe path.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": true, "ability": "wisdom", "dc": 15}'
+   JSON parse edildi: '{"needed": true, "ability": "wisdom", "dc": 15}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'wisdom', 'dc': 15}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=wisdom, dc=15
+DEBUG execute_roll: karakter=kdv, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Wisdom check vs DC 15
+   Zar: 14 | Modifier: +0 | Toplam: 14 | DC: 15
+   ❌ BAŞARISIZ
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: wisdom check vs DC 15
+Roll: 14 + 0 (modifier) = 14
+Result: FAILURE
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (17 mesaj):
+     👤 [user]: The adventure begins. Location: The Gates of Millhaven. Set the openin
+     🧙 [assistant]: Sunlight filters through the ancient stone arches of the Gates of Mill
+     👤 [user]: kdv: I tighten my pack straps and step off the cobblestones, venturing
+     🧙 [assistant]: The wind rustles through the dry leaves of the ancient oaks as you pau
+     👤 [user]: kdv: I take a cautious step closer to the treeline, scanning the misty
+     👤 [user]: [SCENE TRANSITION: players have arrived at The Edge of Silence]
+     🧙 [assistant]: The dense canopy above suddenly thickens, blotting out the sun and plu
+     👤 [user]: kdv: I press forward slowly despite the oppressive silence, keeping on
+     🧙 [assistant]: The silence here is not merely an absence of noise but a tangible pres
+     👤 [user]: kdv: I step firmly over a patch of soft earth to test its give, then m
+     🧙 [assistant]: Your boot sinks slightly into the yielding soil with a wet squelch tha
+     👤 [user]: kdv: I reach out with a gloved hand to brush aside the iron-scented mi
+     🧙 [assistant]: The moment your gloved fingers pierce the viscous fog, a sudden chill 
+     👤 [user]: kdv: I quickly retreat from the snapping roots and sprint toward the e
+     🧙 [assistant]: Your boots pound against the yielding earth as you flee the snapping r
+     👤 [user]: kdv: I dive into the churning mist near the clearing's edge and attemp
+     👤 [user]: kdv rolled wisdom: 14 + 0 = 14 vs DC 15 (FAILURE)
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5421 karakter
+   Roll bilgisi GM'e gitti mi: EVET
+   Roll özeti: Player: kdv
+Action required: wisdom check vs DC 15
+Roll: 14 + 0 (modifier) = 14
+Result: FAILURE
+   Aktif node: 02a_forest_entrance — The Edge of Silence
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: Your shout is swallowed instantly by the thick, churning fog, leaving you deafened and unable to hear your own voice or any response from beyond. The mist swirls aggressively around you, obscuring the faint sunlight and making it impossible to discern safe footing or the direction of potential allies. As panic begins to set in, the ground beneath you shifts again, hinting that the forest is actively trying to keep you trapped within its silent, grasping embrace.
+
+⏱️  Toplam : 13.57s  |  İlk token: 11.11s
+📊 Prompt : 1152 token  |  Cevap: 93 token
+
+🔎 NPC Extractor — AI ham cevap: []
+
+🔎 NPC Extractor — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'Your shout is swallowed instantly by the thick, churning fog, leaving you deafen'
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 8/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I force myself to stop running and instead carefully feel along the shifting ground with my boots, searching for a solid ledge or weak point in the mist wall where I might slip past the grasping roots.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 02a_forest_entrance — The Edge of Silence
+   Trigger için son 19 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Track the bootprints: ROLL d20 + Survival vs DC 12 (Leads directly to the ambush) - Look for signs of the children: ROLL d20 + Investigation vs DC 14 (Finds a scrap of Leo's tunic on a thorn bush) -
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I force myself to stop running and instead carefully feel along the shifting ground with my boots, searching for a solid ledge or weak point in the mist wall where I might slip past the grasping roots.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": true, "ability": "stealth", "dc": 13}'
+   JSON parse edildi: '{"needed": true, "ability": "stealth", "dc": 13}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'stealth', 'dc': 13}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=stealth, dc=13
+DEBUG execute_roll: karakter=kdv, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Stealth check vs DC 13
+   Zar: 12 | Modifier: +0 | Toplam: 12 | DC: 13
+   ❌ BAŞARISIZ
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: stealth check vs DC 13
+Roll: 12 + 0 (modifier) = 12
+Result: FAILURE
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (20 mesaj):
+     👤 [user]: The adventure begins. Location: The Gates of Millhaven. Set the openin
+     🧙 [assistant]: Sunlight filters through the ancient stone arches of the Gates of Mill
+     👤 [user]: kdv: I tighten my pack straps and step off the cobblestones, venturing
+     🧙 [assistant]: The wind rustles through the dry leaves of the ancient oaks as you pau
+     👤 [user]: kdv: I take a cautious step closer to the treeline, scanning the misty
+     👤 [user]: [SCENE TRANSITION: players have arrived at The Edge of Silence]
+     🧙 [assistant]: The dense canopy above suddenly thickens, blotting out the sun and plu
+     👤 [user]: kdv: I press forward slowly despite the oppressive silence, keeping on
+     🧙 [assistant]: The silence here is not merely an absence of noise but a tangible pres
+     👤 [user]: kdv: I step firmly over a patch of soft earth to test its give, then m
+     🧙 [assistant]: Your boot sinks slightly into the yielding soil with a wet squelch tha
+     👤 [user]: kdv: I reach out with a gloved hand to brush aside the iron-scented mi
+     🧙 [assistant]: The moment your gloved fingers pierce the viscous fog, a sudden chill 
+     👤 [user]: kdv: I quickly retreat from the snapping roots and sprint toward the e
+     🧙 [assistant]: Your boots pound against the yielding earth as you flee the snapping r
+     👤 [user]: kdv: I dive into the churning mist near the clearing's edge and attemp
+     👤 [user]: kdv rolled wisdom: 14 + 0 = 14 vs DC 15 (FAILURE)
+     🧙 [assistant]: Your shout is swallowed instantly by the thick, churning fog, leaving 
+     👤 [user]: kdv: I force myself to stop running and instead carefully feel along t
+     👤 [user]: kdv rolled stealth: 12 + 0 = 12 vs DC 13 (FAILURE)
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5446 karakter
+   Roll bilgisi GM'e gitti mi: EVET
+   Roll özeti: Player: kdv
+Action required: stealth check vs DC 13
+Roll: 12 + 0 (modifier) = 12
+Result: FAILURE
+   Aktif node: 02a_forest_entrance — The Edge of Silence
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: The moment you try to move quietly along the shifting ground, the mist reacts with a violent shudder, snapping the grasping roots into a tighter embrace that nearly crushes your ankles. The silence is shattered not by sound, but by a sudden, deafening roar as the fog coalesces around you, blinding your vision and trapping you in a suffocating wall of swirling gray. It becomes clear that stealth offers no advantage here; the Edge of Silence has decided you are prey, and there is nowhere left to hide from its hungry, root-like tendrils.
+
+⏱️  Toplam : 15.11s  |  İlk token: 12.03s
+📊 Prompt : 1325 token  |  Cevap: 116 token
+
+🔎 NPC Extractor — AI ham cevap: []
+
+🔎 NPC Extractor — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'The moment you try to move quietly along the shifting ground, the mist reacts wi'
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 9/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I bite back a scream as the roots tighten, then shove forward with all my strength to break free and blindly charge toward the faintest patch of light I can feel through the suffocating fog.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 02a_forest_entrance — The Edge of Silence
+   Trigger için son 20 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Track the bootprints: ROLL d20 + Survival vs DC 12 (Leads directly to the ambush) - Look for signs of the children: ROLL d20 + Investigation vs DC 14 (Finds a scrap of Leo's tunic on a thorn bush) -
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I bite back a scream as the roots tighten, then shove forward with all my strength to break free and blindly charge toward the faintest patch of light I can feel through the suffocating fog.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+1d2, roll any die and assign a 1 or 2 to the roll depending 
+on whether it was odd or even. (Alternatively, if the num -
+ber rolled is more than half the number of sides on the 
+die, it’s a 2
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": true, "ability": "strength", "dc": 15}'
+   JSON parse edildi: '{"needed": true, "ability": "strength", "dc": 15}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'strength', 'dc': 15}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=strength, dc=15
+DEBUG execute_roll: karakter=kdv, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Strength check vs DC 15
+   Zar: 4 | Modifier: +3 | Toplam: 7 | DC: 15
+   ❌ BAŞARISIZ
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: strength check vs DC 15
+Roll: 4 + 3 (modifier) = 7
+Result: FAILURE
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (20 mesaj):
+     🧙 [assistant]: The wind rustles through the dry leaves of the ancient oaks as you pau
+     👤 [user]: kdv: I take a cautious step closer to the treeline, scanning the misty
+     👤 [user]: [SCENE TRANSITION: players have arrived at The Edge of Silence]
+     🧙 [assistant]: The dense canopy above suddenly thickens, blotting out the sun and plu
+     👤 [user]: kdv: I press forward slowly despite the oppressive silence, keeping on
+     🧙 [assistant]: The silence here is not merely an absence of noise but a tangible pres
+     👤 [user]: kdv: I step firmly over a patch of soft earth to test its give, then m
+     🧙 [assistant]: Your boot sinks slightly into the yielding soil with a wet squelch tha
+     👤 [user]: kdv: I reach out with a gloved hand to brush aside the iron-scented mi
+     🧙 [assistant]: The moment your gloved fingers pierce the viscous fog, a sudden chill 
+     👤 [user]: kdv: I quickly retreat from the snapping roots and sprint toward the e
+     🧙 [assistant]: Your boots pound against the yielding earth as you flee the snapping r
+     👤 [user]: kdv: I dive into the churning mist near the clearing's edge and attemp
+     👤 [user]: kdv rolled wisdom: 14 + 0 = 14 vs DC 15 (FAILURE)
+     🧙 [assistant]: Your shout is swallowed instantly by the thick, churning fog, leaving 
+     👤 [user]: kdv: I force myself to stop running and instead carefully feel along t
+     👤 [user]: kdv rolled stealth: 12 + 0 = 12 vs DC 13 (FAILURE)
+     🧙 [assistant]: The moment you try to move quietly along the shifting ground, the mist
+     👤 [user]: kdv: I bite back a scream as the roots tighten, then shove forward wit
+     👤 [user]: kdv rolled strength: 4 + 3 = 7 vs DC 15 (FAILURE)
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5457 karakter
+   Roll bilgisi GM'e gitti mi: EVET
+   Roll özeti: Player: kdv
+Action required: strength check vs DC 15
+Roll: 4 + 3 (modifier) = 7
+Result: FAILURE
+   Aktif node: 02a_forest_entrance — The Edge of Silence
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: The roots respond with terrifying speed, their wooden fingers tightening like vipers around your limbs before you can generate enough force to break free. Your shove is met with an immovable wall of resistance; the forest floor seems to solidify instantly under your boots, anchoring you in place. The faint patch of light you sense through the fog begins to recede, as if the very air is being sucked away from you. With no strength left to break the hold and no clear path forward, you are completely immobilized by the grasping embrace, waiting for whatever lurks beyond the roots to emerge into the suffocating gray.
+
+⏱️  Toplam : 14.78s  |  İlk token: 11.39s
+📊 Prompt : 1338 token  |  Cevap: 127 token
+
+🔎 NPC Extractor — AI ham cevap: []
+
+🔎 NPC Extractor — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'The roots respond with terrifying speed, their wooden fingers tightening like vi'
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 10/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I grit my teeth against the crushing pressure and frantically claw at the nearest thick root, trying to gouge a foothold while forcing myself to remain calm enough to listen for any sound other than the roaring mist.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 02a_forest_entrance — The Edge of Silence
+   Trigger için son 20 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Track the bootprints: ROLL d20 + Survival vs DC 12 (Leads directly to the ambush) - Look for signs of the children: ROLL d20 + Investigation vs DC 14 (Finds a scrap of Leo's tunic on a thorn bush) -
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I grit my teeth against the crushing pressure and frantically claw at the nearest thick root, trying to gouge a foothold while forcing myself to remain calm enough to listen for any sound other than the roaring mist.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": true, "ability": "strength", "dc": 15}'
+   JSON parse edildi: '{"needed": true, "ability": "strength", "dc": 15}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'strength', 'dc': 15}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=strength, dc=15
+DEBUG execute_roll: karakter=kdv, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Strength check vs DC 15
+   Zar: 12 | Modifier: +3 | Toplam: 15 | DC: 15
+   ✅ BAŞARILI
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: strength check vs DC 15
+Roll: 12 + 3 (modifier) = 15
+Result: SUCCESS
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (20 mesaj):
+     🧙 [assistant]: The dense canopy above suddenly thickens, blotting out the sun and plu
+     👤 [user]: kdv: I press forward slowly despite the oppressive silence, keeping on
+     🧙 [assistant]: The silence here is not merely an absence of noise but a tangible pres
+     👤 [user]: kdv: I step firmly over a patch of soft earth to test its give, then m
+     🧙 [assistant]: Your boot sinks slightly into the yielding soil with a wet squelch tha
+     👤 [user]: kdv: I reach out with a gloved hand to brush aside the iron-scented mi
+     🧙 [assistant]: The moment your gloved fingers pierce the viscous fog, a sudden chill 
+     👤 [user]: kdv: I quickly retreat from the snapping roots and sprint toward the e
+     🧙 [assistant]: Your boots pound against the yielding earth as you flee the snapping r
+     👤 [user]: kdv: I dive into the churning mist near the clearing's edge and attemp
+     👤 [user]: kdv rolled wisdom: 14 + 0 = 14 vs DC 15 (FAILURE)
+     🧙 [assistant]: Your shout is swallowed instantly by the thick, churning fog, leaving 
+     👤 [user]: kdv: I force myself to stop running and instead carefully feel along t
+     👤 [user]: kdv rolled stealth: 12 + 0 = 12 vs DC 13 (FAILURE)
+     🧙 [assistant]: The moment you try to move quietly along the shifting ground, the mist
+     👤 [user]: kdv: I bite back a scream as the roots tighten, then shove forward wit
+     👤 [user]: kdv rolled strength: 4 + 3 = 7 vs DC 15 (FAILURE)
+     🧙 [assistant]: The roots respond with terrifying speed, their wooden fingers tighteni
+     👤 [user]: kdv: I grit my teeth against the crushing pressure and frantically cla
+     👤 [user]: kdv rolled strength: 12 + 3 = 15 vs DC 15 (SUCCESS)
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5114 karakter
+   Roll bilgisi GM'e gitti mi: EVET
+   Roll özeti: Player: kdv
+Action required: strength check vs DC 15
+Roll: 12 + 3 (modifier) = 15
+Result: SUCCESS
+   Aktif node: 02a_forest_entrance — The Edge of Silence
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: With a guttural roar, your fingers finally find purchase in the slick, fibrous bark of the nearest root. You tear a jagged groove into its surface, creating a desperate foothold that halts the crushing pressure just as it threatens to snap your bones. The sudden release of tension allows you to heave your body upward, breaking free from the immediate stranglehold and scrambling onto the unstable ledge you've carved out.
+
+However, the victory is fleeting; the mist continues to roar around you, and the roots you just damaged seem to scream in protest, sending a fresh wave of vibrations through the ground. You are now precariously balanced on this narrow strip of solid earth, teetering between the suffocating fog below and the grasping darkness above, your heart hammering against your ribs as you frantically scan the faint light for any sign of rescue or a way to break the encirclement.
+
+⏱️  Toplam : 16.77s  |  İlk token: 11.74s
+📊 Prompt : 1398 token  |  Cevap: 188 token
+
+🔎 NPC Extractor — AI ham cevap: []
+
+🔎 NPC Extractor — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'With a guttural roar, your fingers finally find purchase in the slick, fibrous b'
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+
+[INPUT MOCK] Tur limiti (10) doldu → quit
+Oturum kapatıldı. (ID: 29)
+
+Görüşürüz adventurer! ⚔️
+
+
+════════════════════════════════════════════════════════════
+📊 TEST ÖZET RAPORU
+════════════════════════════════════════════════════════════
+  Toplam süre        : 387.3s (6.5 dakika)
+  Oynanan tur        : 10
+  Sahne geçişi       : 2
+  Zar atılan eylem   : 4
+  → Başarı           : 1
+  → Başarısızlık     : 3
+  → Kritik           : 0
+  Yaratılan NPC      : 0
+
+  Ziyaret edilen node'lar (2 geçiş):
+    → 00_village_gates — The Gates of Millhaven
+    → 02a_forest_entrance — The Edge of Silence
+
+  Zar detayları:
+    🎲 Player: kdv | Action required: wisdom check vs DC 15 | Roll: 14 + 0 (modifier) = 14 | Result: FAILURE
+    🎲 Player: kdv | Action required: stealth check vs DC 13 | Roll: 12 + 0 (modifier) = 12 | Result: FAILURE
+    🎲 Player: kdv | Action required: strength check vs DC 15 | Roll: 4 + 3 (modifier) = 7 | Result: FAILURE
+    🎲 Player: kdv | Action required: strength check vs DC 15 | Roll: 12 + 3 (modifier) = 15 | Result: SUCCESS
+
+  Log dosyası: logs/test_20260309_061841.txt
+════════════════════════════════════════════════════════════

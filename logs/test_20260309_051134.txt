@@ -1,0 +1,1094 @@
+============================================================
+🤖 DnD GM — OTOMATİK TEST
+   Tarih   : 2026-03-09 05:11:34
+   Log     : logs/test_20260309_051134.txt
+   Tur     : 10
+   Senaryo : Shadow Over Millhaven
+   Karakter: kdv
+============================================================
+
+
+============================================================
+🚀 OYUN BAŞLIYOR
+============================================================
+
+Veritabanı hazır.
+VektörDB zaten mevcut, ingest atlanıyor.
+
+⚔️  DUNGEON MASTER AI  ⚔️
+──────────────────────────────
+1. Giriş yap
+2. Kayıt ol
+
+[INPUT MOCK] Prompt: '
+Seçim: '
+[INPUT MOCK] Setup cevabı: '1'
+
+[INPUT MOCK] Prompt: 'Kullanıcı adı: '
+[INPUT MOCK] Setup cevabı: 'kdv'
+
+[INPUT MOCK] Prompt: 'Şifre: '
+[INPUT MOCK] Setup cevabı: '2002'
+Hoş geldin, kdv!
+
+Hoş geldin kdv! Rol: player
+
+[INPUT MOCK] Prompt: 'Oturum adı: '
+[INPUT MOCK] Setup cevabı: 'h'
+Oturum oluşturuldu: h (ID: 26)
+DEBUG session_id: 26
+
+🧙 KARAKTER YÜKLE
+──────────────────────────────
+1. Yeni karakter oluştur
+2. Mevcut karakter yükle
+
+[INPUT MOCK] Prompt: '
+Seçim (1/2): '
+[INPUT MOCK] Setup cevabı: 'test_20260309_051134'
+⚠️  Geçersiz seçim.
+
+🧙 KARAKTER YÜKLE
+──────────────────────────────
+1. Yeni karakter oluştur
+2. Mevcut karakter yükle
+
+[INPUT MOCK] Prompt: '
+Seçim (1/2): '
+[INPUT MOCK] Setup cevabı: 'test_20260309_051134'
+⚠️  Geçersiz seçim.
+
+🧙 KARAKTER YÜKLE
+──────────────────────────────
+1. Yeni karakter oluştur
+2. Mevcut karakter yükle
+
+[INPUT MOCK] Prompt: '
+Seçim (1/2): '
+[INPUT MOCK] Setup cevabı: '2'
+
+Karakter dosyaları:
+  1. kdv.yaml
+
+[INPUT MOCK] Prompt: 'Numara veya dosya adı: '
+[INPUT MOCK] Setup cevabı: '1'
+kdv oyuna katıldı.
+✅ kdv oyuna katıldı!
+
+[INPUT MOCK] Prompt: 'Başka karakter eklemek ister misin? (e/h): '
+[INPUT MOCK] Setup cevabı: 'h'
+
+DEBUG yüklenen karakterler (1 adet):
+   • kdv | Savaşçı | abilities: {'charisma': 10, 'constitution': 16, 'dexterity': 14, 'intelligence': 11, 'strength': 16, 'wisdom': 10}
+
+📖 SENARYO
+──────────────────────────────
+
+[INPUT MOCK] Prompt: 'Bir senaryo takip etmek istiyor musun? (e/h): '
+[INPUT MOCK] Setup cevabı: 'e'
+
+Mevcut senaryolar:
+  1. Shadow Over Millhaven
+     A once-peaceful valley protected by a silver dragon has fall...
+
+[INPUT MOCK] Prompt: '
+Numara ile seçin: '
+[INPUT MOCK] Setup cevabı: '1'
+
+📍 Yeni lokasyon: The Gates of Millhaven
+✅ Senaryo yüklendi: Shadow Over Millhaven
+
+DEBUG senaryo: Shadow Over Millhaven
+DEBUG başlangıç node: 00_village_gates
+
+🎲 Macera başlıyor...
+
+──────────────────────────────────────────────────
+VektörDB yüklendi.
+
+══════════════════════════════════════════════════
+🔍 DEBUG — SYSTEM PROMPT (ilk 800 karakter)
+══════════════════════════════════════════════════
+
+You are a Dungeons & Dragons Game Master.
+
+SETTING: Medieval fantasy world only. No phones, no modern technology.
+
+PERSPECTIVE (CRITICAL):
+- You are the NARRATOR, not a character
+- NEVER use "I", "me", "my" in your responses
+- Always refer to characters in third person: "Elias does...", "she says..."
+- You describe what happens, you do not participate
+
+STRICT RULES:
+- Respond in English only
+- Maximum 3 sentences per response, no exceptions
+- Player characters are listed in [PLAYERS] — NEVER rename them
+- ALWAYS advance the story, never repeat previous descriptions
+- You MAY invent NPCs freely; scenario NPCs are listed in [SCENARIO NPCS]
+
+NPC CREATION (for NPCs NOT already listed in scenario):
+- When introducing a NEW named NPC, add this tag at the very END of your response:
+  [NPC_CREATE
+══════════════════════════════════════════════════
+
+🔍 DEBUG — BAŞLANGIÇ NPC'LERİ (0 adet):
+   (henüz NPC yok)
+
+⏳ GM başlangıç sahnesini hazırlıyor...
+
+
+🧙 GM: Stone gargoyles loom over the cobblestone entrance of Millhaven, their frozen gazes watching as a traveler steps through the heavy oak doors. The air inside is thick with the scent of damp earth and old parchment, while distant laughter from the tavern spills out into the quiet courtyard. With your hand resting on the hilt of your blade, you stand ready to face whatever secrets—or dangers—the town holds.
+
+⏱️  Toplam : 13.73s  |  İlk token: 11.12s
+📊 Prompt : 34 token  |  Cevap: 85 token
+
+DEBUG NPC parse — intro cevabı uzunluğu: 407 karakter
+DEBUG NPC parse — [NPC_CREATE] var mı: False
+DEBUG NPC parse — intro sonrası NPC sayısı: 0
+
+──────────────────────────────────────────────────
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 1/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I step past the stone gargoyles and push through the heavy oak doors to explore the town square, keeping an eye out for suspicious shadows in the dim light.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 00_village_gates — The Gates of Millhaven
+   Trigger için son 3 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Persuade the guards to open the gate: ROLL d20 + Charisma vs DC 12 - Bribe the guards: Costs 2 gold, automatic success - Intimidate: ROLL d20 + Strength vs DC 15 (Guards open it but warn the tavern)
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I step past the stone gargoyles and push through the heavy oak doors to explore the town square, keeping an eye out for suspicious shadows in the dim light.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+lightning bolt, or pull off some other dangerous task. Any-
+thing is possible, but the dice make some outcomes more 
+probable than others.
+ Dungeon Master (DM): OK, one at a time. Phillip, yo
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   ⏭️  Zar atılmadı
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (3 mesaj):
+     👤 [user]: The adventure begins. Location: The Gates of Millhaven. Set the openin
+     🧙 [assistant]: Stone gargoyles loom over the cobblestone entrance of Millhaven, their
+     👤 [user]: kdv: I step past the stone gargoyles and push through the heavy oak do
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5565 karakter
+   Roll bilgisi GM'e gitti mi: HAYIR
+   Aktif node: 00_village_gates — The Gates of Millhaven
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: The heavy oak doors creak shut behind you, sealing out the cool night air and plunging the town square into a warm, lantern-lit glow. You scan the bustling crowd, noting the clatter of horseshoes on cobblestones and the murmur of merchants haggling near the fountain, but your sharp eyes catch a flicker of movement in an alleyway that seems too still for such a lively evening. As you move deeper into the square, a sudden shout from a nearby stall draws your attention, hinting that not all is as peaceful as it appears.
+
+⏱️  Toplam : 14.43s  |  İlk token: 11.17s
+📊 Prompt : 164 token  |  Cevap: 118 token
+
+DEBUG NPC parse — GM cevabı uzunluğu: 522 karakter
+DEBUG NPC parse — [NPC_CREATE] var mı: False
+DEBUG NPC parse — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'The heavy oak doors creak shut behind you, sealing out the cool night air and pl'
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 2/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I ignore the sudden shout and slip into the still alleyway to investigate the flicker of movement, drawing my blade as I approach the shadows.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 00_village_gates — The Gates of Millhaven
+   Trigger için son 5 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Persuade the guards to open the gate: ROLL d20 + Charisma vs DC 12 - Bribe the guards: Costs 2 gold, automatic success - Intimidate: ROLL d20 + Strength vs DC 15 (Guards open it but warn the tavern)
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I ignore the sudden shout and slip into the still alleyway to investigate the flicker of movement, drawing my blade as I approach the shadows.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   ⏭️  Zar atılmadı
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (5 mesaj):
+     👤 [user]: The adventure begins. Location: The Gates of Millhaven. Set the openin
+     🧙 [assistant]: Stone gargoyles loom over the cobblestone entrance of Millhaven, their
+     👤 [user]: kdv: I step past the stone gargoyles and push through the heavy oak do
+     🧙 [assistant]: The heavy oak doors creak shut behind you, sealing out the cool night 
+     👤 [user]: kdv: I ignore the sudden shout and slip into the still alleyway to inv
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5568 karakter
+   Roll bilgisi GM'e gitti mi: HAYIR
+   Aktif node: 00_village_gates — The Gates of Millhaven
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: The alleyway is narrow and shadowed, the scent of wet stone and unwashed bodies clinging to the air as you step inside. Your blade flashes in the moonlight, cutting through the darkness just as a pair of glowing red eyes snaps open from behind a stack of rotting crates. Before you can strike, a dozen small, scuttling legs scramble up the walls, revealing a nest of shadowy creatures that hiss and dart toward your throat.
+
+⏱️  Toplam : 13.65s  |  İlk token: 11.24s
+📊 Prompt : 323 token  |  Cevap: 92 token
+
+DEBUG NPC parse — GM cevabı uzunluğu: 423 karakter
+DEBUG NPC parse — [NPC_CREATE] var mı: False
+DEBUG NPC parse — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'The alleyway is narrow and shadowed, the scent of wet stone and unwashed bodies '
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 3/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I leap back from the scuttling legs and shout a warning to anyone nearby before drawing my blade to fight the shadowy creatures.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 00_village_gates — The Gates of Millhaven
+   Trigger için son 7 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Persuade the guards to open the gate: ROLL d20 + Charisma vs DC 12 - Bribe the guards: Costs 2 gold, automatic success - Intimidate: ROLL d20 + Strength vs DC 15 (Guards open it but warn the tavern)
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I leap back from the scuttling legs and shout a warning to anyone nearby before drawing my blade to fight the shadowy creatures.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+provided that it makes the check before the start of your 
+next turn.
+ Alternatively, you can aid a friendly creature in attack -
+ing a creature within 5 feet of you. You feint, distract 
+the
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": true, "ability": "dex", "dc": 10}'
+   JSON parse edildi: '{"needed": true, "ability": "dex", "dc": 10}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'dex', 'dc': 10}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=dexterity, dc=10
+DEBUG execute_roll: karakter=kdv, score=14, modifier=2
+
+──────────────────────────────────────────────────
+🎲 Dexterity check vs DC 10
+   Zar: 6 | Modifier: +2 | Toplam: 8 | DC: 10
+   ❌ BAŞARISIZ
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: dexterity check vs DC 10
+Roll: 6 + 2 (modifier) = 8
+Result: FAILURE
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (8 mesaj):
+     👤 [user]: The adventure begins. Location: The Gates of Millhaven. Set the openin
+     🧙 [assistant]: Stone gargoyles loom over the cobblestone entrance of Millhaven, their
+     👤 [user]: kdv: I step past the stone gargoyles and push through the heavy oak do
+     🧙 [assistant]: The heavy oak doors creak shut behind you, sealing out the cool night 
+     👤 [user]: kdv: I ignore the sudden shout and slip into the still alleyway to inv
+     🧙 [assistant]: The alleyway is narrow and shadowed, the scent of wet stone and unwash
+     👤 [user]: kdv: I leap back from the scuttling legs and shout a warning to anyone
+     👤 [user]: kdv rolled dexterity: 6 + 2 = 8 vs DC 10 (FAILURE)
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5461 karakter
+   Roll bilgisi GM'e gitti mi: EVET
+   Roll özeti: Player: kdv
+Action required: dexterity check vs DC 10
+Roll: 6 + 2 (modifier) = 8
+Result: FAILURE
+   Aktif node: 00_village_gates — The Gates of Millhaven
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: Your feet slip on the slick, moss-covered stones of the alley floor, and you stumble backward into a pile of crates rather than leaping clear. The warning shout is cut short by a chorus of hissing snarls as the shadowy creatures pounce from the darkness, their claws raking your armor and sending sparks flying off your blade. You find yourself pinned against the damp stone wall, surrounded by the writhing mass of the beasts, with no easy way to break free or call for help without risking immediate injury.
+
+⏱️  Toplam : 14.19s  |  İlk token: 11.37s
+📊 Prompt : 481 token  |  Cevap: 108 token
+
+DEBUG NPC parse — GM cevabı uzunluğu: 509 karakter
+DEBUG NPC parse — [NPC_CREATE] var mı: False
+DEBUG NPC parse — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'Your feet slip on the slick, moss-covered stones of the alley floor, and you stu'
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 4/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I scramble sideways against the wall and draw a throwing knife to target the largest creature while shouting a desperate call for assistance from the town square above.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 00_village_gates — The Gates of Millhaven
+   Trigger için son 10 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Persuade the guards to open the gate: ROLL d20 + Charisma vs DC 12 - Bribe the guards: Costs 2 gold, automatic success - Intimidate: ROLL d20 + Strength vs DC 15 (Guards open it but warn the tavern)
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I scramble sideways against the wall and draw a throwing knife to target the largest creature while shouting a desperate call for assistance from the town square above.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": true, "ability": "dex", "dc": 10}'
+   JSON parse edildi: '{"needed": true, "ability": "dex", "dc": 10}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'dex', 'dc': 10}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=dexterity, dc=10
+DEBUG execute_roll: karakter=kdv, score=14, modifier=2
+
+──────────────────────────────────────────────────
+🎲 Dexterity check vs DC 10
+   Zar: 15 | Modifier: +2 | Toplam: 17 | DC: 10
+   ✅ BAŞARILI
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: dexterity check vs DC 10
+Roll: 15 + 2 (modifier) = 17
+Result: SUCCESS
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (11 mesaj):
+     👤 [user]: The adventure begins. Location: The Gates of Millhaven. Set the openin
+     🧙 [assistant]: Stone gargoyles loom over the cobblestone entrance of Millhaven, their
+     👤 [user]: kdv: I step past the stone gargoyles and push through the heavy oak do
+     🧙 [assistant]: The heavy oak doors creak shut behind you, sealing out the cool night 
+     👤 [user]: kdv: I ignore the sudden shout and slip into the still alleyway to inv
+     🧙 [assistant]: The alleyway is narrow and shadowed, the scent of wet stone and unwash
+     👤 [user]: kdv: I leap back from the scuttling legs and shout a warning to anyone
+     👤 [user]: kdv rolled dexterity: 6 + 2 = 8 vs DC 10 (FAILURE)
+     🧙 [assistant]: Your feet slip on the slick, moss-covered stones of the alley floor, a
+     👤 [user]: kdv: I scramble sideways against the wall and draw a throwing knife to
+     👤 [user]: kdv rolled dexterity: 15 + 2 = 17 vs DC 10 (SUCCESS)
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5414 karakter
+   Roll bilgisi GM'e gitti mi: EVET
+   Roll özeti: Player: kdv
+Action required: dexterity check vs DC 10
+Roll: 15 + 2 (modifier) = 17
+Result: SUCCESS
+   Aktif node: 00_village_gates — The Gates of Millhaven
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: You twist your body with surprising agility, sliding along the rough stone wall to avoid a snapping claw while hurling your throwing knife with practiced precision. The blade finds its mark, embedding itself deep into the flank of the largest creature and causing it to hiss in pain as it recoils from the wound. Your desperate shout echoes up through the narrow alley entrance, finally reaching the ears of someone in the bustling square above who might be able to lend a hand.
+
+⏱️  Toplam : 13.91s  |  İlk token: 11.58s
+📊 Prompt : 659 token  |  Cevap: 92 token
+
+DEBUG NPC parse — GM cevabı uzunluğu: 478 karakter
+DEBUG NPC parse — [NPC_CREATE] var mı: False
+DEBUG NPC parse — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'You twist your body with surprising agility, sliding along the rough stone wall '
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 5/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I grip my blade tighter and shout louder to draw attention from the square above while parrying another snapping claw with a desperate defensive move.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 00_village_gates — The Gates of Millhaven
+   Trigger için son 13 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Persuade the guards to open the gate: ROLL d20 + Charisma vs DC 12 - Bribe the guards: Costs 2 gold, automatic success - Intimidate: ROLL d20 + Strength vs DC 15 (Guards open it but warn the tavern)
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I grip my blade tighter and shout louder to draw attention from the square above while parrying another snapping claw with a desperate defensive move.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": true, "ability": "strength", "dc": 15}'
+   JSON parse edildi: '{"needed": true, "ability": "strength", "dc": 15}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'strength', 'dc': 15}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=strength, dc=15
+DEBUG execute_roll: karakter=kdv, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Strength check vs DC 15
+   Zar: 10 | Modifier: +3 | Toplam: 13 | DC: 15
+   ❌ BAŞARISIZ
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: strength check vs DC 15
+Roll: 10 + 3 (modifier) = 13
+Result: FAILURE
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (14 mesaj):
+     👤 [user]: The adventure begins. Location: The Gates of Millhaven. Set the openin
+     🧙 [assistant]: Stone gargoyles loom over the cobblestone entrance of Millhaven, their
+     👤 [user]: kdv: I step past the stone gargoyles and push through the heavy oak do
+     🧙 [assistant]: The heavy oak doors creak shut behind you, sealing out the cool night 
+     👤 [user]: kdv: I ignore the sudden shout and slip into the still alleyway to inv
+     🧙 [assistant]: The alleyway is narrow and shadowed, the scent of wet stone and unwash
+     👤 [user]: kdv: I leap back from the scuttling legs and shout a warning to anyone
+     👤 [user]: kdv rolled dexterity: 6 + 2 = 8 vs DC 10 (FAILURE)
+     🧙 [assistant]: Your feet slip on the slick, moss-covered stones of the alley floor, a
+     👤 [user]: kdv: I scramble sideways against the wall and draw a throwing knife to
+     👤 [user]: kdv rolled dexterity: 15 + 2 = 17 vs DC 10 (SUCCESS)
+     🧙 [assistant]: You twist your body with surprising agility, sliding along the rough s
+     👤 [user]: kdv: I grip my blade tighter and shout louder to draw attention from t
+     👤 [user]: kdv rolled strength: 10 + 3 = 13 vs DC 15 (FAILURE)
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5422 karakter
+   Roll bilgisi GM'e gitti mi: EVET
+   Roll özeti: Player: kdv
+Action required: strength check vs DC 15
+Roll: 10 + 3 (modifier) = 13
+Result: FAILURE
+   Aktif node: 00_village_gates — The Gates of Millhaven
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: Your arm trembles under the strain as the creature's heavy claw drives past your guard, slamming against the stone wall and cracking the mortar beside your head. The pain is sharp, but you grit your teeth and continue to shout for help, your voice growing hoarse from fear and effort. With one eye squeezed shut in agony, you manage to keep your footing despite the assault, waiting for a moment of respite or a savior from above.
+
+⏱️  Toplam : 13.99s  |  İlk token: 11.68s
+📊 Prompt : 818 token  |  Cevap: 91 token
+
+DEBUG NPC parse — GM cevabı uzunluğu: 430 karakter
+DEBUG NPC parse — [NPC_CREATE] var mı: False
+DEBUG NPC parse — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'Your arm trembles under the strain as the creature's heavy claw drives past your'
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 6/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I continue shouting my warning while trying to create an opening to strike another creature, hoping someone from the square will finally arrive before I'm overrun.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 00_village_gates — The Gates of Millhaven
+   Trigger için son 16 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Persuade the guards to open the gate: ROLL d20 + Charisma vs DC 12 - Bribe the guards: Costs 2 gold, automatic success - Intimidate: ROLL d20 + Strength vs DC 15 (Guards open it but warn the tavern)
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I continue shouting my warning while trying to create an opening to strike another creature, hoping someone from the square will finally arrive before I'm overrun.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   ⏭️  Zar atılmadı
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (16 mesaj):
+     👤 [user]: The adventure begins. Location: The Gates of Millhaven. Set the openin
+     🧙 [assistant]: Stone gargoyles loom over the cobblestone entrance of Millhaven, their
+     👤 [user]: kdv: I step past the stone gargoyles and push through the heavy oak do
+     🧙 [assistant]: The heavy oak doors creak shut behind you, sealing out the cool night 
+     👤 [user]: kdv: I ignore the sudden shout and slip into the still alleyway to inv
+     🧙 [assistant]: The alleyway is narrow and shadowed, the scent of wet stone and unwash
+     👤 [user]: kdv: I leap back from the scuttling legs and shout a warning to anyone
+     👤 [user]: kdv rolled dexterity: 6 + 2 = 8 vs DC 10 (FAILURE)
+     🧙 [assistant]: Your feet slip on the slick, moss-covered stones of the alley floor, a
+     👤 [user]: kdv: I scramble sideways against the wall and draw a throwing knife to
+     👤 [user]: kdv rolled dexterity: 15 + 2 = 17 vs DC 10 (SUCCESS)
+     🧙 [assistant]: You twist your body with surprising agility, sliding along the rough s
+     👤 [user]: kdv: I grip my blade tighter and shout louder to draw attention from t
+     👤 [user]: kdv rolled strength: 10 + 3 = 13 vs DC 15 (FAILURE)
+     🧙 [assistant]: Your arm trembles under the strain as the creature's heavy claw drives
+     👤 [user]: kdv: I continue shouting my warning while trying to create an opening 
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5609 karakter
+   Roll bilgisi GM'e gitti mi: HAYIR
+   Aktif node: 00_village_gates — The Gates of Millhaven
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: You press yourself firmly into the corner, using your body as a shield against the relentless swarm while your voice cracks with urgency. The alley fills with the chaotic sounds of battle—snarls, clashing steel, and the thud of claws on stone—as you desperately search for a gap in the creatures' formation to unleash a counter-attack. Every second feels like an eternity as you wait, hoping that the shouts are finally carrying far enough to bring reinforcements before your strength gives out entirely.
+
+⏱️  Toplam : 14.41s  |  İlk token: 11.81s
+📊 Prompt : 950 token  |  Cevap: 100 token
+
+DEBUG NPC parse — GM cevabı uzunluğu: 504 karakter
+DEBUG NPC parse — [NPC_CREATE] var mı: False
+DEBUG NPC parse — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'You press yourself firmly into the corner, using your body as a shield against t'
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 7/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I seize the fractured mortar from the wall and hurl it upward to create a distraction, then scramble to kick open the alley entrance so reinforcements can charge in.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 00_village_gates — The Gates of Millhaven
+   Trigger için son 18 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Persuade the guards to open the gate: ROLL d20 + Charisma vs DC 12 - Bribe the guards: Costs 2 gold, automatic success - Intimidate: ROLL d20 + Strength vs DC 15 (Guards open it but warn the tavern)
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I seize the fractured mortar from the wall and hurl it upward to create a distraction, then scramble to kick open the alley entrance so reinforcements can charge in.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": true, "ability": "dex", "dc": 10}'
+   JSON parse edildi: '{"needed": true, "ability": "dex", "dc": 10}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'dex', 'dc': 10}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=dexterity, dc=10
+DEBUG execute_roll: karakter=kdv, score=14, modifier=2
+
+──────────────────────────────────────────────────
+🎲 Dexterity check vs DC 10
+   Zar: 1 | Modifier: +2 | Toplam: 3 | DC: 10
+   💀 KRİTİK BAŞARISIZLIK!
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: dexterity check vs DC 10
+Roll: 1 + 2 (modifier) = 3
+Result: CRITICAL FAILURE
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (19 mesaj):
+     👤 [user]: The adventure begins. Location: The Gates of Millhaven. Set the openin
+     🧙 [assistant]: Stone gargoyles loom over the cobblestone entrance of Millhaven, their
+     👤 [user]: kdv: I step past the stone gargoyles and push through the heavy oak do
+     🧙 [assistant]: The heavy oak doors creak shut behind you, sealing out the cool night 
+     👤 [user]: kdv: I ignore the sudden shout and slip into the still alleyway to inv
+     🧙 [assistant]: The alleyway is narrow and shadowed, the scent of wet stone and unwash
+     👤 [user]: kdv: I leap back from the scuttling legs and shout a warning to anyone
+     👤 [user]: kdv rolled dexterity: 6 + 2 = 8 vs DC 10 (FAILURE)
+     🧙 [assistant]: Your feet slip on the slick, moss-covered stones of the alley floor, a
+     👤 [user]: kdv: I scramble sideways against the wall and draw a throwing knife to
+     👤 [user]: kdv rolled dexterity: 15 + 2 = 17 vs DC 10 (SUCCESS)
+     🧙 [assistant]: You twist your body with surprising agility, sliding along the rough s
+     👤 [user]: kdv: I grip my blade tighter and shout louder to draw attention from t
+     👤 [user]: kdv rolled strength: 10 + 3 = 13 vs DC 15 (FAILURE)
+     🧙 [assistant]: Your arm trembles under the strain as the creature's heavy claw drives
+     👤 [user]: kdv: I continue shouting my warning while trying to create an opening 
+     🧙 [assistant]: You press yourself firmly into the corner, using your body as a shield
+     👤 [user]: kdv: I seize the fractured mortar from the wall and hurl it upward to 
+     👤 [user]: kdv rolled dexterity: 1 + 2 = 3 vs DC 10 (CRITICAL FAILURE)
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5818 karakter
+   Roll bilgisi GM'e gitti mi: EVET
+   Roll özeti: Player: kdv
+Action required: dexterity check vs DC 10
+Roll: 1 + 2 (modifier) = 3
+Result: CRITICAL FA
+   Aktif node: 00_village_gates — The Gates of Millhaven
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: The mortar crumbles uselessly from your grip before you even lift it, and your foot slips on the slick stones as you attempt to kick the door open. Instead of creating an opening, your clumsy movement causes a loose stone to roll down the alley, momentarily silencing the creatures but trapping you deeper in the corner. The distraction is lost, leaving you completely surrounded by the hissing swarm with no escape and no sign of help arriving from above.
+
+⏱️  Toplam : 14.49s  |  İlk token: 12.07s
+📊 Prompt : 1122 token  |  Cevap: 91 token
+
+DEBUG NPC parse — GM cevabı uzunluğu: 456 karakter
+DEBUG NPC parse — [NPC_CREATE] var mı: False
+DEBUG NPC parse — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'The mortar crumbles uselessly from your grip before you even lift it, and your f'
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 8/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I dive into a desperate roll against a lesser claw, biting down hard on the creature's snout to create an opening, then shout urgently toward the square above hoping a distant voice has heard my plight.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 00_village_gates — The Gates of Millhaven
+   Trigger için son 20 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Persuade the guards to open the gate: ROLL d20 + Charisma vs DC 12 - Bribe the guards: Costs 2 gold, automatic success - Intimidate: ROLL d20 + Strength vs DC 15 (Guards open it but warn the tavern)
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I dive into a desperate roll against a lesser claw, biting down hard on the creature's snout to create an opening, then shout urgently toward the square above hoping a distant voice has heard my plight.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": true, "ability": "strength", "dc": 15}'
+   JSON parse edildi: '{"needed": true, "ability": "strength", "dc": 15}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'strength', 'dc': 15}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=strength, dc=15
+DEBUG execute_roll: karakter=kdv, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Strength check vs DC 15
+   Zar: 13 | Modifier: +3 | Toplam: 16 | DC: 15
+   ✅ BAŞARILI
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: strength check vs DC 15
+Roll: 13 + 3 (modifier) = 16
+Result: SUCCESS
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (20 mesaj):
+     👤 [user]: kdv: I step past the stone gargoyles and push through the heavy oak do
+     🧙 [assistant]: The heavy oak doors creak shut behind you, sealing out the cool night 
+     👤 [user]: kdv: I ignore the sudden shout and slip into the still alleyway to inv
+     🧙 [assistant]: The alleyway is narrow and shadowed, the scent of wet stone and unwash
+     👤 [user]: kdv: I leap back from the scuttling legs and shout a warning to anyone
+     👤 [user]: kdv rolled dexterity: 6 + 2 = 8 vs DC 10 (FAILURE)
+     🧙 [assistant]: Your feet slip on the slick, moss-covered stones of the alley floor, a
+     👤 [user]: kdv: I scramble sideways against the wall and draw a throwing knife to
+     👤 [user]: kdv rolled dexterity: 15 + 2 = 17 vs DC 10 (SUCCESS)
+     🧙 [assistant]: You twist your body with surprising agility, sliding along the rough s
+     👤 [user]: kdv: I grip my blade tighter and shout louder to draw attention from t
+     👤 [user]: kdv rolled strength: 10 + 3 = 13 vs DC 15 (FAILURE)
+     🧙 [assistant]: Your arm trembles under the strain as the creature's heavy claw drives
+     👤 [user]: kdv: I continue shouting my warning while trying to create an opening 
+     🧙 [assistant]: You press yourself firmly into the corner, using your body as a shield
+     👤 [user]: kdv: I seize the fractured mortar from the wall and hurl it upward to 
+     👤 [user]: kdv rolled dexterity: 1 + 2 = 3 vs DC 10 (CRITICAL FAILURE)
+     🧙 [assistant]: The mortar crumbles uselessly from your grip before you even lift it, 
+     👤 [user]: kdv: I dive into a desperate roll against a lesser claw, biting down h
+     👤 [user]: kdv rolled strength: 13 + 3 = 16 vs DC 15 (SUCCESS)
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5423 karakter
+   Roll bilgisi GM'e gitti mi: EVET
+   Roll özeti: Player: kdv
+Action required: strength check vs DC 15
+Roll: 13 + 3 (modifier) = 16
+Result: SUCCESS
+   Aktif node: 00_village_gates — The Gates of Millhaven
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: You grit your teeth and drive your shoulder forward with a burst of desperate strength, shoving the lesser creature aside just enough to create a fleeting opening. Seizing the moment, you clamp your jaws down hard on its snout, tasting copper and darkness as the beast thrashes wildly against your grip. The roll of your body sends you tumbling through the narrow gap you forced open, landing in a heap in the square below.
+
+The sudden crash of your fall silences the alley for a heartbeat, but then a roar erupts from above—the town watch or merchants finally hearing your cries. Torches flare as figures pour out of the entrance, their weapons drawn and eyes wide with shock at seeing you pinned beneath the writhing mass of shadows. The tide of battle shifts instantly; the reinforcements rush in to drive the creatures back, but you remain on the ground, biting down hard against pain and exhaustion, waiting for the chaos to settle so you can stand up again.
+
+⏱️  Toplam : 17.26s  |  İlk token: 12.03s
+📊 Prompt : 1178 token  |  Cevap: 197 token
+
+DEBUG NPC parse — GM cevabı uzunluğu: 963 karakter
+DEBUG NPC parse — [NPC_CREATE] var mı: False
+DEBUG NPC parse — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'You grit your teeth and drive your shoulder forward with a burst of desperate st'
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 9/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I scramble to my feet amidst the chaos and rush toward the nearest survivor to offer a hand up, then sprint out of the square to investigate the source of the shadows that attacked us.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 00_village_gates — The Gates of Millhaven
+   Trigger için son 20 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Persuade the guards to open the gate: ROLL d20 + Charisma vs DC 12 - Bribe the guards: Costs 2 gold, automatic success - Intimidate: ROLL d20 + Strength vs DC 15 (Guards open it but warn the tavern)
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I scramble to my feet amidst the chaos and rush toward the nearest survivor to offer a hand up, then sprint out of the square to investigate the source of the shadows that attacked us.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   ⏭️  Zar atılmadı
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (20 mesaj):
+     👤 [user]: kdv: I ignore the sudden shout and slip into the still alleyway to inv
+     🧙 [assistant]: The alleyway is narrow and shadowed, the scent of wet stone and unwash
+     👤 [user]: kdv: I leap back from the scuttling legs and shout a warning to anyone
+     👤 [user]: kdv rolled dexterity: 6 + 2 = 8 vs DC 10 (FAILURE)
+     🧙 [assistant]: Your feet slip on the slick, moss-covered stones of the alley floor, a
+     👤 [user]: kdv: I scramble sideways against the wall and draw a throwing knife to
+     👤 [user]: kdv rolled dexterity: 15 + 2 = 17 vs DC 10 (SUCCESS)
+     🧙 [assistant]: You twist your body with surprising agility, sliding along the rough s
+     👤 [user]: kdv: I grip my blade tighter and shout louder to draw attention from t
+     👤 [user]: kdv rolled strength: 10 + 3 = 13 vs DC 15 (FAILURE)
+     🧙 [assistant]: Your arm trembles under the strain as the creature's heavy claw drives
+     👤 [user]: kdv: I continue shouting my warning while trying to create an opening 
+     🧙 [assistant]: You press yourself firmly into the corner, using your body as a shield
+     👤 [user]: kdv: I seize the fractured mortar from the wall and hurl it upward to 
+     👤 [user]: kdv rolled dexterity: 1 + 2 = 3 vs DC 10 (CRITICAL FAILURE)
+     🧙 [assistant]: The mortar crumbles uselessly from your grip before you even lift it, 
+     👤 [user]: kdv: I dive into a desperate roll against a lesser claw, biting down h
+     👤 [user]: kdv rolled strength: 13 + 3 = 16 vs DC 15 (SUCCESS)
+     🧙 [assistant]: You grit your teeth and drive your shoulder forward with a burst of de
+     👤 [user]: kdv: I scramble to my feet amidst the chaos and rush toward the neares
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5582 karakter
+   Roll bilgisi GM'e gitti mi: HAYIR
+   Aktif node: 00_village_gates — The Gates of Millhaven
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: You haul yourself to your feet, breathless and bleeding from a fresh gash on your cheek, but you don't hesitate. As the town watch begins to methodically sweep the alleyway for stragglers, you spot a merchant stumbling back into the square, clutching a sack of goods. You rush over, offering a steady hand to help them up, your voice calm despite the adrenaline still pumping through you.
+
+Once the immediate danger in the alley is secured and the survivors are accounted for, you turn your attention outward. You sprint toward the edge of the town where the shadows seemed to emanate from, scanning the horizon for signs of what—or who—sent those creatures into the alley. The night air grows colder as you move away from the safety of the square, your blade ready and your senses sharp for any sign of a larger threat lurking in the darkness beyond the walls.
+
+⏱️  Toplam : 16.73s  |  İlk token: 11.82s
+📊 Prompt : 1261 token  |  Cevap: 181 token
+
+DEBUG NPC parse — GM cevabı uzunluğu: 861 karakter
+DEBUG NPC parse — [NPC_CREATE] var mı: False
+DEBUG NPC parse — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'You haul yourself to your feet, breathless and bleeding from a fresh gash on you'
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 10/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I press forward along the town's edge, keeping close to the shadows while scanning the perimeter for signs of the creatures' origin, then approach a suspicious flicker of unnatural light near the gatehouse.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 00_village_gates — The Gates of Millhaven
+   Trigger için son 20 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Persuade the guards to open the gate: ROLL d20 + Charisma vs DC 12 - Bribe the guards: Costs 2 gold, automatic success - Intimidate: ROLL d20 + Strength vs DC 15 (Guards open it but warn the tavern)
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I press forward along the town's edge, keeping close to the shadows while scanning the perimeter for signs of the creatures' origin, then approach a suspicious flicker of unnatural light near the gatehouse.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   ⏭️  Zar atılmadı
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (20 mesaj):
+     👤 [user]: kdv: I leap back from the scuttling legs and shout a warning to anyone
+     👤 [user]: kdv rolled dexterity: 6 + 2 = 8 vs DC 10 (FAILURE)
+     🧙 [assistant]: Your feet slip on the slick, moss-covered stones of the alley floor, a
+     👤 [user]: kdv: I scramble sideways against the wall and draw a throwing knife to
+     👤 [user]: kdv rolled dexterity: 15 + 2 = 17 vs DC 10 (SUCCESS)
+     🧙 [assistant]: You twist your body with surprising agility, sliding along the rough s
+     👤 [user]: kdv: I grip my blade tighter and shout louder to draw attention from t
+     👤 [user]: kdv rolled strength: 10 + 3 = 13 vs DC 15 (FAILURE)
+     🧙 [assistant]: Your arm trembles under the strain as the creature's heavy claw drives
+     👤 [user]: kdv: I continue shouting my warning while trying to create an opening 
+     🧙 [assistant]: You press yourself firmly into the corner, using your body as a shield
+     👤 [user]: kdv: I seize the fractured mortar from the wall and hurl it upward to 
+     👤 [user]: kdv rolled dexterity: 1 + 2 = 3 vs DC 10 (CRITICAL FAILURE)
+     🧙 [assistant]: The mortar crumbles uselessly from your grip before you even lift it, 
+     👤 [user]: kdv: I dive into a desperate roll against a lesser claw, biting down h
+     👤 [user]: kdv rolled strength: 13 + 3 = 16 vs DC 15 (SUCCESS)
+     🧙 [assistant]: You grit your teeth and drive your shoulder forward with a burst of de
+     👤 [user]: kdv: I scramble to my feet amidst the chaos and rush toward the neares
+     🧙 [assistant]: You haul yourself to your feet, breathless and bleeding from a fresh g
+     👤 [user]: kdv: I press forward along the town's edge, keeping close to the shado
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5578 karakter
+   Roll bilgisi GM'e gitti mi: HAYIR
+   Aktif node: 00_village_gates — The Gates of Millhaven
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: You move like a ghost along the perimeter, your boots making minimal sound against the cobblestones. The town is eerily quiet now that the initial panic has settled, save for the distant clatter of armor and shouting from the square. As you creep toward the gatehouse, the unnatural light catches your eye—a sickly, violet hue that seems to pulse in rhythm with a low, sub-audible hum vibrating through the soles of your boots.
+
+The flicker emanates from a fissure opening up in the earth just beyond the outer wall, near the old watchtower. From within this rift, tendrils of the same shadowy darkness you fought earlier seem to be slithering out, dragging fragments of stone and debris into the void. It appears the creatures weren't merely attacking; they were escaping a breach in reality itself. You freeze, drawing your blade and raising it high, ready to cut down whatever waits just beyond that glowing rift, but the sheer scale of the tear suggests this is far more than a simple beast attack.
+
+⏱️  Toplam : 17.72s  |  İlk token: 12.18s
+📊 Prompt : 1361 token  |  Cevap: 213 token
+
+DEBUG NPC parse — GM cevabı uzunluğu: 1002 karakter
+DEBUG NPC parse — [NPC_CREATE] var mı: False
+DEBUG NPC parse — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'You move like a ghost along the perimeter, your boots making minimal sound again'
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+
+[INPUT MOCK] Tur limiti (10) doldu → quit
+Oturum kapatıldı. (ID: 26)
+
+Görüşürüz adventurer! ⚔️
+
+
+════════════════════════════════════════════════════════════
+📊 TEST ÖZET RAPORU
+════════════════════════════════════════════════════════════
+  Toplam süre        : 378.7s (6.3 dakika)
+  Oynanan tur        : 10
+  Sahne geçişi       : 1
+  Zar atılan eylem   : 5
+  → Başarı           : 2
+  → Başarısızlık     : 3
+  → Kritik           : 1
+  Yaratılan NPC      : 0
+
+  Ziyaret edilen node'lar (1 geçiş):
+    → 00_village_gates — The Gates of Millhaven
+
+  Zar detayları:
+    🎲 Player: kdv | Action required: dexterity check vs DC 10 | Roll: 6 + 2 (modifier) = 8 | Result: FAILURE
+    🎲 Player: kdv | Action required: dexterity check vs DC 10 | Roll: 15 + 2 (modifier) = 17 | Result: SUCCESS
+    🎲 Player: kdv | Action required: strength check vs DC 15 | Roll: 10 + 3 (modifier) = 13 | Result: FAILURE
+    🎲 Player: kdv | Action required: dexterity check vs DC 10 | Roll: 1 + 2 (modifier) = 3 | Result: CRITICAL FAILURE
+    🎲 Player: kdv | Action required: strength check vs DC 15 | Roll: 13 + 3 (modifier) = 16 | Result: SUCCESS
+
+  Log dosyası: logs/test_20260309_051134.txt
+════════════════════════════════════════════════════════════

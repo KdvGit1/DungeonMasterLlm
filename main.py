@@ -11,9 +11,11 @@ from db.session_manager import (
 from game.character_manager import load_character_from_yaml
 from game.game_state import GameState
 from game.dice import d20, get_modifier
-from game.npc_manager import parse_and_save_npcs
+from game.npc_manager import get_all_npcs, save_npc
+from game.npc_extractor import extract_npcs_from_response
 from game.scenario_manager import ScenarioManager
 from prompts.system_prompt import build_system_prompt
+from rag.retriever import get_relevant_rules
 from rag.ingest import ingest
 from game.character_creator import create_character
 import requests
@@ -73,25 +75,118 @@ def ask_gm(messages, system_prompt):
 
     return full_response
 
+# ─── ZAR GEREKLİ Mİ? ─────────────────────────────────────────────────────────
+
+def needs_roll_check(action, node_available_actions=None):
+    """
+    Oyuncu eylemini RAG örnekleri + küçük AI çağrısıyla analiz eder.
+    Döner: {"needed": True, "ability": "charisma", "dc": 12}
+         veya {"needed": False}
+    """
+    print("\n" + "─" * 40)
+    print(f"🎯 DEBUG needs_roll_check")
+    print(f"   Eylem: '{action}'")
+
+    # RAG'dan zar örneklerini çek
+    examples = get_relevant_rules(f"dice roll ability check required: {action}")
+    if not examples:
+        examples = "No examples found."
+
+    print(f"   RAG sonucu (ilk 200 kr): {str(examples)[:200]}")
+
+    node_context = ""
+    if node_available_actions:
+        node_context = f"\nSCENE SPECIFIC ACTIONS (use these DCs if action matches):\n{node_available_actions}"
+        print(f"   Node actions mevcut: EVET")
+    else:
+        print(f"   Node actions mevcut: HAYIR")
+
+    prompt = f"""You are a D&D rules judge. Decide if this player action requires a dice roll.
+
+PLAYER ACTION: "{action}"
+
+DICE ROLL REFERENCE:
+{examples}
+{node_context}
+
+Rules:
+- Uncertain outcomes (persuading, sneaking, investigating, attacking, jumping, lying) → need a roll
+- Certain outcomes (talking normally, walking, entering a room, looking around casually) → no roll
+
+Respond with ONLY valid JSON, no explanation, no markdown:
+If roll needed: {{"needed": true, "ability": "charisma", "dc": 12}}
+If no roll:     {{"needed": false}}"""
+
+    try:
+        response = requests.post(
+            f"{config.base_url}/api/chat",
+            json={
+                "model": config.model,
+                "messages": [{"role": "user", "content": prompt}],
+                "stream": False,
+                "think": False,
+                "options": {
+                    "num_ctx": 4096,
+                    "temperature": 0.1,
+                    "num_predict": 50
+                }
+            }
+        )
+        result = response.json()
+        answer = result["message"]["content"].strip()
+
+        print(f"   AI ham cevap: '{answer}'")
+
+        # Markdown temizle
+        answer = re.sub(r'```json|```', '', answer).strip()
+
+        # Sadece JSON kısmını al
+        match = re.search(r'\{.*?\}', answer, re.DOTALL)
+        if match:
+            answer = match.group(0)
+            print(f"   JSON parse edildi: '{answer}'")
+        else:
+            print(f"   ⚠️  JSON bulunamadı, roll yok sayılıyor")
+            return {"needed": False}
+
+        data = json.loads(answer)
+
+        if data.get("needed"):
+            result_info = {
+                "needed": True,
+                "ability": data.get("ability", "strength").lower(),
+                "dc": int(data.get("dc", 12))
+            }
+            print(f"   ✅ Roll GEREKLİ → {result_info}")
+            return result_info
+
+        print(f"   ⏭️  Roll GEREKMİYOR")
+        return {"needed": False}
+
+    except Exception as e:
+        print(f"   ❌ needs_roll_check HATA: {e}")
+        return {"needed": False}
+    finally:
+        print("─" * 40)
+
 # ─── ZAR AT ──────────────────────────────────────────────────────────────────
 
-def handle_roll(gm_response, player_name, game_state, session_id, user):
+def execute_roll(roll_info, player_name, game_state, session_id, user):
     """
-    GM cevabından 'ROLL d20 + [ability] vs DC [number]' parse eder,
-    dice.py ile otomatik atar, sonucu DB'ye kaydeder.
+    needs_roll_check'ten gelen roll_info'ya göre zar atar.
+    Sonucu ekrana yazar, DB'ye kaydeder, GM'e gidecek string döner.
     """
-    pattern = r'ROLL\s+d20\s*\+\s*(\w+)\s+vs\s+DC\s+(\d+)'
-    match = re.search(pattern, gm_response, re.IGNORECASE)
+    ability = roll_info["ability"]
+    dc = roll_info["dc"]
 
-    if not match:
-        print("DEBUG handle_roll: ROLL bulundu ama format eşleşmedi.")
-        print(f"DEBUG gm_response snippet: {gm_response[:200]}")
-        return None
+    # Kısaltma normalize et (dex→dexterity, str→strength vb.)
+    ability_map = {
+        "dex": "dexterity", "str": "strength", "con": "constitution",
+        "wis": "wisdom", "int": "intelligence", "cha": "charisma"
+    }
+    ability = ability_map.get(ability, ability)
 
-    ability = match.group(1).lower()
-    dc = int(match.group(2))
-
-    print(f"DEBUG handle_roll: ability={ability}, dc={dc}")
+    print(f"\nDEBUG execute_roll: ability={ability}, dc={dc}")
 
     # karakterden ability score çek
     char = game_state.characters[0]
@@ -99,32 +194,47 @@ def handle_roll(gm_response, player_name, game_state, session_id, user):
     score = abilities.get(ability, 10)
     modifier = get_modifier(score)
 
-    print(f"DEBUG handle_roll: score={score}, modifier={modifier}")
+    print(f"DEBUG execute_roll: karakter={char.get('name')}, score={score}, modifier={modifier}")
 
     # zar at
     roll_result = d20()
     total = roll_result + modifier
 
-    # sonucu ekrana yaz
+    # ekrana yaz
     print("\n" + "─" * 50)
     print(f"🎲 {ability.capitalize()} check vs DC {dc}")
     print(f"   Zar: {roll_result} | Modifier: {modifier:+d} | Toplam: {total} | DC: {dc}")
 
     if roll_result == 20:
+        outcome_label = "CRITICAL SUCCESS"
         print("   ⭐ KRİTİK BAŞARI!")
     elif roll_result == 1:
+        outcome_label = "CRITICAL FAILURE"
         print("   💀 KRİTİK BAŞARISIZLIK!")
     elif total >= dc:
+        outcome_label = "SUCCESS"
         print("   ✅ BAŞARILI")
     else:
+        outcome_label = "FAILURE"
         print("   ❌ BAŞARISIZ")
 
-    outcome = "SUCCESS" if total >= dc else "FAIL"
+    # GM'e gidecek özet
     roll_message = (
-        f"{player_name} rolled {ability}: "
-        f"{roll_result} + {modifier} = {total} vs DC {dc} ({outcome})"
+        f"Player: {player_name}\n"
+        f"Action required: {ability} check vs DC {dc}\n"
+        f"Roll: {roll_result} + {modifier} (modifier) = {total}\n"
+        f"Result: {outcome_label}"
     )
-    save_message(session_id, user.get("id"), "user", roll_message)
+
+    # DB'ye kaydet
+    db_message = (
+        f"{player_name} rolled {ability}: "
+        f"{roll_result} + {modifier} = {total} vs DC {dc} ({outcome_label})"
+    )
+    save_message(session_id, user.get("id"), "user", db_message)
+
+    print(f"\nDEBUG execute_roll → GM'e gidecek mesaj:\n{roll_message}")
+
     return roll_message
 
 # ─── GİRİŞ EKRANI ────────────────────────────────────────────────────────────
@@ -214,11 +324,6 @@ def load_player_characters(game_state):
 # ─── SENARYO SEÇ ─────────────────────────────────────────────────────────────
 
 def select_scenario():
-    """
-    Kullanıcıya senaryo takip etmek isteyip istemediğini sorar.
-    Evet → scenarios/ klasöründeki senaryoları tarar, seçtirip ScenarioManager döner.
-    Hayır → None döner (serbest mod).
-    """
     print("\n📖 SENARYO")
     print("─" * 30)
     choice = input("Bir senaryo takip etmek istiyor musun? (e/h): ").strip().lower()
@@ -227,19 +332,16 @@ def select_scenario():
         print("ℹ️  Serbest mod — hayal gücüne bırakıldı.")
         return None
 
-    # scenarios/ klasörünü tara
     scenarios_root = "scenarios"
     if not os.path.exists(scenarios_root):
         print("⚠️  'scenarios/' klasörü bulunamadı, serbest mod.")
         return None
 
-    # Her alt klasörde scenario.yaml arayalım
     found = []
     for entry in sorted(os.listdir(scenarios_root)):
         entry_path = os.path.join(scenarios_root, entry)
         meta_path = os.path.join(entry_path, "scenario.yaml")
         if os.path.isdir(entry_path) and os.path.exists(meta_path):
-            # Başlığı meta'dan çek
             try:
                 import yaml
                 with open(meta_path, "r", encoding="utf-8") as f:
@@ -249,11 +351,7 @@ def select_scenario():
             except Exception:
                 title = entry
                 description = ""
-            found.append({
-                "path": entry_path,
-                "title": title,
-                "description": description
-            })
+            found.append({"path": entry_path, "title": title, "description": description})
 
     if not found:
         print("⚠️  Hiç senaryo bulunamadı, serbest mod.")
@@ -292,8 +390,9 @@ def game_loop(user, session_id, game_state, scenario_manager):
 
     valid_names = [c['name'].lower() for c in game_state.characters]
     names_display = ", ".join([c['name'] for c in game_state.characters])
+    player_names_list = [c['name'] for c in game_state.characters]
 
-    # Senaryo başlangıç mesajı
+    # Başlangıç mesajı
     if scenario_manager and scenario_manager.current_node:
         node = scenario_manager.current_node
         intro_message = (
@@ -310,22 +409,44 @@ def game_loop(user, session_id, game_state, scenario_manager):
 
     system_prompt = build_system_prompt(
         game_state.characters, "begin adventure exploration",
-        game_state, scenario_manager
+        game_state, scenario_manager, session_id=session_id
     )
 
-    # ── DEBUG: system prompt önizleme ──
+    # ── DEBUG: system prompt tam içerik ──
     print("\n" + "═" * 50)
-    print("🔍 DEBUG — SYSTEM PROMPT (ilk 600 karakter)")
+    print("🔍 DEBUG — SYSTEM PROMPT (ilk 800 karakter)")
     print("═" * 50)
-    print(system_prompt[:600])
+    print(system_prompt[:800])
     print("═" * 50 + "\n")
+
+    # ── DEBUG: NPC durumu (başlangıç) ──
+    npcs = get_all_npcs(session_id)
+    print(f"🔍 DEBUG — BAŞLANGIÇ NPC'LERİ ({len(npcs)} adet):")
+    if npcs:
+        for npc in npcs:
+            print(f"   • {npc['name']} | {npc['public'].get('role','?')} | SECRET: {str(npc['secret'])[:60]}")
+    else:
+        print("   (henüz NPC yok)")
+    print()
 
     print("⏳ GM başlangıç sahnesini hazırlıyor...\n")
     gm_intro = ask_gm(
         [{"role": "user", "content": intro_message}],
         system_prompt
     )
-    gm_intro = parse_and_save_npcs(gm_intro)
+
+    # ── NPC Extraction (intro) ──
+    existing_npc_names = [n['name'] for n in get_all_npcs(session_id)]
+    new_npcs = extract_npcs_from_response(gm_intro, [{"role": "assistant", "content": gm_intro}], existing_npc_names, player_names_list)
+    for npc in new_npcs:
+        public_data = {"role": npc["role"], "appearance": npc["appearance"], "personality": npc["personality"]}
+        save_npc(npc["name"], public_data, npc["secret"], session_id)
+
+    npcs_after = get_all_npcs(session_id)
+    print(f"\n🔎 NPC Extractor — intro sonrası NPC sayısı: {len(npcs_after)}")
+    for npc in npcs_after:
+        print(f"   • {npc['name']} | {npc['public'].get('role','?')} | SECRET: {str(npc['secret'])[:50]}")
+
     game_state.set_scene(gm_intro[:100])
     if scenario_manager and scenario_manager.current_node:
         game_state.current_node = scenario_manager.current_node.get("title", "")
@@ -371,51 +492,26 @@ def game_loop(user, session_id, game_state, scenario_manager):
         user_message = f"{player_name}: {action}"
         save_message(session_id, user.get("id"), "user", user_message)
 
-        recent_messages = get_recent_messages(session_id)
+        # ════════════════════════════════════════════════════
+        # ADIM 1: TRIGGER CHECK — sahne değişti mi?
+        # ════════════════════════════════════════════════════
+        print("\n" + "═" * 50)
+        print("📍 ADIM 1 — TRIGGER CHECK")
+        print("═" * 50)
 
-        # ── DEBUG: mesaj geçmişi ──
-        print(f"\nDEBUG mesaj geçmişi ({len(recent_messages)} mesaj):")
-        for m in recent_messages:
-            icon = "👤" if m['role'] == 'user' else "🧙"
-            print(f"  {icon} [{m['role']}]: {m['content'][:70]}")
-
-        system_prompt = build_system_prompt(
-            game_state.characters, action,
-            game_state, scenario_manager
-        )
-
-        # ── DEBUG: kaç token gönderileceğini tahmin et ──
-        print(f"\nDEBUG system_prompt uzunluğu: {len(system_prompt)} karakter")
-        if scenario_manager and scenario_manager.current_node:
-            print(f"DEBUG aktif node: {scenario_manager.current_node.get('id', '?')} — {scenario_manager.current_node.get('title', '?')}")
-
-        print("\n⏳ GM düşünüyor...\n")
-        gm_response = ask_gm(recent_messages, system_prompt)
-        gm_response = parse_and_save_npcs(gm_response)
-        game_state.set_scene(gm_response[:100])
-
-        # ── Zar gerekli mi? ──
-        if "ROLL" in gm_response.upper():
-            roll_result = handle_roll(
-                gm_response, player_name, game_state, session_id, user
-            )
-            if roll_result:
-                recent_messages = get_recent_messages(session_id)
-                print("\n⏳ GM sonucu değerlendiriyor...\n")
-                gm_response = ask_gm(recent_messages, system_prompt)
-                gm_response = parse_and_save_npcs(gm_response)
-                game_state.set_scene(gm_response[:100])
-
-        print("\n" + "─" * 50)
-        save_message(session_id, None, "assistant", gm_response)
-
-        # ── Senaryo trigger kontrolü ──
         if scenario_manager:
-            recent_messages = get_recent_messages(session_id)
-            print(f"\nDEBUG trigger kontrolü başlıyor... (node: {scenario_manager.current_node.get('id', '?')})")
-            next_node = scenario_manager.check_trigger(recent_messages)
-            print(f"DEBUG trigger sonucu: {next_node}")
+            current_id = scenario_manager.current_node.get('id', '?') if scenario_manager.current_node else '?'
+            current_title = scenario_manager.current_node.get('title', '?') if scenario_manager.current_node else '?'
+            print(f"   Mevcut node: {current_id} — {current_title}")
+
+            recent_for_trigger = get_recent_messages(session_id)
+            print(f"   Trigger için son {len(recent_for_trigger)} mesaj kullanılıyor")
+
+            next_node = scenario_manager.check_trigger(recent_for_trigger)
+            print(f"   Trigger sonucu: {next_node if next_node else 'YOK — sahne değişmedi'}")
+
             if next_node:
+                print(f"   🚀 Sahne geçişi: {current_id} → {next_node}")
                 scenario_manager.load_node(next_node)
                 if scenario_manager.current_node:
                     game_state.current_node = scenario_manager.current_node.get("title", "")
@@ -424,6 +520,92 @@ def game_loop(user, session_id, game_state, scenario_manager):
                     f"{scenario_manager.current_node.get('title', next_node)}]"
                 )
                 save_message(session_id, None, "user", transition_msg)
+                print(f"   Yeni node yüklendi: {scenario_manager.current_node.get('id','?')} — {scenario_manager.current_node.get('title','?')}")
+        else:
+            print("   Senaryo yok — trigger atlandı")
+
+        # ════════════════════════════════════════════════════
+        # ADIM 2: ROLL CHECK — zar gerekli mi?
+        # ════════════════════════════════════════════════════
+        print("\n" + "═" * 50)
+        print("🎲 ADIM 2 — ROLL CHECK")
+        print("═" * 50)
+
+        node_actions = None
+        if scenario_manager and scenario_manager.current_node:
+            node_actions = scenario_manager.current_node.get("available_actions")
+            print(f"   Node available_actions: {'mevcut' if node_actions else 'YOK'}")
+            if node_actions:
+                print(f"   {str(node_actions)[:200]}")
+        else:
+            print("   Node yok — available_actions kullanılamıyor")
+
+        roll_info = needs_roll_check(action, node_actions)
+
+        roll_result_msg = None
+        if roll_info.get("needed"):
+            roll_result_msg = execute_roll(roll_info, player_name, game_state, session_id, user)
+        else:
+            print("   ⏭️  Zar atılmadı")
+
+        # ════════════════════════════════════════════════════
+        # ADIM 3: GM CEVABI
+        # ════════════════════════════════════════════════════
+        print("\n" + "═" * 50)
+        print("🧙 ADIM 3 — GM CEVABI")
+        print("═" * 50)
+
+        recent_messages = get_recent_messages(session_id)
+
+        print(f"   Mesaj geçmişi ({len(recent_messages)} mesaj):")
+        for m in recent_messages:
+            icon = "👤" if m['role'] == 'user' else "🧙"
+            print(f"     {icon} [{m['role']}]: {m['content'][:70]}")
+
+        # ── DEBUG: NPC'ler ──
+        npcs_now = get_all_npcs(session_id)
+        print(f"\n   Mevcut NPC'ler ({len(npcs_now)} adet):")
+        if npcs_now:
+            for npc in npcs_now:
+                print(f"     • {npc['name']} | {npc['public'].get('role','?')} | SECRET: {str(npc['secret'])[:50]}")
+        else:
+            print("     (henüz NPC yok)")
+
+        system_prompt = build_system_prompt(
+            game_state.characters, action,
+            game_state, scenario_manager,
+            roll_info=roll_result_msg, session_id=session_id
+        )
+
+        print(f"\n   System prompt uzunluğu: {len(system_prompt)} karakter")
+        print(f"   Roll bilgisi GM'e gitti mi: {'EVET' if roll_result_msg else 'HAYIR'}")
+        if roll_result_msg:
+            print(f"   Roll özeti: {roll_result_msg[:100]}")
+        if scenario_manager and scenario_manager.current_node:
+            print(f"   Aktif node: {scenario_manager.current_node.get('id','?')} — {scenario_manager.current_node.get('title','?')}")
+
+        print("\n" + "─" * 50)
+        print("⏳ GM düşünüyor...\n")
+        gm_response = ask_gm(recent_messages, system_prompt)
+
+        # ── NPC Extraction ──
+        existing_npc_names = [n['name'] for n in get_all_npcs(session_id)]
+        new_npcs = extract_npcs_from_response(gm_response, recent_messages, existing_npc_names, player_names_list)
+        for npc in new_npcs:
+            public_data = {"role": npc["role"], "appearance": npc["appearance"], "personality": npc["personality"]}
+            save_npc(npc["name"], public_data, npc["secret"], session_id)
+
+        npcs_after_turn = get_all_npcs(session_id)
+        print(f"\n🔎 NPC Extractor — tur sonrası NPC sayısı: {len(npcs_after_turn)}")
+        for npc in npcs_after_turn:
+            print(f"   • {npc['name']} | {npc['public'].get('role','?')} | SECRET: {str(npc['secret'])[:50]}")
+
+        game_state.set_scene(gm_response[:100])
+        print(f"\nDEBUG game_state.current_scene güncellendi: '{gm_response[:80]}'")
+
+        print("\n" + "─" * 50)
+        save_message(session_id, None, "assistant", gm_response)
+        print("DEBUG mesaj DB'ye kaydedildi ✅")
 
 # ─── ANA FONKSİYON ───────────────────────────────────────────────────────────
 
@@ -452,6 +634,8 @@ def main():
         session_name = input("Oturum adı: ").strip()
         session_id = create_session(session_name)
 
+    print(f"DEBUG session_id: {session_id}")
+
     # ── Oyun durumu ──
     game_state = GameState()
     game_state.session_id = session_id
@@ -463,8 +647,18 @@ def main():
         print("⚠️  Hiç karakter yüklenmedi, çıkılıyor.")
         return
 
+    print(f"\nDEBUG yüklenen karakterler ({len(game_state.characters)} adet):")
+    for c in game_state.characters:
+        print(f"   • {c.get('name')} | {c.get('class','?')} | abilities: {c.get('abilities',{})}")
+
     # ── Senaryo seç ──
     scenario_manager = select_scenario()
+
+    if scenario_manager:
+        print(f"\nDEBUG senaryo: {scenario_manager.meta.get('title','?')}")
+        print(f"DEBUG başlangıç node: {scenario_manager.current_node.get('id','?') if scenario_manager.current_node else 'YOK'}")
+    else:
+        print("\nDEBUG senaryo: YOK (serbest mod)")
 
     # ── Oyunu başlat ──
     game_loop(user, session_id, game_state, scenario_manager)

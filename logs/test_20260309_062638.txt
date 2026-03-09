@@ -1,0 +1,981 @@
+============================================================
+🤖 DnD GM — OTOMATİK TEST
+   Tarih   : 2026-03-09 06:26:38
+   Log     : logs/test_20260309_062638.txt
+   Tur     : 10
+   Senaryo : Shadow Over Millhaven
+   Karakter: kdv
+============================================================
+
+
+============================================================
+🚀 OYUN BAŞLIYOR
+============================================================
+
+Veritabanı hazır.
+VektörDB zaten mevcut, ingest atlanıyor.
+
+⚔️  DUNGEON MASTER AI  ⚔️
+──────────────────────────────
+1. Giriş yap
+2. Kayıt ol
+
+[INPUT MOCK] Prompt: '
+Seçim: '
+[INPUT MOCK] Setup cevabı: '1'
+
+[INPUT MOCK] Prompt: 'Kullanıcı adı: '
+[INPUT MOCK] Setup cevabı: 'kdv'
+
+[INPUT MOCK] Prompt: 'Şifre: '
+[INPUT MOCK] Setup cevabı: '2002'
+Hoş geldin, kdv!
+
+Hoş geldin kdv! Rol: player
+
+[INPUT MOCK] Prompt: 'Oturum adı: '
+[INPUT MOCK] Setup cevabı: 'h'
+Oturum oluşturuldu: h (ID: 30)
+DEBUG session_id: 30
+
+🧙 KARAKTER YÜKLE
+──────────────────────────────
+1. Yeni karakter oluştur
+2. Mevcut karakter yükle
+
+[INPUT MOCK] Prompt: '
+Seçim (1/2): '
+[INPUT MOCK] Setup cevabı: 'test_20260309_062638'
+⚠️  Geçersiz seçim.
+
+🧙 KARAKTER YÜKLE
+──────────────────────────────
+1. Yeni karakter oluştur
+2. Mevcut karakter yükle
+
+[INPUT MOCK] Prompt: '
+Seçim (1/2): '
+[INPUT MOCK] Setup cevabı: 'test_20260309_062638'
+⚠️  Geçersiz seçim.
+
+🧙 KARAKTER YÜKLE
+──────────────────────────────
+1. Yeni karakter oluştur
+2. Mevcut karakter yükle
+
+[INPUT MOCK] Prompt: '
+Seçim (1/2): '
+[INPUT MOCK] Setup cevabı: '2'
+
+Karakter dosyaları:
+  1. kdv.yaml
+
+[INPUT MOCK] Prompt: 'Numara veya dosya adı: '
+[INPUT MOCK] Setup cevabı: '1'
+kdv oyuna katıldı.
+✅ kdv oyuna katıldı!
+
+[INPUT MOCK] Prompt: 'Başka karakter eklemek ister misin? (e/h): '
+[INPUT MOCK] Setup cevabı: 'h'
+
+DEBUG yüklenen karakterler (1 adet):
+   • kdv | Savaşçı | abilities: {'charisma': 10, 'constitution': 16, 'dexterity': 14, 'intelligence': 11, 'strength': 16, 'wisdom': 10}
+
+📖 SENARYO
+──────────────────────────────
+
+[INPUT MOCK] Prompt: 'Bir senaryo takip etmek istiyor musun? (e/h): '
+[INPUT MOCK] Setup cevabı: 'e'
+
+Mevcut senaryolar:
+  1. Shadow Over Millhaven
+     A once-peaceful valley protected by a silver dragon has fall...
+
+[INPUT MOCK] Prompt: '
+Numara ile seçin: '
+[INPUT MOCK] Setup cevabı: '1'
+
+📍 Yeni lokasyon: The Gates of Millhaven
+✅ Senaryo yüklendi: Shadow Over Millhaven
+
+DEBUG senaryo: Shadow Over Millhaven
+DEBUG başlangıç node: 00_village_gates
+
+🎲 Macera başlıyor...
+
+──────────────────────────────────────────────────
+VektörDB yüklendi.
+
+══════════════════════════════════════════════════
+🔍 DEBUG — SYSTEM PROMPT (ilk 800 karakter)
+══════════════════════════════════════════════════
+
+You are a Dungeons & Dragons Game Master.
+
+SETTING: Medieval fantasy world only. No phones, no modern technology.
+
+PERSPECTIVE (CRITICAL):
+- You are the NARRATOR, not a character
+- NEVER use "I", "me", "my" in your responses
+- Always refer to characters in third person: "Elias does...", "she says..."
+- You describe what happens, you do not participate
+
+STRICT RULES:
+- Respond in English only
+- Maximum 3 sentences per response, no exceptions
+- Player characters are listed in [PLAYERS] — NEVER rename them
+- ALWAYS advance the story, never repeat previous descriptions
+- You MAY invent NPCs freely; scenario NPCs are listed in [SCENARIO NPCS]
+- When introducing important NPCs, ALWAYS give them a proper name (e.g. "Garret the guard", not just "a guard")
+
+DICE ROLL RULES:
+- The dice system handl
+══════════════════════════════════════════════════
+
+🔍 DEBUG — BAŞLANGIÇ NPC'LERİ (0 adet):
+   (henüz NPC yok)
+
+⏳ GM başlangıç sahnesini hazırlıyor...
+
+
+🧙 GM: The ancient iron gates of Millhaven groan under the weight of centuries, framing a path shrouded in mist and silence. A cold wind whistles through the archway, carrying the faint scent of damp earth and distant decay. As you step forward, the first shadow detaches itself from the treeline, signaling that no one here is truly alone.
+
+⏱️  Toplam : 13.32s  |  İlk token: 11.27s
+📊 Prompt : 34 token  |  Cevap: 73 token
+
+🔎 NPC Extractor — AI ham cevap: []
+
+🔎 NPC Extractor — intro sonrası NPC sayısı: 0
+
+──────────────────────────────────────────────────
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 1/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I draw my weapon and move cautiously toward the shadow, ready to defend myself while keeping an eye on the mist for other signs of danger.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 00_village_gates — The Gates of Millhaven
+   Trigger için son 3 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Persuade the guards to open the gate: ROLL d20 + Charisma vs DC 12 - Bribe the guards: Costs 2 gold, automatic success - Intimidate: ROLL d20 + Strength vs DC 15 (Guards open it but warn the tavern)
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I draw my weapon and move cautiously toward the shadow, ready to defend myself while keeping an eye on the mist for other signs of danger.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   ⏭️  Zar atılmadı
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (3 mesaj):
+     👤 [user]: The adventure begins. Location: The Gates of Millhaven. Set the openin
+     🧙 [assistant]: The ancient iron gates of Millhaven groan under the weight of centurie
+     👤 [user]: kdv: I draw my weapon and move cautiously toward the shadow, ready to 
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5622 karakter
+   Roll bilgisi GM'e gitti mi: HAYIR
+   Aktif node: 00_village_gates — The Gates of Millhaven
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: Your hand tightens around the hilt of your blade as you inch forward, the metal cold against your palm. The shadow seems to shift slightly in the gloom, testing your resolve without making a sudden move. You hold your breath, scanning the swirling mist for any other shapes that might emerge from the fog before you are forced to act.
+
+⏱️  Toplam : 13.18s  |  İlk token: 11.31s
+📊 Prompt : 147 token  |  Cevap: 70 token
+
+🔎 NPC Extractor — AI ham cevap: []
+
+🔎 NPC Extractor — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'Your hand tightens around the hilt of your blade as you inch forward, the metal '
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 2/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I lower my weapon slightly as the shadow remains still, then cautiously call out to ask if anyone is there before stepping past the immediate threat.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 00_village_gates — The Gates of Millhaven
+   Trigger için son 5 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Persuade the guards to open the gate: ROLL d20 + Charisma vs DC 12 - Bribe the guards: Costs 2 gold, automatic success - Intimidate: ROLL d20 + Strength vs DC 15 (Guards open it but warn the tavern)
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I lower my weapon slightly as the shadow remains still, then cautiously call out to ask if anyone is there before stepping past the immediate threat.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   ⏭️  Zar atılmadı
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (5 mesaj):
+     👤 [user]: The adventure begins. Location: The Gates of Millhaven. Set the openin
+     🧙 [assistant]: The ancient iron gates of Millhaven groan under the weight of centurie
+     👤 [user]: kdv: I draw my weapon and move cautiously toward the shadow, ready to 
+     🧙 [assistant]: Your hand tightens around the hilt of your blade as you inch forward, 
+     👤 [user]: kdv: I lower my weapon slightly as the shadow remains still, then caut
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5593 karakter
+   Roll bilgisi GM'e gitti mi: HAYIR
+   Aktif node: 00_village_gates — The Gates of Millhaven
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: You ease your grip on your weapon, offering a tentative voice into the silence that hangs heavy in the damp air. "Is anyone there?" you call out, your words swallowed quickly by the wind as you take a cautious step toward the stillness. The shadow offers no answer, only a deeper chill that seems to seep from the very stones of the gate.
+
+⏱️  Toplam : 12.95s  |  İlk token: 11.01s
+📊 Prompt : 257 token  |  Cevap: 74 token
+
+🔎 NPC Extractor — AI ham cevap: []
+
+🔎 NPC Extractor — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'You ease your grip on your weapon, offering a tentative voice into the silence t'
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 3/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I take a firmer step forward and call out again, asking if anyone can help those trapped inside, while keeping my hand ready near my weapon just in case.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 00_village_gates — The Gates of Millhaven
+   Trigger için son 7 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Persuade the guards to open the gate: ROLL d20 + Charisma vs DC 12 - Bribe the guards: Costs 2 gold, automatic success - Intimidate: ROLL d20 + Strength vs DC 15 (Guards open it but warn the tavern)
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I take a firmer step forward and call out again, asking if anyone can help those trapped inside, while keeping my hand ready near my weapon just in case.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   ⏭️  Zar atılmadı
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (7 mesaj):
+     👤 [user]: The adventure begins. Location: The Gates of Millhaven. Set the openin
+     🧙 [assistant]: The ancient iron gates of Millhaven groan under the weight of centurie
+     👤 [user]: kdv: I draw my weapon and move cautiously toward the shadow, ready to 
+     🧙 [assistant]: Your hand tightens around the hilt of your blade as you inch forward, 
+     👤 [user]: kdv: I lower my weapon slightly as the shadow remains still, then caut
+     🧙 [assistant]: You ease your grip on your weapon, offering a tentative voice into the
+     👤 [user]: kdv: I take a firmer step forward and call out again, asking if anyone
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5615 karakter
+   Roll bilgisi GM'e gitti mi: HAYIR
+   Aktif node: 00_village_gates — The Gates of Millhaven
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: You stride with renewed purpose, your voice echoing off the stone walls as you ask if anyone within can aid the trapped souls. The shadow remains unnervingly still, watching your every move as you keep your hand hovering near your blade's hilt. A sudden gust of wind whips through the gate, momentarily obscuring the figure and leaving only the sound of your own breath in the tense silence.
+
+⏱️  Toplam : 13.27s  |  İlk token: 11.15s
+📊 Prompt : 376 token  |  Cevap: 81 token
+
+🔎 NPC Extractor — AI ham cevap: []
+
+🔎 NPC Extractor — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'You stride with renewed purpose, your voice echoing off the stone walls as you a'
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 4/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I ignore the chilling wind and press onward toward the gate's interior, shouting a warning about the lurking danger while scanning the pillars for any other threats.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 00_village_gates — The Gates of Millhaven
+   Trigger için son 9 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Persuade the guards to open the gate: ROLL d20 + Charisma vs DC 12 - Bribe the guards: Costs 2 gold, automatic success - Intimidate: ROLL d20 + Strength vs DC 15 (Guards open it but warn the tavern)
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I ignore the chilling wind and press onward toward the gate's interior, shouting a warning about the lurking danger while scanning the pillars for any other threats.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   ⏭️  Zar atılmadı
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (9 mesaj):
+     👤 [user]: The adventure begins. Location: The Gates of Millhaven. Set the openin
+     🧙 [assistant]: The ancient iron gates of Millhaven groan under the weight of centurie
+     👤 [user]: kdv: I draw my weapon and move cautiously toward the shadow, ready to 
+     🧙 [assistant]: Your hand tightens around the hilt of your blade as you inch forward, 
+     👤 [user]: kdv: I lower my weapon slightly as the shadow remains still, then caut
+     🧙 [assistant]: You ease your grip on your weapon, offering a tentative voice into the
+     👤 [user]: kdv: I take a firmer step forward and call out again, asking if anyone
+     🧙 [assistant]: You stride with renewed purpose, your voice echoing off the stone wall
+     👤 [user]: kdv: I ignore the chilling wind and press onward toward the gate's int
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5625 karakter
+   Roll bilgisi GM'e gitti mi: HAYIR
+   Aktif node: 00_village_gates — The Gates of Millhaven
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: You push past the threshold with determination, your shout cutting through the damp air as you warn of the unseen dangers waiting within. The shadow seems to recoil slightly at your voice, retreating deeper into the gloom behind you. You scan the ancient pillars frantically, searching for any sign that the darkness inside is not empty before forcing yourself to move further in.
+
+⏱️  Toplam : 12.91s  |  İlk token: 10.93s
+📊 Prompt : 499 token  |  Cevap: 73 token
+
+🔎 NPC Extractor — AI ham cevap: []
+
+🔎 NPC Extractor — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'You push past the threshold with determination, your shout cutting through the d'
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 5/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I press deeper into the gloom, ignoring the shadow's retreat to investigate the trapped souls and scan for any remaining threats hiding in the pillars.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 00_village_gates — The Gates of Millhaven
+   Trigger için son 11 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Persuade the guards to open the gate: ROLL d20 + Charisma vs DC 12 - Bribe the guards: Costs 2 gold, automatic success - Intimidate: ROLL d20 + Strength vs DC 15 (Guards open it but warn the tavern)
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I press deeper into the gloom, ignoring the shadow's retreat to investigate the trapped souls and scan for any remaining threats hiding in the pillars.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   ⏭️  Zar atılmadı
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (11 mesaj):
+     👤 [user]: The adventure begins. Location: The Gates of Millhaven. Set the openin
+     🧙 [assistant]: The ancient iron gates of Millhaven groan under the weight of centurie
+     👤 [user]: kdv: I draw my weapon and move cautiously toward the shadow, ready to 
+     🧙 [assistant]: Your hand tightens around the hilt of your blade as you inch forward, 
+     👤 [user]: kdv: I lower my weapon slightly as the shadow remains still, then caut
+     🧙 [assistant]: You ease your grip on your weapon, offering a tentative voice into the
+     👤 [user]: kdv: I take a firmer step forward and call out again, asking if anyone
+     🧙 [assistant]: You stride with renewed purpose, your voice echoing off the stone wall
+     👤 [user]: kdv: I ignore the chilling wind and press onward toward the gate's int
+     🧙 [assistant]: You push past the threshold with determination, your shout cutting thr
+     👤 [user]: kdv: I press deeper into the gloom, ignoring the shadow's retreat to i
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5636 karakter
+   Roll bilgisi GM'e gitti mi: HAYIR
+   Aktif node: 00_village_gates — The Gates of Millhaven
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: You stride past the retreating shadow, your boots crunching on gravel as you navigate the treacherous interior of the gatehouse. With every step, you probe the shadows between the massive pillars, eyes darting wildly to ensure no other predator is watching from the dark corners. Your heart pounds with a mix of fear and urgency as you finally spot faint cries for help echoing from the depths ahead.
+
+⏱️  Toplam : 13.01s  |  İlk token: 10.88s
+📊 Prompt : 613 token  |  Cevap: 81 token
+
+🔎 NPC Extractor — AI ham cevap: []
+
+🔎 NPC Extractor — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'You stride past the retreating shadow, your boots crunching on gravel as you nav'
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 6/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I follow the faint cries deeper into the gloom, scanning the walls for ambushes before stepping closer to investigate where the trapped souls are held.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 00_village_gates — The Gates of Millhaven
+   Trigger için son 13 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Persuade the guards to open the gate: ROLL d20 + Charisma vs DC 12 - Bribe the guards: Costs 2 gold, automatic success - Intimidate: ROLL d20 + Strength vs DC 15 (Guards open it but warn the tavern)
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I follow the faint cries deeper into the gloom, scanning the walls for ambushes before stepping closer to investigate where the trapped souls are held.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   ⏭️  Zar atılmadı
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (13 mesaj):
+     👤 [user]: The adventure begins. Location: The Gates of Millhaven. Set the openin
+     🧙 [assistant]: The ancient iron gates of Millhaven groan under the weight of centurie
+     👤 [user]: kdv: I draw my weapon and move cautiously toward the shadow, ready to 
+     🧙 [assistant]: Your hand tightens around the hilt of your blade as you inch forward, 
+     👤 [user]: kdv: I lower my weapon slightly as the shadow remains still, then caut
+     🧙 [assistant]: You ease your grip on your weapon, offering a tentative voice into the
+     👤 [user]: kdv: I take a firmer step forward and call out again, asking if anyone
+     🧙 [assistant]: You stride with renewed purpose, your voice echoing off the stone wall
+     👤 [user]: kdv: I ignore the chilling wind and press onward toward the gate's int
+     🧙 [assistant]: You push past the threshold with determination, your shout cutting thr
+     👤 [user]: kdv: I press deeper into the gloom, ignoring the shadow's retreat to i
+     🧙 [assistant]: You stride past the retreating shadow, your boots crunching on gravel 
+     👤 [user]: kdv: I follow the faint cries deeper into the gloom, scanning the wall
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5621 karakter
+   Roll bilgisi GM'e gitti mi: HAYIR
+   Aktif node: 00_village_gates — The Gates of Millhaven
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: You press onward into the deepest recesses of the gatehouse, your eyes sweeping frantically along the crumbling stone walls for any sign of a hidden ambush. The faint cries grow clearer now, guiding you toward a heavy iron door that stands slightly ajar, revealing glimpses of desperate faces pressed against the bars within. With one hand ready to draw your weapon and the other gripping the cold metal of your shield, you take a final step forward, bracing yourself for whatever horrors await in the heart of this cursed place.
+
+⏱️  Toplam : 12.11s  |  İlk token: 9.37s
+📊 Prompt : 735 token  |  Cevap: 104 token
+
+🔎 NPC Extractor — AI ham cevap: []
+
+🔎 NPC Extractor — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'You press onward into the deepest recesses of the gatehouse, your eyes sweeping '
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 7/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I take a cautious step toward the ajar iron door, hand on my weapon as I prepare to force it open and rescue the trapped souls.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 00_village_gates — The Gates of Millhaven
+   Trigger için son 15 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Persuade the guards to open the gate: ROLL d20 + Charisma vs DC 12 - Bribe the guards: Costs 2 gold, automatic success - Intimidate: ROLL d20 + Strength vs DC 15 (Guards open it but warn the tavern)
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I take a cautious step toward the ajar iron door, hand on my weapon as I prepare to force it open and rescue the trapped souls.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   ⏭️  Zar atılmadı
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (15 mesaj):
+     👤 [user]: The adventure begins. Location: The Gates of Millhaven. Set the openin
+     🧙 [assistant]: The ancient iron gates of Millhaven groan under the weight of centurie
+     👤 [user]: kdv: I draw my weapon and move cautiously toward the shadow, ready to 
+     🧙 [assistant]: Your hand tightens around the hilt of your blade as you inch forward, 
+     👤 [user]: kdv: I lower my weapon slightly as the shadow remains still, then caut
+     🧙 [assistant]: You ease your grip on your weapon, offering a tentative voice into the
+     👤 [user]: kdv: I take a firmer step forward and call out again, asking if anyone
+     🧙 [assistant]: You stride with renewed purpose, your voice echoing off the stone wall
+     👤 [user]: kdv: I ignore the chilling wind and press onward toward the gate's int
+     🧙 [assistant]: You push past the threshold with determination, your shout cutting thr
+     👤 [user]: kdv: I press deeper into the gloom, ignoring the shadow's retreat to i
+     🧙 [assistant]: You stride past the retreating shadow, your boots crunching on gravel 
+     👤 [user]: kdv: I follow the faint cries deeper into the gloom, scanning the wall
+     🧙 [assistant]: You press onward into the deepest recesses of the gatehouse, your eyes
+     👤 [user]: kdv: I take a cautious step toward the ajar iron door, hand on my weap
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5360 karakter
+   Roll bilgisi GM'e gitti mi: HAYIR
+   Aktif node: 00_village_gates — The Gates of Millhaven
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: You plant your boot firmly against the heavy iron door, your free hand tightening around your weapon as you brace for the impact of forcing it wide. The metal groans in protest under your strength, revealing a sliver of dim light that illuminates the terrified faces of the souls trapped within. With a final heave, the door swings open just enough to let you rush forward and secure the area before anyone else can emerge from the shadows.
+
+⏱️  Toplam : 12.38s  |  İlk token: 10.03s
+📊 Prompt : 879 token  |  Cevap: 89 token
+
+🔎 NPC Extractor — AI ham cevap: []
+
+🔎 NPC Extractor — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'You plant your boot firmly against the heavy iron door, your free hand tightenin'
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 8/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I rush through the swinging door to secure the trapped souls and scan the immediate area for any lurking threats before dragging them to safety.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 00_village_gates — The Gates of Millhaven
+   Trigger için son 17 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Persuade the guards to open the gate: ROLL d20 + Charisma vs DC 12 - Bribe the guards: Costs 2 gold, automatic success - Intimidate: ROLL d20 + Strength vs DC 15 (Guards open it but warn the tavern)
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I rush through the swinging door to secure the trapped souls and scan the immediate area for any lurking threats before dragging them to safety.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   ⏭️  Zar atılmadı
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (17 mesaj):
+     👤 [user]: The adventure begins. Location: The Gates of Millhaven. Set the openin
+     🧙 [assistant]: The ancient iron gates of Millhaven groan under the weight of centurie
+     👤 [user]: kdv: I draw my weapon and move cautiously toward the shadow, ready to 
+     🧙 [assistant]: Your hand tightens around the hilt of your blade as you inch forward, 
+     👤 [user]: kdv: I lower my weapon slightly as the shadow remains still, then caut
+     🧙 [assistant]: You ease your grip on your weapon, offering a tentative voice into the
+     👤 [user]: kdv: I take a firmer step forward and call out again, asking if anyone
+     🧙 [assistant]: You stride with renewed purpose, your voice echoing off the stone wall
+     👤 [user]: kdv: I ignore the chilling wind and press onward toward the gate's int
+     🧙 [assistant]: You push past the threshold with determination, your shout cutting thr
+     👤 [user]: kdv: I press deeper into the gloom, ignoring the shadow's retreat to i
+     🧙 [assistant]: You stride past the retreating shadow, your boots crunching on gravel 
+     👤 [user]: kdv: I follow the faint cries deeper into the gloom, scanning the wall
+     🧙 [assistant]: You press onward into the deepest recesses of the gatehouse, your eyes
+     👤 [user]: kdv: I take a cautious step toward the ajar iron door, hand on my weap
+     🧙 [assistant]: You plant your boot firmly against the heavy iron door, your free hand
+     👤 [user]: kdv: I rush through the swinging door to secure the trapped souls and 
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5609 karakter
+   Roll bilgisi GM'e gitti mi: HAYIR
+   Aktif node: 00_village_gates — The Gates of Millhaven
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: You burst through the doorway, your blade flashing in the dim light as you sweep the cramped chamber for any hidden attackers. The screams of the trapped souls cut through the silence, but you focus on their safety, quickly ushering them toward a narrow escape route while keeping your guard up against the encroaching darkness. With the first group secured, you turn back to the door, ready to face whatever else lies beyond before leading the survivors deeper into the dungeon's labyrinthine corridors.
+
+⏱️  Toplam : 12.43s  |  İlk token: 9.83s
+📊 Prompt : 1006 token  |  Cevap: 97 token
+
+🔎 NPC Extractor — AI ham cevap: []
+
+🔎 NPC Extractor — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'You burst through the doorway, your blade flashing in the dim light as you sweep'
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 9/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I grab a torch from a nearby sconce and lead the trembling souls toward the exit while keeping a wary eye on the shadows behind us. Once clear of the chamber, I signal the group to follow closely as we navigate back through the gatehouse corridors.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 00_village_gates — The Gates of Millhaven
+   Trigger için son 19 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Persuade the guards to open the gate: ROLL d20 + Charisma vs DC 12 - Bribe the guards: Costs 2 gold, automatic success - Intimidate: ROLL d20 + Strength vs DC 15 (Guards open it but warn the tavern)
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I grab a torch from a nearby sconce and lead the trembling souls toward the exit while keeping a wary eye on the shadows behind us. Once clear of the chamber, I signal the group to follow closely as we navigate back through the gatehouse corridors.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   ⏭️  Zar atılmadı
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (19 mesaj):
+     👤 [user]: The adventure begins. Location: The Gates of Millhaven. Set the openin
+     🧙 [assistant]: The ancient iron gates of Millhaven groan under the weight of centurie
+     👤 [user]: kdv: I draw my weapon and move cautiously toward the shadow, ready to 
+     🧙 [assistant]: Your hand tightens around the hilt of your blade as you inch forward, 
+     👤 [user]: kdv: I lower my weapon slightly as the shadow remains still, then caut
+     🧙 [assistant]: You ease your grip on your weapon, offering a tentative voice into the
+     👤 [user]: kdv: I take a firmer step forward and call out again, asking if anyone
+     🧙 [assistant]: You stride with renewed purpose, your voice echoing off the stone wall
+     👤 [user]: kdv: I ignore the chilling wind and press onward toward the gate's int
+     🧙 [assistant]: You push past the threshold with determination, your shout cutting thr
+     👤 [user]: kdv: I press deeper into the gloom, ignoring the shadow's retreat to i
+     🧙 [assistant]: You stride past the retreating shadow, your boots crunching on gravel 
+     👤 [user]: kdv: I follow the faint cries deeper into the gloom, scanning the wall
+     🧙 [assistant]: You press onward into the deepest recesses of the gatehouse, your eyes
+     👤 [user]: kdv: I take a cautious step toward the ajar iron door, hand on my weap
+     🧙 [assistant]: You plant your boot firmly against the heavy iron door, your free hand
+     👤 [user]: kdv: I rush through the swinging door to secure the trapped souls and 
+     🧙 [assistant]: You burst through the doorway, your blade flashing in the dim light as
+     👤 [user]: kdv: I grab a torch from a nearby sconce and lead the trembling souls 
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5391 karakter
+   Roll bilgisi GM'e gitti mi: HAYIR
+   Aktif node: 00_village_gates — The Gates of Millhaven
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: You snatch a flickering torch from a rusted sconce, its warm light cutting a fragile path through the oppressive darkness of the corridor. The trembling souls huddle close behind you, their fear palpable as you urge them forward, your gaze constantly sweeping the walls for any new shadows that might detach themselves to ambush you. With every cautious step toward the exit, you keep your hand near your weapon, ready to strike at a moment's notice if the gloom decides to reclaim its prey.
+
+⏱️  Toplam : 12.44s  |  İlk token: 9.79s
+📊 Prompt : 1166 token  |  Cevap: 100 token
+
+🔎 NPC Extractor — AI ham cevap: []
+
+🔎 NPC Extractor — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'You snatch a flickering torch from a rusted sconce, its warm light cutting a fra'
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 10/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I press on with the survivors toward the exit, listening intently for any new sounds of pursuit from the dungeon's depths while scanning the corridor walls for signs of other escape routes we could use if blocked.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 00_village_gates — The Gates of Millhaven
+   Trigger için son 20 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Persuade the guards to open the gate: ROLL d20 + Charisma vs DC 12 - Bribe the guards: Costs 2 gold, automatic success - Intimidate: ROLL d20 + Strength vs DC 15 (Guards open it but warn the tavern)
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I press on with the survivors toward the exit, listening intently for any new sounds of pursuit from the dungeon's depths while scanning the corridor walls for signs of other escape routes we could use if blocked.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   ⏭️  Zar atılmadı
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (20 mesaj):
+     🧙 [assistant]: The ancient iron gates of Millhaven groan under the weight of centurie
+     👤 [user]: kdv: I draw my weapon and move cautiously toward the shadow, ready to 
+     🧙 [assistant]: Your hand tightens around the hilt of your blade as you inch forward, 
+     👤 [user]: kdv: I lower my weapon slightly as the shadow remains still, then caut
+     🧙 [assistant]: You ease your grip on your weapon, offering a tentative voice into the
+     👤 [user]: kdv: I take a firmer step forward and call out again, asking if anyone
+     🧙 [assistant]: You stride with renewed purpose, your voice echoing off the stone wall
+     👤 [user]: kdv: I ignore the chilling wind and press onward toward the gate's int
+     🧙 [assistant]: You push past the threshold with determination, your shout cutting thr
+     👤 [user]: kdv: I press deeper into the gloom, ignoring the shadow's retreat to i
+     🧙 [assistant]: You stride past the retreating shadow, your boots crunching on gravel 
+     👤 [user]: kdv: I follow the faint cries deeper into the gloom, scanning the wall
+     🧙 [assistant]: You press onward into the deepest recesses of the gatehouse, your eyes
+     👤 [user]: kdv: I take a cautious step toward the ajar iron door, hand on my weap
+     🧙 [assistant]: You plant your boot firmly against the heavy iron door, your free hand
+     👤 [user]: kdv: I rush through the swinging door to secure the trapped souls and 
+     🧙 [assistant]: You burst through the doorway, your blade flashing in the dim light as
+     👤 [user]: kdv: I grab a torch from a nearby sconce and lead the trembling souls 
+     🧙 [assistant]: You snatch a flickering torch from a rusted sconce, its warm light cut
+     👤 [user]: kdv: I press on with the survivors toward the exit, listening intently
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5594 karakter
+   Roll bilgisi GM'e gitti mi: HAYIR
+   Aktif node: 00_village_gates — The Gates of Millhaven
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: You march with the trembling group, your boots echoing softly against the stone floor as you strain your ears for the tell-tale sound of heavy footsteps or scuttling claws behind you. The silence is unnerving, suggesting the dungeon knows how to hide its hunters, but you remain vigilant. Your eyes dart along the damp walls, noting a hidden grate and a crumbling archway that might serve as secondary exits if the main gate proves impassable. As you near the outer gate, the mist begins to thin slightly, revealing a sliver of starlight above, offering a glimmer of hope that your journey out is finally nearing its end.
+
+⏱️  Toplam : 14.72s  |  İlk token: 11.30s
+📊 Prompt : 1292 token  |  Cevap: 129 token
+
+🔎 NPC Extractor — AI ham cevap: []
+
+🔎 NPC Extractor — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'You march with the trembling group, your boots echoing softly against the stone '
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+
+[INPUT MOCK] Tur limiti (10) doldu → quit
+Oturum kapatıldı. (ID: 30)
+
+Görüşürüz adventurer! ⚔️
+
+
+════════════════════════════════════════════════════════════
+📊 TEST ÖZET RAPORU
+════════════════════════════════════════════════════════════
+  Toplam süre        : 369.7s (6.2 dakika)
+  Oynanan tur        : 10
+  Sahne geçişi       : 1
+  Zar atılan eylem   : 0
+  → Başarı           : 0
+  → Başarısızlık     : 0
+  → Kritik           : 0
+  Yaratılan NPC      : 0
+
+  Ziyaret edilen node'lar (1 geçiş):
+    → 00_village_gates — The Gates of Millhaven
+
+  Log dosyası: logs/test_20260309_062638.txt
+════════════════════════════════════════════════════════════

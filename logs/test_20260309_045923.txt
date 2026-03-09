@@ -1,0 +1,1135 @@
+============================================================
+🤖 DnD GM — OTOMATİK TEST
+   Tarih   : 2026-03-09 04:59:23
+   Log     : logs/test_20260309_045923.txt
+   Tur     : 10
+   Senaryo : Shadow Over Millhaven
+   Karakter: kdv
+============================================================
+
+
+============================================================
+🚀 OYUN BAŞLIYOR
+============================================================
+
+Veritabanı hazır.
+VektörDB zaten mevcut, ingest atlanıyor.
+
+⚔️  DUNGEON MASTER AI  ⚔️
+──────────────────────────────
+1. Giriş yap
+2. Kayıt ol
+
+[INPUT MOCK] Prompt: '
+Seçim: '
+[INPUT MOCK] Setup cevabı: '1'
+
+[INPUT MOCK] Prompt: 'Kullanıcı adı: '
+[INPUT MOCK] Setup cevabı: 'kdv'
+
+[INPUT MOCK] Prompt: 'Şifre: '
+[INPUT MOCK] Setup cevabı: '2002'
+Hoş geldin, kdv!
+
+Hoş geldin kdv! Rol: player
+
+[INPUT MOCK] Prompt: 'Oturum adı: '
+[INPUT MOCK] Setup cevabı: 'h'
+Oturum oluşturuldu: h (ID: 25)
+DEBUG session_id: 25
+
+🧙 KARAKTER YÜKLE
+──────────────────────────────
+1. Yeni karakter oluştur
+2. Mevcut karakter yükle
+
+[INPUT MOCK] Prompt: '
+Seçim (1/2): '
+[INPUT MOCK] Setup cevabı: 'test_20260309_045923'
+⚠️  Geçersiz seçim.
+
+🧙 KARAKTER YÜKLE
+──────────────────────────────
+1. Yeni karakter oluştur
+2. Mevcut karakter yükle
+
+[INPUT MOCK] Prompt: '
+Seçim (1/2): '
+[INPUT MOCK] Setup cevabı: '2'
+
+Karakter dosyaları:
+  1. kdv.yaml
+
+[INPUT MOCK] Prompt: 'Numara veya dosya adı: '
+[INPUT MOCK] Setup cevabı: '1'
+kdv oyuna katıldı.
+✅ kdv oyuna katıldı!
+
+[INPUT MOCK] Prompt: 'Başka karakter eklemek ister misin? (e/h): '
+[INPUT MOCK] Setup cevabı: 'h'
+
+DEBUG yüklenen karakterler (1 adet):
+   • kdv | Savaşçı | abilities: {'charisma': 10, 'constitution': 16, 'dexterity': 14, 'intelligence': 11, 'strength': 16, 'wisdom': 10}
+
+📖 SENARYO
+──────────────────────────────
+
+[INPUT MOCK] Prompt: 'Bir senaryo takip etmek istiyor musun? (e/h): '
+[INPUT MOCK] Setup cevabı: 'e'
+
+Mevcut senaryolar:
+  1. Shadow Over Millhaven
+     A once-peaceful valley protected by a silver dragon has fall...
+
+[INPUT MOCK] Prompt: '
+Numara ile seçin: '
+[INPUT MOCK] Setup cevabı: '1'
+
+📍 Yeni lokasyon: The Gates of Millhaven
+✅ Senaryo yüklendi: Shadow Over Millhaven
+
+DEBUG senaryo: Shadow Over Millhaven
+DEBUG başlangıç node: 00_village_gates
+
+🎲 Macera başlıyor...
+
+──────────────────────────────────────────────────
+VektörDB yüklendi.
+
+══════════════════════════════════════════════════
+🔍 DEBUG — SYSTEM PROMPT (ilk 800 karakter)
+══════════════════════════════════════════════════
+
+You are a Dungeons & Dragons Game Master.
+
+SETTING: Medieval fantasy world only. No phones, no modern technology.
+
+PERSPECTIVE (CRITICAL):
+- You are the NARRATOR, not a character
+- NEVER use "I", "me", "my" in your responses
+- Always refer to characters in third person: "Elias does...", "she says..."
+- You describe what happens, you do not participate
+
+STRICT RULES:
+- Respond in English only
+- Maximum 3 sentences per response, no exceptions
+- Player characters are listed in [PLAYERS] — NEVER rename them
+- ALWAYS advance the story, never repeat previous descriptions
+- You MAY invent NPCs freely; scenario NPCs are listed in [SCENARIO NPCS]
+
+NPC CREATION (for NPCs NOT already listed in scenario):
+- When introducing a NEW named NPC, add this tag at the very END of your response:
+  [NPC_CREATE
+══════════════════════════════════════════════════
+
+🔍 DEBUG — BAŞLANGIÇ NPC'LERİ (0 adet):
+   (henüz NPC yok)
+
+⏳ GM başlangıç sahnesini hazırlıyor...
+
+
+🧙 GM: Sunlight filters through the ancient stone arches of Millhaven's gates, casting long shadows over the bustling market below. Merchants shout their wares to passing travelers while a gentle breeze carries the scent of roasted meat and fresh bread from the nearby inns. As you step forward onto the cobblestones, the adventure officially commences under the watchful gaze of the city guard.
+
+⏱️  Toplam : 12.85s  |  İlk token: 10.79s
+📊 Prompt : 34 token  |  Cevap: 78 token
+
+DEBUG NPC parse — intro cevabı uzunluğu: 388 karakter
+DEBUG NPC parse — [NPC_CREATE] var mı: False
+DEBUG NPC parse — intro sonrası NPC sayısı: 0
+
+──────────────────────────────────────────────────
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 1/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I weave through the crowd, casting a glance at every stall and suspicious shadow while listening closely to the merchants' shouts for clues about local rumors.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 00_village_gates — The Gates of Millhaven
+   Trigger için son 3 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Persuade the guards to open the gate: ROLL d20 + Charisma vs DC 12 - Bribe the guards: Costs 2 gold, automatic success - Intimidate: ROLL d20 + Strength vs DC 15 (Guards open it but warn the tavern)
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I weave through the crowd, casting a glance at every stall and suspicious shadow while listening closely to the merchants' shouts for clues about local rumors.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   ⏭️  Zar atılmadı
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (3 mesaj):
+     👤 [user]: The adventure begins. Location: The Gates of Millhaven. Set the openin
+     🧙 [assistant]: Sunlight filters through the ancient stone arches of Millhaven's gates
+     👤 [user]: kdv: I weave through the crowd, casting a glance at every stall and su
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5571 karakter
+   Roll bilgisi GM'e gitti mi: HAYIR
+   Aktif node: 00_village_gates — The Gates of Millhaven
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: Your keen observation catches a hushed argument near the fishmonger's stall, where a nervous guard whispers of "strange visitors" heading toward the old crypts. A sudden commotion erupts as a group of armored knights marches past, their banners bearing the sigil of the Iron Throne, signaling that trouble is closer than you thought. You press deeper into the alleyways, your senses sharpening to detect any movement or sound that doesn't belong in this lively marketplace.
+
+⏱️  Toplam : 13.61s  |  İlk token: 11.11s
+📊 Prompt : 153 token  |  Cevap: 97 token
+
+DEBUG NPC parse — GM cevabı uzunluğu: 473 karakter
+DEBUG NPC parse — [NPC_CREATE] var mı: False
+DEBUG NPC parse — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'Your keen observation catches a hushed argument near the fishmonger's stall, whe'
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 2/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I slip away from the crowd to eavesdrop on the nervous guard's conversation before the armored knights pass, hoping to learn where these strange visitors are heading. If they seem untrustworthy, I quickly check the fishmonger's stall for hidden compartments or secret passages behind the crates of fresh produce.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 00_village_gates — The Gates of Millhaven
+   Trigger için son 5 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Persuade the guards to open the gate: ROLL d20 + Charisma vs DC 12 - Bribe the guards: Costs 2 gold, automatic success - Intimidate: ROLL d20 + Strength vs DC 15 (Guards open it but warn the tavern)
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I slip away from the crowd to eavesdrop on the nervous guard's conversation before the armored knights pass, hoping to learn where these strange visitors are heading. If they seem untrustworthy, I quickly check the fishmonger's stall for hidden compartments or secret passages behind the crates of fresh produce.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": true, "ability": "dex", "dc": 10}'
+   JSON parse edildi: '{"needed": true, "ability": "dex", "dc": 10}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'dex', 'dc': 10}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=dex, dc=10
+DEBUG execute_roll: karakter=kdv, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Dex check vs DC 10
+   Zar: 3 | Modifier: +0 | Toplam: 3 | DC: 10
+   ❌ BAŞARISIZ
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: dex check vs DC 10
+Roll: 3 + 0 (modifier) = 3
+Result: FAILURE
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (6 mesaj):
+     👤 [user]: The adventure begins. Location: The Gates of Millhaven. Set the openin
+     🧙 [assistant]: Sunlight filters through the ancient stone arches of Millhaven's gates
+     👤 [user]: kdv: I weave through the crowd, casting a glance at every stall and su
+     🧙 [assistant]: Your keen observation catches a hushed argument near the fishmonger's 
+     👤 [user]: kdv: I slip away from the crowd to eavesdrop on the nervous guard's co
+     👤 [user]: kdv rolled dex: 3 + 0 = 3 vs DC 10 (FAILURE)
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5787 karakter
+   Roll bilgisi GM'e gitti mi: EVET
+   Roll özeti: Player: kdv
+Action required: dex check vs DC 10
+Roll: 3 + 0 (modifier) = 3
+Result: FAILURE
+   Aktif node: 00_village_gates — The Gates of Millhaven
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: Your attempt to slip away fails as a passing merchant bumps into you, instantly drawing the attention of the very knights you were trying to avoid. They halt their march and glare at your location, while the nervous guard quickly shushes his companion before darting off in the opposite direction. With your cover blown, you decide to abandon the stealthy approach and instead dive behind the crates of fish to inspect them for secret passages as the crowd begins to stir around you.
+
+⏱️  Toplam : 13.65s  |  İlk token: 11.27s
+📊 Prompt : 349 token  |  Cevap: 94 token
+
+DEBUG NPC parse — GM cevabı uzunluğu: 483 karakter
+DEBUG NPC parse — [NPC_CREATE] var mı: False
+DEBUG NPC parse — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'Your attempt to slip away fails as a passing merchant bumps into you, instantly '
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 3/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I quickly search behind the crates of fish for secret passages while keeping a wary eye on the knights' approach, then prepare to make a sudden dash if they decide to investigate further.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 00_village_gates — The Gates of Millhaven
+   Trigger için son 8 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Persuade the guards to open the gate: ROLL d20 + Charisma vs DC 12 - Bribe the guards: Costs 2 gold, automatic success - Intimidate: ROLL d20 + Strength vs DC 15 (Guards open it but warn the tavern)
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I quickly search behind the crates of fish for secret passages while keeping a wary eye on the knights' approach, then prepare to make a sudden dash if they decide to investigate further.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": true, "ability": "dex", "dc": 13}'
+   JSON parse edildi: '{"needed": true, "ability": "dex", "dc": 13}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'dex', 'dc': 13}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=dex, dc=13
+DEBUG execute_roll: karakter=kdv, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Dex check vs DC 13
+   Zar: 5 | Modifier: +0 | Toplam: 5 | DC: 13
+   ❌ BAŞARISIZ
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: dex check vs DC 13
+Roll: 5 + 0 (modifier) = 5
+Result: FAILURE
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (9 mesaj):
+     👤 [user]: The adventure begins. Location: The Gates of Millhaven. Set the openin
+     🧙 [assistant]: Sunlight filters through the ancient stone arches of Millhaven's gates
+     👤 [user]: kdv: I weave through the crowd, casting a glance at every stall and su
+     🧙 [assistant]: Your keen observation catches a hushed argument near the fishmonger's 
+     👤 [user]: kdv: I slip away from the crowd to eavesdrop on the nervous guard's co
+     👤 [user]: kdv rolled dex: 3 + 0 = 3 vs DC 10 (FAILURE)
+     🧙 [assistant]: Your attempt to slip away fails as a passing merchant bumps into you, 
+     👤 [user]: kdv: I quickly search behind the crates of fish for secret passages wh
+     👤 [user]: kdv rolled dex: 5 + 0 = 5 vs DC 13 (FAILURE)
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5787 karakter
+   Roll bilgisi GM'e gitti mi: EVET
+   Roll özeti: Player: kdv
+Action required: dex check vs DC 13
+Roll: 5 + 0 (modifier) = 5
+Result: FAILURE
+   Aktif node: 00_village_gates — The Gates of Millhaven
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: Your frantic search proves futile as you bump into a stack of crates, causing the fresh fish to spill across the cobblestones and alerting the knights. They draw their swords with a collective hiss, realizing you are no longer a casual traveler but a target of immediate concern. With your stealth completely compromised and the crowd now parting like water, you must decide whether to stand your ground or make a desperate run for the city walls before they close in.
+
+⏱️  Toplam : 20.38s  |  İlk token: 18.03s
+📊 Prompt : 517 token  |  Cevap: 92 token
+
+DEBUG NPC parse — GM cevabı uzunluğu: 468 karakter
+DEBUG NPC parse — [NPC_CREATE] var mı: False
+DEBUG NPC parse — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'Your frantic search proves futile as you bump into a stack of crates, causing th'
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 4/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I abandon my search and make a desperate dash toward the city walls while shouting a bluff that I am an official envoy of the Iron Throne to momentarily distract them.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 00_village_gates — The Gates of Millhaven
+   Trigger için son 11 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Persuade the guards to open the gate: ROLL d20 + Charisma vs DC 12 - Bribe the guards: Costs 2 gold, automatic success - Intimidate: ROLL d20 + Strength vs DC 15 (Guards open it but warn the tavern)
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I abandon my search and make a desperate dash toward the city walls while shouting a bluff that I am an official envoy of the Iron Throne to momentarily distract them.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kdv, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 14 | Modifier: +0 | Toplam: 14 | DC: 12
+   ✅ BAŞARILI
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: charisma check vs DC 12
+Roll: 14 + 0 (modifier) = 14
+Result: SUCCESS
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (12 mesaj):
+     👤 [user]: The adventure begins. Location: The Gates of Millhaven. Set the openin
+     🧙 [assistant]: Sunlight filters through the ancient stone arches of Millhaven's gates
+     👤 [user]: kdv: I weave through the crowd, casting a glance at every stall and su
+     🧙 [assistant]: Your keen observation catches a hushed argument near the fishmonger's 
+     👤 [user]: kdv: I slip away from the crowd to eavesdrop on the nervous guard's co
+     👤 [user]: kdv rolled dex: 3 + 0 = 3 vs DC 10 (FAILURE)
+     🧙 [assistant]: Your attempt to slip away fails as a passing merchant bumps into you, 
+     👤 [user]: kdv: I quickly search behind the crates of fish for secret passages wh
+     👤 [user]: kdv rolled dex: 5 + 0 = 5 vs DC 13 (FAILURE)
+     🧙 [assistant]: Your frantic search proves futile as you bump into a stack of crates, 
+     👤 [user]: kdv: I abandon my search and make a desperate dash toward the city wal
+     👤 [user]: kdv rolled charisma: 14 + 0 = 14 vs DC 12 (SUCCESS)
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5828 karakter
+   Roll bilgisi GM'e gitti mi: EVET
+   Roll özeti: Player: kdv
+Action required: charisma check vs DC 12
+Roll: 14 + 0 (modifier) = 14
+Result: SUCCESS
+   Aktif node: 00_village_gates — The Gates of Millhaven
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: Your sudden shout halts the charging knights as they freeze, confused by your bold claim of being an official envoy. The crowd parts instantly to make way for a "royal messenger," buying you precious seconds to scramble toward the city gates and lose them in the throng of panicked onlookers. You reach the safety of the outer wall, breathless but alive, now needing to figure out how to verify your false identity before the Iron Throne's agents realize they've been tricked.
+
+⏱️  Toplam : 14.40s  |  İlk token: 11.89s
+📊 Prompt : 681 token  |  Cevap: 99 token
+
+DEBUG NPC parse — GM cevabı uzunluğu: 476 karakter
+DEBUG NPC parse — [NPC_CREATE] var mı: False
+DEBUG NPC parse — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'Your sudden shout halts the charging knights as they freeze, confused by your bo'
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 5/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I rummage frantically through my pockets to find any token that could substantiate my claim of being an Iron Throne envoy while panting against the cold stone of the city wall.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 00_village_gates — The Gates of Millhaven
+   Trigger için son 14 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Persuade the guards to open the gate: ROLL d20 + Charisma vs DC 12 - Bribe the guards: Costs 2 gold, automatic success - Intimidate: ROLL d20 + Strength vs DC 15 (Guards open it but warn the tavern)
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I rummage frantically through my pockets to find any token that could substantiate my claim of being an Iron Throne envoy while panting against the cold stone of the city wall.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   ⏭️  Zar atılmadı
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (14 mesaj):
+     👤 [user]: The adventure begins. Location: The Gates of Millhaven. Set the openin
+     🧙 [assistant]: Sunlight filters through the ancient stone arches of Millhaven's gates
+     👤 [user]: kdv: I weave through the crowd, casting a glance at every stall and su
+     🧙 [assistant]: Your keen observation catches a hushed argument near the fishmonger's 
+     👤 [user]: kdv: I slip away from the crowd to eavesdrop on the nervous guard's co
+     👤 [user]: kdv rolled dex: 3 + 0 = 3 vs DC 10 (FAILURE)
+     🧙 [assistant]: Your attempt to slip away fails as a passing merchant bumps into you, 
+     👤 [user]: kdv: I quickly search behind the crates of fish for secret passages wh
+     👤 [user]: kdv rolled dex: 5 + 0 = 5 vs DC 13 (FAILURE)
+     🧙 [assistant]: Your frantic search proves futile as you bump into a stack of crates, 
+     👤 [user]: kdv: I abandon my search and make a desperate dash toward the city wal
+     👤 [user]: kdv rolled charisma: 14 + 0 = 14 vs DC 12 (SUCCESS)
+     🧙 [assistant]: Your sudden shout halts the charging knights as they freeze, confused 
+     👤 [user]: kdv: I rummage frantically through my pockets to find any token that c
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5467 karakter
+   Roll bilgisi GM'e gitti mi: HAYIR
+   Aktif node: 00_village_gates — The Gates of Millhaven
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: Your fingers fumble desperately among your belongings, finally grasping a small, tarnished iron badge with the Iron Throne sigil etched into it—a relic from a previous quest you'd never intended to use again. You slap the badge onto your chest and straighten your posture, forcing yourself to project an air of bureaucratic authority despite the pounding in your ears. The knights outside pause at the gate's entrance, their suspicion wavering as they squint at the sudden appearance of a "high-ranking" envoy claiming urgent business with the crown.
+
+⏱️  Toplam : 14.39s  |  İlk token: 11.61s
+📊 Prompt : 828 token  |  Cevap: 109 token
+
+DEBUG NPC parse — GM cevabı uzunluğu: 550 karakter
+DEBUG NPC parse — [NPC_CREATE] var mı: False
+DEBUG NPC parse — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'Your fingers fumble desperately among your belongings, finally grasping a small,'
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 6/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I hold up the tarnished badge firmly and speak with a loud, authoritative voice, demanding entry while weaving through the stunned guards who are too confused to challenge my sudden claim of royal authority.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 00_village_gates — The Gates of Millhaven
+   Trigger için son 16 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Persuade the guards to open the gate: ROLL d20 + Charisma vs DC 12 - Bribe the guards: Costs 2 gold, automatic success - Intimidate: ROLL d20 + Strength vs DC 15 (Guards open it but warn the tavern)
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I hold up the tarnished badge firmly and speak with a loud, authoritative voice, demanding entry while weaving through the stunned guards who are too confused to challenge my sudden claim of royal authority.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kdv, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 16 | Modifier: +0 | Toplam: 16 | DC: 12
+   ✅ BAŞARILI
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: charisma check vs DC 12
+Roll: 16 + 0 (modifier) = 16
+Result: SUCCESS
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (17 mesaj):
+     👤 [user]: The adventure begins. Location: The Gates of Millhaven. Set the openin
+     🧙 [assistant]: Sunlight filters through the ancient stone arches of Millhaven's gates
+     👤 [user]: kdv: I weave through the crowd, casting a glance at every stall and su
+     🧙 [assistant]: Your keen observation catches a hushed argument near the fishmonger's 
+     👤 [user]: kdv: I slip away from the crowd to eavesdrop on the nervous guard's co
+     👤 [user]: kdv rolled dex: 3 + 0 = 3 vs DC 10 (FAILURE)
+     🧙 [assistant]: Your attempt to slip away fails as a passing merchant bumps into you, 
+     👤 [user]: kdv: I quickly search behind the crates of fish for secret passages wh
+     👤 [user]: kdv rolled dex: 5 + 0 = 5 vs DC 13 (FAILURE)
+     🧙 [assistant]: Your frantic search proves futile as you bump into a stack of crates, 
+     👤 [user]: kdv: I abandon my search and make a desperate dash toward the city wal
+     👤 [user]: kdv rolled charisma: 14 + 0 = 14 vs DC 12 (SUCCESS)
+     🧙 [assistant]: Your sudden shout halts the charging knights as they freeze, confused 
+     👤 [user]: kdv: I rummage frantically through my pockets to find any token that c
+     🧙 [assistant]: Your fingers fumble desperately among your belongings, finally graspin
+     👤 [user]: kdv: I hold up the tarnished badge firmly and speak with a loud, autho
+     👤 [user]: kdv rolled charisma: 16 + 0 = 16 vs DC 12 (SUCCESS)
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5826 karakter
+   Roll bilgisi GM'e gitti mi: EVET
+   Roll özeti: Player: kdv
+Action required: charisma check vs DC 12
+Roll: 16 + 0 (modifier) = 16
+Result: SUCCESS
+   Aktif node: 00_village_gates — The Gates of Millhaven
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: Your booming command and flashing badge completely shatter the remaining doubt, causing the stunned guards to immediately part ways and bow in deference to their "royal guest." They hastily open the massive gates with a loud groan of metal, allowing you to stride confidently into the main thoroughfare while the knights hesitate, unsure whether to challenge a man who just commanded entry with such undeniable authority. With the path clear, you can now finally breathe easier and assess your next move without the immediate threat of arrest hanging over your head.
+
+⏱️  Toplam : 14.64s  |  İlk token: 11.97s
+📊 Prompt : 1015 token  |  Cevap: 105 token
+
+DEBUG NPC parse — GM cevabı uzunluğu: 566 karakter
+DEBUG NPC parse — [NPC_CREATE] var mı: False
+DEBUG NPC parse — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'Your booming command and flashing badge completely shatter the remaining doubt, '
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 7/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I stride past the gaping guards and scan the bustling city square for any lingering pursuers while mentally rehearsing a convincing backstory for this fake envoy status.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 00_village_gates — The Gates of Millhaven
+   Trigger için son 19 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Persuade the guards to open the gate: ROLL d20 + Charisma vs DC 12 - Bribe the guards: Costs 2 gold, automatic success - Intimidate: ROLL d20 + Strength vs DC 15 (Guards open it but warn the tavern)
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I stride past the gaping guards and scan the bustling city square for any lingering pursuers while mentally rehearsing a convincing backstory for this fake envoy status.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kdv, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 9 | Modifier: +0 | Toplam: 9 | DC: 12
+   ❌ BAŞARISIZ
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: charisma check vs DC 12
+Roll: 9 + 0 (modifier) = 9
+Result: FAILURE
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (20 mesaj):
+     👤 [user]: The adventure begins. Location: The Gates of Millhaven. Set the openin
+     🧙 [assistant]: Sunlight filters through the ancient stone arches of Millhaven's gates
+     👤 [user]: kdv: I weave through the crowd, casting a glance at every stall and su
+     🧙 [assistant]: Your keen observation catches a hushed argument near the fishmonger's 
+     👤 [user]: kdv: I slip away from the crowd to eavesdrop on the nervous guard's co
+     👤 [user]: kdv rolled dex: 3 + 0 = 3 vs DC 10 (FAILURE)
+     🧙 [assistant]: Your attempt to slip away fails as a passing merchant bumps into you, 
+     👤 [user]: kdv: I quickly search behind the crates of fish for secret passages wh
+     👤 [user]: kdv rolled dex: 5 + 0 = 5 vs DC 13 (FAILURE)
+     🧙 [assistant]: Your frantic search proves futile as you bump into a stack of crates, 
+     👤 [user]: kdv: I abandon my search and make a desperate dash toward the city wal
+     👤 [user]: kdv rolled charisma: 14 + 0 = 14 vs DC 12 (SUCCESS)
+     🧙 [assistant]: Your sudden shout halts the charging knights as they freeze, confused 
+     👤 [user]: kdv: I rummage frantically through my pockets to find any token that c
+     🧙 [assistant]: Your fingers fumble desperately among your belongings, finally graspin
+     👤 [user]: kdv: I hold up the tarnished badge firmly and speak with a loud, autho
+     👤 [user]: kdv rolled charisma: 16 + 0 = 16 vs DC 12 (SUCCESS)
+     🧙 [assistant]: Your booming command and flashing badge completely shatter the remaini
+     👤 [user]: kdv: I stride past the gaping guards and scan the bustling city square
+     👤 [user]: kdv rolled charisma: 9 + 0 = 9 vs DC 12 (FAILURE)
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5804 karakter
+   Roll bilgisi GM'e gitti mi: EVET
+   Roll özeti: Player: kdv
+Action required: charisma check vs DC 12
+Roll: 9 + 0 (modifier) = 9
+Result: FAILURE
+   Aktif node: 00_village_gates — The Gates of Millhaven
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: Your attempt to maintain composure falters as you stumble over your rehearsed lines, accidentally revealing that the "urgent royal business" is actually about finding a lost cat. The guards' deference evaporates instantly, replaced by confused murmurs and raised eyebrows as they realize the supposed envoy is clearly bluffing. You quickly scramble to invent a new, more elaborate lie on the spot, hoping your panic doesn't spill out loud enough to give away your desperate situation.
+
+⏱️  Toplam : 14.42s  |  İlk token: 11.95s
+📊 Prompt : 1188 token  |  Cevap: 94 token
+
+DEBUG NPC parse — GM cevabı uzunluğu: 484 karakter
+DEBUG NPC parse — [NPC_CREATE] var mı: False
+DEBUG NPC parse — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'Your attempt to maintain composure falters as you stumble over your rehearsed li'
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 8/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I stomp around frantically trying to recover dignity while mentally constructing a new lie about being summoned to the throne room by King Robert himself.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 00_village_gates — The Gates of Millhaven
+   Trigger için son 20 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Persuade the guards to open the gate: ROLL d20 + Charisma vs DC 12 - Bribe the guards: Costs 2 gold, automatic success - Intimidate: ROLL d20 + Strength vs DC 15 (Guards open it but warn the tavern)
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I stomp around frantically trying to recover dignity while mentally constructing a new lie about being summoned to the throne room by King Robert himself.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kdv, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 18 | Modifier: +0 | Toplam: 18 | DC: 12
+   ✅ BAŞARILI
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: charisma check vs DC 12
+Roll: 18 + 0 (modifier) = 18
+Result: SUCCESS
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (20 mesaj):
+     🧙 [assistant]: Your keen observation catches a hushed argument near the fishmonger's 
+     👤 [user]: kdv: I slip away from the crowd to eavesdrop on the nervous guard's co
+     👤 [user]: kdv rolled dex: 3 + 0 = 3 vs DC 10 (FAILURE)
+     🧙 [assistant]: Your attempt to slip away fails as a passing merchant bumps into you, 
+     👤 [user]: kdv: I quickly search behind the crates of fish for secret passages wh
+     👤 [user]: kdv rolled dex: 5 + 0 = 5 vs DC 13 (FAILURE)
+     🧙 [assistant]: Your frantic search proves futile as you bump into a stack of crates, 
+     👤 [user]: kdv: I abandon my search and make a desperate dash toward the city wal
+     👤 [user]: kdv rolled charisma: 14 + 0 = 14 vs DC 12 (SUCCESS)
+     🧙 [assistant]: Your sudden shout halts the charging knights as they freeze, confused 
+     👤 [user]: kdv: I rummage frantically through my pockets to find any token that c
+     🧙 [assistant]: Your fingers fumble desperately among your belongings, finally graspin
+     👤 [user]: kdv: I hold up the tarnished badge firmly and speak with a loud, autho
+     👤 [user]: kdv rolled charisma: 16 + 0 = 16 vs DC 12 (SUCCESS)
+     🧙 [assistant]: Your booming command and flashing badge completely shatter the remaini
+     👤 [user]: kdv: I stride past the gaping guards and scan the bustling city square
+     👤 [user]: kdv rolled charisma: 9 + 0 = 9 vs DC 12 (FAILURE)
+     🧙 [assistant]: Your attempt to maintain composure falters as you stumble over your re
+     👤 [user]: kdv: I stomp around frantically trying to recover dignity while mental
+     👤 [user]: kdv rolled charisma: 18 + 0 = 18 vs DC 12 (SUCCESS)
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5629 karakter
+   Roll bilgisi GM'e gitti mi: EVET
+   Roll özeti: Player: kdv
+Action required: charisma check vs DC 12
+Roll: 18 + 0 (modifier) = 18
+Result: SUCCESS
+   Aktif node: 00_village_gates — The Gates of Millhaven
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: Your sudden shift in demeanor is nothing short of theatrical; you stomp with such commanding authority that the guards instantly straighten their backs, mistaking your panic for the intense focus of a high-ranking official. With a booming voice that echoes across the square, you declare, "King Robert himself summons me to the throne room! Any obstruction is treason!" The sheer force of your bluff silences the murmurs, and the confused knights hesitate, unsure if they dare challenge a man claiming direct orders from the King. Seizing this momentary confusion, you weave through the parted crowd, using your newfound "royal presence" to create a buffer between yourself and the pursuing guards, successfully buying time to reach the safety of the city's upper districts.
+
+⏱️  Toplam : 15.76s  |  İlk token: 11.93s
+📊 Prompt : 1204 token  |  Cevap: 150 token
+
+DEBUG NPC parse — GM cevabı uzunluğu: 774 karakter
+DEBUG NPC parse — [NPC_CREATE] var mı: False
+DEBUG NPC parse — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'Your sudden shift in demeanor is nothing short of theatrical; you stomp with suc'
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 9/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I press on with exaggerated confidence, clutching an imaginary royal seal and shouting about urgent state matters to keep the confused knights from challenging my authority as I rush toward the upper district gates.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 00_village_gates — The Gates of Millhaven
+   Trigger için son 20 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Persuade the guards to open the gate: ROLL d20 + Charisma vs DC 12 - Bribe the guards: Costs 2 gold, automatic success - Intimidate: ROLL d20 + Strength vs DC 15 (Guards open it but warn the tavern)
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I press on with exaggerated confidence, clutching an imaginary royal seal and shouting about urgent state matters to keep the confused knights from challenging my authority as I rush toward the upper district gates.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kdv, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 1 | Modifier: +0 | Toplam: 1 | DC: 12
+   💀 KRİTİK BAŞARISIZLIK!
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: charisma check vs DC 12
+Roll: 1 + 0 (modifier) = 1
+Result: CRITICAL FAILURE
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (20 mesaj):
+     🧙 [assistant]: Your attempt to slip away fails as a passing merchant bumps into you, 
+     👤 [user]: kdv: I quickly search behind the crates of fish for secret passages wh
+     👤 [user]: kdv rolled dex: 5 + 0 = 5 vs DC 13 (FAILURE)
+     🧙 [assistant]: Your frantic search proves futile as you bump into a stack of crates, 
+     👤 [user]: kdv: I abandon my search and make a desperate dash toward the city wal
+     👤 [user]: kdv rolled charisma: 14 + 0 = 14 vs DC 12 (SUCCESS)
+     🧙 [assistant]: Your sudden shout halts the charging knights as they freeze, confused 
+     👤 [user]: kdv: I rummage frantically through my pockets to find any token that c
+     🧙 [assistant]: Your fingers fumble desperately among your belongings, finally graspin
+     👤 [user]: kdv: I hold up the tarnished badge firmly and speak with a loud, autho
+     👤 [user]: kdv rolled charisma: 16 + 0 = 16 vs DC 12 (SUCCESS)
+     🧙 [assistant]: Your booming command and flashing badge completely shatter the remaini
+     👤 [user]: kdv: I stride past the gaping guards and scan the bustling city square
+     👤 [user]: kdv rolled charisma: 9 + 0 = 9 vs DC 12 (FAILURE)
+     🧙 [assistant]: Your attempt to maintain composure falters as you stumble over your re
+     👤 [user]: kdv: I stomp around frantically trying to recover dignity while mental
+     👤 [user]: kdv rolled charisma: 18 + 0 = 18 vs DC 12 (SUCCESS)
+     🧙 [assistant]: Your sudden shift in demeanor is nothing short of theatrical; you stom
+     👤 [user]: kdv: I press on with exaggerated confidence, clutching an imaginary ro
+     👤 [user]: kdv rolled charisma: 1 + 0 = 1 vs DC 12 (CRITICAL FAILURE)
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5830 karakter
+   Roll bilgisi GM'e gitti mi: EVET
+   Roll özeti: Player: kdv
+Action required: charisma check vs DC 12
+Roll: 1 + 0 (modifier) = 1
+Result: CRITICAL FAI
+   Aktif node: 00_village_gates — The Gates of Millhaven
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: Your confidence completely evaporates as your foot slips on a loose cobblestone, causing you to trip violently and drop the imaginary seal you were clutching. The sudden silence that follows is deafening; the shouting stops, and all eyes turn to you as you lie sprawled in the dirt, looking less like an envoy of King Robert and more like a madman having a breakdown. The knights, emboldened by your catastrophic failure, immediately draw their swords with lethal intent, closing in from all sides while the crowd gasps in horror at the spectacle of the "King's Envoy" collapsing in a heap. You are no longer just being chased; you are now surrounded by armed executioners who see no royal authority left to protect you.
+
+⏱️  Toplam : 15.95s  |  İlk token: 12.08s
+📊 Prompt : 1235 token  |  Cevap: 151 token
+
+DEBUG NPC parse — GM cevabı uzunluğu: 720 karakter
+DEBUG NPC parse — [NPC_CREATE] var mı: False
+DEBUG NPC parse — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'Your confidence completely evaporates as your foot slips on a loose cobblestone,'
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+[INPUT MOCK] Karakter adı: 'kdv'
+
+[INPUT MOCK] Prompt: 'kdv ne yapıyor? > '
+
+[INPUT MOCK] Tur 10/10 — PlayerAI karar veriyor...
+[INPUT MOCK] PlayerAI aksiyonu: 'I roll onto my back and frantically beg for mercy while trying to shove the imaginary seal into my pocket, hoping the confusion of my fall will buy me enough time to sneak past the nearest knight.'
+
+══════════════════════════════════════════════════
+📍 ADIM 1 — TRIGGER CHECK
+══════════════════════════════════════════════════
+   Mevcut node: 00_village_gates — The Gates of Millhaven
+   Trigger için son 20 mesaj kullanılıyor
+   Trigger sonucu: YOK — sahne değişmedi
+
+══════════════════════════════════════════════════
+🎲 ADIM 2 — ROLL CHECK
+══════════════════════════════════════════════════
+   Node available_actions: mevcut
+   - Persuade the guards to open the gate: ROLL d20 + Charisma vs DC 12 - Bribe the guards: Costs 2 gold, automatic success - Intimidate: ROLL d20 + Strength vs DC 15 (Guards open it but warn the tavern)
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I roll onto my back and frantically beg for mercy while trying to shove the imaginary seal into my pocket, hoping the confusion of my fall will buy me enough time to sneak past the nearest knight.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+   AI ham cevap: '{"needed": true, "ability": "dex", "dc": 15}'
+   JSON parse edildi: '{"needed": true, "ability": "dex", "dc": 15}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'dex', 'dc': 15}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=dex, dc=15
+DEBUG execute_roll: karakter=kdv, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Dex check vs DC 15
+   Zar: 16 | Modifier: +0 | Toplam: 16 | DC: 15
+   ✅ BAŞARILI
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: dex check vs DC 15
+Roll: 16 + 0 (modifier) = 16
+Result: SUCCESS
+
+══════════════════════════════════════════════════
+🧙 ADIM 3 — GM CEVABI
+══════════════════════════════════════════════════
+   Mesaj geçmişi (20 mesaj):
+     🧙 [assistant]: Your frantic search proves futile as you bump into a stack of crates, 
+     👤 [user]: kdv: I abandon my search and make a desperate dash toward the city wal
+     👤 [user]: kdv rolled charisma: 14 + 0 = 14 vs DC 12 (SUCCESS)
+     🧙 [assistant]: Your sudden shout halts the charging knights as they freeze, confused 
+     👤 [user]: kdv: I rummage frantically through my pockets to find any token that c
+     🧙 [assistant]: Your fingers fumble desperately among your belongings, finally graspin
+     👤 [user]: kdv: I hold up the tarnished badge firmly and speak with a loud, autho
+     👤 [user]: kdv rolled charisma: 16 + 0 = 16 vs DC 12 (SUCCESS)
+     🧙 [assistant]: Your booming command and flashing badge completely shatter the remaini
+     👤 [user]: kdv: I stride past the gaping guards and scan the bustling city square
+     👤 [user]: kdv rolled charisma: 9 + 0 = 9 vs DC 12 (FAILURE)
+     🧙 [assistant]: Your attempt to maintain composure falters as you stumble over your re
+     👤 [user]: kdv: I stomp around frantically trying to recover dignity while mental
+     👤 [user]: kdv rolled charisma: 18 + 0 = 18 vs DC 12 (SUCCESS)
+     🧙 [assistant]: Your sudden shift in demeanor is nothing short of theatrical; you stom
+     👤 [user]: kdv: I press on with exaggerated confidence, clutching an imaginary ro
+     👤 [user]: kdv rolled charisma: 1 + 0 = 1 vs DC 12 (CRITICAL FAILURE)
+     🧙 [assistant]: Your confidence completely evaporates as your foot slips on a loose co
+     👤 [user]: kdv: I roll onto my back and frantically beg for mercy while trying to
+     👤 [user]: kdv rolled dex: 16 + 0 = 16 vs DC 15 (SUCCESS)
+
+   Mevcut NPC'ler (0 adet):
+     (henüz NPC yok)
+
+   System prompt uzunluğu: 5785 karakter
+   Roll bilgisi GM'e gitti mi: EVET
+   Roll özeti: Player: kdv
+Action required: dex check vs DC 15
+Roll: 16 + 0 (modifier) = 16
+Result: SUCCESS
+   Aktif node: 00_village_gates — The Gates of Millhaven
+
+──────────────────────────────────────────────────
+⏳ GM düşünüyor...
+
+
+🧙 GM: Your desperate scramble pays off as you twist your body with surprising agility, slipping sideways just inches from a slashing blade. You manage to shove the imaginary seal deep into your tunic and roll toward a narrow alleyway between two towering buildings, using the sudden chaos of your collapse to mask your movement. The nearest knight swings wide, missing you entirely, but his momentum carries him past, allowing you to duck behind a stack of market stalls. However, the other knights haven't lost focus; they begin to fan out, their shouts growing louder as they realize you are trying to flee rather than stand your ground. You are now hiding in the shadows of the alley, breathless and terrified, knowing that every second counts before they corner you.
+
+⏱️  Toplam : 15.83s  |  İlk token: 12.04s
+📊 Prompt : 1298 token  |  Cevap: 148 token
+
+DEBUG NPC parse — GM cevabı uzunluğu: 764 karakter
+DEBUG NPC parse — [NPC_CREATE] var mı: False
+DEBUG NPC parse — tur sonrası NPC sayısı: 0
+
+DEBUG game_state.current_scene güncellendi: 'Your desperate scramble pays off as you twist your body with surprising agility,'
+
+──────────────────────────────────────────────────
+DEBUG mesaj DB'ye kaydedildi ✅
+
+Aktif karakterler: kdv
+
+[INPUT MOCK] Prompt: 'Karakter adı (veya 'quit'): '
+
+[INPUT MOCK] Tur limiti (10) doldu → quit
+Oturum kapatıldı. (ID: 25)
+
+Görüşürüz adventurer! ⚔️
+
+
+════════════════════════════════════════════════════════════
+📊 TEST ÖZET RAPORU
+════════════════════════════════════════════════════════════
+  Toplam süre        : 377.7s (6.3 dakika)
+  Oynanan tur        : 10
+  Sahne geçişi       : 1
+  Zar atılan eylem   : 8
+  → Başarı           : 4
+  → Başarısızlık     : 4
+  → Kritik           : 1
+  Yaratılan NPC      : 0
+
+  Ziyaret edilen node'lar (1 geçiş):
+    → 00_village_gates — The Gates of Millhaven
+
+  Zar detayları:
+    🎲 Player: kdv | Action required: dex check vs DC 10 | Roll: 3 + 0 (modifier) = 3 | Result: FAILURE
+    🎲 Player: kdv | Action required: dex check vs DC 13 | Roll: 5 + 0 (modifier) = 5 | Result: FAILURE
+    🎲 Player: kdv | Action required: charisma check vs DC 12 | Roll: 14 + 0 (modifier) = 14 | Result: SUCCESS
+    🎲 Player: kdv | Action required: charisma check vs DC 12 | Roll: 16 + 0 (modifier) = 16 | Result: SUCCESS
+    🎲 Player: kdv | Action required: charisma check vs DC 12 | Roll: 9 + 0 (modifier) = 9 | Result: FAILURE
+    🎲 Player: kdv | Action required: charisma check vs DC 12 | Roll: 18 + 0 (modifier) = 18 | Result: SUCCESS
+    🎲 Player: kdv | Action required: charisma check vs DC 12 | Roll: 1 + 0 (modifier) = 1 | Result: CRITICAL FAILURE
+    🎲 Player: kdv | Action required: dex check vs DC 15 | Roll: 16 + 0 (modifier) = 16 | Result: SUCCESS
+
+  Log dosyası: logs/test_20260309_045923.txt
+════════════════════════════════════════════════════════════
