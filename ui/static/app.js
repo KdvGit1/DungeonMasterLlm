@@ -26,7 +26,34 @@ const state = {
     scenarioTitle: '',
     nodeTitle: '',
     sending: false,
+    modelReady: false,
 };
+
+// Model status checker
+async function checkModelStatus() {
+    try {
+        const res = await API.get('/api/translate/status');
+        const st = $('#model-status');
+        if (res.status === 'ready') {
+            st.textContent = 'Model hazır';
+            st.classList.add('ready');
+            state.modelReady = true;
+        } else if (res.status === 'loading') {
+            st.textContent = 'Çeviri modeli yükleniyor... (NLLB-200)';
+            st.classList.remove('ready');
+            setTimeout(checkModelStatus, 2000);
+        } else if (res.status === 'error') {
+            st.textContent = '❌ Model yüklenemedi';
+            st.classList.remove('ready');
+        } else {
+            st.textContent = 'Model durumu bekliyor...';
+            setTimeout(checkModelStatus, 2000);
+        }
+    } catch (e) {
+        setTimeout(checkModelStatus, 5000);
+    }
+}
+checkModelStatus();
 
 /* ─── DOM HELPERS ───────────────────────────────────────── */
 
@@ -299,7 +326,7 @@ function initGameScreen(gameData) {
     $('#chat-messages').innerHTML = '';
 
     // Add GM intro message
-    addMessage('gm', '🧙 GM', gameData.gm_response);
+    addDualMessage('gm', '🧙 GM', gameData.gm_response_tr, gameData.gm_response);
 
     // Update panels
     updateNpcPanel(gameData.npcs || []);
@@ -325,6 +352,22 @@ function addMessage(type, sender, text) {
             <div class="message-sender">${sender}</div>
             <div class="message-text">${escapeHtml(text)}</div>`;
     }
+
+    container.appendChild(msg);
+    container.scrollTop = container.scrollHeight;
+}
+
+function addDualMessage(type, sender, textTr, textEn) {
+    const container = $('#chat-messages');
+    const msg = document.createElement('div');
+
+    const cls = type === 'user' ? 'message-user' : 'message-gm';
+    msg.className = `message ${cls}`;
+
+    msg.innerHTML = `
+        <div class="message-sender">${sender}</div>
+        <div class="text-tr">${escapeHtml(textTr || textEn)}</div>
+        <div class="text-en">${escapeHtml(textEn)}</div>`;
 
     container.appendChild(msg);
     container.scrollTop = container.scrollHeight;
@@ -438,10 +481,45 @@ function updateCharacterPanel() {
         </div>` : ''}`;
 }
 
+/* ─── Input Live Translation ──────────────────────────────────── */
+
+let debounceTimer = null;
+const chatInput = $('#chat-input');
+const translationPreview = $('#translation-preview');
+
+chatInput.addEventListener('input', () => {
+    const text = chatInput.value.trim();
+    if (!text) {
+        translationPreview.textContent = '';
+        return;
+    }
+
+    if (!state.modelReady) {
+        translationPreview.textContent = '... (Model bekleniyor)';
+        return;
+    }
+
+    clearTimeout(debounceTimer);
+    translationPreview.textContent = 'Çevriliyor...';
+
+    debounceTimer = setTimeout(async () => {
+        try {
+            const res = await API.post('/api/translate', { text: text, direction: 'tr-en' });
+            if (res.translated) {
+                translationPreview.textContent = res.translated;
+            } else {
+                translationPreview.textContent = 'Çeviri yok';
+            }
+        } catch (e) {
+            translationPreview.textContent = '';
+        }
+    }, 500);
+});
+
 /* ─── Send Action ───────────────────────────────────────── */
 
 $('#btn-send').addEventListener('click', sendAction);
-$('#chat-input').addEventListener('keydown', (e) => {
+chatInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
         sendAction();
@@ -451,22 +529,27 @@ $('#chat-input').addEventListener('keydown', (e) => {
 async function sendAction() {
     if (state.sending) return;
 
-    const input = $('#chat-input');
-    const action = input.value.trim();
-    if (!action) return;
+    const actionTr = chatInput.value.trim();
+    if (!actionTr) return;
+
+    // Get the translated text (or fallback to original if not ready)
+    const actionEn = translationPreview.textContent && translationPreview.textContent !== 'Çevriliyor...' && translationPreview.textContent !== '... (Model bekleniyor)' && translationPreview.textContent !== 'Çeviri yok'
+        ? translationPreview.textContent
+        : actionTr;
 
     state.sending = true;
-    input.value = '';
+    chatInput.value = '';
+    translationPreview.textContent = '';
     $('#btn-send').disabled = true;
 
     const playerName = state.character ? state.character.name : 'Oyuncu';
-    addMessage('user', `⚔️ ${playerName}`, action);
+    addDualMessage('user', `⚔️ ${playerName}`, actionTr, actionEn);
 
     showLoading(true, 'GM düşünüyor...');
 
     try {
         const data = await API.post('/api/game/action', {
-            action,
+            action: actionEn, // Send ENGLISH action to the backend
             player_name: playerName,
         });
 
@@ -491,7 +574,7 @@ async function sendAction() {
         }
 
         // GM response
-        addMessage('gm', '🧙 GM', data.gm_response);
+        addDualMessage('gm', '🧙 GM', data.gm_response_tr, data.gm_response);
 
         // Update NPC panel
         updateNpcPanel(data.npcs || []);
@@ -501,7 +584,7 @@ async function sendAction() {
     } finally {
         state.sending = false;
         $('#btn-send').disabled = false;
-        input.focus();
+        chatInput.focus();
     }
 }
 
@@ -535,7 +618,7 @@ volumeSlider.addEventListener('input', () => {
 
 musicIcon.addEventListener('click', () => {
     if (bgMusic.paused) {
-        bgMusic.play().catch(() => {});
+        bgMusic.play().catch(() => { });
         musicIcon.textContent = '🎵';
         musicIcon.classList.remove('muted');
     } else {
@@ -558,7 +641,7 @@ function startMusic() {
 // Try to play on any user interaction (for autoplay policy)
 document.addEventListener('click', () => {
     if (musicStarted && bgMusic.paused && parseInt(volumeSlider.value) > 0) {
-        bgMusic.play().catch(() => {});
+        bgMusic.play().catch(() => { });
     }
 }, { once: true });
 

@@ -36,6 +36,8 @@ from rag.retriever import get_relevant_rules
 from rag.ingest import ingest
 import config
 
+from ui import translator
+
 # ─── FLASK APP ────────────────────────────────────────────────────────────────
 
 app = Flask(__name__, static_folder="static")
@@ -53,10 +55,11 @@ _state = {
 
 
 def _init_once():
-    """Veritabanı ve RAG'ı bir kez başlat."""
+    """Veritabanı ve RAG'ı bir kez başlat. Çeviri modelini arka planda yükle."""
     if not _state["initialized"]:
         initialize_db()
         ingest()
+        translator.ensure_model_loaded()
         _state["initialized"] = True
 
 
@@ -395,6 +398,30 @@ def api_create_character():
     return jsonify({"success": True, "character": character, "filename": filename})
 
 
+# ─── TRANSLATOR ───────────────────────────────────────────────────────────────
+
+@app.route("/api/translate/status", methods=["GET"])
+def api_translation_status():
+    return jsonify(translator.get_status())
+
+
+@app.route("/api/translate", methods=["POST"])
+def api_translate():
+    data = request.json
+    text = data.get("text", "")
+    direction = data.get("direction", "tr-en")
+
+    if not text:
+        return jsonify({"translated": ""})
+
+    if direction == "tr-en":
+        translated = translator.translate_tr_to_en(text)
+    else:
+        translated = translator.translate_en_to_tr(text)
+
+    return jsonify({"translated": translated})
+
+
 # ─── SCENARIOS ────────────────────────────────────────────────────────────────
 
 @app.route("/api/scenarios", methods=["GET"])
@@ -518,13 +545,17 @@ def api_game_start():
 
     _state["game_started"] = True
 
-    # NPC'leri döndür
+    # Translation
+    gm_intro_tr = translator.translate_en_to_tr(gm_intro)
+
+    # NPC'leri döndür (çevirerek)
     npcs = get_all_npcs(session_id)
-    npcs_clean = [{"name": n["name"], "public": n["public"]} for n in npcs]
+    npcs_clean = [{"name": n["name"], "public": translator.translate_npc_data(n["public"])} for n in npcs]
 
     return jsonify({
         "success": True,
         "gm_response": gm_intro,
+        "gm_response_tr": gm_intro_tr,
         "npcs": npcs_clean,
         "scenario_title": sm.meta.get("title", "") if sm else "Serbest Macera",
         "node_title": sm.current_node.get("title", "") if sm and sm.current_node else "",
@@ -617,13 +648,17 @@ def api_game_action():
     gs.set_scene(gm_response[:100])
     save_message(session_id, None, "assistant", gm_response)
 
-    # NPC listesi
+    # Çeviriler
+    gm_response_tr = translator.translate_en_to_tr(gm_response)
+    
+    # NPC listesi (çevrilmiş public data ile)
     npcs = get_all_npcs(session_id)
-    npcs_clean = [{"name": n["name"], "public": n["public"]} for n in npcs]
+    npcs_clean = [{"name": n["name"], "public": translator.translate_npc_data(n["public"])} for n in npcs]
 
     result = {
         "success": True,
         "gm_response": gm_response,
+        "gm_response_tr": gm_response_tr,
         "player_name": player_name,
         "action": action,
         "npcs": npcs_clean,
@@ -642,7 +677,7 @@ def api_get_npcs():
     if not session_id:
         return jsonify({"npcs": []})
     npcs = get_all_npcs(session_id)
-    npcs_clean = [{"name": n["name"], "public": n["public"]} for n in npcs]
+    npcs_clean = [{"name": n["name"], "public": translator.translate_npc_data(n["public"])} for n in npcs]
     return jsonify({"npcs": npcs_clean})
 
 

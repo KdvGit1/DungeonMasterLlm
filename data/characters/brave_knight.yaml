@@ -1,0 +1,16 @@
+abilities:
+  charisma: 10
+  constitution: 10
+  dexterity: 12
+  intelligence: 11
+  strength: 10
+  wisdom: 10
+armor_class: 11
+background: Noble
+class: Büyücü
+hp: 6
+level: 1
+max_hp: 6
+name: Brave Knight
+race: Elf
+skills: []

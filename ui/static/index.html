@@ -12,6 +12,9 @@
 </head>
 <body>
 
+    <!-- Model Status Indicator -->
+    <div id="model-status">Model durumu bağlanıyor...</div>
+
     <!-- ═══ LOGIN SCREEN ═══ -->
     <div id="screen-login" class="screen active">
         <div class="login-container">
@@ -108,8 +111,11 @@
                 <div id="chat-bg-overlay"></div>
                 <div id="chat-messages"></div>
                 <div id="chat-input-area">
-                    <input type="text" id="chat-input" placeholder="Ne yapıyorsun?" autocomplete="off">
-                    <button id="btn-send" class="btn btn-send" title="Gönder">⚔️</button>
+                    <div class="chat-input-row">
+                        <input type="text" id="chat-input" placeholder="Ne yapıyorsun?" autocomplete="off">
+                        <button id="btn-send" class="btn btn-send" title="Gönder">⚔️</button>
+                    </div>
+                    <div id="translation-preview"></div>
                 </div>
             </main>
 
