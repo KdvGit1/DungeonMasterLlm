@@ -33,16 +33,30 @@ def _load_model():
 
         from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
         import os
-        
+        import torch
+
         cache_dir = os.path.join(os.path.dirname(__file__), "translator_models")
         os.makedirs(cache_dir, exist_ok=True)
-
-        model_name = "facebook/nllb-200-distilled-1.3B"
-        _tokenizer = AutoTokenizer.from_pretrained(model_name, cache_dir=cache_dir)
-        _model = AutoModelForSeq2SeqLM.from_pretrained(model_name, cache_dir=cache_dir)
+        model_name = "Emilio407/nllb-200-distilled-600M-4bit"
+        
+        # Cihaz belirleme (GPU varsa kullan, yoksa CPU)
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        print(f"⚙️ Çeviri modeli cihazı: {device}")
+        
+        try:
+            # Önce sadece yereldeki (cache) dosyaları kullanarak yüklemeyi dene
+            print("🔍 Model yerel önbellekte aranıyor...")
+            _tokenizer = AutoTokenizer.from_pretrained(model_name, cache_dir=cache_dir, local_files_only=True)
+            _model = AutoModelForSeq2SeqLM.from_pretrained(model_name, cache_dir=cache_dir, local_files_only=True, use_safetensors=True, device_map="auto")
+            print(f"✅ Model yerel önbellekten başarıyla yüklendi. (Cihaz: {device})")
+        except Exception as e:
+            # Model yerelde yoksa veya eksikse, internetten indirerek yükle
+            print(f"⚠️ Yerel model bulunamadı veya eksik, internetten indirilecek... ({type(e).__name__})")
+            _tokenizer = AutoTokenizer.from_pretrained(model_name, cache_dir=cache_dir)
+            _model = AutoModelForSeq2SeqLM.from_pretrained(model_name, cache_dir=cache_dir, use_safetensors=True, device_map="auto")
 
         elapsed = time.time() - start
-        print(f"✅ NLLB-200 modeli yüklendi ({elapsed:.1f}s)")
+        print(f"✅ NLLB-200 modeli kullanıma hazır ({elapsed:.1f}s)")
         _loaded = True
 
     except Exception as e:
@@ -95,17 +109,32 @@ def translate(text, src_lang=LANG_EN, tgt_lang=LANG_TR):
         return text  # Model hazır değil, orijinali döndür
 
     try:
+        device = next(_model.parameters()).device # Modelin o anki cihazını al
         _tokenizer.src_lang = src_lang
-        inputs = _tokenizer(text, return_tensors="pt", padding=True, truncation=True, max_length=512)
+        
+        # Metni paragraflara bölerek çok uzun GM cevaplarının kesilmesini önleyelim
+        paragraphs = text.split('\n')
+        translated_paragraphs = []
+        
+        for p in paragraphs:
+            if not p.strip():
+                # Boş satırları aynı şekilde koru
+                translated_paragraphs.append(p)
+                continue
+                
+            inputs = _tokenizer(p, return_tensors="pt", padding=True, truncation=True, max_length=1024)
+            inputs = {k: v.to(device) for k, v in inputs.items()} # Girdileri aynı cihaza taşı
 
-        translated_tokens = _model.generate(
-            **inputs,
-            forced_bos_token_id=_tokenizer.convert_tokens_to_ids(tgt_lang),
-            max_new_tokens=512,
-        )
+            translated_tokens = _model.generate(
+                **inputs,
+                forced_bos_token_id=_tokenizer.convert_tokens_to_ids(tgt_lang),
+                max_new_tokens=1024,
+            )
 
-        result = _tokenizer.batch_decode(translated_tokens, skip_special_tokens=True)[0]
-        return result
+            result = _tokenizer.batch_decode(translated_tokens, skip_special_tokens=True)[0]
+            translated_paragraphs.append(result)
+
+        return '\n'.join(translated_paragraphs)
 
     except Exception as e:
         print(f"⚠️ Çeviri hatası: {e}")

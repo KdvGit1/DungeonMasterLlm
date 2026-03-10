@@ -1,7 +1,22 @@
+--extra-index-url https://download.pytorch.org/whl/cu121
+
+# Web Framework
+Flask
+
+# AI and Machine Learning (with CUDA support)
+pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+transformers
+bitsandbytes
+accelerate
+
+# LangChain and Vector Database
 langchain-chroma
 langchain-ollama
 langchain-community
 langchain-text-splitters
+chromadb
+
+# Utilities
 requests
 PyYAML
 bcrypt
