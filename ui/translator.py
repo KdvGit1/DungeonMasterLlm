@@ -1,9 +1,3 @@
-"""
-ui/translator.py — NLLB-200 çeviri servisi
-Model: facebook/nllb-200-distilled-1.3B
-Lazy singleton: ilk çağrıda yüklenir, sonraki çağrılarda tekrar kullanılır.
-"""
-
 import threading
 import time
 
