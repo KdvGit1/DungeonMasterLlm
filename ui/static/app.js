@@ -53,7 +53,7 @@ async function checkModelStatus() {
         setTimeout(checkModelStatus, 5000);
     }
 }
-checkModelStatus();
+// Started later after config save
 
 /* ─── DOM HELPERS ───────────────────────────────────────── */
 
@@ -85,6 +85,57 @@ function showLoading(show, text) {
     if (text) textEl.textContent = text;
     overlay.style.display = show ? 'flex' : 'none';
 }
+
+/* ═══════════════════════════════════════════════════════════
+   CONFIG SCREEN
+   ═══════════════════════════════════════════════════════════ */
+
+async function loadConfig() {
+    showLoading(true, "Ayarlar yükleniyor...");
+    try {
+        const configData = await API.get('/api/config');
+        
+        const llmSelect = $('#config-llm-model');
+        llmSelect.innerHTML = '';
+        for (const [key, val] of Object.entries(configData.models)) {
+            llmSelect.innerHTML += `<option value="${val}" ${val === configData.current_model ? 'selected' : ''}>${key} (${val})</option>`;
+        }
+
+        const transSelect = $('#config-translator-model');
+        transSelect.innerHTML = '';
+        for (const [key, val] of Object.entries(configData.translators)) {
+            transSelect.innerHTML += `<option value="${val}" ${val === configData.current_translator ? 'selected' : ''}>${key} (${val})</option>`;
+        }
+
+        $('#config-target-language').value = configData.target_language || 'Turkish';
+        
+        showScreen('screen-config');
+    } catch(e) {
+        console.error("Config load error", e);
+    }
+    showLoading(false);
+}
+
+// Check configuration on load instead of checkModelStatus right away
+document.addEventListener('DOMContentLoaded', () => {
+    loadConfig();
+});
+
+$('#btn-save-config').addEventListener('click', async () => {
+    showLoading(true, "Ayarlar kaydediliyor...");
+    const payload = {
+        model: $('#config-llm-model').value,
+        translator: $('#config-translator-model').value,
+        target_language: $('#config-target-language').value.trim() || 'Turkish'
+    };
+    
+    await API.post('/api/config', payload);
+    showLoading(false);
+    
+    // Now start checking model 
+    setTimeout(checkModelStatus, 1000);
+    showScreen('screen-login');
+});
 
 /* ═══════════════════════════════════════════════════════════
    LOGIN

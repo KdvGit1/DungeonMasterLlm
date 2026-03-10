@@ -1,6 +1,7 @@
 from rag.retriever import get_relevant_rules
 from game.character_manager import get_character_summary
 from game.npc_manager import get_all_npcs, get_npc_summary_secret
+import config
 
 # ─── GM KİŞİLİĞİ (SABİT) ────────────────────────────────────────────────────
 
@@ -16,7 +17,7 @@ PERSPECTIVE (CRITICAL):
 - You describe what happens, you do not participate
 
 STRICT RULES:
-- Respond in English only
+{language_rule}
 - Maximum 3 sentences per response, no exceptions
 - Player characters are listed in [PLAYERS] — NEVER rename them
 - ALWAYS advance the story, never repeat previous descriptions
@@ -107,9 +108,18 @@ def build_system_prompt(characters, query, game_state=None, scenario_manager=Non
             f"Do NOT ask for another roll. Do NOT ignore this result.\n\n"
         )
 
+    language_rule = "- Respond in English only"
+    language_override = ""
+    if getattr(config, "translator_model", "none") == "none":
+        target_lang = getattr(config, "target_language", "Turkish")
+        language_rule = f"- Respond in {target_lang} only"
+        language_override = f"\n[CRITICAL LANGUAGE INSTRUCTION]\nYou MUST speak and reply EXCLUSIVELY in {target_lang}. Do NOT reply in English.\n"
+        
+    gm_persona_formatted = GM_PERSONA.replace("{language_rule}", language_rule)
+
     # ── Hepsini birleştir ──
     system_prompt = (
-        f"{GM_PERSONA}\n\n"
+        f"{gm_persona_formatted}\n\n"
         f"{state_section}"
         f"{roll_section}"
         f"{scenario_section}\n"
@@ -117,6 +127,7 @@ def build_system_prompt(characters, query, game_state=None, scenario_manager=Non
         f"{npc_section}"
         f"{rules_section}\n"
         f"{GAME_RULES}"
+        f"{language_override}"
     )
 
     return system_prompt

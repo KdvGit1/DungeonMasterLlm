@@ -1,5 +1,6 @@
 import threading
 import time
+import config
 
 # ─── GLOBAL STATE ─────────────────────────────────────────────────────────────
 
@@ -31,7 +32,12 @@ def _load_model():
 
         cache_dir = os.path.join(os.path.dirname(__file__), "translator_models")
         os.makedirs(cache_dir, exist_ok=True)
-        model_name = "Emilio407/nllb-200-distilled-600M-4bit"
+        model_name = config.translator_model
+        
+        if model_name == "none":
+            print("⚙️ Çeviri modeli 'none' olarak seçildi, yüklenmeyecek.")
+            _loaded = True
+            return
         
         # Cihaz belirleme (GPU varsa kullan, yoksa CPU)
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -62,7 +68,11 @@ def _load_model():
 
 def ensure_model_loaded():
     """Model yüklenmemişse arka planda yüklemeyi başlatır."""
-    global _loading
+    global _loading, _loaded
+    if getattr(config, "translator_model", "none") == "none":
+        _loaded = True
+        return
+
     with _lock:
         if _loaded or _loading:
             return
@@ -85,6 +95,8 @@ def get_status():
 
 def is_ready():
     """Model hazır mı?"""
+    if getattr(config, "translator_model", "none") == "none":
+        return True
     return _loaded and _model is not None and _tokenizer is not None
 
 
@@ -97,6 +109,9 @@ def translate(text, src_lang=LANG_EN, tgt_lang=LANG_TR):
     Model hazır değilse orijinal metni döndürür.
     """
     if not text or not text.strip():
+        return text
+
+    if getattr(config, "translator_model", "none") == "none":
         return text
 
     if not is_ready():

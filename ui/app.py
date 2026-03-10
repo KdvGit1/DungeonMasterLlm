@@ -237,6 +237,47 @@ def serve_asset(filename):
     return send_from_directory(assets_dir, filename)
 
 
+# ─── CONFIGURATION ────────────────────────────────────────────────────────────
+
+@app.route("/api/config", methods=["GET"])
+def api_get_config():
+    return jsonify({
+        "models": config.AVAILABLE_MODELS,
+        "translators": config.AVAILABLE_TRANSLATOR_MODELS,
+        "current_model": config.model,
+        "current_translator": getattr(config, "translator_model", "none"),
+        "target_language": getattr(config, "target_language", "Turkish")
+    })
+
+@app.route("/api/config", methods=["POST"])
+def api_save_config():
+    data = request.json
+    if "model" in data:
+        config.model = data["model"]
+    if "translator" in data:
+        config.translator_model = data["translator"]
+    if "target_language" in data:
+        config.target_language = data["target_language"]
+        
+    # config.py dosyasına değişiklikleri kalıcı olarak yaz
+    import re
+    config_path = os.path.join(PROJECT_ROOT, "config.py")
+    try:
+        with open(config_path, "r", encoding="utf-8") as f:
+            content = f.read()
+            
+        content = re.sub(r"^model\s*=\s*['\"].*?['\"]", f"model = '{config.model}'", content, flags=re.MULTILINE)
+        content = re.sub(r"^translator_model\s*=\s*['\"].*?['\"]", f"translator_model = '{config.translator_model}'", content, flags=re.MULTILINE)
+        content = re.sub(r"^target_language\s*=\s*['\"].*?['\"]", f"target_language = '{config.target_language}'", content, flags=re.MULTILINE)
+        
+        with open(config_path, "w", encoding="utf-8") as f:
+            f.write(content)
+    except Exception as e:
+        print(f"Config save error: {e}")
+
+    return jsonify({"success": True})
+
+
 # ─── AUTH ─────────────────────────────────────────────────────────────────────
 
 @app.route("/api/login", methods=["POST"])
