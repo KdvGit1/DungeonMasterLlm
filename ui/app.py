@@ -31,6 +31,11 @@ from game.dice import d20, get_modifier
 from game.npc_manager import get_all_npcs, save_npc
 from game.npc_extractor import extract_npcs_from_response
 from game.scenario_manager import ScenarioManager
+from game.combat import check_combat_start, player_attack, enemy_attack, format_encounter_status
+from game.inventory_manager import use_item, add_item, get_pickup_dc, get_inventory
+from game.xp_manager import init_player_stats, grant_general_xp, grant_ability_xp, grant_combat_xp, apply_damage, add_gold, format_player_status, grant_quest_rewards
+from game.quest_manager import init_quests, check_node_quests
+from game.event_parser import parse_gm_events
 from prompts.system_prompt import build_system_prompt
 from rag.retriever import get_relevant_rules
 from rag.ingest import ingest
@@ -189,12 +194,21 @@ def _execute_roll(roll_info, player_name, game_state, session_id, user):
 
     if roll_result == 20:
         outcome_label = "CRITICAL SUCCESS"
+        success = True
     elif roll_result == 1:
         outcome_label = "CRITICAL FAILURE"
+        success = False
     elif total >= dc:
         outcome_label = "SUCCESS"
+        success = True
     else:
         outcome_label = "FAILURE"
+        success = False
+
+    if success:
+        grant_ability_xp(session_id, player_name, ability, amount=5)
+
+    grant_general_xp(session_id, player_name, 2, reason="roll yapıldı")
 
     roll_message = (
         f"Player: {player_name}\n"
@@ -217,7 +231,53 @@ def _execute_roll(roll_info, player_name, game_state, session_id, user):
         "modifier": modifier,
         "total": total,
         "outcome": outcome_label,
+        "success": success
     }
+
+# ─── EŞYA ALMA & KULLANMA ────────────────────────────────────────────────────
+
+ACQUIRE_PATTERNS = [
+    r"steal\s+(?:the\s+|a\s+|an\s+)?(.+)",
+    r"grab\s+(?:the\s+|a\s+|an\s+)?(.+)",
+    r"take\s+(?:the\s+|a\s+|an\s+)?(.+)",
+    r"pick\s+up\s+(?:the\s+|a\s+|an\s+)?(.+)",
+    r"snatch\s+(?:the\s+|a\s+|an\s+)?(.+)",
+    r"swipe\s+(?:the\s+|a\s+|an\s+)?(.+)",
+    r"lift\s+(?:the\s+|a\s+|an\s+)?(.+)",
+    r"pocket\s+(?:the\s+|a\s+|an\s+)?(.+)",
+    r"(.+?)\s*(?:çal|çalıyorum|çaldım|al|alıyorum|aldım|kap|kaptım)",
+]
+
+def _check_item_acquisition(action):
+    action_lower = action.lower().strip()
+    action_clean = re.sub(r"^i\s+", "", action_lower)
+    for pattern in ACQUIRE_PATTERNS:
+        match = re.search(pattern, action_clean, re.IGNORECASE)
+        if match:
+            item = match.group(1).strip().rstrip('.,!?')
+            if len(item.split()) <= 4:
+                return item
+    return None
+
+def _handle_item_use(action, player_name, session_id):
+    match_en = re.search(r'\buse\b\s+(?:my\s+|the\s+)?(.+)', action, re.IGNORECASE)
+    match_tr = re.search(r'(.+?)\s*(?:kullan|kullanıyorum|kullandım)', action, re.IGNORECASE)
+
+    item_name = None
+    if match_en:
+        item_name = match_en.group(1).strip().rstrip('.')
+    elif match_tr:
+        item_name = match_tr.group(1).strip().lstrip('I').strip()
+
+    if not item_name:
+        return False, None
+
+    success, msg = use_item(session_id, item_name)
+    if success:
+        grant_general_xp(session_id, player_name, 1, reason="eşya kullanıldı")
+        return True, f"{player_name} uses {item_name}."
+    else:
+        return False, msg
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -539,6 +599,13 @@ def api_game_start():
 
     player_names_list = [c["name"] for c in gs.characters]
 
+    # Initialize stats & quests
+    for char in gs.characters:
+        init_player_stats(session_id, char["name"], char)
+
+    if sm:
+        init_quests(session_id, sm.meta)
+
     # Başlangıç mesajı
     if sm and sm.current_node:
         node = sm.current_node
@@ -600,11 +667,21 @@ def api_game_start():
         "npcs": npcs_clean,
         "scenario_title": sm.meta.get("title", "") if sm else "Serbest Macera",
         "node_title": sm.current_node.get("title", "") if sm and sm.current_node else "",
+        "inventory": get_inventory(session_id),
+        "player_status": [format_player_status(session_id, c["name"]) for c in gs.characters]
     })
 
 
 @app.route("/api/game/action", methods=["POST"])
 def api_game_action():
+    try:
+        return _api_game_action_internal()
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({"error": f"Sunucu iç hatası: {str(e)}"}), 500
+
+def _api_game_action_internal():
     """Oyuncu eylemi → zar kontrolü → GM cevabı."""
     gs = _state["game_state"]
     sm = _state["scenario_manager"]
@@ -632,11 +709,21 @@ def api_game_action():
             c["name"] for c in gs.characters if c["name"].lower() == player_name.lower()
         )
 
+    # ─ Eşya kullanma kontrolü ─
+    item_used, item_gm_msg = _handle_item_use(action, player_name, session_id)
+    if not item_used and re.search(r'\buse\b|kullan', action, re.IGNORECASE) and item_gm_msg is None:
+        pass # Handle UI warning if explicitly wanted, let it pass for now
+
     player_names_list = [c["name"] for c in gs.characters]
     user_message = f"{player_name}: {action}"
     save_message(session_id, user.get("id") if user else None, "user", user_message)
 
-    # TRIGGER CHECK
+    if item_used and item_gm_msg:
+        save_message(session_id, None, "user", item_gm_msg)
+
+    grant_general_xp(session_id, player_name, 1, reason="aksiyon")
+
+    # TRIGGER CHECK & QUEST CHECK
     transition_info = None
     if sm:
         recent_for_trigger = get_recent_messages(session_id)
@@ -645,6 +732,12 @@ def api_game_action():
             sm.load_node(next_node)
             if sm.current_node:
                 gs.current_node = sm.current_node.get("title", "")
+            
+            quest_events = check_node_quests(session_id, next_node)
+            for qe in quest_events:
+                if qe["event"] == "completed":
+                    grant_quest_rewards(session_id, player_name, qe["quest"])
+            
             transition_msg = (
                 f"[SCENE TRANSITION: players have arrived at "
                 f"{sm.current_node.get('title', next_node)}]"
@@ -653,19 +746,81 @@ def api_game_action():
             transition_info = {
                 "new_node": next_node,
                 "new_node_title": sm.current_node.get("title", next_node) if sm.current_node else next_node,
+                "quest_events": quest_events
             }
 
-    # ROLL CHECK
-    node_actions = None
-    if sm and sm.current_node:
-        node_actions = sm.current_node.get("available_actions")
-
-    roll_info = _needs_roll_check(action, node_actions)
-    roll_result = None
+    # COMBAT CHECK
     roll_result_msg = None
-    if roll_info.get("needed"):
-        roll_result = _execute_roll(roll_info, player_name, gs, session_id, user)
-        roll_result_msg = roll_result["roll_message"]
+    combat_status = None
+    combat_logs = []
+
+    if gs.is_combat and gs.active_encounter:
+        attack_msg, damage, enemy_defeated = player_attack(gs, player_name, session_id, user)
+        roll_result_msg = attack_msg
+        combat_logs.append(attack_msg)
+
+        if enemy_defeated:
+            xp = gs.active_encounter.get("xp_reward", 50)
+            grant_combat_xp(session_id, player_name, xp)
+            gs.end_encounter()
+            combat_logs.append(f"Enemy defeated! Earned {xp} XP.")
+        else:
+            enemy_dmg, enemy_msg = enemy_attack(gs, player_name, session_id)
+            if enemy_dmg > 0:
+                is_down, _ = apply_damage(session_id, player_name, enemy_dmg)
+                roll_result_msg += f"\n{enemy_msg}"
+                combat_logs.append(enemy_msg)
+                if is_down:
+                    roll_result_msg += f"\n{player_name} has fallen unconscious!"
+                    combat_logs.append(f"💀 {player_name} has fallen unconscious!")
+    else:
+        combat_result = check_combat_start(action)
+        if combat_result.get("combat"):
+            gs.start_encounter(combat_result)
+            attack_msg, _, enemy_defeated = player_attack(gs, player_name, session_id, user)
+            roll_result_msg = f"COMBAT STARTED against {combat_result['enemy_name']}!\n{attack_msg}"
+            combat_logs.append(f"⚔️ Savaş başladı: {combat_result['enemy_name']}!")
+            combat_logs.append(attack_msg)
+
+            if enemy_defeated:
+                xp = gs.active_encounter.get("xp_reward", 50)
+                grant_combat_xp(session_id, player_name, xp)
+                gs.end_encounter()
+                combat_logs.append(f"Düşman yenildi! {xp} XP kazanıldı.")
+            else:
+                enemy_dmg, enemy_msg = enemy_attack(gs, player_name, session_id)
+                if enemy_dmg > 0:
+                    is_down, _ = apply_damage(session_id, player_name, enemy_dmg)
+                    roll_result_msg += f"\n{enemy_msg}"
+                    combat_logs.append(enemy_msg)
+                    if is_down:
+                        roll_result_msg += f"\n{player_name} bilincini kaybetti!"
+                        combat_logs.append(f"💀 {player_name} bilincini kaybetti!")
+        else:
+            # ROLL CHECK (Yalnızca savaş dışındayken zar kontrolü yapılır)
+            node_actions = None
+            if sm and sm.current_node:
+                node_actions = sm.current_node.get("available_actions")
+
+            roll_info = _needs_roll_check(action, node_actions)
+            roll_result = None
+            if roll_info.get("needed"):
+                roll_result = _execute_roll(roll_info, player_name, gs, session_id, user)
+                roll_result_msg = roll_result["roll_message"]
+                
+                # Başarılı zar sonrası eşya edinme
+                if roll_result.get("success"):
+                    acquired_item = _check_item_acquisition(action)
+                    if acquired_item:
+                        add_item(session_id, acquired_item, 1, 0, "common")
+                        save_message(session_id, None, "user", f"{player_name} successfully acquires: {acquired_item}")
+                        combat_logs.append(f"🎒 {acquired_item} envantere eklendi!")
+            else:
+                grant_general_xp(session_id, player_name, 1, reason="aksiyon (roll yok)")
+
+    # Savaş durumunu API yanıtına ekle
+    if gs.is_combat and gs.active_encounter:
+        combat_status = gs.active_encounter
 
     # GM CEVABI
     recent_messages = get_recent_messages(session_id)
@@ -686,6 +841,17 @@ def api_game_action():
         public_data = {"role": npc["role"], "appearance": npc["appearance"], "personality": npc["personality"]}
         save_npc(npc["name"], public_data, npc["secret"], session_id)
 
+    # EVENT PARSING
+    events = parse_gm_events(gm_response)
+    if events.get("gold_found", 0) > 0:
+        add_gold(session_id, player_name, events["gold_found"])
+        combat_logs.append(f"💰 {events['gold_found']} altın bulundu!")
+
+    pending_item = None
+    if events.get("item_found"):
+        gs.pending_item = events["item_found"]
+        pending_item = events["item_found"]
+
     gs.set_scene(gm_response[:100])
     save_message(session_id, None, "assistant", gm_response)
 
@@ -703,13 +869,67 @@ def api_game_action():
         "player_name": player_name,
         "action": action,
         "npcs": npcs_clean,
+        "inventory": get_inventory(session_id),
+        "player_status": [format_player_status(session_id, c["name"]) for c in gs.characters],
+        "events": events,
+        "pending_item": pending_item,
+        "combat_status": combat_status,
+        "logs": combat_logs
     }
     if roll_result:
         result["roll"] = roll_result
     if transition_info:
         result["transition"] = transition_info
+    if item_gm_msg:
+        result["item_msg"] = item_gm_msg
 
     return jsonify(result)
+
+# ─── EXTRACTION API ──────────────────────────────────────────────────────────
+
+@app.route("/api/game/pickup", methods=["POST"])
+def api_game_pickup():
+    gs = _state["game_state"]
+    session_id = _state["session_id"]
+    user = _state["user"]
+
+    if not gs or not gs.characters:
+        return jsonify({"error": "Oyun başlatılmadı"}), 400
+
+    data = request.json
+    accept = data.get("accept", False)
+    player_name = data.get("player_name", gs.characters[0]["name"])
+
+    item = gs.pending_item
+    if not item:
+        return jsonify({"success": False, "msg": "No item to pick up."})
+
+    gs.pending_item = None # Clear it
+
+    if not accept:
+        save_message(session_id, None, "user", f"{player_name} decides to leave the {item['name']} behind.")
+        return jsonify({"success": True, "picked_up": False, "msg": f"{item['name']} bırakıldı."})
+
+    dc = get_pickup_dc(item.get("rarity", "common"))
+    roll_info = {"ability": "dexterity", "dc": dc}
+    roll_result = _execute_roll(roll_info, player_name, gs, session_id, user)
+
+    if roll_result.get("success"):
+        add_item(session_id, item["name"], 1, item.get("value", 0), item.get("rarity", "common"))
+        save_message(session_id, None, "user", f"{player_name} successfully picks up the {item['name']}!")
+        msg = f"✅ {item['name']} envantere eklendi!"
+    else:
+        save_message(session_id, None, "user", f"{player_name} fumbles and fails to grab the {item['name']}.")
+        msg = f"❌ {item['name']} alınamadı."
+
+    return jsonify({
+        "success": True,
+        "picked_up": roll_result.get("success"),
+        "msg": msg,
+        "roll": roll_result,
+        "inventory": get_inventory(session_id),
+        "player_status": [format_player_status(session_id, c["name"]) for c in gs.characters],
+    })
 
 
 @app.route("/api/game/npcs", methods=["GET"])

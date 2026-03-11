@@ -134,6 +134,11 @@
             <main id="panel-chat">
                 <div id="chat-bg-overlay"></div>
                 <div id="chat-messages"></div>
+                
+                <!-- Encounters & Item Pickup Modals Area -->
+                <div id="combat-status-container" style="display:none;" class="combat-status-panel"></div>
+                <div id="item-pickup-container" style="display:none;" class="item-pickup-panel"></div>
+
                 <div id="chat-input-area">
                     <div class="chat-input-row">
                         <input type="text" id="chat-input" placeholder="Ne yapıyorsun?" autocomplete="off">
@@ -147,6 +152,9 @@
             <aside id="panel-character" class="game-panel">
                 <h2 class="panel-title">🛡️ Karakter</h2>
                 <div id="character-sheet" class="panel-content"></div>
+                
+                <h2 class="panel-title" style="border-top: 1px solid var(--border-subtle); margin-top:0.5rem;">🎒 Envanter & Altın</h2>
+                <div id="inventory-sheet" class="panel-content" style="flex:0.7"></div>
             </aside>
 
         </div>

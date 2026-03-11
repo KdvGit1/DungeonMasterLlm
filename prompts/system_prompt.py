@@ -1,9 +1,12 @@
 from rag.retriever import get_relevant_rules
 from game.character_manager import get_character_summary
 from game.npc_manager import get_all_npcs, get_npc_summary_secret
+from game.inventory_manager import format_inventory_for_prompt
+from game.quest_manager import format_quests_for_prompt
+from game.xp_manager import format_stats_for_prompt
 import config
 
-# ─── GM KİŞİLİĞİ (SABİT) ────────────────────────────────────────────────────
+# ─── GM KİŞİLİĞİ ─────────────────────────────────────────────────────────────
 
 GM_PERSONA = """
 You are a Dungeons & Dragons Game Master.
@@ -22,14 +25,19 @@ STRICT RULES:
 - Player characters are listed in [PLAYERS] — NEVER rename them
 - ALWAYS advance the story, never repeat previous descriptions
 - You MAY invent NPCs freely; scenario NPCs are listed in [SCENARIO NPCS]
-- When introducing important NPCs, ALWAYS give them a proper name (e.g. "Garret the guard", not just "a guard")
+- When introducing important NPCs, ALWAYS give them a proper name
 
 DICE ROLL RULES:
 - The dice system handles rolls automatically BEFORE you respond
-- If [DICE ROLL RESULT] section exists below: narrate the outcome of that roll, do NOT ask for another roll
+- If [DICE ROLL RESULT] section exists below: narrate the outcome, do NOT ask for another roll
 - If no [DICE ROLL RESULT] exists: the action needed no roll, narrate freely
 - On natural 20: describe exceptional success with dramatic flair
 - On natural 1: describe critical failure with consequences
+
+INVENTORY RULE (CRITICAL):
+- [INVENTORY] section is the ONLY source of truth for what the player owns
+- If an item is not listed there, the player does NOT have it — regardless of past messages
+- NEVER give the player items they didn't earn through gameplay
 
 RESPONSE FORMAT:
 1. Describe what happens based on the roll result (if any)
@@ -54,7 +62,8 @@ ABILITY CHECKS:
 
 # ─── SİSTEM PROMPT OLUŞTUR ───────────────────────────────────────────────────
 
-def build_system_prompt(characters, query, game_state=None, scenario_manager=None, roll_info=None, session_id=None):
+def build_system_prompt(characters, query, game_state=None, scenario_manager=None,
+                        roll_info=None, session_id=None):
 
     # ── Karakter özetleri ──
     character_section = "[PLAYERS - NEVER RENAME THESE CHARACTERS]\n"
@@ -64,7 +73,25 @@ def build_system_prompt(characters, query, game_state=None, scenario_manager=Non
     else:
         character_section += "No characters loaded.\n"
 
-    # ── DB'deki NPC'ler (gizli bilgilerle, sadece bu oturumun NPC'leri) ──
+    # ── Player stats (HP, gold, seviye) ──
+    stats_section = ""
+    if session_id and characters:
+        for char in characters:
+            stats_section += format_stats_for_prompt(session_id, char["name"]) + "\n"
+
+    # ── Envanter ──
+    inventory_section = ""
+    if session_id:
+        inventory_section = format_inventory_for_prompt(session_id) + "\n"
+
+    # ── Aktif questler ──
+    quest_section = ""
+    if session_id:
+        quest_section = format_quests_for_prompt(session_id)
+        if quest_section:
+            quest_section += "\n"
+
+    # ── DB'deki NPC'ler ──
     npcs = get_all_npcs(session_id) if session_id else []
     if npcs:
         npc_section = "[KNOWN NPCS - SECRET INFO NEVER REVEALED TO PLAYERS]\n"
@@ -78,11 +105,17 @@ def build_system_prompt(characters, query, game_state=None, scenario_manager=Non
     if scenario_manager is not None:
         scenario_section += scenario_manager.get_node_for_prompt()
         scenario_section += scenario_manager.get_npcs_for_prompt()
+
+        node = scenario_manager.current_node or {}
+        npc_names = [n.get("name", "?") for n in node.get("npcs", [])]
+        npc_list_str = ", ".join(npc_names) if npc_names else "none"
+
         scenario_section += (
-            "\n[SCENARIO RULES — ACTIVE]\n"
-            "- The scene description above defines the EXACT setting — match its atmosphere, weather, and mood\n"
-            "- NPCs listed in [SCENARIO NPCS IN THIS LOCATION] are physically present — involve at least one in your response\n"
-            "- Use each NPC's personality and appearance as described — never contradict them\n"
+            "\n[SCENARIO RULES — MANDATORY]\n"
+            "- The scene description above defines the EXACT setting — match atmosphere, weather, and mood\n"
+            f"- NPCs PHYSICALLY PRESENT: {npc_list_str}\n"
+            "- You MUST mention at least one of these NPCs by name in EVERY response\n"
+            "- Use their exact personality and appearance as described\n"
             "- NEVER reveal an NPC's secret in normal narration\n"
         )
 
@@ -97,30 +130,35 @@ def build_system_prompt(characters, query, game_state=None, scenario_manager=Non
     if game_state is not None:
         state_section = game_state.get_state_summary() + "\n\n"
 
-    # ── Zar sonucu (varsa) ──
-    # Bu bölüm GM'e "zar zaten atıldı, sonucu narrate et" der
+    # ── Zar sonucu ──
     roll_section = ""
     if roll_info:
         roll_section = (
             f"[DICE ROLL RESULT — ALREADY EXECUTED]\n"
             f"{roll_info}\n"
-            f"Narrate the outcome based on this result. "
-            f"Do NOT ask for another roll. Do NOT ignore this result.\n\n"
+            f"Narrate the outcome. Do NOT ask for another roll. Do NOT ignore this result.\n\n"
         )
 
+    # ── Dil kuralı ──
     language_rule = "- Respond in English only"
     language_override = ""
     if getattr(config, "translator_model", "none") == "none":
         target_lang = getattr(config, "target_language", "Turkish")
         language_rule = f"- Respond in {target_lang} only"
-        language_override = f"\n[CRITICAL LANGUAGE INSTRUCTION]\nYou MUST speak and reply EXCLUSIVELY in {target_lang}. Do NOT reply in English.\n"
-        
+        language_override = (
+            f"\n[CRITICAL LANGUAGE INSTRUCTION]\n"
+            f"You MUST speak and reply EXCLUSIVELY in {target_lang}. Do NOT reply in English.\n"
+        )
+
     gm_persona_formatted = GM_PERSONA.replace("{language_rule}", language_rule)
 
     # ── Hepsini birleştir ──
     system_prompt = (
         f"{gm_persona_formatted}\n\n"
         f"{state_section}"
+        f"{stats_section}"
+        f"{inventory_section}"
+        f"{quest_section}"
         f"{roll_section}"
         f"{scenario_section}\n"
         f"{character_section}\n"

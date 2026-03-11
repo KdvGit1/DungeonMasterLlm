@@ -58,45 +58,80 @@ def create_messages_table(cursor):
         )
     ''')
 
+def create_inventory_table(cursor):
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS inventory (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            session_id INTEGER NOT NULL,
+            item_name TEXT NOT NULL,
+            quantity INTEGER DEFAULT 1,
+            value INTEGER DEFAULT 0,
+            rarity TEXT DEFAULT 'common',
+            added_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (session_id) REFERENCES sessions(id)
+        )
+    ''')
+
+def create_player_stats_table(cursor):
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS player_stats (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            session_id INTEGER NOT NULL,
+            player_name TEXT NOT NULL,
+            hp INTEGER DEFAULT 10,
+            max_hp INTEGER DEFAULT 10,
+            gold INTEGER DEFAULT 0,
+            xp INTEGER DEFAULT 0,
+            level INTEGER DEFAULT 1,
+            ability_xp TEXT DEFAULT '{}',
+            FOREIGN KEY (session_id) REFERENCES sessions(id)
+        )
+    ''')
+
+def create_quests_table(cursor):
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS quests (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            session_id INTEGER NOT NULL,
+            quest_id TEXT NOT NULL,
+            title TEXT NOT NULL,
+            description TEXT DEFAULT '',
+            status TEXT CHECK(status IN ('inactive','active','completed','failed')) DEFAULT 'inactive',
+            trigger_node TEXT DEFAULT '',
+            complete_node TEXT DEFAULT '',
+            reward_gold INTEGER DEFAULT 0,
+            reward_xp INTEGER DEFAULT 0,
+            FOREIGN KEY (session_id) REFERENCES sessions(id)
+        )
+    ''')
+
 # ─── MİGRATION ─────────────────────────────────────────────
 
 def migrate(conn):
     cursor = conn.cursor()
 
-    # mevcut characters tablosunun sütunlarını kontrol et
+    # characters tablosu
     cursor.execute("PRAGMA table_info(characters)")
     columns = [row["name"] for row in cursor.fetchall()]
 
-    # secret_info yoksa ekle
     if "secret_info" not in columns:
         cursor.execute("ALTER TABLE characters ADD COLUMN secret_info TEXT")
         print("Migration: secret_info sütunu eklendi.")
 
-    # type yoksa ekle
     if "type" not in columns:
-        cursor.execute(
-            "ALTER TABLE characters ADD COLUMN type TEXT DEFAULT 'player'"
-        )
+        cursor.execute("ALTER TABLE characters ADD COLUMN type TEXT DEFAULT 'player'")
         print("Migration: type sütunu eklendi.")
 
-    # session_id yoksa ekle (NPC'leri oturuma bağlamak için)
     if "session_id" not in columns:
-        cursor.execute(
-            "ALTER TABLE characters ADD COLUMN session_id INTEGER REFERENCES sessions(id)"
-        )
+        cursor.execute("ALTER TABLE characters ADD COLUMN session_id INTEGER REFERENCES sessions(id)")
         print("Migration: session_id sütunu eklendi.")
 
-    # user_id NOT NULL constraint'ini kaldır (NPC'ler user_id=NULL olabilmeli)
+    # user_id NOT NULL kaldır
     cursor.execute("PRAGMA table_info(characters)")
-    needs_rebuild = False
-    for row in cursor.fetchall():
-        # PRAGMA table_info döner: (cid, name, type, notnull, dflt_value, pk)
-        if row[1] == "user_id" and row[3] == 1:
-            needs_rebuild = True
-            break
+    needs_rebuild = any(row[1] == "user_id" and row[3] == 1 for row in cursor.fetchall())
 
     if needs_rebuild:
-        print("Migration: user_id NOT NULL kaldırılıyor (tablo yeniden oluşturuluyor)...")
+        print("Migration: user_id NOT NULL kaldırılıyor...")
         cursor.execute('''
             CREATE TABLE characters_new (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -112,12 +147,16 @@ def migrate(conn):
         ''')
         cursor.execute('''
             INSERT INTO characters_new (id, user_id, name, data, secret_info, type, updated_at, session_id)
-            SELECT id, user_id, name, data, secret_info, type, updated_at, session_id
-            FROM characters
+            SELECT id, user_id, name, data, secret_info, type, updated_at, session_id FROM characters
         ''')
         cursor.execute("DROP TABLE characters")
         cursor.execute("ALTER TABLE characters_new RENAME TO characters")
-        print("Migration: characters tablosu yeniden oluşturuldu (user_id artık nullable).")
+        print("Migration: characters tablosu yeniden oluşturuldu.")
+
+    # Yeni tablolar — yoksa ekle
+    create_inventory_table(cursor)
+    create_player_stats_table(cursor)
+    create_quests_table(cursor)
 
     conn.commit()
 
@@ -135,9 +174,6 @@ def initialize_db():
     create_messages_table(cursor)
 
     conn.commit()
-
-    # migration: mevcut tablolara yeni sütunlar ekle
     migrate(conn)
-
     conn.close()
     print("Veritabanı hazır.")

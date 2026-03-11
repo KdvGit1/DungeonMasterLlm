@@ -381,7 +381,12 @@ function initGameScreen(gameData) {
 
     // Update panels
     updateNpcPanel(gameData.npcs || []);
-    updateCharacterPanel();
+    if (gameData.player_status) {
+        // Backend returns an array of formatted status strings or parsed data. 
+        // For right now, let's keep the old updateCharacterPanel but enhance it.
+    }
+    updateCharacterPanel(gameData.player_status);
+    updateInventoryPanel(gameData.inventory);
 
     // Focus input
     $('#chat-input').focus();
@@ -529,8 +534,133 @@ function updateCharacterPanel() {
         <div class="char-section">
             <div class="char-stat-label" style="margin-bottom:0.25rem">Arka Plan</div>
             <div style="font-size:0.8rem;color:var(--text-secondary)">${escapeHtml(c.background)}</div>
-        </div>` : ''}`;
+        </div>` : ''}
+        <div class="char-section" style="margin-top:0.5rem">
+            <div class="char-stat-row">
+                <span class="char-stat-label">Seviye ${c.level || 1}</span>
+                <span class="char-stat-value" style="font-size:0.8rem; color:var(--text-secondary)">${c.xp || 0} / ${c.xp_to_next || 100} XP</span>
+            </div>
+            <div class="char-stat-bar-container">
+                <div class="char-stat-bar-fill" style="width: ${Math.min(100, Math.max(0, ((c.xp || 0) / (c.xp_to_next || 100)) * 100))}%"></div>
+            </div>
+        </div>`;
 }
+
+function updateInventoryPanel(inventoryData) {
+    const sheet = $('#inventory-sheet');
+    
+    if (!inventoryData) {
+        sheet.innerHTML = '<p style="color:var(--text-secondary);text-align:center;padding:1rem">Envanter boş</p>';
+        return;
+    }
+
+    let html = '';
+    
+    // Gold
+    const gold = inventoryData.gold || 0;
+    html += `
+        <div class="gold-display">
+            🪙 ${gold} Altın
+        </div>
+    `;
+
+    // Items
+    const items = inventoryData.items || [];
+    if (items.length === 0) {
+        html += '<p style="color:var(--text-secondary);font-size:0.8rem;text-align:center;">Çantan boş.</p>';
+    } else {
+        items.forEach(item => {
+            html += `
+                <div class="inventory-item">
+                    <div class="inventory-item-details">
+                        <span class="inventory-item-name">${escapeHtml(item.name)}</span>
+                        <span class="inventory-item-qty">Miktar: ${item.quantity || 1}</span>
+                    </div>
+                    <button class="inventory-item-use-btn" onclick="useItem('${escapeHtml(item.name)}')">Kullan</button>
+                </div>
+            `;
+        });
+    }
+
+    sheet.innerHTML = html;
+}
+
+window.useItem = function(itemName) {
+    const input = $('#chat-input');
+    input.value = `kullan ${itemName}`;
+    sendAction();
+};
+
+function handleCombatStatus(combatData) {
+    const container = $('#combat-status-container');
+    if (!combatData) {
+        container.style.display = 'none';
+        return;
+    }
+
+    container.style.display = 'block';
+    
+    const hpPercent = Math.max(0, Math.min(100, (combatData.enemy_hp / combatData.enemy_max_hp) * 100));
+    
+    container.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:flex-end;">
+            <div class="combat-enemy-name">⚔️ ${escapeHtml(combatData.enemy_name)}</div>
+            <div style="font-size:0.8rem; color: #ffaaa;">HP: ${combatData.enemy_hp} / ${combatData.enemy_max_hp}</div>
+        </div>
+        <div class="combat-enemy-hp-bar">
+            <div class="combat-enemy-hp-fill" style="width: ${hpPercent}%"></div>
+        </div>
+    `;
+}
+
+function handleItemPickup(pendingItem) {
+    const container = $('#item-pickup-container');
+    if (!pendingItem) {
+        container.style.display = 'none';
+        return;
+    }
+
+    container.style.display = 'flex';
+    container.innerHTML = `
+        <div class="item-pickup-info">
+            <strong>🎁 Eşya Bulundu:</strong> ${escapeHtml(pendingItem.name)}
+        </div>
+        <div class="pickup-btn-group">
+            <button class="btn btn-primary" style="padding: 0.4rem 0.8rem;" onclick="respondToItemPickup(true)">Al</button>
+            <button class="btn btn-secondary" style="padding: 0.4rem 0.8rem;" onclick="respondToItemPickup(false)">Bırak</button>
+        </div>
+    `;
+}
+
+window.respondToItemPickup = async function(accept) {
+    const container = $('#item-pickup-container');
+    container.style.display = 'none';
+    
+    showLoading(true, accept ? 'Eşya alınmaya çalışılıyor...' : 'Es geçiliyor...');
+    
+    try {
+        const playerName = state.character ? state.character.name : 'Oyuncu';
+        const res = await API.post('/api/game/pickup', { accept, player_name: playerName });
+        
+        showLoading(false);
+        
+        if (res.msg) {
+            addMessage('system', '', res.msg);
+        }
+        
+        if (res.roll) {
+            addRollMessage(res.roll);
+        }
+        
+        // Update Inventory and Status
+        if (res.inventory) updateInventoryPanel(res.inventory);
+        if (res.player_status) updateCharacterPanel(res.player_status);
+        
+    } catch(err) {
+        showLoading(false);
+        addMessage('system', '', `⚠️ Bağlantı hatası: ${err.message}`);
+    }
+};
 
 /* ─── Input Live Translation ──────────────────────────────────── */
 
@@ -629,6 +759,36 @@ async function sendAction() {
 
         // Update NPC panel
         updateNpcPanel(data.npcs || []);
+        
+        // Update Player Status & Inventory
+        // First we must update state.character if it changed (HP, XP)
+        if (data.player_status) {
+            // Our backend `main.py` stores the character data in GameState. 
+            // In a better approach `api_game_action` should return the raw character object.
+            // For now, let's refetch it if we want it perfectly, or assume it's updated in the session.
+            // Actually, we can fetch state if we need to.
+            API.get('/api/game/state').then(st => {
+                 if (st.characters && st.characters.length > 0) {
+                     state.character = st.characters[0];
+                     updateCharacterPanel();
+                 }
+            });
+        }
+        
+        if (data.inventory) {
+            updateInventoryPanel(data.inventory);
+        }
+
+        // Combat & Logs
+        if (data.logs && data.logs.length > 0) {
+            data.logs.forEach(msg => {
+                if (msg) addMessage('system', '', msg);
+            });
+        }
+        
+        handleCombatStatus(data.combat_status);
+        handleItemPickup(data.pending_item);
+
     } catch (err) {
         showLoading(false);
         addMessage('system', '', `⚠️ Bağlantı hatası: ${err.message}`);

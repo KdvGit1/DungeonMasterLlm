@@ -39,8 +39,8 @@ def _load_model():
             _loaded = True
             return
         
-        # Cihaz belirleme (GPU varsa kullan, yoksa CPU)
-        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        # Cihaz belirleme (CPU)
+        device = torch.device("cpu")
         print(f"⚙️ Çeviri modeli cihazı: {device}")
         
         try:

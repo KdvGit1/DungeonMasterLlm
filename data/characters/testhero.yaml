@@ -1,0 +1,16 @@
+abilities:
+  charisma: 11
+  constitution: 11
+  dexterity: 11
+  intelligence: 11
+  strength: 11
+  wisdom: 11
+armor_class: 10
+background: None
+class: Savaşçı
+hp: 10
+level: 1
+max_hp: 10
+name: testhero
+race: İnsan
+skills: []

@@ -1,0 +1,16 @@
+abilities:
+  charisma: 16
+  constitution: 16
+  dexterity: 16
+  intelligence: 16
+  strength: 16
+  wisdom: 16
+armor_class: 13
+background: Thief that born in wastelands
+class: Hırsız
+hp: 11
+level: 1
+max_hp: 11
+name: kado
+race: İnsan
+skills: []
