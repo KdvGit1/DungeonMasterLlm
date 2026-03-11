@@ -117,12 +117,39 @@ def grant_ability_xp(session_id, player_name, ability, amount=5):
     if current_threshold_idx > prev_threshold_idx:
         leveled_up = True
         print(f"   ⬆️  {ability.capitalize()} eşiği aşıldı! Ability score +1 artacak.")
+        
+        # Karakter statını kalıcı olarak güncelle
+        from game.character_manager import get_character_from_db, save_character_to_db
+        # We need user_id context, but player_name is unique per user in our DB design?
+        # Let's find the user_id from the users table.
+        conn = get_connection()
+        user_row = conn.execute("SELECT id FROM users WHERE username = ?", (player_name,)).fetchone()
+        
+        if user_row:
+            user_id = user_row["id"]
+            char_data = get_character_from_db(user_id)
+            if char_data and "abilities" in char_data:
+                char_data["abilities"][ability] = char_data["abilities"].get(ability, 10) + 1
+                save_character_to_db(user_id, char_data)
+                print(f"   💾 {player_name} {ability} skoru {char_data['abilities'][ability]} olarak kaydedildi.")
+        conn.close()
 
     stats["ability_xp"] = ability_xp
     _save_stats(session_id, player_name, stats)
 
     print(f"   📈 {ability.capitalize()} XP +{amount} → {ability_xp[ability]}")
     return leveled_up
+
+def get_all_xp_data(session_id, player_name):
+    """Frontend'e XP barlarını çizmek için tüm XP verilerini döner."""
+    stats = get_player_stats(session_id, player_name)
+    if not stats:
+        return {"xp": 0, "level": 1, "ability_xp": {}}
+    return {
+        "xp": stats["xp"],
+        "level": stats["level"],
+        "ability_xp": stats.get("ability_xp", {})
+    }
 
 def grant_combat_xp(session_id, player_name, xp_reward):
     """Düşman öldürünce XP ver."""

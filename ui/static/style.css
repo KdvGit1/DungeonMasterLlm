@@ -1093,3 +1093,300 @@ select:focus {
         display: none;
     }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   MULTIPLAYER STYLES
+   ═══════════════════════════════════════════════════════════ */
+
+/* Room Code Display */
+.room-code-big {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    font-weight: 900;
+    letter-spacing: 12px;
+    color: var(--text-gold);
+    text-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+    margin: 1rem 0;
+    padding: 0.5rem 1.5rem;
+    background: rgba(201, 168, 76, 0.08);
+    border: 2px solid var(--border-gold);
+    border-radius: 12px;
+    display: inline-block;
+    animation: pulse 2s infinite;
+}
+
+/* Room Players Grid */
+.room-players-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.room-player-card {
+    background: var(--npc-card-bg);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--border-radius);
+    padding: 1rem 1.5rem;
+    min-width: 160px;
+    text-align: center;
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.4s ease;
+}
+
+.room-player-card.is-me {
+    border-color: var(--border-gold);
+    box-shadow: 0 0 15px rgba(201, 168, 76, 0.15);
+}
+
+.room-player-name {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    color: var(--text-gold);
+    margin-bottom: 0.25rem;
+}
+
+.room-player-meta {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.room-player-user {
+    font-size: 0.7rem;
+    color: rgba(160, 152, 128, 0.5);
+    margin-top: 0.25rem;
+}
+
+/* Card Selected State */
+.card.selected {
+    border-color: var(--border-gold);
+    background: rgba(201, 168, 76, 0.15);
+    box-shadow: 0 0 20px rgba(201, 168, 76, 0.2);
+}
+
+/* Waiting Indicator */
+.waiting-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    background: rgba(201, 168, 76, 0.08);
+    border-top: 1px solid var(--border-subtle);
+    color: var(--text-gold);
+    font-family: var(--font-fantasy);
+    font-size: 0.95rem;
+    z-index: 1;
+    animation: fadeInUp 0.3s ease;
+}
+
+.waiting-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(201, 168, 76, 0.2);
+    border-top-color: var(--border-gold);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Pass Turn Button */
+.btn-pass {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-size: 1.2rem;
+    background: rgba(201, 168, 76, 0.1);
+    border: 1px solid var(--border-subtle);
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--text-gold);
+}
+
+.btn-pass:hover {
+    background: rgba(201, 168, 76, 0.2);
+    border-color: var(--border-gold);
+    transform: scale(1.1);
+}
+
+.btn-pass:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Player Status Cards (left panel) */
+.player-status-card {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--border-radius);
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.75rem;
+    transition: border-color 0.2s;
+}
+
+.player-status-card.is-me {
+    border-color: rgba(201, 168, 76, 0.4);
+    background: rgba(201, 168, 76, 0.05);
+}
+
+.player-status-text {
+    color: var(--text-primary);
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+/* Round Indicator */
+.round-indicator {
+    font-family: var(--font-fantasy);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    background: rgba(201, 168, 76, 0.08);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 0.2rem 0.8rem;
+}
+
+#screen-room .setup-container {
+    width: 640px;
+    max-width: 90vw;
+}
+
+/* ─── Point-Buy Character Creation ───────────────────── */
+
+.point-buy-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.35rem 0;
+}
+
+.point-buy-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.pb-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    border: 1px solid var(--border-subtle);
+    background: rgba(201, 168, 76, 0.15);
+    color: var(--text-gold);
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.pb-btn:hover {
+    background: rgba(201, 168, 76, 0.3);
+    transform: scale(1.1);
+}
+
+.pb-btn:active {
+    transform: scale(0.95);
+}
+
+.pb-score {
+    font-family: var(--font-fantasy);
+    font-size: 1.2rem;
+    min-width: 28px;
+    text-align: center;
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+.pb-cost {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    min-width: 24px;
+    text-align: center;
+}
+
+.point-buy-remaining {
+    margin-top: 0.8rem;
+    padding: 0.5rem 0.8rem;
+    border-radius: 8px;
+    background: rgba(201, 168, 76, 0.08);
+    border: 1px solid var(--border-subtle);
+    font-family: var(--font-fantasy);
+    font-size: 0.95rem;
+    text-align: center;
+    color: var(--text-gold);
+    transition: color 0.3s;
+}
+
+.point-buy-table {
+    margin-top: 0.5rem;
+    padding: 0.4rem 0.6rem;
+    border-radius: 6px;
+    background: rgba(0,0,0,0.15);
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.pb-table-title {
+    font-weight: 600;
+    color: var(--text-gold);
+}
+
+/* ─── Ability XP Bars ───────────────────────────────────── */
+
+.ability-box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 30px; /* Make room for the XP bar */
+}
+
+.ability-xp-container {
+    position: absolute;
+    bottom: 0px;
+    width: 90%;
+    left: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 4px;
+}
+
+.ability-xp-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 2px;
+}
+
+.ability-xp-fill {
+    height: 100%;
+    background: var(--text-gold);
+    transition: width 0.4s ease-out;
+}
+
+.ability-xp-fill.max {
+    background: #4caf50;
+    box-shadow: 0 0 4px #4caf50;
+}
+
+.ability-xp-text {
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+    white-space: nowrap;
+}

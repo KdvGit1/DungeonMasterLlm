@@ -63,6 +63,7 @@ def create_inventory_table(cursor):
         CREATE TABLE IF NOT EXISTS inventory (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             session_id INTEGER NOT NULL,
+            player_name TEXT NOT NULL DEFAULT '',
             item_name TEXT NOT NULL,
             quantity INTEGER DEFAULT 1,
             value INTEGER DEFAULT 0,
@@ -157,6 +158,13 @@ def migrate(conn):
     create_inventory_table(cursor)
     create_player_stats_table(cursor)
     create_quests_table(cursor)
+
+    # inventory tablosuna player_name sütunu ekle (multiplayer için)
+    cursor.execute("PRAGMA table_info(inventory)")
+    inv_columns = [row["name"] for row in cursor.fetchall()]
+    if "player_name" not in inv_columns:
+        cursor.execute("ALTER TABLE inventory ADD COLUMN player_name TEXT NOT NULL DEFAULT ''")
+        print("Migration: inventory.player_name sütunu eklendi.")
 
     conn.commit()
 

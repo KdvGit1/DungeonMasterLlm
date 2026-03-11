@@ -1,0 +1,16 @@
+abilities:
+  charisma: 16
+  constitution: 9
+  dexterity: 9
+  intelligence: 16
+  strength: 9
+  wisdom: 16
+armor_class: 9
+background: Former pervert
+class: Rahip
+hp: 7
+level: 1
+max_hp: 7
+name: Dave
+race: İnsan
+skills: []

@@ -1,7 +1,7 @@
 from rag.retriever import get_relevant_rules
 from game.character_manager import get_character_summary
 from game.npc_manager import get_all_npcs, get_npc_summary_secret
-from game.inventory_manager import format_inventory_for_prompt
+from game.inventory_manager import format_inventory_for_prompt, format_all_inventories_for_prompt
 from game.quest_manager import format_quests_for_prompt
 from game.xp_manager import format_stats_for_prompt
 import config
@@ -44,6 +44,18 @@ RESPONSE FORMAT:
 2. End with what the player sees, hears, or can do next
 """
 
+GM_PERSONA_MULTIPLAYER = """
+MULTIPLAYER RULES (CRITICAL):
+- Multiple players are acting simultaneously in the same world
+- [PLAYER ACTIONS THIS ROUND] lists what each player did this round
+- You MUST address ALL players' actions in a SINGLE response
+- Describe what happens for each player, weaving their actions into one cohesive narrative
+- Players who PASS do nothing — do not narrate actions for them
+- Keep the response concise: maximum 2 sentences per player's action
+- All players share the same world, NPCs, and environment
+- Each player has their OWN separate inventory — check [INVENTORY] sections per player
+"""
+
 GAME_RULES = """
 COMBAT:
 - Initiative: everyone rolls d20 at start, highest goes first
@@ -63,7 +75,7 @@ ABILITY CHECKS:
 # ─── SİSTEM PROMPT OLUŞTUR ───────────────────────────────────────────────────
 
 def build_system_prompt(characters, query, game_state=None, scenario_manager=None,
-                        roll_info=None, session_id=None):
+                        roll_info=None, session_id=None, round_actions=None):
 
     # ── Karakter özetleri ──
     character_section = "[PLAYERS - NEVER RENAME THESE CHARACTERS]\n"
@@ -82,7 +94,14 @@ def build_system_prompt(characters, query, game_state=None, scenario_manager=Non
     # ── Envanter ──
     inventory_section = ""
     if session_id:
-        inventory_section = format_inventory_for_prompt(session_id) + "\n"
+        if characters and len(characters) > 1:
+            # Multiplayer: show all players' inventories
+            player_names = [c["name"] for c in characters]
+            inventory_section = format_all_inventories_for_prompt(session_id, player_names) + "\n"
+        elif characters:
+            inventory_section = format_inventory_for_prompt(session_id, characters[0]["name"]) + "\n"
+        else:
+            inventory_section = format_inventory_for_prompt(session_id) + "\n"
 
     # ── Aktif questler ──
     quest_section = ""
@@ -139,6 +158,17 @@ def build_system_prompt(characters, query, game_state=None, scenario_manager=Non
             f"Narrate the outcome. Do NOT ask for another roll. Do NOT ignore this result.\n\n"
         )
 
+    # ── Round actions (multiplayer) ──
+    round_actions_section = ""
+    if round_actions:
+        round_actions_section = "[PLAYER ACTIONS THIS ROUND]\n"
+        for pname, act in round_actions.items():
+            if act == "__PASS__":
+                round_actions_section += f"- {pname}: PASSES (does nothing this round)\n"
+            else:
+                round_actions_section += f"- {pname}: {act}\n"
+        round_actions_section += "\n"
+
     # ── Dil kuralı ──
     language_rule = "- Respond in English only"
     language_override = ""
@@ -152,13 +182,20 @@ def build_system_prompt(characters, query, game_state=None, scenario_manager=Non
 
     gm_persona_formatted = GM_PERSONA.replace("{language_rule}", language_rule)
 
+    # ── Multiplayer persona ──
+    multiplayer_section = ""
+    if round_actions and len(round_actions) > 0:
+        multiplayer_section = GM_PERSONA_MULTIPLAYER + "\n"
+
     # ── Hepsini birleştir ──
     system_prompt = (
         f"{gm_persona_formatted}\n\n"
+        f"{multiplayer_section}"
         f"{state_section}"
         f"{stats_section}"
         f"{inventory_section}"
         f"{quest_section}"
+        f"{round_actions_section}"
         f"{roll_section}"
         f"{scenario_section}\n"
         f"{character_section}\n"

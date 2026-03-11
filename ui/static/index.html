@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚔️ Dungeon Master AI</title>
-    <meta name="description" content="AI-powered Dungeon Master for D&D adventures">
+    <title>⚔️ Dungeon Master AI — Multiplayer</title>
+    <meta name="description" content="AI-powered Dungeon Master for multiplayer D&D adventures">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;500;600&family=MedievalSharp&display=swap" rel="stylesheet">
@@ -15,36 +15,12 @@
     <!-- Model Status Indicator -->
     <div id="model-status">Model durumu bağlanıyor...</div>
 
-    <!-- ═══ CONFIG SCREEN ═══ -->
-    <div id="screen-config" class="screen active">
-        <div class="setup-container" style="text-align: center;">
-            <div class="login-logo">⚙️</div>
-            <h1 class="login-title">Dungeon Master AI</h1>
-            <p class="login-subtitle">Başlangıç Ayarları</p>
-            <div class="creator-form" style="text-align: left;">
-                <div class="creator-col">
-                    <label>LLM Modeli</label>
-                    <select id="config-llm-model"></select>
-                </div>
-                <div class="creator-col" style="margin-top: 0.5rem">
-                    <label>Çeviri Modeli</label>
-                    <select id="config-translator-model"></select>
-                </div>
-                <div class="creator-col" style="margin-top: 0.5rem">
-                    <label>Hedef Dil (Masaüstü için)</label>
-                    <input type="text" id="config-target-language" placeholder="Örn: Turkish">
-                </div>
-                <button id="btn-save-config" class="btn btn-primary" style="margin-top: 1rem">Kaydet ve Devam Et</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- ═══ LOGIN SCREEN ═══ -->
-    <div id="screen-login" class="screen">
+    <!-- ═══ LOGIN SCREEN (first screen) ═══ -->
+    <div id="screen-login" class="screen active">
         <div class="login-container">
             <div class="login-logo">⚔️</div>
             <h1 class="login-title">Dungeon Master AI</h1>
-            <p class="login-subtitle">Maceranız burada başlıyor</p>
+            <p class="login-subtitle">Multiplayer Macera</p>
             <div class="login-form">
                 <input type="text" id="login-username" placeholder="Kullanıcı adı" autocomplete="off">
                 <input type="password" id="login-password" placeholder="Şifre">
@@ -57,23 +33,54 @@
         </div>
     </div>
 
-    <!-- ═══ SESSION SCREEN ═══ -->
-    <div id="screen-session" class="screen">
-        <div class="setup-container">
-            <h2 class="setup-title">📜 Oturum</h2>
-            <div id="active-session-box" class="setup-box" style="display:none">
-                <p>Aktif oturum: <strong id="active-session-name"></strong></p>
-                <button id="btn-continue-session" class="btn btn-primary">Devam Et</button>
-                <button id="btn-new-session" class="btn btn-secondary">Yeni Oturum</button>
+    <!-- ═══ LOBBY SCREEN ═══ -->
+    <div id="screen-lobby" class="screen">
+        <div class="setup-container" style="text-align: center;">
+            <div class="login-logo">🏠</div>
+            <h1 class="login-title">Çok Oyunculu Lobi</h1>
+            <p class="login-subtitle" id="lobby-welcome"></p>
+
+            <div style="display:flex; gap:1rem; justify-content:center; margin-top:1.5rem; flex-wrap:wrap;">
+                <button id="btn-create-room" class="btn btn-primary" style="font-size:1.1rem; padding:0.8rem 2rem;">
+                    🏰 Oda Oluştur (Host)
+                </button>
+                <div style="display:flex; gap:0.5rem; align-items:center;">
+                    <input type="text" id="join-room-code" placeholder="Oda Kodu" maxlength="4" 
+                           style="width:120px; text-transform:uppercase; text-align:center; font-size:1.2rem; letter-spacing:4px;">
+                    <button id="btn-join-room" class="btn btn-secondary" style="font-size:1.1rem; padding:0.8rem 1.5rem;">
+                        🚪 Katıl
+                    </button>
+                </div>
             </div>
-            <div id="new-session-box" class="setup-box">
-                <input type="text" id="session-name-input" placeholder="Oturum adı">
-                <button id="btn-create-session" class="btn btn-primary">Oluştur</button>
+            <div id="lobby-error" class="error-message" style="margin-top:1rem;"></div>
+        </div>
+    </div>
+
+    <!-- ═══ HOST CONFIG SCREEN (model selection before room creation) ═══ -->
+    <div id="screen-host-config" class="screen">
+        <div class="setup-container" style="text-align: center;">
+            <div class="login-logo">⚙️</div>
+            <h1 class="login-title">Host Ayarları</h1>
+            <p class="login-subtitle">Model ve çeviri ayarları</p>
+            <div class="creator-form" style="text-align: left;">
+                <div class="creator-col">
+                    <label>LLM Modeli</label>
+                    <select id="config-llm-model"></select>
+                </div>
+                <div class="creator-col" style="margin-top: 0.5rem">
+                    <label>Çeviri Modeli</label>
+                    <select id="config-translator-model"></select>
+                </div>
+                <div class="creator-col" style="margin-top: 0.5rem">
+                    <label>Hedef Dil</label>
+                    <input type="text" id="config-target-language" placeholder="Örn: Turkish">
+                </div>
+                <button id="btn-save-config" class="btn btn-primary" style="margin-top: 1rem">Kaydet ve Oda Oluştur</button>
             </div>
         </div>
     </div>
 
-    <!-- ═══ CHARACTER SCREEN ═══ -->
+    <!-- ═══ CHARACTER SELECT ═══ -->
     <div id="screen-character" class="screen">
         <div class="setup-container">
             <h2 class="setup-title">🧙 Karakter Seç</h2>
@@ -81,7 +88,7 @@
             <button id="btn-new-character" class="btn btn-secondary" style="margin-top:1rem">Yeni Karakter Oluştur</button>
         </div>
 
-        <!-- Karakter Oluşturma Formu -->
+        <!-- Character Creator Form -->
         <div id="character-creator" class="setup-container" style="display:none; margin-top:2rem">
             <h2 class="setup-title">⚔️ Karakter Oluştur</h2>
             <div class="creator-form">
@@ -103,12 +110,29 @@
         </div>
     </div>
 
-    <!-- ═══ SCENARIO SCREEN ═══ -->
-    <div id="screen-scenario" class="screen">
-        <div class="setup-container">
-            <h2 class="setup-title">📖 Senaryo Seç</h2>
-            <div id="scenario-list" class="card-grid"></div>
-            <button id="btn-free-play" class="btn btn-secondary" style="margin-top:1rem">Serbest Macera</button>
+    <!-- ═══ ROOM WAITING SCREEN ═══ -->
+    <div id="screen-room" class="screen">
+        <div class="setup-container" style="text-align:center;">
+            <h1 class="login-title">🏰 Oda</h1>
+            <div id="room-code-display" class="room-code-big"></div>
+            <p class="login-subtitle">Bu kodu diğer oyunculara paylaş!</p>
+
+            <div id="room-players-list" class="room-players-grid"></div>
+
+            <!-- Scenario selection (host only) -->
+            <div id="room-scenario-section" style="margin-top:1.5rem; display:none;">
+                <h3 style="color:var(--gold);margin-bottom:0.5rem;">📖 Senaryo</h3>
+                <div id="room-scenario-list" class="card-grid" style="max-width:600px;margin:0 auto;"></div>
+                <button id="btn-room-free-play" class="btn btn-secondary" style="margin-top:0.5rem;">Serbest Macera</button>
+            </div>
+
+            <button id="btn-start-game" class="btn btn-primary" style="margin-top:1.5rem; font-size:1.1rem; padding:0.8rem 3rem; display:none;">
+                ⚔️ Maceraya Başla
+            </button>
+
+            <div id="room-waiting-msg" style="margin-top:1rem; color:var(--text-secondary);">
+                Host'un oyunu başlatmasını bekliyorsunuz...
+            </div>
         </div>
     </div>
 
@@ -119,14 +143,18 @@
         <div id="game-header">
             <h1 id="scenario-title" class="scenario-title">Macera</h1>
             <span id="node-title" class="node-title"></span>
+            <span id="round-indicator" class="round-indicator"></span>
         </div>
 
         <!-- Three Column Layout -->
         <div id="game-layout">
 
-            <!-- LEFT: NPC Panel -->
+            <!-- LEFT: Players + NPC Panel -->
             <aside id="panel-npcs" class="game-panel">
-                <h2 class="panel-title">👥 NPC'ler</h2>
+                <h2 class="panel-title">👥 Oyuncular</h2>
+                <div id="players-status-list" class="panel-content" style="flex:0.6"></div>
+
+                <h2 class="panel-title" style="border-top: 1px solid var(--border-subtle); margin-top:0.5rem;">🧙 NPC'ler</h2>
                 <div id="npc-list" class="panel-content"></div>
             </aside>
 
@@ -135,13 +163,20 @@
                 <div id="chat-bg-overlay"></div>
                 <div id="chat-messages"></div>
                 
-                <!-- Encounters & Item Pickup Modals Area -->
+                <!-- Combat & Item Pickup -->
                 <div id="combat-status-container" style="display:none;" class="combat-status-panel"></div>
                 <div id="item-pickup-container" style="display:none;" class="item-pickup-panel"></div>
+
+                <!-- Waiting indicator -->
+                <div id="waiting-indicator" style="display:none;" class="waiting-indicator">
+                    <div class="waiting-spinner"></div>
+                    <span id="waiting-text">Diğer oyuncular bekleniyor...</span>
+                </div>
 
                 <div id="chat-input-area">
                     <div class="chat-input-row">
                         <input type="text" id="chat-input" placeholder="Ne yapıyorsun?" autocomplete="off">
+                        <button id="btn-pass" class="btn btn-pass" title="Tur Geç">⏭️</button>
                         <button id="btn-send" class="btn btn-send" title="Gönder">⚔️</button>
                     </div>
                     <div id="translation-preview"></div>
