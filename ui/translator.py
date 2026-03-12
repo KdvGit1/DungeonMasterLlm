@@ -1,5 +1,6 @@
 import threading
 import time
+import re
 import config
 
 # ─── GLOBAL STATE ─────────────────────────────────────────────────────────────
@@ -121,7 +122,50 @@ def translate(text, src_lang=LANG_EN, tgt_lang=LANG_TR):
         device = next(_model.parameters()).device # Modelin o anki cihazını al
         _tokenizer.src_lang = src_lang
         
-        # Metni paragraflara bölerek çok uzun GM cevaplarının kesilmesini önleyelim
+        # Yardımcı fonksiyon: Uzun metinleri cümlelere böl
+        def chunk_text(text_to_chunk, max_chars=800):
+            # Önce cümlelere bölmeyi dene
+            sentences = re.split(r'(?<=[.!?])\s+', text_to_chunk)
+            chunks = []
+            
+            for sentence in sentences:
+                sentence = sentence.strip()
+                if not sentence:
+                    continue
+                    
+                if len(sentence) > max_chars:
+                    # Çok uzun cümleyse kelimelere böl
+                    words = sentence.split(" ")
+                    temp_chunk = ""
+                    for word in words:
+                        if len(temp_chunk) + len(word) + 1 <= max_chars:
+                            temp_chunk += (" " if temp_chunk else "") + word
+                        else:
+                            if temp_chunk:
+                                chunks.append(temp_chunk)
+                            temp_chunk = word
+                    if temp_chunk:
+                        chunks.append(temp_chunk)
+                else:
+                    chunks.append(sentence)
+                
+            return chunks
+
+        def translate_chunk(chunk_str):
+            # max_length uyarısını gidermek için modeli max_new_tokens ile çalıştırırken, 
+            # truncation ve padding parametreleri ile de destekliyoruz.
+            inputs = _tokenizer(chunk_str, return_tensors="pt", padding=True, truncation=True, max_length=1024)
+            inputs = {k: v.to(device) for k, v in inputs.items()}
+
+            translated_tokens = _model.generate(
+                **inputs,
+                forced_bos_token_id=_tokenizer.convert_tokens_to_ids(tgt_lang),
+                max_new_tokens=1024,
+                repetition_penalty=1.2,
+                no_repeat_ngram_size=2
+            )
+            return _tokenizer.batch_decode(translated_tokens, skip_special_tokens=True)[0]
+
         paragraphs = text.split('\n')
         translated_paragraphs = []
         
@@ -131,17 +175,14 @@ def translate(text, src_lang=LANG_EN, tgt_lang=LANG_TR):
                 translated_paragraphs.append(p)
                 continue
                 
-            inputs = _tokenizer(p, return_tensors="pt", padding=True, truncation=True, max_length=1024)
-            inputs = {k: v.to(device) for k, v in inputs.items()} # Girdileri aynı cihaza taşı
-
-            translated_tokens = _model.generate(
-                **inputs,
-                forced_bos_token_id=_tokenizer.convert_tokens_to_ids(tgt_lang),
-                max_new_tokens=1024,
-            )
-
-            result = _tokenizer.batch_decode(translated_tokens, skip_special_tokens=True)[0]
-            translated_paragraphs.append(result)
+            chunks = chunk_text(p, max_chars=800)
+            translated_chunks = []
+            
+            for c in chunks:
+                if c.strip():
+                    translated_chunks.append(translate_chunk(c))
+                    
+            translated_paragraphs.append(" ".join(translated_chunks))
 
         return '\n'.join(translated_paragraphs)
 

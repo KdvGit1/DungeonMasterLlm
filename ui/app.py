@@ -306,7 +306,37 @@ def _process_round(room):
         room.round_processing = False
 
 
+# ─── HEAL DETECTION ───────────────────────────────────────────────────────────
+
+_HEAL_PATTERNS = [
+    re.compile(r'\bheal\s+(.+)', re.IGNORECASE),
+    re.compile(r'\bcast\s+(?:a\s+)?heal(?:ing)?\s+(?:spell\s+)?(?:on\s+)?(.+)', re.IGNORECASE),
+    re.compile(r'\biyileştir\s*(.+)', re.IGNORECASE),
+    re.compile(r'\bşifa\s+ver\s*(.+)', re.IGNORECASE),
+    re.compile(r'\bcure\s+(.+)', re.IGNORECASE),
+    re.compile(r'\brestore\s+(.+)', re.IGNORECASE),
+]
+
+
+def _detect_heal_target(action, player_names):
+    """Detect if the action is trying to heal someone. Returns target name or None."""
+    for pattern in _HEAL_PATTERNS:
+        match = pattern.search(action)
+        if match:
+            target_raw = match.group(1).strip().rstrip('.,!?')
+            # Match against known player names
+            for pname in player_names:
+                if pname.lower() in target_raw.lower() or target_raw.lower() in pname.lower():
+                    return pname
+            # If no match, it might be a self-heal
+            return target_raw
+    return None
+
+
 def _process_round_inner(room):
+    from game.xp_manager import get_player_stats, heal
+    import random
+
     gs = room.game_state
     sm = room.scenario_manager
     session_id = room.session_id
@@ -318,6 +348,9 @@ def _process_round_inner(room):
     all_roll_results = {}  # player_name → roll result dict
     all_combat_logs = {}   # player_name → list of log strings
     combined_roll_msgs = []
+
+    # Track if combat ended this round (prevents enemy respawn)
+    combat_ended_this_round = False
 
     for username, action in actions.items():
         char = room.get_character_for_username(username)
@@ -331,6 +364,41 @@ def _process_round_inner(room):
 
         all_combat_logs[player_name] = []
 
+        # ── Check if player is unconscious (HP ≤ 0) ──
+        player_stats = get_player_stats(session_id, player_name)
+        if player_stats and player_stats["hp"] <= 0:
+            all_combat_logs[player_name].append(f"💀 {player_name} is unconscious and cannot act!")
+            # Still save the message for narrative context
+            user_message = f"{player_name} (unconscious): {action}"
+            save_message(session_id, None, "user", user_message)
+            continue
+
+        # ── Heal detection ──
+        heal_target = _detect_heal_target(action, player_names_list)
+        if heal_target:
+            # Check if target exists
+            target_stats = get_player_stats(session_id, heal_target)
+            if target_stats:
+                # Roll d6 + wisdom modifier for heal amount
+                abilities = char.get("abilities", {})
+                wis_mod = get_modifier(abilities.get("wisdom", 10))
+                heal_amount = max(1, random.randint(1, 6) + wis_mod)
+                heal(session_id, heal_target, heal_amount)
+                all_combat_logs[player_name].append(
+                    f"💚 {player_name} heals {heal_target} for {heal_amount} HP!"
+                )
+                grant_general_xp(session_id, player_name, 3, reason="iyileştirme")
+                grant_ability_xp(session_id, player_name, "wisdom", amount=5)
+                user_message = f"{player_name}: {action}"
+                save_message(session_id, None, "user", user_message)
+                save_message(session_id, None, "user",
+                             f"{player_name} heals {heal_target} for {heal_amount} HP.")
+                continue
+            else:
+                all_combat_logs[player_name].append(
+                    f"❌ Healing target '{heal_target}' not found."
+                )
+
         # Item use check
         item_used, item_gm_msg = _handle_item_use(action, player_name, session_id)
         if item_used and item_gm_msg:
@@ -343,15 +411,21 @@ def _process_round_inner(room):
         # Combat check
         roll_result_msg = None
 
-        if gs.is_combat and gs.active_encounter:
+        if gs.is_combat and gs.active_encounter and not combat_ended_this_round:
             attack_msg, damage, enemy_defeated = player_attack(gs, player_name, session_id, {})
             roll_result_msg = attack_msg
             all_combat_logs[player_name].append(attack_msg)
 
             if enemy_defeated:
                 xp = gs.active_encounter.get("xp_reward", 50)
-                grant_combat_xp(session_id, player_name, xp)
+                # Grant combat XP to ALL active players this round
+                for uname, act in actions.items():
+                    if act != "__PASS__":
+                        ch = room.get_character_for_username(uname)
+                        if ch:
+                            grant_combat_xp(session_id, ch["name"], xp)
                 gs.end_encounter()
+                combat_ended_this_round = True
                 all_combat_logs[player_name].append(f"Enemy defeated! +{xp} XP")
             else:
                 enemy_dmg, enemy_msg = enemy_attack(gs, player_name, session_id)
@@ -360,6 +434,9 @@ def _process_round_inner(room):
                     all_combat_logs[player_name].append(enemy_msg)
                     if is_down:
                         all_combat_logs[player_name].append(f"💀 {player_name} has fallen unconscious!")
+        elif combat_ended_this_round:
+            # Combat just ended this round — skip combat for remaining players
+            all_combat_logs[player_name].append(f"⚔️ Combat has ended. {player_name}'s action is narrative only.")
         else:
             combat_result = check_combat_start(action)
             if combat_result.get("combat"):
@@ -370,8 +447,13 @@ def _process_round_inner(room):
 
                 if enemy_defeated:
                     xp = gs.active_encounter.get("xp_reward", 50)
-                    grant_combat_xp(session_id, player_name, xp)
+                    for uname, act in actions.items():
+                        if act != "__PASS__":
+                            ch = room.get_character_for_username(uname)
+                            if ch:
+                                grant_combat_xp(session_id, ch["name"], xp)
                     gs.end_encounter()
+                    combat_ended_this_round = True
                 else:
                     enemy_dmg, enemy_msg = enemy_attack(gs, player_name, session_id)
                     if enemy_dmg > 0:
@@ -931,13 +1013,16 @@ def api_room_start():
     npcs = get_all_npcs(session_id)
     npcs_clean = [{"name": n["name"], "public": translator.translate_npc_data(n["public"])} for n in npcs]
 
-    # Per-player inventories and statuses
+    # Per-player inventories, statuses, and XP
+    from game.xp_manager import get_all_xp_data
     all_inventories = {}
     all_statuses = {}
+    all_xp = {}
     for uname, char in room.players.items():
         pname = char["name"]
         all_inventories[pname] = get_inventory(session_id, pname)
         all_statuses[pname] = format_player_status(session_id, pname)
+        all_xp[pname] = get_all_xp_data(session_id, pname)
 
     # Store as last_round_result so non-host players get it via polling
     start_result = {
@@ -949,6 +1034,7 @@ def api_room_start():
         "node_title": sm.current_node.get("title", "") if sm and sm.current_node else "",
         "inventories": all_inventories,
         "player_statuses": all_statuses,
+        "xp_data": all_xp,
         "round_number": room.round_number,
     }
     room.last_round_result = start_result

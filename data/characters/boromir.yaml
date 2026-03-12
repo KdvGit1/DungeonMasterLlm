@@ -1,0 +1,16 @@
+abilities:
+  charisma: 10
+  constitution: 13
+  dexterity: 16
+  intelligence: 13
+  strength: 16
+  wisdom: 9
+armor_class: 13
+background: Gondorian Warrior
+class: Savaşçı
+hp: 11
+level: 1
+max_hp: 11
+name: Boromir
+race: İnsan
+skills: []

@@ -9,10 +9,10 @@ AVAILABLE_TRANSLATOR_MODELS = {
     "recommended_model": "Emilio407/nllb-200-1.3B-4bit"
 }
 
-translator_model = 'none'  # default
-target_language = 'English'  # default
+translator_model = 'Emilio407/nllb-200-1.3B-4bit'  # default
+target_language = 'Turkish'  # default
 
-model = 'qwen3.5:2b-q4_K_M'
+model = 'qwen3.5:9b'
 base_url = 'http://localhost:11434'
 context_length = 32768
 temp = 0.6

@@ -655,9 +655,10 @@ function initGameScreen(gameData) {
     addDualMessage('gm', '🧙 GM', gameData.gm_response_tr, gameData.gm_response);
     updateNpcPanel(gameData.npcs || []);
     updateAllPlayersStatus(gameData.player_statuses || {});
-    updateCharacterPanel();
-
+    // Update character panel with XP data if available
     const myName = state.character ? state.character.name : '';
+    const myXpData = (gameData.xp_data && gameData.xp_data[myName]) ? gameData.xp_data[myName] : null;
+    updateCharacterPanel(myXpData);
     if (gameData.inventories && gameData.inventories[myName]) {
         updateInventoryPanel(gameData.inventories[myName]);
     }
@@ -710,6 +711,11 @@ function handleRoundResult(result) {
 
     handleCombatStatus(result.combat_status);
     updateRoundIndicator();
+
+    // Update character panel with fresh XP data
+    if (result.xp_data && result.xp_data[myName]) {
+        updateCharacterPanel(result.xp_data[myName]);
+    }
 
     enableInput();
 }

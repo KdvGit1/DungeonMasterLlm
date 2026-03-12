@@ -90,6 +90,7 @@ def player_attack(game_state, player_name, session_id, user):
     """
     from game.dice import d20, get_modifier
     from db.session_manager import save_message
+    from game.xp_manager import grant_ability_xp
 
     encounter = game_state.active_encounter
     char = next((c for c in game_state.characters if c['name'] == player_name), game_state.characters[0])
@@ -119,6 +120,10 @@ def player_attack(game_state, player_name, session_id, user):
         hit_label = "HIT"
         print(f"   ✅ İSABET! Hasar: {damage}")
 
+    # Grant strength XP on successful hits
+    if damage > 0:
+        grant_ability_xp(session_id, player_name, "strength", amount=5)
+
     # Düşman HP güncelle
     enemy_defeated = False
     if damage > 0:
@@ -143,7 +148,7 @@ def player_attack(game_state, player_name, session_id, user):
     db_msg = f"{player_name} attacks {encounter['enemy_name']}: roll {attack_roll}+{str_mod}={attack_total} vs AC {ac} — {hit_label}"
     if damage > 0:
         db_msg += f", {damage} damage"
-    save_message(session_id, user.get("id"), "user", db_msg)
+    save_message(session_id, user.get("id") if user else None, "user", db_msg)
 
     return roll_message, damage, enemy_defeated
 
