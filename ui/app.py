@@ -32,6 +32,7 @@ from game.npc_extractor import extract_npcs_from_response
 from game.scenario_manager import ScenarioManager
 from game.combat import check_combat_start, player_attack, enemy_attack, format_encounter_status
 from game.inventory_manager import use_item, add_item, get_pickup_dc, get_inventory
+from game.skill_data import get_skills_for_class, get_initial_skill_levels, get_all_skill_info, get_skill_by_id, calculate_skill_damage, calculate_skill_heal
 from game.xp_manager import init_player_stats, grant_general_xp, grant_ability_xp, grant_combat_xp, apply_damage, add_gold, format_player_status, grant_quest_rewards
 from game.quest_manager import init_quests, check_node_quests
 from game.event_parser import parse_gm_events
@@ -306,31 +307,7 @@ def _process_round(room):
         room.round_processing = False
 
 
-# ─── HEAL DETECTION ───────────────────────────────────────────────────────────
-
-_HEAL_PATTERNS = [
-    re.compile(r'\bheal\s+(.+)', re.IGNORECASE),
-    re.compile(r'\bcast\s+(?:a\s+)?heal(?:ing)?\s+(?:spell\s+)?(?:on\s+)?(.+)', re.IGNORECASE),
-    re.compile(r'\biyileştir\s*(.+)', re.IGNORECASE),
-    re.compile(r'\bşifa\s+ver\s*(.+)', re.IGNORECASE),
-    re.compile(r'\bcure\s+(.+)', re.IGNORECASE),
-    re.compile(r'\brestore\s+(.+)', re.IGNORECASE),
-]
-
-
-def _detect_heal_target(action, player_names):
-    """Detect if the action is trying to heal someone. Returns target name or None."""
-    for pattern in _HEAL_PATTERNS:
-        match = pattern.search(action)
-        if match:
-            target_raw = match.group(1).strip().rstrip('.,!?')
-            # Match against known player names
-            for pname in player_names:
-                if pname.lower() in target_raw.lower() or target_raw.lower() in pname.lower():
-                    return pname
-            # If no match, it might be a self-heal
-            return target_raw
-    return None
+# ─── HEAL DETECTION KALDIRILDI — Artık skill butonu kullanılıyor ──────────────
 
 
 def _process_round_inner(room):
@@ -368,36 +345,9 @@ def _process_round_inner(room):
         player_stats = get_player_stats(session_id, player_name)
         if player_stats and player_stats["hp"] <= 0:
             all_combat_logs[player_name].append(f"💀 {player_name} is unconscious and cannot act!")
-            # Still save the message for narrative context
             user_message = f"{player_name} (unconscious): {action}"
             save_message(session_id, None, "user", user_message)
             continue
-
-        # ── Heal detection ──
-        heal_target = _detect_heal_target(action, player_names_list)
-        if heal_target:
-            # Check if target exists
-            target_stats = get_player_stats(session_id, heal_target)
-            if target_stats:
-                # Roll d6 + wisdom modifier for heal amount
-                abilities = char.get("abilities", {})
-                wis_mod = get_modifier(abilities.get("wisdom", 10))
-                heal_amount = max(1, random.randint(1, 6) + wis_mod)
-                heal(session_id, heal_target, heal_amount)
-                all_combat_logs[player_name].append(
-                    f"💚 {player_name} heals {heal_target} for {heal_amount} HP!"
-                )
-                grant_general_xp(session_id, player_name, 3, reason="iyileştirme")
-                grant_ability_xp(session_id, player_name, "wisdom", amount=5)
-                user_message = f"{player_name}: {action}"
-                save_message(session_id, None, "user", user_message)
-                save_message(session_id, None, "user",
-                             f"{player_name} heals {heal_target} for {heal_amount} HP.")
-                continue
-            else:
-                all_combat_logs[player_name].append(
-                    f"❌ Healing target '{heal_target}' not found."
-                )
 
         # Item use check
         item_used, item_gm_msg = _handle_item_use(action, player_name, session_id)
@@ -563,16 +513,25 @@ def _process_round_inner(room):
     npcs = get_all_npcs(session_id)
     npcs_clean = [{"name": n["name"], "public": translator.translate_npc_data(n["public"])} for n in npcs]
 
-    # Build per-player inventory, status, and XP
+    # Build per-player inventory, status, XP, and skills
     from game.xp_manager import get_all_xp_data
     all_inventories = {}
     all_statuses = {}
     all_xp = {}
+    all_skills = {}
+    dead_players = []
     for uname, char in room.players.items():
         pname = char["name"]
         all_inventories[pname] = get_inventory(session_id, pname)
         all_statuses[pname] = format_player_status(session_id, pname)
         all_xp[pname] = get_all_xp_data(session_id, pname)
+        all_skills[pname] = get_all_skill_info(char.get("class", ""), char.get("skill_levels", {}))
+        # Check if player is dead
+        pstats = get_player_stats(session_id, pname)
+        if pstats and pstats["hp"] <= 0:
+            dead_players.append(pname)
+
+    all_dead = len(dead_players) == len(room.players) and len(room.players) > 0
 
     # Combat status
     combat_status = None
@@ -587,12 +546,15 @@ def _process_round_inner(room):
         "inventories": all_inventories,
         "player_statuses": all_statuses,
         "xp_data": all_xp,
+        "skills": all_skills,
         "rolls": all_roll_results,
         "combat_logs": all_combat_logs,
         "events": events,
         "combat_status": combat_status,
         "round_number": room.round_number,
         "player_actions": round_actions_for_prompt,
+        "dead_players": dead_players,
+        "all_dead": all_dead,
     }
     if transition_info:
         result["transition"] = transition_info
@@ -754,6 +716,8 @@ def api_create_character():
     max_hp = selected_class["hp_dice"] + con_modifier
     max_hp = max(max_hp, 1)
 
+    skill_levels = get_initial_skill_levels(selected_class["display"])
+
     character = {
         "name": name,
         "race": selected_race["display"],
@@ -763,7 +727,7 @@ def api_create_character():
         "hp": max_hp,
         "max_hp": max_hp,
         "armor_class": 10 + (final_abilities["dexterity"] - 10) // 2,
-        "skills": [],
+        "skill_levels": skill_levels,
         "background": background,
     }
 
@@ -773,7 +737,10 @@ def api_create_character():
     with open(filepath, "w", encoding="utf-8") as f:
         _yaml.dump(character, f, allow_unicode=True, default_flow_style=False)
 
-    return jsonify({"success": True, "character": character, "filename": filename})
+    # Include skill info in response
+    skills_info = get_all_skill_info(selected_class["display"], skill_levels)
+
+    return jsonify({"success": True, "character": character, "filename": filename, "skills": skills_info})
 
 
 # ─── TRANSLATOR ───────────────────────────────────────────────────────────────
@@ -1063,6 +1030,14 @@ def api_game_action():
         if not action:
             return jsonify({"error": "Eylem boş olamaz"}), 400
 
+        # Dead player check
+        char = room.get_character_for_username(username)
+        if char:
+            from game.xp_manager import get_player_stats
+            pstats = get_player_stats(room.session_id, char["name"])
+            if pstats and pstats["hp"] <= 0:
+                return jsonify({"error": "Karakteriniz öldü! Aksiyon gönderemezsiniz.", "dead": True}), 400
+
         room.submit_action(username, action)
 
         if room.all_actions_submitted():
@@ -1096,6 +1071,14 @@ def api_game_pass():
         return jsonify({"error": "Oda bulunamadı"}), 404
     if username not in room.players:
         return jsonify({"error": "Bu odada değilsiniz"}), 403
+
+    # Dead player check
+    char = room.get_character_for_username(username)
+    if char:
+        from game.xp_manager import get_player_stats
+        pstats = get_player_stats(room.session_id, char["name"])
+        if pstats and pstats["hp"] <= 0:
+            return jsonify({"error": "Karakteriniz öldü! Tur geçemezsiniz.", "dead": True}), 400
 
     room.pass_turn(username)
 
@@ -1139,6 +1122,303 @@ def api_game_poll():
         result["round_complete"] = False
 
     return jsonify(result)
+
+
+# ─── SKILL SYSTEM ─────────────────────────────────────────────────────────────
+
+@app.route("/api/game/skill", methods=["POST"])
+def api_game_skill():
+    """Player uses a combat skill during their turn."""
+    try:
+        data = request.json
+        room_code = data.get("room_code", "").strip().upper()
+        username = data.get("username", "").strip()
+        skill_id = data.get("skill_id", "").strip()
+
+        room = get_room(room_code)
+        if not room:
+            return jsonify({"error": "Oda bulunamadı"}), 404
+        if not room.game_started:
+            return jsonify({"error": "Oyun henüz başlamadı"}), 400
+
+        char = room.get_character_for_username(username)
+        if not char:
+            return jsonify({"error": "Karakter bulunamadı"}), 404
+
+        gs = room.game_state
+        session_id = room.session_id
+        player_name = char["name"]
+
+        # Dead check
+        from game.xp_manager import get_player_stats
+        pstats = get_player_stats(session_id, player_name)
+        if pstats and pstats["hp"] <= 0:
+            return jsonify({"error": "Karakteriniz öldü!", "dead": True}), 400
+
+        # Must be in combat
+        if not gs.is_combat or not gs.active_encounter:
+            return jsonify({"error": "Savaş aktif değil!"}), 400
+
+        # Find skill
+        class_name = char.get("class", "")
+        skill = get_skill_by_id(class_name, skill_id)
+        if not skill:
+            return jsonify({"error": "Skill bulunamadı"}), 404
+        if skill.get("base_heal") is not None and "base_damage" not in skill:
+            return jsonify({"error": "Bu bir heal skill'i, saldırı için kullanılamaz"}), 400
+
+        skill_levels = char.get("skill_levels", {})
+        skill_level = skill_levels.get(skill_id, 1)
+        abilities = char.get("abilities", {})
+        ability_score = abilities.get(skill["ability"], 10)
+
+        # Roll d20 + ability modifier vs DC
+        from game.dice import d20, get_modifier
+        modifier = get_modifier(ability_score)
+        roll_result = d20()
+        total = roll_result + modifier
+        dc = skill["dc"]
+
+        if roll_result == 20:
+            success = True
+            outcome = "CRITICAL SUCCESS"
+        elif roll_result == 1:
+            success = False
+            outcome = "CRITICAL FAILURE"
+        elif total >= dc:
+            success = True
+            outcome = "SUCCESS"
+        else:
+            success = False
+            outcome = "FAILURE"
+
+        damage = 0
+        enemy_defeated = False
+        encounter = gs.active_encounter
+
+        if success:
+            damage = calculate_skill_damage(skill, skill_level, ability_score)
+            if roll_result == 20:
+                damage *= 2  # Critical doubles damage
+            encounter["hp"] = max(0, encounter["hp"] - damage)
+            if encounter["hp"] <= 0:
+                enemy_defeated = True
+                xp = encounter.get("xp_reward", 50)
+                grant_combat_xp(session_id, player_name, xp)
+                gs.end_encounter()
+            grant_ability_xp(session_id, player_name, skill["ability"], amount=5)
+
+        grant_general_xp(session_id, player_name, 2, reason="skill kullanıldı")
+
+        # Save to DB
+        from db.session_manager import save_message
+        db_msg = (f"{player_name} uses {skill['name_en']}: "
+                  f"roll {roll_result}+{modifier}={total} vs DC {dc} — {outcome}")
+        if damage > 0:
+            db_msg += f", {damage} damage"
+        save_message(session_id, None, "user", db_msg)
+
+        # Also submit this as the player's round action
+        action_text = f"[SKILL: {skill['name_en']}] {outcome}"
+        if damage > 0:
+            action_text += f" — {damage} damage"
+        room.submit_action(username, action_text)
+
+        # Enemy counter-attack if still alive and hit
+        enemy_counter = None
+        if not enemy_defeated and gs.is_combat and gs.active_encounter:
+            enemy_dmg, enemy_msg = enemy_attack(gs, player_name, session_id)
+            if enemy_dmg > 0:
+                is_down, _ = apply_damage(session_id, player_name, enemy_dmg)
+                enemy_counter = {
+                    "damage": enemy_dmg,
+                    "message": enemy_msg,
+                    "player_down": is_down,
+                }
+
+        # Updated status
+        player_status = format_player_status(session_id, player_name)
+        combat_status = gs.active_encounter if gs.is_combat and gs.active_encounter else None
+
+        # Check if round should be processed
+        round_result = None
+        if room.all_actions_submitted():
+            room.round_processing = True
+            round_result = _process_round(room)
+
+        return jsonify({
+            "success": True,
+            "skill_name": skill["name"],
+            "roll": roll_result,
+            "modifier": modifier,
+            "total": total,
+            "dc": dc,
+            "outcome": outcome,
+            "damage": damage,
+            "enemy_defeated": enemy_defeated,
+            "enemy_counter": enemy_counter,
+            "player_status": player_status,
+            "combat_status": combat_status,
+            "round_result": round_result,
+        })
+
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({"error": f"Skill hatası: {str(e)}"}), 500
+
+
+@app.route("/api/game/heal", methods=["POST"])
+def api_game_heal():
+    """Player uses their heal skill (instant, not turn-based)."""
+    try:
+        data = request.json
+        room_code = data.get("room_code", "").strip().upper()
+        username = data.get("username", "").strip()
+        target_player = data.get("target_player", "").strip()
+
+        room = get_room(room_code)
+        if not room:
+            return jsonify({"error": "Oda bulunamadı"}), 404
+
+        char = room.get_character_for_username(username)
+        if not char:
+            return jsonify({"error": "Karakter bulunamadı"}), 404
+
+        session_id = room.session_id
+        player_name = char["name"]
+
+        # Dead check — dead players can't heal
+        from game.xp_manager import get_player_stats, heal
+        pstats = get_player_stats(session_id, player_name)
+        if pstats and pstats["hp"] <= 0:
+            return jsonify({"error": "Karakteriniz öldü! İyileştirme yapamazsınız.", "dead": True}), 400
+
+        # Get heal skill
+        class_name = char.get("class", "")
+        skills_data = get_skills_for_class(class_name)
+        if not skills_data:
+            return jsonify({"error": "Skill verisi bulunamadı"}), 404
+        heal_skill = skills_data["heal"]
+
+        skill_levels = char.get("skill_levels", {})
+        skill_level = skill_levels.get(heal_skill["id"], 1)
+        abilities = char.get("abilities", {})
+        ability_score = abilities.get(heal_skill["ability"], 10)
+
+        heal_amount = calculate_skill_heal(heal_skill, skill_level, ability_score)
+
+        healed_players = []
+        revived_players = []
+
+        if heal_skill.get("mass"):
+            # Mass heal — heal all players
+            for uname, pchar in room.players.items():
+                pname = pchar["name"]
+                before = get_player_stats(session_id, pname)
+                was_dead = before and before["hp"] <= 0
+                heal(session_id, pname, heal_amount)
+                healed_players.append({"name": pname, "amount": heal_amount})
+                if was_dead:
+                    after = get_player_stats(session_id, pname)
+                    if after and after["hp"] > 0:
+                        revived_players.append(pname)
+        else:
+            # Single target heal
+            if not target_player:
+                return jsonify({"error": "Hedef oyuncu seçilmedi"}), 400
+            target_stats = get_player_stats(session_id, target_player)
+            if not target_stats:
+                return jsonify({"error": f"Hedef '{target_player}' bulunamadı"}), 404
+            was_dead = target_stats["hp"] <= 0
+            heal(session_id, target_player, heal_amount)
+            healed_players.append({"name": target_player, "amount": heal_amount})
+            if was_dead:
+                after = get_player_stats(session_id, target_player)
+                if after and after["hp"] > 0:
+                    revived_players.append(target_player)
+
+        # XP
+        grant_general_xp(session_id, player_name, 3, reason="iyileştirme")
+        grant_ability_xp(session_id, player_name, heal_skill["ability"], amount=5)
+
+        # Save message
+        from db.session_manager import save_message
+        if heal_skill.get("mass"):
+            save_message(session_id, None, "user",
+                         f"{player_name} uses {heal_skill['name_en']} — heals ALL players for {heal_amount} HP!")
+        else:
+            save_message(session_id, None, "user",
+                         f"{player_name} uses {heal_skill['name_en']} on {target_player} for {heal_amount} HP.")
+
+        # Updated statuses
+        all_statuses = {}
+        for uname, pchar in room.players.items():
+            pname = pchar["name"]
+            all_statuses[pname] = format_player_status(session_id, pname)
+
+        return jsonify({
+            "success": True,
+            "heal_skill_name": heal_skill["name"],
+            "heal_amount": heal_amount,
+            "healed_players": healed_players,
+            "revived_players": revived_players,
+            "mass": heal_skill.get("mass", False),
+            "player_statuses": all_statuses,
+        })
+
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({"error": f"Heal hatası: {str(e)}"}), 500
+
+
+@app.route("/api/game/upgrade-skill", methods=["POST"])
+def api_upgrade_skill():
+    """Player upgrades a skill on level up."""
+    try:
+        data = request.json
+        room_code = data.get("room_code", "").strip().upper()
+        username = data.get("username", "").strip()
+        skill_id = data.get("skill_id", "").strip()
+
+        room = get_room(room_code)
+        if not room:
+            return jsonify({"error": "Oda bulunamadı"}), 404
+
+        char = room.get_character_for_username(username)
+        if not char:
+            return jsonify({"error": "Karakter bulunamadı"}), 404
+
+        # Verify skill exists
+        class_name = char.get("class", "")
+        skill = get_skill_by_id(class_name, skill_id)
+        if not skill:
+            return jsonify({"error": "Skill bulunamadı"}), 404
+
+        # Upgrade skill level (max 5)
+        skill_levels = char.get("skill_levels", {})
+        current_level = skill_levels.get(skill_id, 1)
+        if current_level >= 5:
+            return jsonify({"error": "Bu skill zaten maksimum seviyede!"}), 400
+
+        skill_levels[skill_id] = current_level + 1
+        char["skill_levels"] = skill_levels
+
+        # Return updated skills info
+        skills_info = get_all_skill_info(class_name, skill_levels)
+
+        return jsonify({
+            "success": True,
+            "skill_id": skill_id,
+            "new_level": current_level + 1,
+            "skills": skills_info,
+        })
+
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({"error": f"Upgrade hatası: {str(e)}"}), 500
 
 
 @app.route("/api/game/pickup", methods=["POST"])

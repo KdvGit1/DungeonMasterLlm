@@ -3,6 +3,7 @@
 import os
 import yaml
 import config
+from game.skill_data import get_initial_skill_levels, get_all_skill_info
 
 # ─── SABİTLER ──────────────────────────────────────────────
 
@@ -245,6 +246,9 @@ def create_character():
     max_hp = selected_class["hp_dice"] + con_modifier
     max_hp = max(max_hp, 1)  # minimum 1 HP
 
+    # ── Skill'leri ata ──
+    skill_levels = get_initial_skill_levels(selected_class["display"])
+
     # ── Karakter dict'i oluştur ──
     character = {
         "name": name,
@@ -255,7 +259,7 @@ def create_character():
         "hp": max_hp,
         "max_hp": max_hp,
         "armor_class": 10 + (final_abilities["dexterity"] - 10) // 2,
-        "skills": [],
+        "skill_levels": skill_levels,
         "background": background
     }
 

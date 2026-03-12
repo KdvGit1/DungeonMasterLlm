@@ -33,8 +33,11 @@ const state = {
     lastRoundNumber: -1,
     pollTimer: null,
     hasSubmitted: false,
-    // Track which player submissions we've already displayed this round
     displayedSubmissions: new Set(),
+    skills: [],         // Current player's skill list from backend
+    inCombat: false,     // Whether combat is active
+    isDead: false,       // Whether current player is dead
+    previousLevel: 1,    // Track level for upgrade detection
 };
 
 /* ─── POINT-BUY COST TABLE ──────────────────────────────── */
@@ -667,6 +670,12 @@ function initGameScreen(gameData) {
     showWaiting(false);
     enableInput();
     $('#chat-input').focus();
+
+    // Skills
+    if (gameData.skills && gameData.skills[myName]) {
+        state.skills = gameData.skills[myName];
+    }
+    updateSkillPanel();
 }
 
 function handleRoundResult(result) {
@@ -713,11 +722,45 @@ function handleRoundResult(result) {
     updateRoundIndicator();
 
     // Update character panel with fresh XP data
-    if (result.xp_data && result.xp_data[myName]) {
-        updateCharacterPanel(result.xp_data[myName]);
+    const myXpData = (result.xp_data && result.xp_data[myName]) ? result.xp_data[myName] : null;
+    if (myXpData) {
+        updateCharacterPanel(myXpData);
+        // Detect level up
+        if (myXpData.level > state.previousLevel) {
+            state.previousLevel = myXpData.level;
+            addMessage('system', '', `⬆️ SEVİYE ATLADIN! Seviye ${myXpData.level}!`);
+            showUpgradeModal();
+        }
     }
 
-    enableInput();
+    // Update skills from round result
+    if (result.skills && result.skills[myName]) {
+        state.skills = result.skills[myName];
+    }
+
+    // Combat status & skill panel
+    state.inCombat = !!(result.combat_status);
+    updateSkillPanel();
+
+    // Dead player check
+    if (result.dead_players && result.dead_players.includes(myName)) {
+        state.isDead = true;
+        $('#chat-input-area').classList.add('dead');
+        addMessage('system', '', '💀 Karakteriniz öldü! Aksiyon gönderemezsiniz.');
+        disableInput();
+    } else {
+        state.isDead = false;
+        $('#chat-input-area').classList.remove('dead');
+        enableInput();
+    }
+
+    // All dead → death screen
+    if (result.all_dead) {
+        showDeathScreen();
+        return;
+    }
+
+    if (!state.isDead) enableInput();
 }
 
 function updateSubmissionStatus(submission) {
@@ -763,11 +806,15 @@ function updateRoundIndicator() {
 }
 
 function enableInput() {
+    if (state.isDead) return; // Don't enable input for dead players
     state.sending = false;
     state.hasSubmitted = false;
     $('#btn-send').disabled = false;
     $('#btn-pass').disabled = false;
+    $('#btn-heal').disabled = false;
     $('#chat-input').disabled = false;
+    // Enable skill buttons
+    $$('.skill-btn').forEach(b => b.disabled = false);
     $('#chat-input').focus();
 }
 
@@ -776,7 +823,10 @@ function disableInput() {
     state.hasSubmitted = true;
     $('#btn-send').disabled = true;
     $('#btn-pass').disabled = true;
+    $('#btn-heal').disabled = true;
     $('#chat-input').disabled = true;
+    // Disable skill buttons
+    $$('.skill-btn').forEach(b => b.disabled = true);
 }
 
 /* ─── Messages ──────────────────────────────────────────── */
@@ -1088,9 +1138,10 @@ chatInput.addEventListener('keydown', (e) => {
 });
 
 $('#btn-pass').addEventListener('click', passTurn);
+$('#btn-heal').addEventListener('click', openHealModal);
 
 async function sendAction() {
-    if (state.sending || state.hasSubmitted) return;
+    if (state.sending || state.hasSubmitted || state.isDead) return;
 
     const actionTr = chatInput.value.trim();
     if (!actionTr) return;
@@ -1117,7 +1168,12 @@ async function sendAction() {
 
         if (data.error) {
             addMessage('system', '', `⚠️ ${data.error}`);
-            enableInput();
+            if (data.dead) {
+                state.isDead = true;
+                $('#chat-input-area').classList.add('dead');
+            } else {
+                enableInput();
+            }
             return;
         }
 
@@ -1139,7 +1195,7 @@ async function sendAction() {
 }
 
 async function passTurn() {
-    if (state.sending || state.hasSubmitted) return;
+    if (state.sending || state.hasSubmitted || state.isDead) return;
 
     disableInput();
 
@@ -1229,6 +1285,292 @@ document.addEventListener('click', () => {
         bgMusic.play().catch(() => { });
     }
 }, { once: true });
+
+/* ═══════════════════════════════════════════════════════════
+   SKILL SYSTEM
+   ═══════════════════════════════════════════════════════════ */
+
+function updateSkillPanel() {
+    const panel = $('#skill-buttons-panel');
+    if (!panel) return;
+
+    if (!state.skills || state.skills.length === 0 || !state.inCombat) {
+        panel.style.display = 'none';
+        return;
+    }
+
+    panel.style.display = 'flex';
+    panel.innerHTML = '';
+
+    state.skills.forEach(skill => {
+        if (skill.type === 'heal') return; // Heal is separate button
+        const btn = document.createElement('button');
+        btn.className = `skill-btn ${skill.type}`;
+        btn.disabled = state.isDead || state.hasSubmitted;
+        btn.innerHTML = `${skill.emoji} ${skill.name} <span class="skill-level">Lv${skill.level}</span>`;
+        btn.title = `${skill.description}\nDC: ${skill.dc} | ${skill.dice}+${skill.ability.toUpperCase()}`;
+        btn.addEventListener('click', () => useSkill(skill.id));
+        panel.appendChild(btn);
+    });
+}
+
+async function useSkill(skillId) {
+    if (state.sending || state.hasSubmitted || state.isDead) return;
+    disableInput();
+
+    const myName = state.character ? state.character.name : 'Oyuncu';
+    const skill = state.skills.find(s => s.id === skillId);
+    addMessage('system', '', `${skill ? skill.emoji : '⚔️'} ${myName} ${skill ? skill.name : 'Skill'} kullanıyor...`);
+    state.displayedSubmissions.add(myName);
+
+    try {
+        const data = await API.post('/api/game/skill', {
+            room_code: state.roomCode,
+            username: state.username,
+            skill_id: skillId,
+        });
+
+        if (data.error) {
+            addMessage('system', '', `⚠️ ${data.error}`);
+            if (data.dead) {
+                state.isDead = true;
+                $('#chat-input-area').classList.add('dead');
+            } else {
+                enableInput();
+            }
+            return;
+        }
+
+        // Show roll result
+        addRollMessage({
+            ability: skill ? skill.ability : 'strength',
+            dc: data.dc,
+            roll: data.roll,
+            modifier: data.modifier,
+            total: data.total,
+            outcome: data.outcome,
+        }, myName);
+
+        // Show damage
+        if (data.damage > 0) {
+            addMessage('system', '', `💥 ${data.skill_name}: ${data.damage} hasar!`);
+        } else {
+            addMessage('system', '', `💨 ${data.skill_name} ıskaladı!`);
+        }
+
+        // Enemy counter attack
+        if (data.enemy_counter) {
+            addMessage('system', '', `👹 Düşman saldırıyor! ${data.enemy_counter.damage} hasar!`);
+            if (data.enemy_counter.player_down) {
+                addMessage('system', '', `💀 ${myName} yere yıkıldı!`);
+                state.isDead = true;
+                $('#chat-input-area').classList.add('dead');
+            }
+        }
+
+        // Enemy defeated
+        if (data.enemy_defeated) {
+            addMessage('system', '', `🎉 Düşman yenildi!`);
+            state.inCombat = false;
+            updateSkillPanel();
+        }
+
+        // Update combat status
+        handleCombatStatus(data.combat_status);
+
+        // Update player status
+        if (data.player_status) {
+            updateAllPlayersStatus({[myName]: data.player_status});
+        }
+
+        // If round completed from this action
+        if (data.round_result) {
+            state.lastRoundNumber = data.round_result.round_number;
+            state.hasSubmitted = false;
+            state.displayedSubmissions.clear();
+            handleRoundResult(data.round_result);
+        } else {
+            showWaiting(true, 'Diğer oyuncular bekleniyor...');
+        }
+
+    } catch (err) {
+        addMessage('system', '', `⚠️ Skill hatası: ${err.message}`);
+        enableInput();
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   HEAL SYSTEM
+   ═══════════════════════════════════════════════════════════ */
+
+function openHealModal() {
+    if (state.isDead) return;
+
+    // Check if mass heal (Cleric)
+    const healSkill = state.skills.find(s => s.type === 'heal');
+    if (healSkill && healSkill.mass) {
+        // Mass heal — no target needed, execute directly
+        executeHeal('');
+        return;
+    }
+
+    // Show target selection modal
+    const modal = $('#heal-modal');
+    const list = $('#heal-target-list');
+    list.innerHTML = '';
+
+    // Get player names from the status panel
+    const playerCards = $$('.player-status-card');
+    playerCards.forEach(card => {
+        const text = card.querySelector('.player-status-text');
+        if (text) {
+            // Extract player name from status text (format: "Name — Race Class ...")
+            const fullText = text.textContent;
+            const name = fullText.split('—')[0].trim().split(' ')[0].trim();
+            if (name) {
+                const btn = document.createElement('button');
+                btn.className = 'heal-target-btn';
+                btn.innerHTML = `<span>💚 ${escapeHtml(name)}</span>`;
+                btn.addEventListener('click', () => {
+                    closeHealModal();
+                    executeHeal(name);
+                });
+                list.appendChild(btn);
+            }
+        }
+    });
+
+    modal.style.display = 'flex';
+}
+
+window.closeHealModal = function() {
+    $('#heal-modal').style.display = 'none';
+};
+
+async function executeHeal(targetPlayer) {
+    if (state.isDead) return;
+
+    const myName = state.character ? state.character.name : 'Oyuncu';
+    const healSkill = state.skills.find(s => s.type === 'heal');
+
+    try {
+        const data = await API.post('/api/game/heal', {
+            room_code: state.roomCode,
+            username: state.username,
+            target_player: targetPlayer,
+        });
+
+        if (data.error) {
+            addMessage('system', '', `⚠️ ${data.error}`);
+            if (data.dead) {
+                state.isDead = true;
+                $('#chat-input-area').classList.add('dead');
+            }
+            return;
+        }
+
+        // Show heal result
+        if (data.mass) {
+            addMessage('system', '', `💚 ${myName} ${data.heal_skill_name} kullandı — Tüm oyuncular ${data.heal_amount} HP iyileşti!`);
+        } else {
+            const healed = data.healed_players[0];
+            addMessage('system', '', `💚 ${myName} → ${healed.name}: ${data.heal_amount} HP iyileşti!`);
+        }
+
+        // Update player statuses
+        if (data.player_statuses) {
+            updateAllPlayersStatus(data.player_statuses);
+        }
+
+    } catch (err) {
+        addMessage('system', '', `⚠️ Heal hatası: ${err.message}`);
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SKILL UPGRADE (Level Up)
+   ═══════════════════════════════════════════════════════════ */
+
+function showUpgradeModal() {
+    const modal = $('#upgrade-modal');
+    const list = $('#upgrade-skill-list');
+    list.innerHTML = '';
+
+    state.skills.forEach(skill => {
+        const btn = document.createElement('button');
+        btn.className = 'upgrade-skill-btn';
+        const isMax = skill.level >= 5;
+        btn.disabled = isMax;
+        btn.innerHTML = `
+            <span>${skill.emoji} ${skill.name} ${isMax ? '(MAX)' : ''}</span>
+            <span class="upgrade-skill-level">Lv${skill.level} ${isMax ? '' : '→ Lv' + (skill.level + 1)}</span>
+        `;
+        if (!isMax) {
+            btn.addEventListener('click', () => upgradeSkill(skill.id));
+        }
+        list.appendChild(btn);
+    });
+
+    modal.style.display = 'flex';
+}
+
+window.closeUpgradeModal = function() {
+    $('#upgrade-modal').style.display = 'none';
+};
+
+async function upgradeSkill(skillId) {
+    try {
+        const data = await API.post('/api/game/upgrade-skill', {
+            room_code: state.roomCode,
+            username: state.username,
+            skill_id: skillId,
+        });
+
+        if (data.error) {
+            addMessage('system', '', `⚠️ ${data.error}`);
+            return;
+        }
+
+        // Update skills
+        if (data.skills) {
+            state.skills = data.skills;
+            updateSkillPanel();
+        }
+
+        const upgradedSkill = state.skills.find(s => s.id === skillId);
+        addMessage('system', '', `⬆️ ${upgradedSkill ? upgradedSkill.name : 'Skill'} güçlendirildi! (Lv${data.new_level})`);
+        closeUpgradeModal();
+
+    } catch (err) {
+        addMessage('system', '', `⚠️ Upgrade hatası: ${err.message}`);
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DEATH SCREEN
+   ═══════════════════════════════════════════════════════════ */
+
+function showDeathScreen() {
+    const screen = $('#death-screen');
+    screen.style.display = 'flex';
+    screen.classList.add('active');
+}
+
+$('#btn-death-return').addEventListener('click', () => {
+    // Return to lobby
+    const screen = $('#death-screen');
+    screen.style.display = 'none';
+    screen.classList.remove('active');
+    state.gameStarted = false;
+    state.isDead = false;
+    state.inCombat = false;
+    state.lastRoundNumber = -1;
+    state.skills = [];
+    state.previousLevel = 1;
+    $('#chat-input-area').classList.remove('dead');
+    if (state.pollTimer) clearInterval(state.pollTimer);
+    showScreen('screen-lobby');
+});
 
 /* ═══════════════════════════════════════════════════════════
    UTILS

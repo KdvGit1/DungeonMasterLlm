@@ -2,7 +2,7 @@ import json
 from db.database import get_connection
 
 # Genel seviye XP eşikleri (toplam XP)
-LEVEL_THRESHOLDS = [0, 300, 900, 2700, 6500, 14000]
+LEVEL_THRESHOLDS = [0, 100, 300, 900, 2167, 4667]
 
 # Ability XP eşikleri (her ability kendi sayacını tutar)
 ABILITY_THRESHOLDS = [0, 50, 150, 300, 500, 750]

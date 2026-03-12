@@ -1390,3 +1390,260 @@ select:focus {
     color: var(--text-secondary);
     white-space: nowrap;
 }
+
+/* ═══════════════════════════════════════════════════════════
+   SKILL BUTTONS PANEL
+   ═══════════════════════════════════════════════════════════ */
+
+.skill-buttons-panel {
+    display: flex;
+    gap: 0.4rem;
+    padding: 0.5rem 0;
+    flex-wrap: wrap;
+}
+
+.skill-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid;
+    white-space: nowrap;
+}
+
+.skill-btn.combat {
+    background: rgba(200, 50, 50, 0.15);
+    border-color: rgba(200, 50, 50, 0.4);
+    color: #ff6b6b;
+}
+
+.skill-btn.combat:hover {
+    background: rgba(200, 50, 50, 0.35);
+    border-color: #ff6b6b;
+    transform: scale(1.05);
+    box-shadow: 0 0 12px rgba(200, 50, 50, 0.3);
+}
+
+.skill-btn.heal {
+    background: rgba(50, 180, 50, 0.15);
+    border-color: rgba(50, 180, 50, 0.4);
+    color: #69db7c;
+}
+
+.skill-btn.heal:hover {
+    background: rgba(50, 180, 50, 0.35);
+    border-color: #69db7c;
+    transform: scale(1.05);
+    box-shadow: 0 0 12px rgba(50, 180, 50, 0.3);
+}
+
+.skill-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.skill-btn .skill-level {
+    font-size: 0.6rem;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    padding: 0 4px;
+    color: var(--text-secondary);
+}
+
+/* Heal Button (next to send) */
+.btn-heal {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-size: 1.2rem;
+    background: rgba(50, 180, 50, 0.15);
+    border: 1px solid rgba(50, 180, 50, 0.4);
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #69db7c;
+}
+
+.btn-heal:hover {
+    background: rgba(50, 180, 50, 0.3);
+    border-color: #69db7c;
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(50, 180, 50, 0.3);
+}
+
+.btn-heal:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MODAL OVERLAYS
+   ═══════════════════════════════════════════════════════════ */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 10, 20, 0.85);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    animation: fadeInUp 0.25s ease;
+}
+
+.modal-content {
+    background: var(--bg-card);
+    border: 1px solid var(--border-gold);
+    border-radius: 16px;
+    padding: 2rem;
+    min-width: 320px;
+    max-width: 480px;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(201, 168, 76, 0.15);
+}
+
+.modal-content h3 {
+    font-family: var(--font-heading);
+    color: var(--text-gold);
+    font-size: 1.2rem;
+    margin-bottom: 1.2rem;
+}
+
+/* Heal Target List */
+.heal-target-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.heal-target-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.7rem 1rem;
+    background: rgba(50, 180, 50, 0.1);
+    border: 1px solid rgba(50, 180, 50, 0.3);
+    border-radius: 10px;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+}
+
+.heal-target-btn:hover {
+    background: rgba(50, 180, 50, 0.25);
+    border-color: #69db7c;
+    transform: translateX(4px);
+}
+
+.heal-target-hp {
+    font-size: 0.8rem;
+    color: #69db7c;
+}
+
+/* Upgrade Skill List */
+.upgrade-skill-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.upgrade-skill-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.7rem 1rem;
+    background: rgba(201, 168, 76, 0.1);
+    border: 1px solid rgba(201, 168, 76, 0.3);
+    border-radius: 10px;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+}
+
+.upgrade-skill-btn:hover {
+    background: rgba(201, 168, 76, 0.25);
+    border-color: var(--border-gold);
+    transform: translateX(4px);
+}
+
+.upgrade-skill-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.upgrade-skill-level {
+    font-size: 0.75rem;
+    color: var(--text-gold);
+    font-weight: 600;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DEATH SCREEN
+   ═══════════════════════════════════════════════════════════ */
+
+.death-container {
+    text-align: center;
+    animation: fadeInUp 0.5s ease;
+}
+
+.death-skull {
+    font-size: 6rem;
+    animation: deathPulse 2s infinite;
+    filter: drop-shadow(0 0 30px rgba(255, 0, 0, 0.5));
+}
+
+.death-title {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    color: #cc0000;
+    text-shadow: 0 0 30px rgba(200, 0, 0, 0.5), 0 0 60px rgba(200, 0, 0, 0.3);
+    letter-spacing: 8px;
+    margin-top: 1rem;
+}
+
+.death-subtitle {
+    font-family: var(--font-fantasy);
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+}
+
+@keyframes deathPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+/* Dead input state */
+#chat-input-area.dead {
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+#chat-input-area.dead::after {
+    content: '💀 Karakteriniz öldü';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #cc0000;
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    pointer-events: none;
+}

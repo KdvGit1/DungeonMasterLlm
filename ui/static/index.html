@@ -174,8 +174,13 @@
                 </div>
 
                 <div id="chat-input-area">
+                    <!-- Skill buttons panel (visible during combat) -->
+                    <div id="skill-buttons-panel" style="display:none;" class="skill-buttons-panel">
+                    </div>
+
                     <div class="chat-input-row">
                         <input type="text" id="chat-input" placeholder="Ne yapıyorsun?" autocomplete="off">
+                        <button id="btn-heal" class="btn btn-heal" title="İyileştir">💚</button>
                         <button id="btn-pass" class="btn btn-pass" title="Tur Geç">⏭️</button>
                         <button id="btn-send" class="btn btn-send" title="Gönder">⚔️</button>
                     </div>
@@ -214,6 +219,34 @@
     <div id="loading-overlay" class="loading-overlay" style="display:none">
         <div class="loading-spinner"></div>
         <p class="loading-text">GM düşünüyor...</p>
+    </div>
+
+    <!-- Heal Target Modal -->
+    <div id="heal-modal" class="modal-overlay" style="display:none;">
+        <div class="modal-content">
+            <h3>💚 İyileştir — Hedef Seç</h3>
+            <div id="heal-target-list" class="heal-target-list"></div>
+            <button class="btn btn-secondary" onclick="closeHealModal()">İptal</button>
+        </div>
+    </div>
+
+    <!-- Skill Upgrade Modal -->
+    <div id="upgrade-modal" class="modal-overlay" style="display:none;">
+        <div class="modal-content">
+            <h3>⬆️ Seviye Atladın! Bir Skill Güçlendir</h3>
+            <div id="upgrade-skill-list" class="upgrade-skill-list"></div>
+            <button class="btn btn-secondary" onclick="closeUpgradeModal()">Kapat</button>
+        </div>
+    </div>
+
+    <!-- Death Screen -->
+    <div id="death-screen" class="screen" style="display:none;">
+        <div class="death-container">
+            <div class="death-skull">💀</div>
+            <h1 class="death-title">ÖLDÜNÜZ</h1>
+            <p class="death-subtitle">Tüm oyuncular yenildi...</p>
+            <button id="btn-death-return" class="btn btn-primary" style="margin-top:2rem;">🏠 Odaya Dön</button>
+        </div>
     </div>
 
     <script src="/static/app.js"></script>
