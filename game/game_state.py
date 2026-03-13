@@ -9,6 +9,7 @@ class GameState:
         self.session_id = None
         self.turn_count = 0
         self.current_node = None
+        self.combat_messages = []
 
         # Aktif savaş bilgisi — EncounterState nesnesi veya None
         self.active_encounter = None

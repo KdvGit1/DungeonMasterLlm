@@ -60,6 +60,8 @@ def player_attack_target(game_state, player_name, target_index, session_id, user
     attack_roll = d20()
     attack_total = attack_roll + str_mod
     ac = target_enemy["ac"]
+    
+    print(f"🐞 DEBUG [Combat]: Player '{player_name}' attacking '{target_enemy['display_name']}'. AC: {ac}, Base Roll: {attack_roll}, Mod: {str_mod}, Total: {attack_total}")
 
     # İsabet kontrolü
     if attack_roll == 20:
@@ -114,6 +116,7 @@ def player_attack_target(game_state, player_name, target_index, session_id, user
         "hit": hit_label,
     })
 
+    print(f"🐞 DEBUG [Combat]: Player attack result -> Hit: {hit_label}, Damage: {damage}, Enemy Defeated: {enemy_defeated}, Encounter Over: {encounter_over}")
     return roll_message, damage, enemy_defeated, encounter_over
 
 
@@ -156,8 +159,10 @@ def enemy_turn_all(game_state, player_targets, session_id):
 
     encounter = game_state.active_encounter
     if not encounter or not encounter.is_active:
+        print(f"🐞 DEBUG [Combat]: enemy_turn_all aborted. No active encounter.")
         return []
 
+    print(f"🐞 DEBUG [Combat]: Triggering enemy_turn_all for session {session_id}.")
     results = enemy_turn(encounter, player_targets)
 
     # Combat log'a ekle

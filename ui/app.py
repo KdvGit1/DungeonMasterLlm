@@ -357,6 +357,26 @@ def _handle_item_use(action, player_name, session_id):
     else:
         return False, msg
 
+def _generate_llm_combat_summary(session_id, combat_messages, dead_players):
+    print(f"🐞 DEBUG [Combat/UI]: _generate_llm_combat_summary called with {len(combat_messages)} messages")
+    prompt = (
+        "Summarize the following combat encounter in a short, narrative, and engaging paragraph. "
+        "The summary should read like a story, describing the flow of battle, who did what, and how it ended. "
+        "Focus on the narrative, not mechanical numbers.\n\n"
+        "Combat Log:\n"
+    )
+    for msg in combat_messages:
+        role = "Player" if msg["role"] == "user" else "Game Master"
+        prompt += f"{role}: {msg['content']}\n"
+        
+    if dead_players:
+        prompt += f"\nNote: The following players died or fell unconscious during the battle: {', '.join(dead_players)}. Incorporate this tragedy into the narrative."
+    
+    print(f"🐞 DEBUG [Combat/UI]: Requesting LLM to generate summary...")
+    summary = _ask_gm_full([{"role": "user", "content": "Please summarize the combat."}], prompt)
+    print(f"🐞 DEBUG [Combat/UI]: NARRATIVE SUMMARY GENERATED:\n{summary}\n")
+    return summary
+
 
 # ═════════════════════════════════════════════════════════════════════════════
 # ROUND PROCESSING (multiplayer)
@@ -384,6 +404,8 @@ def _process_round_inner(room):
     player_names_list = room.get_player_names()
 
     actions = room.consume_round_actions()
+    
+    print(f"🐞 DEBUG [Combat/UI]: _process_round_inner started for round {room.round_number}. is_combat: {gs.is_combat}")
 
     # Per-player processing
     all_roll_results = {}  # player_name → roll result dict
@@ -421,6 +443,9 @@ def _process_round_inner(room):
         if not (gs.is_combat and gs.active_encounter):
             user_message = f"{player_name}: {action}"
             save_message(session_id, None, "user", user_message)
+        else:
+            user_message = f"{player_name}: {action}"
+            gs.combat_messages.append({"role": "user", "content": user_message})
 
         grant_general_xp(session_id, player_name, 1, reason="aksiyon")
 
@@ -456,9 +481,13 @@ def _process_round_inner(room):
                         if pstats and pstats["hp"] <= 0:
                             dead_in_combat.append(pchar["name"])
 
+                    print(f"🐞 DEBUG [Combat/UI]: Encounter over. Compiling summaries.")
                     # Combat summary'yi DB'ye kaydet
-                    summary_msg = generate_combat_summary(encounter, dead_in_combat)
-                    save_message(session_id, None, "user", summary_msg)
+                    mechanical_summary = generate_combat_summary(encounter, dead_in_combat)
+                    narrative_summary = _generate_llm_combat_summary(session_id, gs.combat_messages, dead_in_combat)
+                    final_summary = f"{mechanical_summary}\n\n[NARRATIVE RECAP]\n{narrative_summary}"
+                    save_message(session_id, None, "assistant", final_summary)
+                    gs.combat_messages = []
 
                     gs.end_encounter()
                     combat_ended_this_round = True
@@ -616,6 +645,7 @@ def _process_round_inner(room):
             print(f"⚠️ GM encounter yaratmadı, Pre-Check üzerinden savaş zorla başlatılıyor: {encounter_data}")
 
         if encounter_data:
+            print(f"🐞 DEBUG [Combat/UI]: GM response yielded encounter data: {encounter_data}")
             # Encounter bulundu — narrative'i temizle
             # (Eğer fallback'ten geldiyse strip edecek blok yoktur, sorun olmaz)
             clean_narrative = strip_encounter_from_response(gm_response)
@@ -648,6 +678,25 @@ def _process_round_inner(room):
 
         gm_response_tr = translator.translate_en_to_tr(gm_response)
     else:
+        recent_messages = get_recent_messages(session_id)
+        actions_str = " | ".join([f"{k}: {v}" for k, v in round_actions_for_prompt.items() if v != "__PASS__"])
+        
+        system_prompt = build_system_prompt(
+            gs.characters,
+            actions_str,
+            gs, sm,
+            roll_info=combined_roll_str,
+            session_id=session_id,
+            round_actions=round_actions_for_prompt,
+        )
+
+        context_msgs = recent_messages + gs.combat_messages
+        gm_response = _ask_gm_full(context_msgs, system_prompt)
+        
+        gs.set_scene(gm_response[:100])
+        gs.combat_messages.append({"role": "assistant", "content": gm_response})
+        
+        gm_response_tr = translator.translate_en_to_tr(gm_response)
         events = {}
 
     # NPC list
@@ -1913,6 +1962,6 @@ def api_game_state():
 # ═════════════════════════════════════════════════════════════════════════════
 
 if __name__ == "__main__":
-    print("\n⚔️  DungeonMaster UI (Multiplayer) başlatılıyor...")
+    print("\n DungeonMaster UI (Multiplayer) baslatiliyor...")
     print("   http://localhost:5000\n")
     app.run(debug=True, host="0.0.0.0", port=5000, use_reloader=False)

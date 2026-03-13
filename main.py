@@ -216,7 +216,10 @@ def execute_roll(roll_info, player_name, game_state, session_id, user):
         f"{player_name} rolled {ability}: "
         f"{roll_result} + {modifier} = {total} vs DC {dc} ({outcome_label})"
     )
-    save_message(session_id, user.get("id"), "user", db_message)
+    if game_state.is_combat:
+        game_state.combat_messages.append({"role": "user", "content": db_message})
+    else:
+        save_message(session_id, user.get("id"), "user", db_message)
     print(f"\nDEBUG execute_roll → GM'e gidecek mesaj:\n{roll_message}")
     return roll_message, success
 
@@ -449,6 +452,37 @@ def select_scenario():
         print(f"⚠️  Senaryo yüklenirken hata: {e}")
         return None
 
+def generate_llm_combat_summary(session_id, combat_messages, game_state, dead_players=None):
+    print(f"🐞 DEBUG [Combat/CLI]: generate_llm_combat_summary called with {len(combat_messages)} messages")
+    prompt = (
+        "Summarize the following combat encounter in a short, narrative, and engaging paragraph. "
+        "The summary should read like a story, describing the flow of battle, who did what, and how it ended. "
+        "Focus on the narrative, not mechanical numbers.\n\n"
+        "Combat Log:\n"
+    )
+    for msg in combat_messages:
+        role = "Player" if msg["role"] == "user" else "Game Master"
+        prompt += f"{role}: {msg['content']}\n"
+        
+    if dead_players:
+        prompt += f"\nNote: The following players died or fell unconscious during the battle: {', '.join(dead_players)}. Incorporate this tragedy into the narrative."
+    
+    # We call ask_gm manually so we don't mess up main flow
+    response = requests.post(
+        f"{config.base_url}/api/chat",
+        json={
+            "model": config.model,
+            "messages": [{"role": "user", "content": "Please summarize the combat."}],
+            "system": prompt,
+            "stream": False,
+            "think": False,
+            "options": {"num_ctx": config.context_length, "temperature": config.temp}
+        }
+    ).json()
+    summary = response.get("message", {}).get("content", "")
+    print(f"🐞 DEBUG [Combat/CLI]: NARRATIVE SUMMARY GENERATED:\n{summary}\n")
+    return summary
+
 # ─── ANA OYUN DÖNGÜSÜ ────────────────────────────────────────────────────────
 
 def game_loop(user, session_id, game_state, scenario_manager):
@@ -569,9 +603,16 @@ def game_loop(user, session_id, game_state, scenario_manager):
             continue
 
         user_message = f"{player_name}: {action}"
-        save_message(session_id, user.get("id"), "user", user_message)
+        if game_state.is_combat:
+            game_state.combat_messages.append({"role": "user", "content": user_message})
+        else:
+            save_message(session_id, user.get("id"), "user", user_message)
+        
         if item_used and item_gm_msg:
-            save_message(session_id, None, "user", item_gm_msg)
+            if game_state.is_combat:
+                game_state.combat_messages.append({"role": "user", "content": item_gm_msg})
+            else:
+                save_message(session_id, None, "user", item_gm_msg)
 
         grant_general_xp(session_id, player_name, 1, reason="aksiyon")
 
@@ -623,8 +664,17 @@ def game_loop(user, session_id, game_state, scenario_manager):
             roll_result_msg = attack_msg
 
             if enemy_defeated:
+                print(f"🐞 DEBUG [Combat/CLI]: Encounter over. Defeated enemy. Compiling summaries.")
                 xp = game_state.active_encounter.get("xp_reward", 50)
                 grant_combat_xp(session_id, player_name, xp)
+                
+                # Savaş bittiğinde mekanik özet ve NARRATIVE özet çıkar
+                mechanical_summary = generate_combat_summary(game_state.active_encounter, [])
+                narrative_summary = generate_llm_combat_summary(session_id, game_state.combat_messages, game_state)
+                final_summary = f"{mechanical_summary}\n\n[NARRATIVE RECAP]\n{narrative_summary}"
+                save_message(session_id, None, "assistant", final_summary)
+                game_state.combat_messages = []
+                
                 game_state.end_encounter()
             else:
                 enemy_dmg, enemy_msg = enemy_attack(game_state, player_name, session_id)
@@ -640,32 +690,32 @@ def game_loop(user, session_id, game_state, scenario_manager):
             # CLI'da GM cevabı sonrası parse edilir
             print("   ⏭️  Combat şimdi [ENCOUNTER] bloğu ile tetikleniyor")
 
-                # ════════════════════════════════════════════════════
-                # ADIM 3: ROLL CHECK
-                # ════════════════════════════════════════════════════
-                print("\n" + "═" * 50)
-                print("🎲 ADIM 3 — ROLL CHECK")
-                print("═" * 50)
+        # ════════════════════════════════════════════════════
+        # ADIM 3: ROLL CHECK
+        # ════════════════════════════════════════════════════
+        print("\n" + "═" * 50)
+        print("🎲 ADIM 3 — ROLL CHECK")
+        print("═" * 50)
 
-                node_actions = None
-                if scenario_manager and scenario_manager.current_node:
-                    node_actions = scenario_manager.current_node.get("available_actions")
-                    print(f"   Node available_actions: {'mevcut' if node_actions else 'YOK'}")
+        node_actions = None
+        if scenario_manager and scenario_manager.current_node:
+            node_actions = scenario_manager.current_node.get("available_actions")
+            print(f"   Node available_actions: {'mevcut' if node_actions else 'YOK'}")
 
-                roll_info = needs_roll_check(action, node_actions)
+        roll_info = needs_roll_check(action, node_actions)
 
-                if roll_info.get("needed"):
-                    roll_result_msg, roll_success = execute_roll(roll_info, player_name, game_state, session_id, user)
-                    # Başarılı roll: eşya edinme aksiyonu mu?
-                    if roll_success:
-                        acquired_item = check_item_acquisition(action)
-                        if acquired_item:
-                            add_item(session_id, acquired_item, 1, 0, "common")
-                            print(f"   🎒 '{acquired_item}' envantere eklendi (başarılı roll)")
-                            save_message(session_id, None, "user", f"{player_name} successfully acquires: {acquired_item}")
-                else:
-                    print("   ⏭️  Zar atılmadı")
-                    grant_general_xp(session_id, player_name, 1, reason="aksiyon (roll yok)")
+        if roll_info.get("needed"):
+            roll_result_msg, roll_success = execute_roll(roll_info, player_name, game_state, session_id, user)
+            # Başarılı roll: eşya edinme aksiyonu mu?
+            if roll_success:
+                acquired_item = check_item_acquisition(action)
+                if acquired_item:
+                    add_item(session_id, acquired_item, 1, 0, "common")
+                    print(f"   🎒 '{acquired_item}' envantere eklendi (başarılı roll)")
+                    save_message(session_id, None, "user", f"{player_name} successfully acquires: {acquired_item}")
+        else:
+            print("   ⏭️  Zar atılmadı")
+            grant_general_xp(session_id, player_name, 1, reason="aksiyon (roll yok)")
 
         # ════════════════════════════════════════════════════
         # ADIM 4: GM CEVABI
@@ -674,13 +724,14 @@ def game_loop(user, session_id, game_state, scenario_manager):
         print("🧙 ADIM 4 — GM CEVABI")
         print("═" * 50)
 
-        recent_messages = get_recent_messages(session_id)
+        recent_messages = get_recent_messages(session_id) + game_state.combat_messages
         system_prompt = build_system_prompt(
             game_state.characters, action,
             game_state, scenario_manager,
             roll_info=roll_result_msg, session_id=session_id
         )
 
+        print(f"🐞 DEBUG [Combat/CLI]: Requesting GM response. (Combat? {game_state.is_combat})")
         print(f"   System prompt uzunluğu: {len(system_prompt)} karakter")
         print("⏳ GM düşünüyor...\n")
         gm_response = ask_gm(recent_messages, system_prompt)
@@ -715,7 +766,11 @@ def game_loop(user, session_id, game_state, scenario_manager):
         print(f"\n🔎 NPC Extractor — tur sonrası: {len(npcs_after)} NPC")
 
         game_state.set_scene(gm_response[:100])
-        save_message(session_id, None, "assistant", gm_response)
+        
+        if game_state.is_combat:
+            game_state.combat_messages.append({"role": "assistant", "content": gm_response})
+        else:
+            save_message(session_id, None, "assistant", gm_response)
 
         # ── Durum göster ──
         print("\n" + "─" * 50)

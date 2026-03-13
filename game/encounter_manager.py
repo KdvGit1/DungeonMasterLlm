@@ -63,6 +63,7 @@ def parse_encounter_block(gm_response):
     if not match:
         return None
 
+    print(f"🐞 DEBUG [Combat]: [ENCOUNTER] block found in GM response. Parsing...")
     try:
         data = json.loads(match.group(1).strip())
 
@@ -86,9 +87,11 @@ def parse_encounter_block(gm_response):
 
         # Max enemy sınırı
         if len(normalized) > MAX_ENEMIES:
+            print(f"🐞 DEBUG [Combat]: Too many enemies requested ({len(normalized)}). Capping at {MAX_ENEMIES}.")
             normalized = normalized[:MAX_ENEMIES]
 
         data["enemies"] = normalized
+        print(f"🐞 DEBUG [Combat]: Parsed encounter successfully with {len(normalized)} enemies.")
         return data
 
     except (json.JSONDecodeError, TypeError, KeyError) as exc:
@@ -116,6 +119,8 @@ def create_encounter(encounter_data):
     """
     state = EncounterState()
     state.context = encounter_data.get("context", "")
+    
+    print(f"🐞 DEBUG [Combat]: Creating EncounterState for context: '{state.context}'")
 
     for idx, enemy_info in enumerate(encounter_data["enemies"]):
         monster_type = enemy_info.get("type", "bandit")
@@ -141,6 +146,7 @@ def create_encounter(encounter_data):
         }
         state.enemies.append(enemy)
 
+    print(f"🐞 DEBUG [Combat]: EncounterState created with {len(state.enemies)} enemies.")
     return state
 
 
@@ -173,7 +179,10 @@ def enemy_turn(encounter_state, player_targets):
     alive_enemies = get_alive_enemies(encounter_state)
     alive_players = [p for p in player_targets if p["hp"] > 0]
 
+    print(f"🐞 DEBUG [Combat]: Enemy turn starting. Alive enemies: {len(alive_enemies)}, Alive players: {len(alive_players)}")
+
     if not alive_players:
+        print(f"🐞 DEBUG [Combat]: No alive players. Skipping enemy turn.")
         return results
 
     for enemy in alive_enemies:
@@ -246,7 +255,9 @@ def enemy_turn(encounter_state, player_targets):
         })
 
         _tick_status_effects(enemy)
+        print(f"🐞 DEBUG [Combat]: Enemy attack generated -> {msg}")
 
+    print(f"🐞 DEBUG [Combat]: Enemy turn finished generating {len(results)} attack results.")
     return results
 
 
@@ -516,6 +527,8 @@ def generate_combat_summary(encounter_state, dead_players=None):
     Ölü oyuncuları açıkça belirtir.
     """
     dead_players = dead_players or []
+
+    print(f"🐞 DEBUG [Combat]: Generating mechanical combat summary. Dead players: {dead_players}")
 
     # Düşman sonuçları
     defeated = [e for e in encounter_state.enemies if e["hp"] <= 0 and not e.get("fled")]
