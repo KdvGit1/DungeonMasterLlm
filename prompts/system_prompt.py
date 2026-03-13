@@ -4,6 +4,7 @@ from game.npc_manager import get_all_npcs, get_npc_summary_secret
 from game.inventory_manager import format_inventory_for_prompt, format_all_inventories_for_prompt
 from game.quest_manager import format_quests_for_prompt
 from game.xp_manager import format_stats_for_prompt
+from game.monster_data import get_monster_type_list
 import config
 
 # ─── GM KİŞİLİĞİ ─────────────────────────────────────────────────────────────
@@ -70,6 +71,27 @@ ABILITY CHECKS:
 - Intelligence: investigating, recalling knowledge
 - Wisdom: perception, insight, survival
 - Charisma: persuading, deceiving, intimidating
+"""
+
+ENCOUNTER_RULES = """
+ENCOUNTER DECLARATION (CRITICAL):
+- When combat arises in the narrative, append an [ENCOUNTER] block at the END of your response
+- If the player initiates an attack or any offensive action, YOU MUST IMMEDIATELY start combat by appending the [ENCOUNTER] block, even if they fail a dice roll.
+- Format: [ENCOUNTER]{{"enemies": [{"name": "Tavern Bouncer", "type": "guard"}, {"name": "Drunk Thug", "type": "bandit"}], "context": "bar fight"}}[/ENCOUNTER]
+- "name" = the creature's narrative name from the scene
+- "type" = the closest match from available types: {monster_types}
+- Pick the type whose combat style best matches the creature
+- NEVER exceed 4 enemies total
+- ALWAYS mention the enemy count clearly in your narrative before the [ENCOUNTER] block
+- Do NOT generate stats — the system handles that
+- Do NOT add new enemies during combat
+- If a combat event happens (reinforcement, flee, etc.), narrate it naturally
+
+DEAD CHARACTER RULES:
+- If a character is marked as DEAD in the game state, they are PERMANENTLY gone
+- NEVER narrate actions, speech, or thoughts for dead characters
+- Dead characters cannot move, speak, fight, or interact in any way
+- Other characters may mourn or reference them, but the dead character itself does NOTHING
 """
 
 # ─── SİSTEM PROMPT OLUŞTUR ───────────────────────────────────────────────────
@@ -182,6 +204,32 @@ def build_system_prompt(characters, query, game_state=None, scenario_manager=Non
 
     gm_persona_formatted = GM_PERSONA.replace("{language_rule}", language_rule)
 
+    # ── Encounter rules (monster type listesiyle) ──
+    monster_types = ", ".join(get_monster_type_list())
+    encounter_rules = ENCOUNTER_RULES.replace("{monster_types}", monster_types)
+
+    # ── Encounter status (aktif savaş varsa) ──
+    encounter_section = ""
+    if game_state and game_state.is_combat and game_state.active_encounter:
+        from game.encounter_manager import get_encounter_status_for_prompt
+        encounter_section = get_encounter_status_for_prompt(game_state.active_encounter) + "\n"
+
+    # ── Ölü oyuncular ──
+    dead_players_section = ""
+    if session_id and characters:
+        from game.xp_manager import get_player_stats
+        dead_names = []
+        for char in characters:
+            pstats = get_player_stats(session_id, char["name"])
+            if pstats and pstats["hp"] <= 0:
+                dead_names.append(char["name"])
+        if dead_names:
+            dead_players_section = (
+                "[DEAD CHARACTERS - DO NOT INCLUDE IN NARRATIVE]\n"
+                + "\n".join(f"- {n} is DEAD. Cannot move, speak, or act." for n in dead_names)
+                + "\n\n"
+            )
+
     # ── Multiplayer persona ──
     multiplayer_section = ""
     if round_actions and len(round_actions) > 0:
@@ -191,6 +239,9 @@ def build_system_prompt(characters, query, game_state=None, scenario_manager=Non
     system_prompt = (
         f"{gm_persona_formatted}\n\n"
         f"{multiplayer_section}"
+        f"{encounter_rules}\n\n"
+        f"{dead_players_section}"
+        f"{encounter_section}"
         f"{state_section}"
         f"{stats_section}"
         f"{inventory_section}"

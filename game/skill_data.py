@@ -2,10 +2,8 @@
 """
 Her class'a 3 savaş skill'i + 1 heal skill.
 Skill level arttıkça base_damage/base_heal +2 artar.
+Güçlü skill'lerin cooldown'u vardır (tur bazlı).
 """
-
-import random
-from game.dice import get_modifier
 
 # ─── SKILL TANIMLARI ──────────────────────────────────────────────────────────
 
@@ -21,6 +19,7 @@ CLASS_SKILLS = {
                 "dice": "1d8",
                 "base_damage": 0,
                 "dc": 10,
+                "cooldown": 0,
                 "description": "Ağır bir kılıç darbesi",
             },
             {
@@ -32,6 +31,7 @@ CLASS_SKILLS = {
                 "dice": "1d4",
                 "base_damage": 0,
                 "dc": 8,
+                "cooldown": 0,
                 "description": "Düşmanı sersemletir, kolay ama düşük hasar",
             },
             {
@@ -43,6 +43,7 @@ CLASS_SKILLS = {
                 "dice": "2d6",
                 "base_damage": 0,
                 "dc": 14,
+                "cooldown": 3,
                 "description": "Güçlü ama zor saldırı",
             },
         ],
@@ -69,6 +70,7 @@ CLASS_SKILLS = {
                 "dice": "2d6",
                 "base_damage": 0,
                 "dc": 13,
+                "cooldown": 2,
                 "description": "Ateş büyüsü",
             },
             {
@@ -80,6 +82,7 @@ CLASS_SKILLS = {
                 "dice": "1d8",
                 "base_damage": 0,
                 "dc": 10,
+                "cooldown": 0,
                 "description": "Buz mermisi",
             },
             {
@@ -91,6 +94,7 @@ CLASS_SKILLS = {
                 "dice": "3d6",
                 "base_damage": 0,
                 "dc": 16,
+                "cooldown": 4,
                 "description": "Çok güçlü ama çok zor",
             },
         ],
@@ -117,6 +121,7 @@ CLASS_SKILLS = {
                 "dice": "2d6",
                 "base_damage": 0,
                 "dc": 13,
+                "cooldown": 2,
                 "description": "Arkadan saldırı",
             },
             {
@@ -128,6 +133,7 @@ CLASS_SKILLS = {
                 "dice": "1d6",
                 "base_damage": 0,
                 "dc": 10,
+                "cooldown": 0,
                 "description": "Hızlı bıçak darbesi",
             },
             {
@@ -139,6 +145,7 @@ CLASS_SKILLS = {
                 "dice": "3d6",
                 "base_damage": 0,
                 "dc": 16,
+                "cooldown": 4,
                 "description": "Kritik noktalara saldırı",
             },
         ],
@@ -165,6 +172,7 @@ CLASS_SKILLS = {
                 "dice": "1d8",
                 "base_damage": 0,
                 "dc": 10,
+                "cooldown": 0,
                 "description": "Kutsal enerji saldırısı",
             },
             {
@@ -176,6 +184,7 @@ CLASS_SKILLS = {
                 "dice": "1d6",
                 "base_damage": 0,
                 "dc": 8,
+                "cooldown": 0,
                 "description": "Işık enerjisi",
             },
             {
@@ -187,6 +196,7 @@ CLASS_SKILLS = {
                 "dice": "2d8",
                 "base_damage": 0,
                 "dc": 14,
+                "cooldown": 3,
                 "description": "Güçlü kutsal saldırı",
             },
         ],
@@ -213,6 +223,7 @@ CLASS_SKILLS = {
                 "dice": "1d8",
                 "base_damage": 0,
                 "dc": 10,
+                "cooldown": 0,
                 "description": "Ok atışı",
             },
             {
@@ -224,6 +235,7 @@ CLASS_SKILLS = {
                 "dice": "1d4",
                 "base_damage": 0,
                 "dc": 12,
+                "cooldown": 2,
                 "description": "İki ok atar (x2 vuruş)",
                 "hits": 2,
             },
@@ -236,6 +248,7 @@ CLASS_SKILLS = {
                 "dice": "2d10",
                 "base_damage": 0,
                 "dc": 15,
+                "cooldown": 4,
                 "description": "Güçlü tek atış",
             },
         ],
@@ -262,6 +275,7 @@ CLASS_SKILLS = {
                 "dice": "1d8",
                 "base_damage": 0,
                 "dc": 10,
+                "cooldown": 0,
                 "description": "Ses dalgası hasarı",
             },
             {
@@ -273,6 +287,7 @@ CLASS_SKILLS = {
                 "dice": "1d6",
                 "base_damage": 0,
                 "dc": 8,
+                "cooldown": 0,
                 "description": "Moral bozucu saldırı",
             },
             {
@@ -284,6 +299,7 @@ CLASS_SKILLS = {
                 "dice": "2d8",
                 "base_damage": 0,
                 "dc": 14,
+                "cooldown": 3,
                 "description": "Güçlü ses patlaması",
             },
         ],
@@ -303,6 +319,9 @@ CLASS_SKILLS = {
 
 
 # ─── YARDIMCI FONKSİYONLAR ───────────────────────────────────────────────────
+
+import random
+from game.dice import get_modifier
 
 def _roll_dice(dice_str):
     """Parse '2d6' format and roll. Returns total."""
@@ -423,3 +442,30 @@ def get_all_skill_info(class_display_name, skill_levels):
     })
 
     return result
+
+
+# ─── COOLDOWN YÖNETİMİ ───────────────────────────────────────────────────────
+
+def get_skill_cooldown_value(class_display_name, skill_id):
+    """Skill'in cooldown değerini döner (tanımdan)."""
+    skill = get_skill_by_id(class_display_name, skill_id)
+    if not skill:
+        return 0
+    return skill.get("cooldown", 0)
+
+
+def check_skill_available(skill_id, cooldown_tracker):
+    """Skill cooldown'da mı? True = kullanılabilir."""
+    remaining = cooldown_tracker.get(skill_id, 0)
+    return remaining <= 0
+
+
+def tick_cooldowns(cooldown_tracker):
+    """Tüm cooldown'ları 1 azalt, 0 olanları temizle."""
+    to_remove = []
+    for skill_id, remaining in cooldown_tracker.items():
+        cooldown_tracker[skill_id] = remaining - 1
+        if cooldown_tracker[skill_id] <= 0:
+            to_remove.append(skill_id)
+    for key in to_remove:
+        del cooldown_tracker[key]

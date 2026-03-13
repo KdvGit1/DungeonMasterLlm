@@ -667,6 +667,7 @@ select:focus {
     color: #ff4444;
     font-size: 1.1rem;
     font-weight: bold;
+    flex: 1;
 }
 
 .combat-enemy-hp-bar {
@@ -682,6 +683,44 @@ select:focus {
     height: 100%;
     background: #ff4444;
     transition: width 0.3s ease;
+}
+
+.encounter-prompt-panel {
+    background: rgba(30, 10, 10, 0.95);
+    border-top: 2px solid var(--border-gold);
+    padding: 1rem 1.5rem;
+    z-index: 6;
+    position: relative;
+    box-shadow: 0 -4px 15px rgba(0,0,0,0.5);
+    text-align: center;
+}
+
+.combat-enemy-row {
+    background: rgba(0,0,0,0.4);
+    padding: 0.5rem;
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+    border: 1px solid var(--border-subtle);
+    display: block;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.combat-enemy-row:hover {
+    border-color: rgba(255, 68, 68, 0.5);
+}
+
+.combat-enemy-row input[type="radio"]:checked + .combat-enemy-content {
+    color: #ff4444;
+}
+
+.combat-enemy-row input[type="radio"] {
+    display: none;
+}
+
+.combat-enemy-row.selected {
+    border-color: #ff4444;
+    background: rgba(255, 68, 68, 0.1);
 }
 
 .item-pickup-panel {

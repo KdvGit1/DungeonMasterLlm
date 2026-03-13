@@ -30,12 +30,20 @@ from game.dice import d20, get_modifier
 from game.npc_manager import get_all_npcs, save_npc
 from game.npc_extractor import extract_npcs_from_response
 from game.scenario_manager import ScenarioManager
-from game.combat import check_combat_start, player_attack, enemy_attack, format_encounter_status
+from game.combat import player_attack, enemy_attack, format_encounter_status, player_attack_target, enemy_turn_all
+from game.encounter_manager import (
+    parse_encounter_block, strip_encounter_block, create_encounter,
+    get_alive_enemies, is_encounter_over, get_total_xp, generate_combat_summary,
+    format_encounter_display
+)
+from game.event_parser import parse_encounter_from_response, strip_encounter_from_response
 from game.inventory_manager import use_item, add_item, get_pickup_dc, get_inventory
-from game.skill_data import get_skills_for_class, get_initial_skill_levels, get_all_skill_info, get_skill_by_id, calculate_skill_damage, calculate_skill_heal
-from game.xp_manager import init_player_stats, grant_general_xp, grant_ability_xp, grant_combat_xp, apply_damage, add_gold, format_player_status, grant_quest_rewards
+from game.monster_data import MONSTER_TABLE
+from game.skill_data import get_skills_for_class, get_initial_skill_levels, get_all_skill_info, get_skill_by_id, calculate_skill_damage, calculate_skill_heal, get_skill_cooldown_value
+from game.xp_manager import init_player_stats, grant_general_xp, grant_ability_xp, grant_combat_xp, apply_damage, add_gold, format_player_status, grant_quest_rewards, get_player_stats
 from game.quest_manager import init_quests, check_node_quests
 from game.event_parser import parse_gm_events
+from game.combat_events import check_combat_events, apply_event
 from game.room_manager import create_room, join_room, get_room, get_room_for_user, get_room_code_for_user, leave_room
 from prompts.system_prompt import build_system_prompt
 from rag.retriever import get_relevant_rules
@@ -120,6 +128,15 @@ def _ask_gm_full(messages, system_prompt):
 
 def _needs_roll_check(action, node_available_actions=None):
     """Zar gerekli mi kontrolü."""
+    action_lower = action.lower()
+    attack_keywords = [
+        "attack", "kill",
+        "saldır", "öldür",
+    ]
+    for kw in attack_keywords:
+        if kw in action_lower:
+            return {"needed": False}
+
     examples = get_relevant_rules(f"dice roll ability check required: {action}")
     if not examples:
         examples = "No examples found."
@@ -273,6 +290,53 @@ def _check_item_acquisition(action):
     return None
 
 
+# ─── COMBAT INTENT KONTROLÜ ──────────────────────────────────────────────────
+
+def _check_for_combat_intent(actions_str, recent_messages):
+    """
+    Oyuncu aksiyonlarının bir savaş başlatıp başlatmadığını LLM'e sorar.
+    Eğer evet ise {"is_combat": True} döner.
+    """
+    prompt = f"""You are a D&D intent analyzer. Look at the recent context and the player's new actions.
+Does the player's action initiate combat, an attack, or a fight?
+
+RECENT CONTEXT:
+{recent_messages[-2000:] if recent_messages else "None"}
+
+PLAYER ACTIONS:
+{actions_str}
+
+If NO combat is initiated, respond with:
+{{"is_combat": false}}
+
+If COMBAT IS initiated, you MUST also determine the enemies from the context. Use a generic type from this list if possible: {', '.join(MONSTER_TABLE.keys())}. 
+If none fit, fallback to a sensible one. Max 4 enemies.
+Respond ONLY with valid JSON:
+{{"is_combat": true, "enemies": ["dragon"], "context": "player attacks the dragon"}}
+"""
+    try:
+        response = http_requests.post(
+            f"{config.base_url}/api/chat",
+            json={
+                "model": config.model,
+                "messages": [{"role": "user", "content": prompt}],
+                "stream": False,
+                "think": False,
+                "options": {"num_ctx": 4096, "temperature": 0.1, "num_predict": 100},
+            },
+        )
+        result = response.json()
+        answer = result["message"]["content"].strip()
+        answer = re.sub(r"```json|```", "", answer).strip()
+        match = re.search(r"\{.*?\}", answer, re.DOTALL)
+        if match:
+            data = json.loads(match.group(0))
+            return data
+    except Exception as e:
+        print(f"⚠️ Combat intent check hatası: {e}")
+    return {"is_combat": False}
+
+
 def _handle_item_use(action, player_name, session_id):
     match_en = re.search(r'\buse\b\s+(?:my\s+|the\s+)?(.+)', action, re.IGNORECASE)
     match_tr = re.search(r'(.+?)\s*(?:kullan|kullanıyorum|kullandım)', action, re.IGNORECASE)
@@ -311,7 +375,7 @@ def _process_round(room):
 
 
 def _process_round_inner(room):
-    from game.xp_manager import get_player_stats, heal
+    from game.xp_manager import get_player_stats, heal, get_all_xp_data
     import random
 
     gs = room.game_state
@@ -345,8 +409,7 @@ def _process_round_inner(room):
         player_stats = get_player_stats(session_id, player_name)
         if player_stats and player_stats["hp"] <= 0:
             all_combat_logs[player_name].append(f"💀 {player_name} is unconscious and cannot act!")
-            user_message = f"{player_name} (unconscious): {action}"
-            save_message(session_id, None, "user", user_message)
+            # Combat mesajları DB'ye KAYDEDİLMEZ
             continue
 
         # Item use check
@@ -354,82 +417,117 @@ def _process_round_inner(room):
         if item_used and item_gm_msg:
             save_message(session_id, None, "user", item_gm_msg)
 
-        user_message = f"{player_name}: {action}"
-        save_message(session_id, None, "user", user_message)
+        # Combat sırasında mesajları DB'ye KAYDETME (sadece narrative mesajlar kaydedilir)
+        if not (gs.is_combat and gs.active_encounter):
+            user_message = f"{player_name}: {action}"
+            save_message(session_id, None, "user", user_message)
+
         grant_general_xp(session_id, player_name, 1, reason="aksiyon")
 
         # Combat check
         roll_result_msg = None
 
         if gs.is_combat and gs.active_encounter and not combat_ended_this_round:
-            attack_msg, damage, enemy_defeated = player_attack(gs, player_name, session_id, {})
-            roll_result_msg = attack_msg
-            all_combat_logs[player_name].append(attack_msg)
+            encounter = gs.active_encounter
 
-            if enemy_defeated:
-                xp = gs.active_encounter.get("xp_reward", 50)
-                # Grant combat XP to ALL active players this round
-                for uname, act in actions.items():
-                    if act != "__PASS__":
-                        ch = room.get_character_for_username(uname)
-                        if ch:
-                            grant_combat_xp(session_id, ch["name"], xp)
-                gs.end_encounter()
-                combat_ended_this_round = True
-                all_combat_logs[player_name].append(f"Enemy defeated! +{xp} XP")
-            else:
-                enemy_dmg, enemy_msg = enemy_attack(gs, player_name, session_id)
-                if enemy_dmg > 0:
-                    is_down, _ = apply_damage(session_id, player_name, enemy_dmg)
-                    all_combat_logs[player_name].append(enemy_msg)
-                    if is_down:
-                        all_combat_logs[player_name].append(f"💀 {player_name} has fallen unconscious!")
-        elif combat_ended_this_round:
-            # Combat just ended this round — skip combat for remaining players
-            all_combat_logs[player_name].append(f"⚔️ Combat has ended. {player_name}'s action is narrative only.")
-        else:
-            combat_result = check_combat_start(action)
-            if combat_result.get("combat"):
-                gs.start_encounter(combat_result)
-                attack_msg, _, enemy_defeated = player_attack(gs, player_name, session_id, {})
-                roll_result_msg = f"COMBAT STARTED against {combat_result['enemy_name']}!\n{attack_msg}"
-                all_combat_logs[player_name].append(f"⚔️ Combat: {combat_result['enemy_name']}!")
+            # Oyuncunun saldırısı (ilk hayattaki düşmana)
+            alive = get_alive_enemies(encounter)
+            if alive:
+                target_idx = alive[0]["id"]  # Default: ilk hayattaki
+                attack_msg, damage, enemy_defeated, enc_over = player_attack_target(
+                    gs, player_name, target_idx, session_id, {}
+                )
+                roll_result_msg = attack_msg
+                all_combat_logs[player_name].append(attack_msg)
 
-                if enemy_defeated:
-                    xp = gs.active_encounter.get("xp_reward", 50)
+                if enc_over:
+                    total_xp = get_total_xp(encounter)
+                    # Tüm aktif oyunculara XP ver
                     for uname, act in actions.items():
                         if act != "__PASS__":
                             ch = room.get_character_for_username(uname)
                             if ch:
-                                grant_combat_xp(session_id, ch["name"], xp)
+                                grant_combat_xp(session_id, ch["name"], total_xp)
+
+                    # Ölü oyuncuları tespit et
+                    dead_in_combat = []
+                    for uname, pchar in room.players.items():
+                        pstats = get_player_stats(session_id, pchar["name"])
+                        if pstats and pstats["hp"] <= 0:
+                            dead_in_combat.append(pchar["name"])
+
+                    # Combat summary'yi DB'ye kaydet
+                    summary_msg = generate_combat_summary(encounter, dead_in_combat)
+                    save_message(session_id, None, "user", summary_msg)
+
                     gs.end_encounter()
                     combat_ended_this_round = True
-                else:
-                    enemy_dmg, enemy_msg = enemy_attack(gs, player_name, session_id)
-                    if enemy_dmg > 0:
-                        is_down, _ = apply_damage(session_id, player_name, enemy_dmg)
+                    all_combat_logs[player_name].append(f"All enemies defeated! +{total_xp} XP")
+                elif not enemy_defeated:
+                    # Düşman saldırısı
+                    player_targets = _build_player_targets(room, session_id)
+                    enemy_results = enemy_turn_all(gs, player_targets, session_id)
+                    for er in enemy_results:
+                        if er["damage"] > 0 and er["target_player"]:
+                            is_down, _ = apply_damage(session_id, er["target_player"], er["damage"])
+                            all_combat_logs[player_name].append(er["message"])
+                            if is_down:
+                                all_combat_logs[player_name].append(f"💀 {er['target_player']} has fallen unconscious!")
+                        elif er["message"]:
+                            all_combat_logs[player_name].append(er["message"])
+
+                    # Combat events kontrolü
+                    encounter.turn_number += 1
+                    player_stats_list = _build_player_targets(room, session_id)
+                    events_triggered = check_combat_events(encounter, encounter.turn_number, player_stats_list)
+                    for evt in events_triggered:
+                        evt_msg = apply_event(encounter, evt, player_stats_list)
+                        if evt_msg:
+                            all_combat_logs[player_name].append(f"⚡ {evt_msg}")
+                            # ally_arrives event: heal all players
+                            if evt["effect"] == "add_ally":
+                                for uname, pchar in room.players.items():
+                                    heal(session_id, pchar["name"], evt.get("ally_heal", 5))
+                            # aoe_damage event: also damages players
+                            if evt["effect"] == "aoe_damage":
+                                aoe_dmg = evt.get("aoe_damage", 4)
+                                for uname, pchar in room.players.items():
+                                    apply_damage(session_id, pchar["name"], aoe_dmg)
+
+                    # Skill cooldown tick
+                    gs.tick_skill_cooldowns(player_name)
+                    gs.tick_player_statuses(player_name)
+
+                    # DoT hasarı uygula
+                    dot_dmg = gs.get_player_dot_damage(player_name)
+                    if dot_dmg > 0:
+                        is_down, _ = apply_damage(session_id, player_name, dot_dmg)
+                        all_combat_logs[player_name].append(f"☠️ Poison deals {dot_dmg} damage to {player_name}!")
                         if is_down:
-                            all_combat_logs[player_name].append(f"💀 {player_name} unconscious!")
+                            all_combat_logs[player_name].append(f"💀 {player_name} has fallen unconscious!")
+
+        elif combat_ended_this_round:
+            all_combat_logs[player_name].append(f"⚔️ Combat has ended. {player_name}'s action is narrative only.")
+        else:
+            # Non-combat: roll check
+            node_actions = None
+            if sm and sm.current_node:
+                node_actions = sm.current_node.get("available_actions")
+
+            roll_info = _needs_roll_check(action, node_actions)
+            if roll_info.get("needed"):
+                roll_result = _execute_roll(roll_info, player_name, gs, session_id, {})
+                roll_result_msg = roll_result["roll_message"]
+                all_roll_results[player_name] = roll_result
+
+                if roll_result.get("success"):
+                    acquired_item = _check_item_acquisition(action)
+                    if acquired_item:
+                        add_item(session_id, acquired_item, 1, 0, "common", player_name)
+                        save_message(session_id, None, "user", f"{player_name} successfully acquires: {acquired_item}")
+                        all_combat_logs[player_name].append(f"🎒 {acquired_item} acquired!")
             else:
-                # Roll check
-                node_actions = None
-                if sm and sm.current_node:
-                    node_actions = sm.current_node.get("available_actions")
-
-                roll_info = _needs_roll_check(action, node_actions)
-                if roll_info.get("needed"):
-                    roll_result = _execute_roll(roll_info, player_name, gs, session_id, {})
-                    roll_result_msg = roll_result["roll_message"]
-                    all_roll_results[player_name] = roll_result
-
-                    if roll_result.get("success"):
-                        acquired_item = _check_item_acquisition(action)
-                        if acquired_item:
-                            add_item(session_id, acquired_item, 1, 0, "common", player_name)
-                            save_message(session_id, None, "user", f"{player_name} successfully acquires: {acquired_item}")
-                            all_combat_logs[player_name].append(f"🎒 {acquired_item} acquired!")
-                else:
-                    grant_general_xp(session_id, player_name, 1, reason="aksiyon (roll yok)")
+                grant_general_xp(session_id, player_name, 1, reason="aksiyon (roll yok)")
 
         if roll_result_msg:
             combined_roll_msgs.append(roll_result_msg)
@@ -444,7 +542,6 @@ def _process_round_inner(room):
             if sm.current_node:
                 gs.current_node = sm.current_node.get("title", "")
 
-            # Grant quest rewards to first non-passing player
             quest_events = check_node_quests(session_id, next_node)
             for qe in quest_events:
                 if qe["event"] == "completed":
@@ -462,71 +559,115 @@ def _process_round_inner(room):
                 "new_node_title": sm.current_node.get("title", next_node) if sm.current_node else next_node,
             }
 
-    # Build round actions dict for the system prompt (player_name → action)
+    # Build round actions dict for the system prompt
     round_actions_for_prompt = {}
     for username, action in actions.items():
         char = room.get_character_for_username(username)
         pname = char["name"] if char else username
         round_actions_for_prompt[pname] = action
 
-    # Build combined roll info string
     combined_roll_str = "\n---\n".join(combined_roll_msgs) if combined_roll_msgs else None
 
-    # GM CALL
-    recent_messages = get_recent_messages(session_id)
-    system_prompt = build_system_prompt(
-        gs.characters,
-        " | ".join([f"{k}: {v}" for k, v in round_actions_for_prompt.items() if v != "__PASS__"]),
-        gs, sm,
-        roll_info=combined_roll_str,
-        session_id=session_id,
-        round_actions=round_actions_for_prompt,
-    )
+    # GM CALL (combat sırasında GM'i çağırma — sadece narrative durumda)
+    gm_response = ""
+    gm_response_tr = ""
+    pending_encounter_data = None
 
-    gm_response = _ask_gm_full(recent_messages, system_prompt)
+    if not gs.is_combat or combat_ended_this_round:
+        recent_messages = get_recent_messages(session_id)
+        
+        actions_str = " | ".join([f"{k}: {v}" for k, v in round_actions_for_prompt.items() if v != "__PASS__"])
+        
+        # Savaş niyeti var mı kontrol et
+        combat_intent_data = _check_for_combat_intent(actions_str, recent_messages)
+        is_combat_intended = combat_intent_data.get("is_combat", False)
+        print(f"⚔️ Savaş Niyeti (Pre-Check): {is_combat_intended}")
 
-    # NPC Extraction
-    existing_npc_names = [n["name"] for n in get_all_npcs(session_id)]
-    new_npcs = extract_npcs_from_response(gm_response, recent_messages, existing_npc_names, player_names_list)
-    for npc in new_npcs:
-        public_data = {"role": npc["role"], "appearance": npc["appearance"], "personality": npc["personality"]}
-        save_npc(npc["name"], public_data, npc["secret"], session_id)
+        system_prompt = build_system_prompt(
+            gs.characters,
+            actions_str,
+            gs, sm,
+            roll_info=combined_roll_str,
+            session_id=session_id,
+            round_actions=round_actions_for_prompt,
+        )
 
-    # Event parsing
-    events = parse_gm_events(gm_response)
-    if events.get("gold_found", 0) > 0:
-        # Distribute gold to first non-passing player
-        for uname, act in actions.items():
-            if act != "__PASS__":
-                ch = room.get_character_for_username(uname)
-                if ch:
-                    add_gold(session_id, ch["name"], events["gold_found"])
-                    break
+        gm_response = _ask_gm_full(recent_messages, system_prompt)
 
-    gs.set_scene(gm_response[:100])
-    save_message(session_id, None, "assistant", gm_response)
+        # [ENCOUNTER] block parse veya Intent Fallback
+        encounter_data = parse_encounter_from_response(gm_response)
+        
+        # Eğer GM encounter bloğu üretmediyse ama pre-check savaş dedi ise zorla başlat
+        if not encounter_data and is_combat_intended:
+            enemies_str_list = combat_intent_data.get("enemies", ["bandit"])
+            if not isinstance(enemies_str_list, list):
+                enemies_str_list = ["bandit"]
+            context = combat_intent_data.get("context", "Savaş başlıyor.")
+            
+            # create_encounter expects dicts with 'name' and 'type', not just strings
+            formatted_enemies = []
+            for e in enemies_str_list:
+                if isinstance(e, str):
+                    formatted_enemies.append({"name": e, "type": e})
+                elif isinstance(e, dict):
+                    formatted_enemies.append(e)
 
-    # Translation
-    gm_response_tr = translator.translate_en_to_tr(gm_response)
+            encounter_data = {"enemies": formatted_enemies, "context": context}
+            print(f"⚠️ GM encounter yaratmadı, Pre-Check üzerinden savaş zorla başlatılıyor: {encounter_data}")
+
+        if encounter_data:
+            # Encounter bulundu — narrative'i temizle
+            # (Eğer fallback'ten geldiyse strip edecek blok yoktur, sorun olmaz)
+            clean_narrative = strip_encounter_from_response(gm_response)
+            gm_response = clean_narrative
+
+            # Encounter oluştur ve pending olarak kaydet
+            new_encounter = create_encounter(encounter_data)
+            gs.pending_encounter = new_encounter
+            pending_encounter_data = new_encounter.to_dict()
+
+        # NPC Extraction
+        existing_npc_names = [n["name"] for n in get_all_npcs(session_id)]
+        new_npcs = extract_npcs_from_response(gm_response, recent_messages, existing_npc_names, player_names_list)
+        for npc in new_npcs:
+            public_data = {"role": npc["role"], "appearance": npc["appearance"], "personality": npc["personality"]}
+            save_npc(npc["name"], public_data, npc["secret"], session_id)
+
+        # Event parsing (item/gold)
+        events = parse_gm_events(gm_response)
+        if events.get("gold_found", 0) > 0:
+            for uname, act in actions.items():
+                if act != "__PASS__":
+                    ch = room.get_character_for_username(uname)
+                    if ch:
+                        add_gold(session_id, ch["name"], events["gold_found"])
+                        break
+
+        gs.set_scene(gm_response[:100])
+        save_message(session_id, None, "assistant", gm_response)
+
+        gm_response_tr = translator.translate_en_to_tr(gm_response)
+    else:
+        events = {}
 
     # NPC list
     npcs = get_all_npcs(session_id)
     npcs_clean = [{"name": n["name"], "public": translator.translate_npc_data(n["public"])} for n in npcs]
 
-    # Build per-player inventory, status, XP, and skills
-    from game.xp_manager import get_all_xp_data
+    # Build per-player data
     all_inventories = {}
     all_statuses = {}
     all_xp = {}
     all_skills = {}
     dead_players = []
+    all_cooldowns = {}
     for uname, char in room.players.items():
         pname = char["name"]
         all_inventories[pname] = get_inventory(session_id, pname)
         all_statuses[pname] = format_player_status(session_id, pname)
         all_xp[pname] = get_all_xp_data(session_id, pname)
         all_skills[pname] = get_all_skill_info(char.get("class", ""), char.get("skill_levels", {}))
-        # Check if player is dead
+        all_cooldowns[pname] = gs.get_all_skill_cooldowns(pname)
         pstats = get_player_stats(session_id, pname)
         if pstats and pstats["hp"] <= 0:
             dead_players.append(pname)
@@ -536,7 +677,7 @@ def _process_round_inner(room):
     # Combat status
     combat_status = None
     if gs.is_combat and gs.active_encounter:
-        combat_status = gs.active_encounter
+        combat_status = gs.active_encounter.to_dict()
 
     result = {
         "success": True,
@@ -547,10 +688,12 @@ def _process_round_inner(room):
         "player_statuses": all_statuses,
         "xp_data": all_xp,
         "skills": all_skills,
+        "skill_cooldowns": all_cooldowns,
         "rolls": all_roll_results,
         "combat_logs": all_combat_logs,
         "events": events,
         "combat_status": combat_status,
+        "pending_encounter": pending_encounter_data,
         "round_number": room.round_number,
         "player_actions": round_actions_for_prompt,
         "dead_players": dead_players,
@@ -561,6 +704,22 @@ def _process_round_inner(room):
 
     room.last_round_result = result
     return result
+
+
+def _build_player_targets(room, session_id):
+    """Build player target list for enemy attacks."""
+    targets = []
+    for uname, char in room.players.items():
+        pname = char["name"]
+        pstats = get_player_stats(session_id, pname)
+        if pstats:
+            targets.append({
+                "name": pname,
+                "ac": char.get("armor_class", 12),
+                "hp": pstats["hp"],
+                "max_hp": pstats["max_hp"],
+            })
+    return targets
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -1124,6 +1283,163 @@ def api_game_poll():
     return jsonify(result)
 
 
+# ─── ENCOUNTER ENDPOINTS ──────────────────────────────────────────────────────
+
+@app.route("/api/game/encounter/confirm", methods=["POST"])
+def api_encounter_confirm():
+    """Player confirms or flees a pending encounter (Attack/Flee)."""
+    try:
+        data = request.json
+        room_code = data.get("room_code", "").strip().upper()
+        username = data.get("username", "").strip()
+        confirm_action = data.get("action", "attack").lower()
+
+        room = get_room(room_code)
+        if not room:
+            return jsonify({"error": "Oda bulunamadı"}), 404
+
+        gs = room.game_state
+        if not gs.pending_encounter:
+            return jsonify({"error": "Bekleyen encounter yok"}), 400
+
+        if confirm_action == "attack":
+            gs.start_encounter(gs.pending_encounter)
+            encounter_dict = gs.active_encounter.to_dict()
+            return jsonify({
+                "success": True,
+                "action": "attack",
+                "combat_started": True,
+                "encounter": encounter_dict,
+            })
+        else:
+            gs.pending_encounter = None
+            save_message(room.session_id, None, "user",
+                         "The party decides to flee from the encounter.")
+            return jsonify({
+                "success": True,
+                "action": "flee",
+                "combat_started": False,
+            })
+
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({"error": f"Encounter hatası: {str(e)}"}), 500
+
+
+@app.route("/api/game/encounter/attack", methods=["POST"])
+def api_encounter_attack():
+    """Player attacks a specific enemy target during combat."""
+    try:
+        data = request.json
+        room_code = data.get("room_code", "").strip().upper()
+        username = data.get("username", "").strip()
+        target_id = data.get("target_id", 0)
+
+        room = get_room(room_code)
+        if not room:
+            return jsonify({"error": "Oda bulunamadı"}), 404
+
+        gs = room.game_state
+        session_id = room.session_id
+        char = room.get_character_for_username(username)
+        if not char:
+            return jsonify({"error": "Karakter bulunamadı"}), 404
+        player_name = char["name"]
+
+        pstats = get_player_stats(session_id, player_name)
+        if pstats and pstats["hp"] <= 0:
+            return jsonify({"error": "Karakteriniz öldü!", "dead": True}), 400
+        if not gs.is_combat or not gs.active_encounter:
+            return jsonify({"error": "Savaş aktif değil!"}), 400
+
+        attack_msg, damage, enemy_defeated, enc_over = player_attack_target(
+            gs, player_name, target_id, session_id, {}
+        )
+
+        result = {
+            "success": True,
+            "attack_message": attack_msg,
+            "damage": damage,
+            "enemy_defeated": enemy_defeated,
+            "encounter_over": enc_over,
+        }
+
+        if enc_over:
+            total_xp = get_total_xp(gs.active_encounter)
+            for uname, pchar in room.players.items():
+                grant_combat_xp(session_id, pchar["name"], total_xp)
+
+            dead_in_combat = []
+            for uname, pchar in room.players.items():
+                ps = get_player_stats(session_id, pchar["name"])
+                if ps and ps["hp"] <= 0:
+                    dead_in_combat.append(pchar["name"])
+
+            summary_msg = generate_combat_summary(gs.active_encounter, dead_in_combat)
+            save_message(session_id, None, "user", summary_msg)
+            gs.end_encounter()
+            result["total_xp"] = total_xp
+        else:
+            player_targets = _build_player_targets(room, session_id)
+            enemy_results = enemy_turn_all(gs, player_targets, session_id)
+            enemy_attacks = []
+            for er in enemy_results:
+                ea = {"message": er["message"], "damage": er["damage"], "target": er.get("target_player")}
+                if er["damage"] > 0 and er["target_player"]:
+                    is_down, _ = apply_damage(session_id, er["target_player"], er["damage"])
+                    ea["player_down"] = is_down
+                enemy_attacks.append(ea)
+            result["enemy_attacks"] = enemy_attacks
+
+            gs.active_encounter.turn_number += 1
+            events_triggered = check_combat_events(gs.active_encounter, gs.active_encounter.turn_number, player_targets)
+            combat_events_list = []
+            from game.xp_manager import heal
+            for evt in events_triggered:
+                evt_msg = apply_event(gs.active_encounter, evt, player_targets)
+                if evt_msg:
+                    combat_events_list.append(evt_msg)
+                    if evt["effect"] == "add_ally":
+                        for uname, pchar in room.players.items():
+                            heal(session_id, pchar["name"], evt.get("ally_heal", 5))
+                    if evt["effect"] == "aoe_damage":
+                        for uname, pchar in room.players.items():
+                            apply_damage(session_id, pchar["name"], evt.get("aoe_damage", 4))
+            result["combat_events"] = combat_events_list
+
+            gs.tick_skill_cooldowns(player_name)
+            gs.tick_player_statuses(player_name)
+            dot_dmg = gs.get_player_dot_damage(player_name)
+            if dot_dmg > 0:
+                is_down, _ = apply_damage(session_id, player_name, dot_dmg)
+                result["dot_damage"] = dot_dmg
+
+        if gs.is_combat and gs.active_encounter:
+            result["encounter"] = gs.active_encounter.to_dict()
+
+        all_statuses = {}
+        for uname, pchar in room.players.items():
+            all_statuses[pchar["name"]] = format_player_status(session_id, pchar["name"])
+        result["player_statuses"] = all_statuses
+        result["skill_cooldowns"] = gs.get_all_skill_cooldowns(player_name)
+
+        action_text = f"[ATTACK target:{target_id}] {attack_msg}"
+        room.submit_action(username, action_text)
+
+        if room.all_actions_submitted():
+            room.round_processing = True
+            round_result = _process_round(room)
+            result["round_result"] = round_result
+
+        return jsonify(result)
+
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({"error": f"Attack hatası: {str(e)}"}), 500
+
+
 # ─── SKILL SYSTEM ─────────────────────────────────────────────────────────────
 
 @app.route("/api/game/skill", methods=["POST"])
@@ -1150,7 +1466,7 @@ def api_game_skill():
         player_name = char["name"]
 
         # Dead check
-        from game.xp_manager import get_player_stats
+        from game.xp_manager import get_player_stats, heal
         pstats = get_player_stats(session_id, player_name)
         if pstats and pstats["hp"] <= 0:
             return jsonify({"error": "Karakteriniz öldü!", "dead": True}), 400
@@ -1166,6 +1482,10 @@ def api_game_skill():
             return jsonify({"error": "Skill bulunamadı"}), 404
         if skill.get("base_heal") is not None and "base_damage" not in skill:
             return jsonify({"error": "Bu bir heal skill'i, saldırı için kullanılamaz"}), 400
+
+        # Check cooldown
+        if gs.get_skill_cooldown(player_name, skill_id) > 0:
+            return jsonify({"error": f"{skill['name_en']} yeteneği bekleme süresinde!"}), 400
 
         skill_levels = char.get("skill_levels", {})
         skill_level = skill_levels.get(skill_id, 1)
@@ -1195,50 +1515,120 @@ def api_game_skill():
         damage = 0
         enemy_defeated = False
         encounter = gs.active_encounter
+        target_id = data.get("target_id", 0)
+        enc_over = False
+        total_xp_awarded = 0
+
+        target_enemy = None
 
         if success:
             damage = calculate_skill_damage(skill, skill_level, ability_score)
             if roll_result == 20:
                 damage *= 2  # Critical doubles damage
-            encounter["hp"] = max(0, encounter["hp"] - damage)
-            if encounter["hp"] <= 0:
-                enemy_defeated = True
-                xp = encounter.get("xp_reward", 50)
-                grant_combat_xp(session_id, player_name, xp)
-                gs.end_encounter()
+
+            target_enemy = next((e for e in encounter.enemies if e["id"] == target_id and e["hp"] > 0), None)
+            if not target_enemy:
+                alive = get_alive_enemies(encounter)
+                if alive:
+                    target_enemy = alive[0]
+
+            if target_enemy:
+                target_enemy["hp"] = max(0, target_enemy["hp"] - damage)
+                if target_enemy["hp"] <= 0:
+                    enemy_defeated = True
+                    enc_over = is_encounter_over(encounter)
+                    if enc_over:
+                        total_xp_awarded = get_total_xp(encounter)
+                        for uname, pchar in room.players.items():
+                            grant_combat_xp(session_id, pchar["name"], total_xp_awarded)
+
+                        dead_in_combat = []
+                        for uname, pchar in room.players.items():
+                            ps = get_player_stats(session_id, pchar["name"])
+                            if ps and ps["hp"] <= 0:
+                                dead_in_combat.append(pchar["name"])
+
+                        summary_msg = generate_combat_summary(encounter, dead_in_combat)
+                        from db.session_manager import save_message
+                        save_message(session_id, None, "user", summary_msg)
+                        gs.end_encounter()
+            
             grant_ability_xp(session_id, player_name, skill["ability"], amount=5)
+
+            # Apply cooldown
+            cooldown_val = get_skill_cooldown_value(skill)
+            if cooldown_val > 0:
+                gs.set_skill_cooldown(player_name, skill_id, cooldown_val)
 
         grant_general_xp(session_id, player_name, 2, reason="skill kullanıldı")
 
-        # Save to DB
+        # Save to DB (only if not enc_over, to prevent duplicate messages if you want, but narrative needs the skill text too)
         from db.session_manager import save_message
-        db_msg = (f"{player_name} uses {skill['name_en']}: "
+        target_name_str = target_enemy["display_name"] if target_enemy else "enemy"
+        db_msg = (f"{player_name} uses {skill['name_en']} on {target_name_str}: "
                   f"roll {roll_result}+{modifier}={total} vs DC {dc} — {outcome}")
         if damage > 0:
             db_msg += f", {damage} damage"
-        save_message(session_id, None, "user", db_msg)
+        
+        # We only save the skill use text to DB to maintain context, even in combat
+        # encounter summary gets saved too if over. Cooldown ticks.
+        encounter.combat_log.append({
+            "type": "skill_attack",
+            "player": player_name,
+            "target": target_name_str,
+            "skill": skill['name_en'],
+            "roll": roll_result,
+            "total": total,
+            "damage": damage,
+            "hit": outcome,
+        })
 
         # Also submit this as the player's round action
-        action_text = f"[SKILL: {skill['name_en']}] {outcome}"
+        action_text = f"[SKILL: {skill['name_en']} target:{target_id}] {outcome}"
         if damage > 0:
             action_text += f" — {damage} damage"
         room.submit_action(username, action_text)
 
-        # Enemy counter-attack if still alive and hit
-        enemy_counter = None
-        if not enemy_defeated and gs.is_combat and gs.active_encounter:
-            enemy_dmg, enemy_msg = enemy_attack(gs, player_name, session_id)
-            if enemy_dmg > 0:
-                is_down, _ = apply_damage(session_id, player_name, enemy_dmg)
-                enemy_counter = {
-                    "damage": enemy_dmg,
-                    "message": enemy_msg,
-                    "player_down": is_down,
-                }
+        enemy_attacks = []
+        combat_events_list = []
+        dot_dmg = 0
+        
+        # Enemy counter-attack if encounter not over
+        if not enc_over and gs.is_combat and gs.active_encounter:
+            player_targets = _build_player_targets(room, session_id)
+            enemy_results = enemy_turn_all(gs, player_targets, session_id)
+            for er in enemy_results:
+                ea = {"message": er["message"], "damage": er["damage"], "target": er.get("target_player")}
+                if er["damage"] > 0 and er["target_player"]:
+                    is_down, _ = apply_damage(session_id, er["target_player"], er["damage"])
+                    ea["player_down"] = is_down
+                enemy_attacks.append(ea)
+
+            gs.active_encounter.turn_number += 1
+            events_triggered = check_combat_events(gs.active_encounter, gs.active_encounter.turn_number, player_targets)
+            for evt in events_triggered:
+                evt_msg = apply_event(gs.active_encounter, evt, player_targets)
+                if evt_msg:
+                    combat_events_list.append(evt_msg)
+                    if evt["effect"] == "add_ally":
+                        for uname, pchar in room.players.items():
+                            heal(session_id, pchar["name"], evt.get("ally_heal", 5))
+                    if evt["effect"] == "aoe_damage":
+                        for uname, pchar in room.players.items():
+                            apply_damage(session_id, pchar["name"], evt.get("aoe_damage", 4))
+
+            gs.tick_skill_cooldowns(player_name)
+            gs.tick_player_statuses(player_name)
+            dot_dmg = gs.get_player_dot_damage(player_name)
+            if dot_dmg > 0:
+                is_down, _ = apply_damage(session_id, player_name, dot_dmg)
 
         # Updated status
-        player_status = format_player_status(session_id, player_name)
-        combat_status = gs.active_encounter if gs.is_combat and gs.active_encounter else None
+        all_statuses = {}
+        for uname, pchar in room.players.items():
+            all_statuses[pchar["name"]] = format_player_status(session_id, pchar["name"])
+
+        combat_status = gs.active_encounter.to_dict() if gs.is_combat and gs.active_encounter else None
 
         # Check if round should be processed
         round_result = None
@@ -1256,9 +1646,15 @@ def api_game_skill():
             "outcome": outcome,
             "damage": damage,
             "enemy_defeated": enemy_defeated,
-            "enemy_counter": enemy_counter,
-            "player_status": player_status,
+            "encounter_over": enc_over,
+            "total_xp": total_xp_awarded,
+            "enemy_attacks": enemy_attacks,
+            "combat_events": combat_events_list,
+            "dot_damage": dot_dmg,
+            "player_status": format_player_status(session_id, player_name),
+            "player_statuses": all_statuses,
             "combat_status": combat_status,
+            "skill_cooldowns": gs.get_all_skill_cooldowns(player_name),
             "round_result": round_result,
         })
 
@@ -1294,12 +1690,17 @@ def api_game_heal():
         if pstats and pstats["hp"] <= 0:
             return jsonify({"error": "Karakteriniz öldü! İyileştirme yapamazsınız.", "dead": True}), 400
 
-        # Get heal skill
+        gs = room.game_state
+
+        # Check cooldown for heal skill specifically (using 'heal' instead of an ID since there's one heal skill per class, but maybe using its actual ID is better)
         class_name = char.get("class", "")
         skills_data = get_skills_for_class(class_name)
         if not skills_data:
             return jsonify({"error": "Skill verisi bulunamadı"}), 404
         heal_skill = skills_data["heal"]
+        
+        if gs.get_skill_cooldown(player_name, heal_skill["id"]) > 0:
+            return jsonify({"error": f"{heal_skill['name_en']} yeteneği bekleme süresinde!"}), 400
 
         skill_levels = char.get("skill_levels", {})
         skill_level = skill_levels.get(heal_skill["id"], 1)
@@ -1338,6 +1739,11 @@ def api_game_heal():
                 if after and after["hp"] > 0:
                     revived_players.append(target_player)
 
+        # Apply Cooldown
+        cooldown_val = get_skill_cooldown_value(heal_skill)
+        if cooldown_val > 0:
+            gs.set_skill_cooldown(player_name, heal_skill["id"], cooldown_val)
+
         # XP
         grant_general_xp(session_id, player_name, 3, reason="iyileştirme")
         grant_ability_xp(session_id, player_name, heal_skill["ability"], amount=5)
@@ -1365,6 +1771,7 @@ def api_game_heal():
             "revived_players": revived_players,
             "mass": heal_skill.get("mass", False),
             "player_statuses": all_statuses,
+            "skill_cooldowns": gs.get_all_skill_cooldowns(player_name)
         })
 
     except Exception as e:

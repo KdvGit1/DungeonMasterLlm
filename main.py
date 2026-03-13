@@ -14,7 +14,9 @@ from game.dice import d20, get_modifier
 from game.npc_manager import get_all_npcs, save_npc
 from game.npc_extractor import extract_npcs_from_response
 from game.scenario_manager import ScenarioManager
-from game.combat import check_combat_start, player_attack, enemy_attack, format_encounter_status
+from game.combat import player_attack, enemy_attack, format_encounter_status
+from game.encounter_manager import parse_encounter_block, strip_encounter_block, create_encounter, get_alive_enemies, is_encounter_over, get_total_xp, generate_combat_summary
+from game.event_parser import parse_encounter_from_response, strip_encounter_from_response
 from game.inventory_manager import use_item, add_item, get_pickup_dc, display_inventory
 from game.xp_manager import (
     init_player_stats, grant_general_xp, grant_ability_xp,
@@ -634,27 +636,9 @@ def game_loop(user, session_id, game_state, scenario_manager):
                         print(f"   💀 {player_name} bilinci kaybetti!")
 
         else:
-            combat_result = check_combat_start(action)
-            print(f"   Combat check: {combat_result}")
-
-            if combat_result.get("combat"):
-                game_state.start_encounter(combat_result)
-                attack_msg, damage, enemy_defeated = player_attack(game_state, player_name, session_id, user)
-                roll_result_msg = f"COMBAT STARTED against {combat_result['enemy_name']}!\n{attack_msg}"
-
-                if enemy_defeated:
-                    xp = game_state.active_encounter.get("xp_reward", 50)
-                    grant_combat_xp(session_id, player_name, xp)
-                    game_state.end_encounter()
-                else:
-                    enemy_dmg, enemy_msg = enemy_attack(game_state, player_name, session_id)
-                    if enemy_dmg > 0:
-                        is_down, _ = apply_damage(session_id, player_name, enemy_dmg)
-                        roll_result_msg += f"\n{enemy_msg}"
-                        if is_down:
-                            roll_result_msg += f"\n{player_name} has fallen unconscious!"
-            else:
-                print("   ⏭️  Savaş yok")
+            # Combat artık [ENCOUNTER] bloğu ile GM cevabından tetiklenir
+            # CLI'da GM cevabı sonrası parse edilir
+            print("   ⏭️  Combat şimdi [ENCOUNTER] bloğu ile tetikleniyor")
 
                 # ════════════════════════════════════════════════════
                 # ADIM 3: ROLL CHECK

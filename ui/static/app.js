@@ -668,8 +668,15 @@ function initGameScreen(gameData) {
 
     updateRoundIndicator();
     showWaiting(false);
-    enableInput();
-    $('#chat-input').focus();
+    handleCombatStatus(gameData.combat_status);
+
+    if (gameData.pending_encounter) {
+        showEncounterPrompt(gameData.pending_encounter);
+    } else {
+        hideEncounterPrompt();
+        enableInput();
+        $('#chat-input').focus();
+    }
 
     // Skills
     if (gameData.skills && gameData.skills[myName]) {
@@ -760,7 +767,12 @@ function handleRoundResult(result) {
         return;
     }
 
-    if (!state.isDead) enableInput();
+    if (result.pending_encounter) {
+        showEncounterPrompt(result.pending_encounter);
+    } else {
+        hideEncounterPrompt();
+        if (!state.isDead) enableInput();
+    }
 }
 
 function updateSubmissionStatus(submission) {
@@ -812,10 +824,23 @@ function enableInput() {
     $('#btn-send').disabled = false;
     $('#btn-pass').disabled = false;
     $('#btn-heal').disabled = false;
-    $('#chat-input').disabled = false;
+    
     // Enable skill buttons
     $$('.skill-btn').forEach(b => b.disabled = false);
-    $('#chat-input').focus();
+    
+    // Update UI based on combat state
+    if (state.inCombat) {
+        $('#chat-input').disabled = true;
+        $('#chat-input').placeholder = "Saldırmak için düşman seçin...";
+        $('#translation-preview').style.display = 'none';
+        $('#btn-send').title = "Seçilen hedefe saldır";
+    } else {
+        $('#chat-input').disabled = false;
+        $('#chat-input').placeholder = "Ne yapıyorsun?";
+        $('#translation-preview').style.display = 'block';
+        $('#btn-send').title = "Gönder";
+        $('#chat-input').focus();
+    }
 }
 
 function disableInput() {
@@ -1073,24 +1098,154 @@ function handleCombatStatus(combatData) {
     const container = $('#combat-status-container');
     if (!combatData) {
         container.style.display = 'none';
+        state.inCombat = false;
         return;
     }
 
     container.style.display = 'block';
-    const hp = combatData.hp || 0;
-    const maxHp = combatData.max_hp || 1;
-    const hpPercent = Math.max(0, Math.min(100, (hp / maxHp) * 100));
-
-    container.innerHTML = `
-        <div style="display:flex; justify-content:space-between; align-items:flex-end;">
-            <div class="combat-enemy-name">⚔️ ${escapeHtml(combatData.enemy_name)}</div>
-            <div style="font-size:0.8rem; color: #ffaaaa;">HP: ${hp} / ${maxHp}</div>
-        </div>
-        <div class="combat-enemy-hp-bar">
-            <div class="combat-enemy-hp-fill" style="width: ${hpPercent}%"></div>
-        </div>
-    `;
+    state.inCombat = true;
+    
+    let html = `<div style="margin-bottom:0.5rem; font-family:var(--font-heading); color:var(--text-gold);">⚔️ Hedef Seç:</div>`;
+    
+    let selectedTargetId = state.selectedTargetId;
+    let anyAlive = false;
+    
+    if (combatData.enemies && combatData.enemies.length > 0) {
+        // Validate currently selected target or pick the first alive one
+        const selectedEnemy = combatData.enemies.find(e => e.id === selectedTargetId && e.hp > 0);
+        if (!selectedEnemy) {
+            const firstAlive = combatData.enemies.find(e => e.hp > 0);
+            if (firstAlive) {
+                selectedTargetId = firstAlive.id;
+                state.selectedTargetId = selectedTargetId;
+            } else {
+                selectedTargetId = null;
+                state.selectedTargetId = null;
+            }
+        }
+        
+        combatData.enemies.forEach(enemy => {
+            const isAlive = enemy.hp > 0;
+            if (isAlive) anyAlive = true;
+            const hpPercent = Math.max(0, Math.min(100, (enemy.hp / enemy.max_hp) * 100));
+            const isSelected = isAlive && enemy.id === selectedTargetId;
+            
+            html += `
+                <label class="combat-enemy-row ${isSelected ? 'selected' : ''}" style="${!isAlive ? 'opacity:0.5; cursor:not-allowed;' : ''}">
+                    <input type="radio" name="combat_target" value="${enemy.id}" 
+                           ${isSelected ? 'checked' : ''} 
+                           ${!isAlive ? 'disabled' : ''}
+                           onchange="selectCombatTarget(${enemy.id})">
+                    <div class="combat-enemy-content" style="display:flex; justify-content:space-between; align-items:flex-end;">
+                        <div class="combat-enemy-name">${!isAlive ? '💀 ' : ''}${escapeHtml(enemy.display_name)}</div>
+                        <div style="font-size:0.8rem; color: #ffaaaa;">HP: ${enemy.hp} / ${enemy.max_hp}</div>
+                    </div>
+                    <div class="combat-enemy-hp-bar">
+                        <div class="combat-enemy-hp-fill" style="width: ${hpPercent}%; ${!isAlive ? 'background:#555' : ''}"></div>
+                    </div>
+                </label>
+            `;
+        });
+    } else {
+        html += `<div style="color:#aaa;">Düşman Yok</div>`;
+    }
+    
+    container.innerHTML = html;
 }
+
+window.selectCombatTarget = function(targetId) {
+    state.selectedTargetId = targetId;
+    document.querySelectorAll('.combat-enemy-row').forEach(row => {
+        row.classList.remove('selected');
+    });
+    const selectedRadio = document.querySelector(`input[name="combat_target"][value="${targetId}"]`);
+    if (selectedRadio) {
+        selectedRadio.parentElement.classList.add('selected');
+    }
+};
+
+function showEncounterPrompt(encounterData) {
+    state.inCombat = true; // Block normal chat interactions
+    disableInput();
+    
+    // Check if we already sent an action for combat prompt recently
+    if (state.hasSubmitted) return;
+
+    const container = $('#encounter-prompt-container');
+    const enemiesDiv = $('#encounter-prompt-enemies');
+    const inputArea = $('#chat-input-area');
+    
+    container.style.display = 'block';
+    inputArea.style.display = 'none';
+    
+    if (encounterData && encounterData.enemies) {
+        const counts = {};
+        encounterData.enemies.forEach(e => {
+            const name = e.name;
+            counts[name] = (counts[name] || 0) + 1;
+        });
+        const texts = Object.entries(counts).map(([name, count]) => `${count}x ${name}`);
+        enemiesDiv.textContent = `Düşmanlar: ${texts.join(', ')}`;
+    }
+}
+
+function hideEncounterPrompt() {
+    $('#encounter-prompt-container').style.display = 'none';
+    $('#chat-input-area').style.display = 'flex';
+}
+
+$('#btn-encounter-attack').addEventListener('click', () => confirmEncounter('attack'));
+$('#btn-encounter-flee').addEventListener('click', () => confirmEncounter('flee'));
+
+async function confirmEncounter(actionChoice) {
+    if (state.sending || state.hasSubmitted || state.isDead) return;
+    
+    state.sending = true;
+    state.hasSubmitted = true;
+    
+    const container = $('#encounter-prompt-container');
+    container.style.display = 'none';
+    $('#chat-input-area').style.display = 'flex';
+    
+    const myName = state.character ? state.character.name : 'Oyuncu';
+    const actionText = actionChoice === 'attack' ? 'savaşa girmeyi seçti' : 'kaçmaya karar verdi';
+    addMessage('system', '', `⚔️ ${myName} ${actionText}...`);
+    
+    try {
+        const data = await API.post('/api/game/encounter/confirm', {
+            room_code: state.roomCode,
+            username: state.username,
+            action: actionChoice
+        });
+        
+        state.sending = false;
+        
+        if (data.error) {
+            addMessage('system', '', `⚠️ ${data.error}`);
+            enableInput();
+            return;
+        }
+        
+        if (data.combat_started) {
+            addMessage('system', '', `🔥 Savaş başladı!`);
+            handleCombatStatus(data.encounter);
+            enableInput();
+            updateSkillPanel();
+        } else {
+            addMessage('system', '', `💨 Gruptan biri kaçmayı seçti, savaş iptal edildi!`);
+            state.inCombat = false;
+            handleCombatStatus(null);
+            enableInput();
+            updateSkillPanel();
+        }
+        
+    } catch (err) {
+        state.sending = false;
+        addMessage('system', '', `⚠️ Hata: ${err.message}`);
+        enableInput();
+    }
+}
+
 
 /* ─── Input Live Translation ──────────────────────────── */
 
@@ -1142,6 +1297,95 @@ $('#btn-heal').addEventListener('click', openHealModal);
 
 async function sendAction() {
     if (state.sending || state.hasSubmitted || state.isDead) return;
+
+    if (state.inCombat) {
+        if (!state.selectedTargetId) {
+            addMessage('system', '', `⚠️ Lütfen saldırılacak bir hedef seçin!`);
+            return;
+        }
+
+        disableInput();
+        
+        const myName = state.character ? state.character.name : 'Oyuncu';
+        addMessage('system', '', `⚔️ ${myName} saldırıyor...`);
+        state.displayedSubmissions.add(myName);
+
+        try {
+            const data = await API.post('/api/game/encounter/attack', {
+                room_code: state.roomCode,
+                username: state.username,
+                target_id: parseInt(state.selectedTargetId)
+            });
+
+            if (data.error) {
+                addMessage('system', '', `⚠️ ${data.error}`);
+                if (data.dead) {
+                    state.isDead = true;
+                    $('#chat-input-area').classList.add('dead');
+                } else {
+                    enableInput();
+                }
+                return;
+            }
+
+            // Show roll summary
+            addRollMessage({
+                ability: 'saldırı',
+                dc: data.dc,
+                roll: data.roll,
+                modifier: data.modifier,
+                total: data.total,
+                outcome: data.outcome,
+            }, myName);
+
+            // Show damage
+            if (data.damage > 0) {
+                addMessage('system', '', `💥 ${data.damage} hasar verdiniz!`);
+            } else {
+                addMessage('system', '', `💨 Saldırı ıskaladı!`);
+            }
+
+            // Enemy counter attack
+            if (data.enemy_counter) {
+                addMessage('system', '', `👹 Düşman saldırıyor! ${data.enemy_counter.damage} hasar!`);
+                if (data.enemy_counter.player_down) {
+                    addMessage('system', '', `💀 ${myName} yere yıkıldı!`);
+                    state.isDead = true;
+                    $('#chat-input-area').classList.add('dead');
+                }
+            }
+
+            // Enemy defeated
+            if (data.enemy_defeated) {
+                addMessage('system', '', `🎉 Düşman yenildi!`);
+                state.inCombat = false;
+                updateSkillPanel();
+            }
+
+            // Update combat status
+            handleCombatStatus(data.combat_status);
+
+            // Update player status
+            if (data.player_status) {
+                updateAllPlayersStatus({[myName]: data.player_status});
+            }
+
+            // If round completed
+            if (data.round_result) {
+                state.lastRoundNumber = data.round_result.round_number;
+                state.hasSubmitted = false;
+                state.displayedSubmissions.clear();
+                handleRoundResult(data.round_result);
+            } else {
+                showWaiting(true, 'Diğer oyuncular bekleniyor...');
+            }
+
+        } catch (err) {
+            addMessage('system', '', `⚠️ Saldırı hatası: ${err.message}`);
+            enableInput();
+        }
+        return;
+    }
 
     const actionTr = chatInput.value.trim();
     if (!actionTr) return;
@@ -1292,10 +1536,19 @@ document.addEventListener('click', () => {
 
 function updateSkillPanel() {
     const panel = $('#skill-buttons-panel');
+    const healBtn = $('#btn-heal');
+    
     if (!panel) return;
 
     if (!state.skills || state.skills.length === 0 || !state.inCombat) {
         panel.style.display = 'none';
+        
+        // Reset heal button state out of combat just in case
+        if (healBtn) {
+            healBtn.disabled = state.isDead || state.hasSubmitted;
+            healBtn.title = `İyileştir`;
+            healBtn.innerHTML = `💚`;
+        }
         return;
     }
 
@@ -1303,12 +1556,31 @@ function updateSkillPanel() {
     panel.innerHTML = '';
 
     state.skills.forEach(skill => {
-        if (skill.type === 'heal') return; // Heal is separate button
+        const cd = skill.current_cooldown || 0;
+        const isCooldown = cd > 0;
+        
+        if (skill.type === 'heal') {
+            if (healBtn) {
+                if (isCooldown) {
+                    healBtn.disabled = true;
+                    healBtn.title = `İyileştir (⏳ ${cd} Tur)`;
+                    healBtn.innerHTML = `💚<span style="font-size:0.6rem;display:block;">${cd}</span>`;
+                } else {
+                    healBtn.disabled = state.isDead || state.hasSubmitted;
+                    healBtn.title = `İyileştir`;
+                    healBtn.innerHTML = `💚`;
+                }
+            }
+            return; // Skip adding to main skill panel
+        }
+        
         const btn = document.createElement('button');
-        btn.className = `skill-btn ${skill.type}`;
-        btn.disabled = state.isDead || state.hasSubmitted;
-        btn.innerHTML = `${skill.emoji} ${skill.name} <span class="skill-level">Lv${skill.level}</span>`;
-        btn.title = `${skill.description}\nDC: ${skill.dc} | ${skill.dice}+${skill.ability.toUpperCase()}`;
+        btn.className = `skill-btn ${skill.type} ${isCooldown ? 'cooldown' : ''}`;
+        btn.disabled = state.isDead || state.hasSubmitted || isCooldown;
+        
+        const cdHtml = isCooldown ? `<span class="skill-cooldown" style="color:#ffaaaa;font-size:0.7rem;margin-left:0.3rem;">⏳${cd}</span>` : '';
+        btn.innerHTML = `${skill.emoji} ${skill.name} <span class="skill-level">Lv${skill.level}</span>${cdHtml}`;
+        btn.title = `${skill.description}\nDC: ${skill.dc} | ${skill.dice}+${skill.ability.toUpperCase()}${isCooldown ? `\n⏳ Bekleme: ${cd} tur` : ''}`;
         btn.addEventListener('click', () => useSkill(skill.id));
         panel.appendChild(btn);
     });
@@ -1316,10 +1588,21 @@ function updateSkillPanel() {
 
 async function useSkill(skillId) {
     if (state.sending || state.hasSubmitted || state.isDead) return;
+
+    const skill = state.skills.find(s => s.id === skillId);
+    
+    let targetId = null;
+    if (skill && skill.type !== 'heal') {
+        if (!state.selectedTargetId) {
+            addMessage('system', '', `⚠️ Lütfen bir hedef seçin!`);
+            return;
+        }
+        targetId = parseInt(state.selectedTargetId);
+    }
+
     disableInput();
 
     const myName = state.character ? state.character.name : 'Oyuncu';
-    const skill = state.skills.find(s => s.id === skillId);
     addMessage('system', '', `${skill ? skill.emoji : '⚔️'} ${myName} ${skill ? skill.name : 'Skill'} kullanıyor...`);
     state.displayedSubmissions.add(myName);
 
@@ -1328,6 +1611,7 @@ async function useSkill(skillId) {
             room_code: state.roomCode,
             username: state.username,
             skill_id: skillId,
+            target_id: targetId,
         });
 
         if (data.error) {
@@ -1422,21 +1706,40 @@ function openHealModal() {
     // Get player names from the status panel
     const playerCards = $$('.player-status-card');
     playerCards.forEach(card => {
-        const text = card.querySelector('.player-status-text');
-        if (text) {
-            // Extract player name from status text (format: "Name — Race Class ...")
-            const fullText = text.textContent;
-            const name = fullText.split('—')[0].trim().split(' ')[0].trim();
-            if (name) {
-                const btn = document.createElement('button');
-                btn.className = 'heal-target-btn';
-                btn.innerHTML = `<span>💚 ${escapeHtml(name)}</span>`;
-                btn.addEventListener('click', () => {
-                    closeHealModal();
-                    executeHeal(name);
-                });
-                list.appendChild(btn);
+        let name = "";
+        
+        const textDiv = card.querySelector('.player-status-text');
+        if (textDiv) {
+            const fullText = textDiv.textContent; // "❤️  Name  HP: ..."
+            // Skip the first emoji and extract the name before "HP:"
+            if (fullText.includes("HP:")) {
+                const parts = fullText.split('HP:')[0].trim(); // "❤️  Name"
+                // The name is usually the last word before HP, or everything after the first emoji
+                const nameParts = parts.split(' ');
+                // Find the first non-empty word after index 0 since index 0 is likely the emoji
+                for(let i = 1; i < nameParts.length; i++) {
+                    if (nameParts[i].trim().length > 0) {
+                        name = nameParts[i].trim();
+                        break;
+                    }
+                }
+                
+                // Fallback if the above logic fails: Remove the known emoji manually
+                if (!name) {
+                    name = parts.replace('❤️', '').trim().split(' ')[0];
+                }
             }
+        }
+        
+        if (name) {
+            const btn = document.createElement('button');
+            btn.className = 'heal-target-btn';
+            btn.innerHTML = `<span>💚 ${escapeHtml(name)}</span>`;
+            btn.addEventListener('click', () => {
+                closeHealModal();
+                executeHeal(name);
+            });
+            list.appendChild(btn);
         }
     });
 
@@ -1475,6 +1778,20 @@ async function executeHeal(targetPlayer) {
         } else {
             const healed = data.healed_players[0];
             addMessage('system', '', `💚 ${myName} → ${healed.name}: ${data.heal_amount} HP iyileşti!`);
+        }
+
+        // Show revive messages
+        if (data.revived_players && data.revived_players.length > 0) {
+            data.revived_players.forEach(pname => {
+                addMessage('system', '', `✨ ${pname} hayata döndü!`);
+            });
+
+            // If I was revived, un-dead me
+            if (data.revived_players.includes(myName)) {
+                state.isDead = false;
+                $('#chat-input-area').classList.remove('dead');
+                enableInput();
+            }
         }
 
         // Update player statuses

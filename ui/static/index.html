@@ -173,6 +173,16 @@
                     <span id="waiting-text">Diğer oyuncular bekleniyor...</span>
                 </div>
 
+                <!-- Encounter confirmation prompt -->
+                <div id="encounter-prompt-container" style="display:none;" class="encounter-prompt-panel">
+                    <h3 id="encounter-prompt-title" style="margin-top:0; color:var(--gold);">⚔️ Savaşa Hazırlan!</h3>
+                    <div id="encounter-prompt-enemies" style="margin-bottom: 1rem; color: #ddd; font-size: 0.9rem;"></div>
+                    <div style="display:flex; gap:1rem;">
+                        <button id="btn-encounter-attack" class="btn btn-primary" style="flex:1;">Saldır</button>
+                        <button id="btn-encounter-flee" class="btn btn-secondary" style="flex:1;">Kaç</button>
+                    </div>
+                </div>
+
                 <div id="chat-input-area">
                     <!-- Skill buttons panel (visible during combat) -->
                     <div id="skill-buttons-panel" style="display:none;" class="skill-buttons-panel">

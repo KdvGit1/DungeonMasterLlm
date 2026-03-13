@@ -66,3 +66,24 @@ or if nothing:
         print(f"   ❌ parse_gm_events HATA: {e}")
 
     return {"item_found": None, "gold_found": 0, "quest_hint": ""}
+
+
+# ─── ENCOUNTER PARSE (GM cevabından [ENCOUNTER] bloğu çıkart) ────────────────
+
+def parse_encounter_from_response(gm_response):
+    """
+    GM cevabından [ENCOUNTER]...[/ENCOUNTER] bloğunu parse eder.
+    encounter_manager modülünü kullanır.
+
+    Döner:
+        {"enemies": [{"name": "...", "type": "..."}, ...], "context": "..."}
+        veya None (blok yoksa)
+    """
+    from game.encounter_manager import parse_encounter_block
+    return parse_encounter_block(gm_response)
+
+
+def strip_encounter_from_response(gm_response):
+    """GM cevabından [ENCOUNTER] bloğunu kaldırır, temiz narrative döner."""
+    from game.encounter_manager import strip_encounter_block
+    return strip_encounter_block(gm_response)
