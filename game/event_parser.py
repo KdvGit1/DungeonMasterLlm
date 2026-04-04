@@ -2,6 +2,7 @@ import re
 import json
 import requests
 import config
+from game.llm_utils import extract_json_object
 
 # ─── GM CEVABINI ANALİZ ET ───────────────────────────────────────────────────
 
@@ -53,10 +54,9 @@ or if nothing:
             }
         )
         answer = response.json()["message"]["content"].strip()
-        answer = re.sub(r'```json|```', '', answer).strip()
-        match = re.search(r'\{.*\}', answer, re.DOTALL)
-        if match:
-            data = json.loads(match.group(0))
+
+        data = extract_json_object(answer)
+        if data is not None:
             return {
                 "item_found": data.get("item_found"),
                 "gold_found": int(data.get("gold_found", 0)),

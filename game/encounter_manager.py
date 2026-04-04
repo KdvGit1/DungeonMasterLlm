@@ -31,12 +31,12 @@ class EncounterState:
             "enemies": [
                 {
                     "id": e["id"],
-                    "type": e["type"],
+                    "type": e.get("type", "unknown"),
                     "display_name": e["display_name"],
                     "hp": e["hp"],
                     "max_hp": e["max_hp"],
                     "ac": e["ac"],
-                    "abilities": e["abilities"],
+                    "abilities": e.get("abilities", []),
                     "status_effects": e.get("status_effects", []),
                     "fled": e.get("fled", False),
                 }
@@ -53,18 +53,41 @@ class EncounterState:
 def parse_encounter_block(gm_response):
     """
     GM cevabından [ENCOUNTER]...[/ENCOUNTER] bloğunu parse eder.
+    Robust regex used to handle missing closing tags or extra text.
 
     Döner:
         {"enemies": [{"name": "Tavern Bouncer", "type": "guard"}, ...], "context": "..."}
         veya None (blok yoksa)
     """
+    # Try finding balanced block first
     pattern = r'\[ENCOUNTER\](.*?)\[/ENCOUNTER\]'
-    match = re.search(pattern, gm_response, re.DOTALL)
-    if not match:
+    match = re.search(pattern, gm_response, re.DOTALL | re.IGNORECASE)
+    
+    content = ""
+    if match:
+        content = match.group(1).strip()
+    else:
+        # Try finding block that starts with [ENCOUNTER] but maybe missing closing tag
+        pattern_lazy = r'\[ENCOUNTER\](.*?)$'
+        match_lazy = re.search(pattern_lazy, gm_response, re.DOTALL | re.IGNORECASE)
+        if match_lazy:
+            content = match_lazy.group(1).strip()
+        else:
+            return None
+
+    if not content:
         return None
 
+    # Clean up content (remove markdown if present)
+    content = re.sub(r'```json|```', '', content).strip()
+    
+    # Try to find the first JSON object in the content
+    json_match = re.search(r'\{.*\}', content, re.DOTALL)
+    if json_match:
+        content = json_match.group(0)
+
     try:
-        data = json.loads(match.group(1).strip())
+        data = json.loads(content)
 
         # enemies listesi kontrolü
         enemies = data.get("enemies", [])
@@ -452,7 +475,7 @@ def get_alive_enemies(encounter_state):
 
 def get_total_xp(encounter_state):
     """Encounter'daki toplam XP ödülünü hesaplar."""
-    return sum(e["xp"] for e in encounter_state.enemies if not e.get("fled", False))
+    return sum(e["xp"] for e in encounter_state.enemies if e["hp"] > 0 and not e.get("fled", False))
 
 
 def is_encounter_over(encounter_state):

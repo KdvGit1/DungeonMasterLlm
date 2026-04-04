@@ -109,13 +109,17 @@ class GameState:
 
     # ── Skill Cooldowns ──
 
-    def start_skill_cooldown(self, player_name, skill_id, cooldown_turns):
+    def set_skill_cooldown(self, player_name, skill_id, cooldown_turns):
         """Skill cooldown başlat."""
         if cooldown_turns <= 0:
             return
         if player_name not in self.skill_cooldowns:
             self.skill_cooldowns[player_name] = {}
         self.skill_cooldowns[player_name][skill_id] = cooldown_turns
+
+    def start_skill_cooldown(self, player_name, skill_id, cooldown_turns):
+        """Alias for set_skill_cooldown"""
+        self.set_skill_cooldown(player_name, skill_id, cooldown_turns)
 
     def tick_skill_cooldowns(self, player_name):
         """Tur sonu: tüm skill cooldown'ları 1 azalt."""

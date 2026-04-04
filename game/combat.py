@@ -157,6 +157,8 @@ def enemy_turn_all(game_state, player_targets, session_id):
     encounter = game_state.active_encounter
     if not encounter or not encounter.is_active:
         return []
+    if not game_state.is_combat:
+        return []
 
     results = enemy_turn(encounter, player_targets)
 
