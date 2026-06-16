@@ -3,6 +3,11 @@
 [ENCOUNTER] blok parse + çoklu düşman encounter state yönetimi.
 LLM cevabından encounter bloğu çıkarır, monster tablosundan stat çeker,
 tur-bazlı combat mantığını yönetir.
+
+KEY DESIGN PRINCIPLES:
+- Combat is fully code-driven. The LLM only narrates.
+- Combat MUST terminate: hard turn limit, auto-resolution, and forced events.
+- Combat is dynamic: enemies adapt, environment changes, dramatic moments.
 """
 
 import re
@@ -17,13 +22,21 @@ from game.dice import d20
 class EncounterState:
     """Aktif bir encounter'ın tüm durumunu tutar."""
 
+    # Hard turn limit — combat auto-resolves after this many turns
+    MAX_TURNS = 12
+
     def __init__(self):
-        self.enemies = []           # [{id, type, display_name, hp, max_hp, ac, attack_bonus, damage_str, xp, abilities, behavior, status_effects, ability_cooldowns}, ...]
+        self.enemies = []           # [{id, type, display_name, hp, max_hp, ac, attack_bonus, damage_str, xp, abilities, behavior, status_effects, ability_cooldowns, fled}, ...]
         self.turn_number = 0
         self.is_active = True
         self.combat_log = []        # Her tur logları (frontend'e gönderilir, DB'ye kaydedilmez)
         self.triggered_events = set()  # Tetiklenmiş olay ID'leri
         self.context = ""           # Encounter bağlamı
+        self.total_damage_dealt_to_enemies = 0  # Track progress
+        self.total_damage_dealt_to_players = 0
+        self.last_significant_event = ""  # Last dramatic thing that happened
+        self.enemies_flanking = False  # Tactical state
+        self.terrain_advantage = None  # "players", "enemies", or None
 
     def to_dict(self):
         """Frontend'e göndermek için dict'e çevir."""
@@ -45,7 +58,20 @@ class EncounterState:
             "turn_number": self.turn_number,
             "is_active": self.is_active,
             "context": self.context,
+            "max_turns": self.MAX_TURNS,
+            "terrain_advantage": self.terrain_advantage,
         }
+
+    def is_at_turn_limit(self):
+        """Check if we've hit the hard turn limit."""
+        return self.turn_number >= self.MAX_TURNS
+
+    def get_progress_ratio(self):
+        """How much damage has been dealt to enemies vs total HP. 0.0 to 1.0."""
+        total_max_hp = sum(e["max_hp"] for e in self.enemies)
+        if total_max_hp == 0:
+            return 1.0
+        return self.total_damage_dealt_to_enemies / total_max_hp
 
 
 # ─── ENCOUNTER PARSE ──────────────────────────────────────────────────────────
@@ -67,12 +93,10 @@ def parse_encounter_block(gm_response):
     try:
         data = json.loads(match.group(1).strip())
 
-        # enemies listesi kontrolü
         enemies = data.get("enemies", [])
         if not enemies:
             return None
 
-        # Eski format desteği: string list → name=type olan dict list
         normalized = []
         for e in enemies:
             if isinstance(e, str):
@@ -85,7 +109,6 @@ def parse_encounter_block(gm_response):
             else:
                 continue
 
-        # Max enemy sınırı
         if len(normalized) > MAX_ENEMIES:
             print(f"🐞 DEBUG [Combat]: Too many enemies requested ({len(normalized)}). Capping at {MAX_ENEMIES}.")
             normalized = normalized[:MAX_ENEMIES]
@@ -119,7 +142,7 @@ def create_encounter(encounter_data):
     """
     state = EncounterState()
     state.context = encounter_data.get("context", "")
-    
+
     print(f"🐞 DEBUG [Combat]: Creating EncounterState for context: '{state.context}'")
 
     for idx, enemy_info in enumerate(encounter_data["enemies"]):
@@ -139,9 +162,9 @@ def create_encounter(encounter_data):
             "damage_str": stats["damage_str"],
             "xp": stats["xp"],
             "abilities": stats["abilities"],
-            "behavior": stats["behavior"],
-            "status_effects": [],       # aktif efektler: [{type, turns_left, ...}]
-            "ability_cooldowns": {},     # ability_name → kalan cooldown turu
+            "behavior": stats.get("behavior", None),
+            "status_effects": [],
+            "ability_cooldowns": {},
             "fled": False,
         }
         state.enemies.append(enemy)
@@ -270,22 +293,19 @@ def _try_use_ability(enemy, encounter_state, alive_players):
         if not effect:
             continue
         if effect.get("passive"):
-            continue  # Passive yetenekler otomatik, aksiyon harcanmaz
+            continue
 
-        # Cooldown kontrolü
         cd_remaining = enemy["ability_cooldowns"].get(ability_name, 0)
         if cd_remaining > 0:
             continue
 
-        # Tetikleme koşulu
         trigger = effect.get("trigger")
         if trigger == "hp_below_50":
             if enemy["hp"] > enemy["max_hp"] * 0.5:
-                continue  # HP yeterince düşmemiş
+                continue
         elif trigger == "on_hit":
-            continue  # on_hit pasif tetiklenir, burada kullanılmaz
+            continue
 
-        # Yeteneği kullan
         if effect["effect"] == "heal_lowest_ally":
             return _use_heal_ally(enemy, encounter_state, effect, ability_name)
         elif effect["effect"] == "dot":
@@ -303,18 +323,13 @@ def _try_use_ability(enemy, encounter_state, alive_players):
 
 
 def _use_heal_ally(enemy, encounter_state, effect, ability_name):
-    """heal_ally yeteneği: en düşük HP'li müttefiki iyileştirir."""
     alive = [e for e in encounter_state.enemies if e["hp"] > 0 and e["id"] != enemy["id"]]
     if not alive:
         return None
 
     target = min(alive, key=lambda e: e["hp"])
-
-    # Heal miktarı hesapla
     heal_amount = parse_damage(effect["heal"])
     target["hp"] = min(target["max_hp"], target["hp"] + heal_amount)
-
-    # Cooldown uygula
     enemy["ability_cooldowns"][ability_name] = effect.get("cooldown", 3)
 
     msg = f"{enemy['display_name']} heals {target['display_name']} for {heal_amount} HP!"
@@ -331,11 +346,8 @@ def _use_heal_ally(enemy, encounter_state, effect, ability_name):
 
 
 def _use_poison_dart(enemy, target, effect, ability_name):
-    """poison_dart: hedefe DoT uygular."""
     dot_dmg = effect.get("dot_damage", 3)
     dot_turns = effect.get("dot_turns", 2)
-
-    # Cooldown uygula
     enemy["ability_cooldowns"][ability_name] = effect.get("cooldown", 0)
 
     msg = f"{enemy['display_name']} fires a poison dart at {target['name']}! ({dot_dmg} damage for {dot_turns} turns)"
@@ -344,7 +356,7 @@ def _use_poison_dart(enemy, target, effect, ability_name):
         "target_player": target["name"],
         "attack_roll": 0,
         "hit": True,
-        "damage": 0,  # İlk tur hasar yok, DoT sonra uygulanır
+        "damage": 0,
         "ability_used": ability_name,
         "ability_effect": {"dot_damage": dot_dmg, "dot_turns": dot_turns, "target": target["name"]},
         "message": msg,
@@ -352,15 +364,14 @@ def _use_poison_dart(enemy, target, effect, ability_name):
 
 
 def _use_aoe_damage(enemy, alive_players, effect, ability_name):
-    """aoe_damage: tüm oyunculara hasar vurur."""
     damage = parse_damage(effect.get("damage", "2d6"))
     enemy["ability_cooldowns"][ability_name] = effect.get("cooldown", 3)
-    
+
     msg = f"{enemy['display_name']} unleashes an area attack! ({damage} damage to everyone)"
-    
+
     return {
         "enemy_name": enemy["display_name"],
-        "target_player": None, # Indicates AOE
+        "target_player": None,
         "attack_roll": 0,
         "hit": True,
         "damage": damage,
@@ -371,15 +382,14 @@ def _use_aoe_damage(enemy, alive_players, effect, ability_name):
 
 
 def _use_life_drain(enemy, target, effect, ability_name):
-    """life_drain: hedefe hasar verir, hasar kadar kendini iyileştirir."""
     damage = parse_damage(effect.get("damage", "2d6"))
     enemy["ability_cooldowns"][ability_name] = effect.get("cooldown", 3)
-    
+
     heal_amount = damage
     enemy["hp"] = min(enemy["max_hp"], enemy["hp"] + heal_amount)
-    
+
     msg = f"{enemy['display_name']} drains life from {target['name']}! ({damage} damage treated as self-heal)"
-    
+
     return {
         "enemy_name": enemy["display_name"],
         "target_player": target["name"],
@@ -393,13 +403,12 @@ def _use_life_drain(enemy, target, effect, ability_name):
 
 
 def _use_heal_self(enemy, effect, ability_name):
-    """heal_self: kendini iyileştirir."""
     heal_amount = parse_damage(effect.get("heal", "1d6"))
     enemy["ability_cooldowns"][ability_name] = effect.get("cooldown", 2)
-    
+
     enemy["hp"] = min(enemy["max_hp"], enemy["hp"] + heal_amount)
     msg = f"{enemy['display_name']} regenerates {heal_amount} HP!"
-    
+
     return {
         "enemy_name": enemy["display_name"],
         "target_player": None,
@@ -415,7 +424,6 @@ def _use_heal_self(enemy, effect, ability_name):
 # ─── STATUS EFFECT YÖNETİMİ ──────────────────────────────────────────────────
 
 def _is_stunned(enemy):
-    """Düşman stunned mı?"""
     for se in enemy.get("status_effects", []):
         if se["type"] == "stun" and se.get("turns_left", 0) > 0:
             return True
@@ -423,7 +431,6 @@ def _is_stunned(enemy):
 
 
 def _tick_status_effects(enemy):
-    """Tur sonu: status effect sürelerini azalt, süresi bitenleri kaldır."""
     remaining = []
     for se in enemy.get("status_effects", []):
         se["turns_left"] = se.get("turns_left", 0) - 1
@@ -433,7 +440,6 @@ def _tick_status_effects(enemy):
 
 
 def _tick_enemy_cooldowns(enemy):
-    """Tur başı: yetenek cooldown'larını azalt."""
     to_remove = []
     for ability_name, cd in enemy.get("ability_cooldowns", {}).items():
         if cd > 0:
@@ -445,7 +451,6 @@ def _tick_enemy_cooldowns(enemy):
 
 
 def _get_rage_bonus(enemy):
-    """Rage yeteneği aktifse bonus hasar döner."""
     if "rage" not in enemy.get("abilities", []):
         return 0
     if enemy["hp"] <= enemy["max_hp"] * 0.5:
@@ -461,6 +466,11 @@ def get_alive_enemies(encounter_state):
     return [e for e in encounter_state.enemies if e["hp"] > 0 and not e.get("fled", False)]
 
 
+def get_alive_players(player_targets):
+    """Hayatta kalan oyuncuları döner."""
+    return [p for p in player_targets if p["hp"] > 0]
+
+
 def get_total_xp(encounter_state):
     """Encounter'daki toplam XP ödülünü hesaplar."""
     return sum(e["xp"] for e in encounter_state.enemies if not e.get("fled", False))
@@ -469,6 +479,22 @@ def get_total_xp(encounter_state):
 def is_encounter_over(encounter_state):
     """Tüm düşmanlar öldü mü / kaçtı mı?"""
     return len(get_alive_enemies(encounter_state)) == 0
+
+
+def is_combat_finished(encounter_state, player_targets):
+    """
+    Combat is finished if ANY of:
+    1. All enemies dead/fled
+    2. All players unconscious
+    3. Hard turn limit reached
+    """
+    if is_encounter_over(encounter_state):
+        return True, "enemies_defeated"
+    if len(get_alive_players(player_targets)) == 0:
+        return True, "players_defeated"
+    if encounter_state.is_at_turn_limit():
+        return True, "turn_limit"
+    return False, None
 
 
 # ─── PROMPT İÇİN ENCOUNTER DURUMU ────────────────────────────────────────────
@@ -481,11 +507,36 @@ def get_encounter_status_for_prompt(encounter_state):
     lines = ["[ACTIVE ENCOUNTER]"]
     for enemy in encounter_state.enemies:
         status = "ALIVE" if enemy["hp"] > 0 else ("FLED" if enemy.get("fled") else "DEAD")
+        hp_pct = enemy["hp"] / enemy["max_hp"] if enemy["max_hp"] > 0 else 0
+        # Add descriptive HP state
+        if hp_pct > 0.75:
+            condition = "fresh"
+        elif hp_pct > 0.5:
+            condition = "wounded"
+        elif hp_pct > 0.25:
+            condition = "badly wounded"
+        elif hp_pct > 0:
+            condition = "near death"
+        else:
+            condition = "dead"
+
         lines.append(
             f"- {enemy['display_name']} ({enemy['type']}): "
-            f"HP {enemy['hp']}/{enemy['max_hp']} — {status}"
+            f"HP {enemy['hp']}/{enemy['max_hp']} ({condition}) — {status}"
         )
-    lines.append(f"Turn: {encounter_state.turn_number}")
+
+    lines.append(f"Turn: {encounter_state.turn_number}/{encounter_state.MAX_TURNS}")
+
+    # Add dramatic context based on combat state
+    alive_enemies = get_alive_enemies(encounter_state)
+    if len(alive_enemies) == 1:
+        lines.append("⚡ Only one enemy remains — this is the final stand!")
+    elif encounter_state.turn_number >= encounter_state.MAX_TURNS - 2:
+        lines.append("⚠️ Combat has been dragging on — something must change soon!")
+
+    if encounter_state.last_significant_event:
+        lines.append(f"Last event: {encounter_state.last_significant_event}")
+
     return "\n".join(lines) + "\n"
 
 
@@ -513,7 +564,7 @@ def format_encounter_display(encounter_state):
             f"HP: [{bar}] {enemy['hp']}/{enemy['max_hp']}  AC: {enemy['ac']}"
         )
 
-    lines.append(f"   Tur: {encounter_state.turn_number}")
+    lines.append(f"   Tur: {encounter_state.turn_number}/{encounter_state.MAX_TURNS}")
     return "\n".join(lines)
 
 
@@ -523,14 +574,11 @@ def generate_combat_summary(encounter_state, dead_players=None):
     """
     Savaş bitince tek bir özet mesaj üretir.
     Bu mesaj DB'ye kaydedilir ve LLM'in hafızasına girer.
-
-    Ölü oyuncuları açıkça belirtir.
     """
     dead_players = dead_players or []
 
     print(f"🐞 DEBUG [Combat]: Generating mechanical combat summary. Dead players: {dead_players}")
 
-    # Düşman sonuçları
     defeated = [e for e in encounter_state.enemies if e["hp"] <= 0 and not e.get("fled")]
     fled = [e for e in encounter_state.enemies if e.get("fled")]
 
@@ -549,7 +597,6 @@ def generate_combat_summary(encounter_state, dead_players=None):
     total_xp = get_total_xp(encounter_state)
     parts.append(f"Total XP earned: {total_xp}.")
 
-    # Ölü oyuncular — KRİTİK
     if dead_players:
         for dp in dead_players:
             parts.append(

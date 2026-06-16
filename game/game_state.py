@@ -29,6 +29,12 @@ class GameState:
         # {player_name: {skill_id: remaining_turns}}
         self.skill_cooldowns = {}
 
+        # Combat narration variety tracking
+        # Prevents the GM from repeating the same descriptions
+        self.used_combat_descriptions = set()
+        self.combat_rounds_without_progress = 0
+        self.last_combat_event = ""
+
     def add_player(self, user, character):
         self.active_players.append(user)
         self.characters.append(character)
@@ -39,6 +45,9 @@ class GameState:
         self.active_encounter = encounter_state
         self.is_combat = True
         self.pending_encounter = None
+        self.combat_rounds_without_progress = 0
+        self.last_combat_event = ""
+        self.used_combat_descriptions = set()
 
         alive = [e for e in encounter_state.enemies if e["hp"] > 0]
         names = ", ".join(e["display_name"] for e in alive)
@@ -50,6 +59,8 @@ class GameState:
         self.active_encounter = None
         self.is_combat = False
         self.pending_encounter = None
+        self.combat_rounds_without_progress = 0
+        self.used_combat_descriptions = set()
         print("⚔️  Savaş bitti.")
 
     def start_combat(self, initiative_order):
@@ -72,6 +83,24 @@ class GameState:
 
     def set_scene(self, scene_description):
         self.current_scene = scene_description
+
+    def is_encounter_active(self):
+        """Check if combat is truly active and has living enemies."""
+        if not self.is_combat or not self.active_encounter:
+            return False
+        from game.encounter_manager import get_alive_enemies
+        return len(get_alive_enemies(self.active_encounter)) > 0
+
+    def record_combat_description(self, desc):
+        """Track a combat description to avoid repetition."""
+        # Store a simplified version for comparison
+        key = desc.lower()[:60].strip()
+        self.used_combat_descriptions.add(key)
+
+    def is_description_used(self, desc):
+        """Check if a similar combat description was already used."""
+        key = desc.lower()[:60].strip()
+        return key in self.used_combat_descriptions
 
     # ── Oyuncu Status Effects ──
 
@@ -107,6 +136,10 @@ class GameState:
             if se["type"] == "dot" and se.get("turns_left", 0) > 0:
                 total += se.get("dot_damage", 0)
         return total
+
+    def clear_player_statuses(self, player_name):
+        """Tüm status effect'leri temizle (savaş sonu)."""
+        self.player_status_effects[player_name] = []
 
     # ── Skill Cooldowns ──
 
@@ -152,10 +185,16 @@ class GameState:
         player_names = ", ".join([c['name'] for c in self.characters]) if self.characters else "No players"
         node_info = f"\nCurrent Location: {self.current_node}" if self.current_node else ""
 
+        # Add variety warning if combat has been going on too long without progress
+        variety_warning = ""
+        if self.combat_rounds_without_progress >= 3:
+            variety_warning = "\n⚠️ COMBAT VARIETY WARNING: Combat has been repetitive. Change tactics, introduce environmental events, have enemies adapt, or accelerate the resolution.\n"
+
         return (
             f"[CURRENT GAME STATE]\n"
             f"Scene: {self.current_scene}\n"
             f"Players: {player_names}\n"
             f"{combat_status}"
             f"{node_info}"
+            f"{variety_warning}"
         )
