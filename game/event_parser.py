@@ -1,7 +1,6 @@
 import re
 import json
-import requests
-import config
+from llm_client import ask_llm
 
 # ─── GM CEVABINI ANALİZ ET ───────────────────────────────────────────────────
 
@@ -42,17 +41,7 @@ or if nothing:
 }}"""
 
     try:
-        response = requests.post(
-            f"{config.base_url}/api/chat",
-            json={
-                "model": config.model,
-                "messages": [{"role": "user", "content": prompt}],
-                "stream": False,
-                "think": False,
-                "options": {"num_ctx": 2048, "temperature": 0.1, "num_predict": 80}
-            }
-        )
-        answer = response.json()["message"]["content"].strip()
+        answer = ask_llm([{"role": "user", "content": prompt}]).strip()
         answer = re.sub(r'```json|```', '', answer).strip()
         match = re.search(r'\{.*\}', answer, re.DOTALL)
         if match:
@@ -86,4 +75,4 @@ def parse_encounter_from_response(gm_response):
 def strip_encounter_from_response(gm_response):
     """GM cevabından [ENCOUNTER] bloğunu kaldırır, temiz narrative döner."""
     from game.encounter_manager import strip_encounter_block
-    return strip_encounter_block(gm_response)
+    return strip_encounter_block(gm_response)

@@ -4,7 +4,7 @@
 Flask
 
 # AI and Machine Learning (with CUDA support)
-pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+# pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
 transformers
 bitsandbytes
 accelerate

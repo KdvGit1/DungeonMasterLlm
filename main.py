@@ -32,56 +32,16 @@ from prompts.system_prompt import build_system_prompt
 from rag.retriever import get_relevant_rules
 from rag.ingest import ingest
 from game.character_creator import create_character
+from llm_client import ask_llm_full, ask_llm, stream_llm
 import requests
 import config
 
-# ─── OLLAMA'YA İSTEK GÖNDER ──────────────────────────────────────────────────
+# ─── LLM CLIENT (shared via llm_client.py) ───────────────────────────────────
+# ask_gm is now a thin wrapper around ask_llm_full for CLI display
 
 def ask_gm(messages, system_prompt):
-    start = time.time()
-    response = requests.post(
-        f"{config.base_url}/api/chat",
-        json={
-            "model": config.model,
-            "messages": messages,
-            "system": system_prompt,
-            "stream": True,
-            "think": False,
-            "options": {
-                "num_ctx": config.context_length,
-                "temperature": config.temp,
-                "num_predict": config.num_predict
-            }
-        },
-        stream=True
-    )
-
-    full_response = ""
-    prompt_tokens = 0
-    response_tokens = 0
-    first_chunk_time = None
-
-    print("\n🧙 GM: ", end="", flush=True)
-
-    for line in response.iter_lines():
-        if not line:
-            continue
-        chunk = json.loads(line)
-        if first_chunk_time is None:
-            first_chunk_time = time.time() - start
-        message = chunk.get("message", {})
-        content = message.get("content", "")
-        if content:
-            print(content, end="", flush=True)
-            full_response += content
-        if chunk.get("done"):
-            prompt_tokens = chunk.get("prompt_eval_count", "?")
-            response_tokens = chunk.get("eval_count", "?")
-
-    elapsed = time.time() - start
-    print(f"\n\n⏱️  Toplam : {elapsed:.2f}s  |  İlk token: {first_chunk_time:.2f}s")
-    print(f"📊 Prompt : {prompt_tokens} token  |  Cevap: {response_tokens} token")
-    return full_response
+    """Send a streaming GM request. Uses llm_client (Ollama or OpenRouter)."""
+    return ask_llm_full(messages, system_prompt)
 
 # ─── ZAR GEREKLİ Mİ? ─────────────────────────────────────────────────────────
 
@@ -119,18 +79,8 @@ If roll needed: {{"needed": true, "ability": "charisma", "dc": 12}}
 If no roll:     {{"needed": false}}"""
 
     try:
-        response = requests.post(
-            f"{config.base_url}/api/chat",
-            json={
-                "model": config.model,
-                "messages": [{"role": "user", "content": prompt}],
-                "stream": False,
-                "think": False,
-                "options": {"num_ctx": 4096, "temperature": 0.1, "num_predict": 50}
-            }
-        )
-        result = response.json()
-        answer = result["message"]["content"].strip()
+        response = ask_llm([{"role": "user", "content": prompt}])
+        answer = response.strip()
         print(f"   AI ham cevap: '{answer}'")
         answer = re.sub(r'```json|```', '', answer).strip()
         match = re.search(r'\{.*?\}', answer, re.DOTALL)
@@ -470,21 +420,9 @@ def generate_llm_combat_summary(session_id, combat_messages, game_state, dead_pl
     if dead_players:
         prompt += f"\nNote: The following players died or fell unconscious during the battle: {', '.join(dead_players)}. Incorporate this tragedy into the narrative."
 
-    response = requests.post(
-        f"{config.base_url}/api/chat",
-        json={
-            "model": config.model,
-            "messages": [{"role": "user", "content": "Please summarize the combat."}],
-            "system": prompt,
-            "stream": False,
-            "think": False,
-            "options": {"num_ctx": config.context_length, "temperature": config.temp}
-        }
-    ).json()
-    summary = response.get("message", {}).get("content", "")
+    summary = ask_llm([{"role": "user", "content": "Please summarize the combat."}], prompt)
     print(f"🐞 DEBUG [Combat/CLI]: NARRATIVE SUMMARY GENERATED:\n{summary}\n")
     return summary
-
 
 # ─── COMBAT TURN PROCESSOR ───────────────────────────────────────────────────
 # This is the core combat engine for CLI. It processes ONE full round of combat:

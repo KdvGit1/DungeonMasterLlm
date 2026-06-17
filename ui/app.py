@@ -48,6 +48,7 @@ from game.room_manager import create_room, join_room, get_room, get_room_for_use
 from prompts.system_prompt import build_system_prompt
 from rag.retriever import get_relevant_rules
 from rag.ingest import ingest
+from llm_client import ask_llm_full, ask_llm, stream_llm
 import config
 
 from ui import translator
@@ -79,49 +80,21 @@ def _init_translator():
         _translator_initialized = True
 
 
-# ─── OLLAMA ÇAĞRISI ──────────────────────────────────────────────────────────
+# ─── LLM CLIENT (shared via llm_client.py) ───────────────────────────────────
+# These are thin wrappers for the web UI
 
 def _ask_gm_streaming(messages, system_prompt):
     """GM'den yanıt al, streaming olarak yield et."""
-    response = http_requests.post(
-        f"{config.base_url}/api/chat",
-        json={
-            "model": config.model,
-            "messages": messages,
-            "system": system_prompt,
-            "stream": True,
-            "think": False,
-            "options": {
-                "num_ctx": config.context_length,
-                "temperature": config.temp,
-                "num_predict": config.num_predict,
-            },
-        },
-        stream=True,
-    )
-
-    full_response = ""
-    for line in response.iter_lines():
-        if not line:
-            continue
-        chunk = json.loads(line)
-        content = chunk.get("message", {}).get("content", "")
+    for content, done in stream_llm(messages, system_prompt):
         if content:
-            full_response += content
             yield content, False
-
-        if chunk.get("done"):
+        if done:
             yield "", True
-
-    return full_response
 
 
 def _ask_gm_full(messages, system_prompt):
     """GM'den yanıt al, hepsini birden döndür."""
-    full = ""
-    for content, done in _ask_gm_streaming(messages, system_prompt):
-        full += content
-    return full
+    return ask_llm_full(messages, system_prompt)
 
 
 # ─── ZAR KONTROLÜ ────────────────────────────────────────────────────────────
@@ -162,18 +135,7 @@ If roll needed: {{"needed": true, "ability": "charisma", "dc": 12}}
 If no roll:     {{"needed": false}}"""
 
     try:
-        response = http_requests.post(
-            f"{config.base_url}/api/chat",
-            json={
-                "model": config.model,
-                "messages": [{"role": "user", "content": prompt}],
-                "stream": False,
-                "think": False,
-                "options": {"num_ctx": 4096, "temperature": 0.1, "num_predict": 50},
-            },
-        )
-        result = response.json()
-        answer = result["message"]["content"].strip()
+        answer = ask_llm([{"role": "user", "content": prompt}]).strip()
         answer = re.sub(r"```json|```", "", answer).strip()
         match = re.search(r"\{.*?\}", answer, re.DOTALL)
         if match:
@@ -315,18 +277,7 @@ Respond ONLY with valid JSON:
 {{"is_combat": true, "enemies": ["dragon"], "context": "player attacks the dragon"}}
 """
     try:
-        response = http_requests.post(
-            f"{config.base_url}/api/chat",
-            json={
-                "model": config.model,
-                "messages": [{"role": "user", "content": prompt}],
-                "stream": False,
-                "think": False,
-                "options": {"num_ctx": 4096, "temperature": 0.1, "num_predict": 100},
-            },
-        )
-        result = response.json()
-        answer = result["message"]["content"].strip()
+        answer = ask_llm([{"role": "user", "content": prompt}]).strip()
         answer = re.sub(r"```json|```", "", answer).strip()
         match = re.search(r"\{.*?\}", answer, re.DOTALL)
         if match:
@@ -854,36 +805,48 @@ def serve_asset(filename):
 
 @app.route("/api/config", methods=["GET"])
 def api_get_config():
+    """Get current configuration including provider, models, and API key status."""
+    openrouter_key_set = bool(config.get_api_key('openrouter'))
     return jsonify({
+        "provider": getattr(config, 'PROVIDER', 'ollama'),
         "models": config.AVAILABLE_MODELS,
+        "openrouter_models": config.OPENROUTER_MODELS,
         "translators": config.AVAILABLE_TRANSLATOR_MODELS,
-        "current_model": config.model,
+        "current_model": config.get_active_model(),
         "current_translator": getattr(config, "translator_model", "none"),
-        "target_language": getattr(config, "target_language", "Turkish")
+        "target_language": getattr(config, "target_language", "Turkish"),
+        "openrouter_key_set": openrouter_key_set,
+        "ollama_model": config.model,
+        "openrouter_model": config.openrouter_model,
     })
 
 
 @app.route("/api/config", methods=["POST"])
 def api_save_config():
+    """Save configuration including provider, model, and API keys."""
     data = request.json
+
+    # Provider selection
+    if "provider" in data:
+        config.PROVIDER = data["provider"]
+
+    # Ollama settings
     if "model" in data:
         config.model = data["model"]
+
+    # OpenRouter settings
+    if "openrouter_model" in data:
+        config.openrouter_model = data["openrouter_model"]
+
+    # API key management
+    if "openrouter_api_key" in data:
+        config.set_api_key('openrouter', data["openrouter_api_key"])
+
+    # Translator settings
     if "translator" in data:
         config.translator_model = data["translator"]
     if "target_language" in data:
         config.target_language = data["target_language"]
-
-    config_path = os.path.join(PROJECT_ROOT, "config.py")
-    try:
-        with open(config_path, "r", encoding="utf-8") as f:
-            content = f.read()
-        content = re.sub(r"^model\s*=\s*['\"].*?['\"]", f"model = '{config.model}'", content, flags=re.MULTILINE)
-        content = re.sub(r"^translator_model\s*=\s*['\"].*?['\"]", f"translator_model = '{config.translator_model}'", content, flags=re.MULTILINE)
-        content = re.sub(r"^target_language\s*=\s*['\"].*?['\"]", f"target_language = '{config.target_language}'", content, flags=re.MULTILINE)
-        with open(config_path, "w", encoding="utf-8") as f:
-            f.write(content)
-    except Exception as e:
-        print(f"Config save error: {e}")
 
     return jsonify({"success": True})
 
@@ -893,6 +856,52 @@ def api_config_init():
     """Host config kaydettikten sonra translator'ı başlat."""
     _init_translator()
     return jsonify({"success": True})
+
+
+@app.route("/api/config/test", methods=["POST"])
+def api_test_connection():
+    """Test the current LLM connection."""
+    data = request.json
+    test_provider = data.get('provider', config.PROVIDER)
+
+    try:
+        if test_provider == 'openrouter':
+            test_key = data.get('openrouter_api_key', config.get_api_key('openrouter'))
+            if not test_key:
+                return jsonify({"success": False, "error": "No API key provided"}), 400
+
+            # Quick test call to OpenRouter
+            import requests as req
+            headers = {
+                'Authorization': f'Bearer {test_key}',
+                'Content-Type': 'application/json',
+            }
+            test_model = data.get('openrouter_model', config.openrouter_model)
+            resp = req.post(
+                f"{config.OPENROUTER_BASE_URL}/chat/completions",
+                json={
+                    'model': test_model,
+                    'messages': [{'role': 'user', 'content': 'Reply with OK'}],
+                    'max_tokens': 10,
+                },
+                headers=headers,
+                timeout=15,
+            )
+            if resp.status_code == 200:
+                return jsonify({"success": True, "message": f"Connected to OpenRouter ({test_model})"})
+            else:
+                return jsonify({"success": False, "error": f"HTTP {resp.status_code}: {resp.text[:200]}"}), 400
+        else:
+            # Test Ollama
+            import requests as req
+            resp = req.get(f"{config.base_url}/api/tags", timeout=5)
+            if resp.status_code == 200:
+                models = resp.json().get('models', [])
+                return jsonify({"success": True, "message": f"Ollama running with {len(models)} models"})
+            else:
+                return jsonify({"success": False, "error": f"Ollama returned {resp.status_code}"}), 400
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
 
 
 # ─── AUTH ─────────────────────────────────────────────────────────────────────

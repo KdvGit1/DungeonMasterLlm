@@ -174,12 +174,28 @@ async function loadConfigForHost() {
     try {
         const configData = await API.get('/api/config');
 
+        // Provider radio buttons
+        const provider = configData.provider || 'ollama';
+        document.querySelector(`input[name="provider"][value="${provider}"]`).checked = true;
+        updateProviderSections(provider);
+
+        // Ollama models
         const llmSelect = $('#config-llm-model');
         llmSelect.innerHTML = '';
         for (const [key, val] of Object.entries(configData.models)) {
-            llmSelect.innerHTML += `<option value="${val}" ${val === configData.current_model ? 'selected' : ''}>${key} (${val})</option>`;
+            llmSelect.innerHTML += `<option value="${val}" ${val === configData.ollama_model ? 'selected' : ''}>${key} (${val})</option>`;
         }
 
+        // OpenRouter models
+        const orSelect = $('#config-openrouter-model');
+        if (orSelect) {
+            orSelect.innerHTML = '';
+            for (const [key, val] of Object.entries(configData.openrouter_models || {})) {
+                orSelect.innerHTML += `<option value="${val}" ${val === configData.openrouter_model ? 'selected' : ''}>${key} (${val})</option>`;
+            }
+        }
+
+        // Translator models
         const transSelect = $('#config-translator-model');
         transSelect.innerHTML = '';
         for (const [key, val] of Object.entries(configData.translators)) {
@@ -187,19 +203,94 @@ async function loadConfigForHost() {
         }
 
         $('#config-target-language').value = configData.target_language || 'Turkish';
+
+        // API key status
+        const keyStatus = $('#openrouter-key-status');
+        if (keyStatus) {
+            if (configData.openrouter_key_set) {
+                keyStatus.innerHTML = '✅ API key kayıtlı';
+                keyStatus.style.color = '#4caf50';
+            } else {
+                keyStatus.innerHTML = '⚠️ API key gerekli';
+                keyStatus.style.color = '#e74c3c';
+            }
+        }
     } catch(e) {
         console.error("Config load error", e);
     }
 }
 
-$('#btn-save-config').addEventListener('click', async () => {
-    showLoading(true, "Ayarlar kaydediliyor ve model başlatılıyor...");
+// Provider radio button switching
+document.querySelectorAll('input[name="provider"]').forEach(radio => {
+    radio.addEventListener('change', (e) => {
+        updateProviderSections(e.target.value);
+    });
+});
 
+function updateProviderSections(provider) {
+    const ollamaSection = $('#ollama-model-section');
+    const orSection = $('#openrouter-model-section');
+    const orKeySection = $('#openrouter-key-section');
+    if (provider === 'openrouter') {
+        if (ollamaSection) ollamaSection.style.display = 'none';
+        if (orSection) orSection.style.display = 'block';
+        if (orKeySection) orKeySection.style.display = 'block';
+    } else {
+        if (ollamaSection) ollamaSection.style.display = 'block';
+        if (orSection) orSection.style.display = 'none';
+        if (orKeySection) orKeySection.style.display = 'none';
+    }
+}
+
+// Test connection button
+$('#btn-test-connection').addEventListener('click', async () => {
+    const resultEl = $('#connection-test-result');
+    resultEl.textContent = 'Test ediliyor...';
+    resultEl.style.color = 'var(--text-secondary)';
+
+    const provider = document.querySelector('input[name="provider"]:checked').value;
+    const payload = { provider };
+
+    if (provider === 'openrouter') {
+        payload.openrouter_model = $('#config-openrouter-model').value;
+        payload.openrouter_api_key = $('#config-openrouter-key').value.trim();
+    }
+
+    try {
+        const res = await API.post('/api/config/test', payload);
+        if (res.success) {
+            resultEl.textContent = `✅ ${res.message}`;
+            resultEl.style.color = '#4caf50';
+        } else {
+            resultEl.textContent = `❌ ${res.error}`;
+            resultEl.style.color = '#e74c3c';
+        }
+    } catch(e) {
+        resultEl.textContent = `❌ Bağlantı hatası: ${e.message}`;
+        resultEl.style.color = '#e74c3c';
+    }
+});
+
+$('#btn-save-config').addEventListener('click', async () => {
+    showLoading(true, "Ayarlar kaydediliyor...");
+
+    const provider = document.querySelector('input[name="provider"]:checked').value;
     const payload = {
-        model: $('#config-llm-model').value,
+        provider,
         translator: $('#config-translator-model').value,
-        target_language: $('#config-target-language').value.trim() || 'Turkish'
+        target_language: $('#config-target-language').value.trim() || 'Turkish',
     };
+
+    if (provider === 'ollama') {
+        payload.model = $('#config-llm-model').value;
+    } else {
+        payload.openrouter_model = $('#config-openrouter-model').value;
+        const apiKey = $('#config-openrouter-key').value.trim();
+        if (apiKey) {
+            payload.openrouter_api_key = apiKey;
+        }
+    }
+
     await API.post('/api/config', payload);
 
     // Start translator loading in background

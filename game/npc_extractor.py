@@ -9,8 +9,7 @@ Her GM cevabından sonra çalışır:
 
 import json
 import re
-import requests
-import config
+from llm_client import ask_llm
 
 
 def extract_npcs_from_response(gm_response, recent_messages, existing_npc_names, player_names):
@@ -66,22 +65,7 @@ If there are new NPCs: [{{"name":"...","role":"...","appearance":"...","personal
 If there are NO new NPCs: []"""
 
     try:
-        response = requests.post(
-            f"{config.base_url}/api/chat",
-            json={
-                "model": config.model,
-                "messages": [{"role": "user", "content": prompt}],
-                "stream": False,
-                "think": False,
-                "options": {
-                    "num_ctx": 4096,
-                    "temperature": 0.2,
-                    "num_predict": 400
-                }
-            }
-        )
-        result = response.json()
-        answer = result["message"]["content"].strip()
+        answer = ask_llm([{"role": "user", "content": prompt}]).strip()
 
         print(f"\n🔎 NPC Extractor — AI ham cevap: {answer[:200]}")
 
