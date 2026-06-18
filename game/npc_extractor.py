@@ -92,14 +92,13 @@ If there are NO new NPCs: []"""
             if not isinstance(npc, dict):
                 continue
 
-            # Tüm gerekli alanlar var mı?
-            missing = [f for f in required_fields if not npc.get(f)]
-            if missing:
-                print(f"🔎 NPC Extractor — ⚠️  '{npc.get('name', '?')}' eksik alan: {missing}, atlanıyor")
-                continue
+            # Tüm gerekli alanlar var mı? Boş olanları "unknown" ile doldur
+            for field in required_fields:
+                if not npc.get(field):
+                    npc[field] = "unknown"
 
-            # Zaten bilinen bir isim mi?
-            if npc["name"].lower() in known_names:
+            # Zaten bilinen bir isim mi? (unknown ise de ekle)
+            if npc["name"].lower() != "unknown" and npc["name"].lower() in known_names:
                 print(f"🔎 NPC Extractor — ⏭️  '{npc['name']}' zaten biliniyor, atlanıyor")
                 continue
 

@@ -93,7 +93,7 @@ def _get_chat_endpoint(cfg):
         return f"{cfg['base_url']}/api/chat"
 
 
-def ask_llm(messages, system_prompt, timeout=120):
+def ask_llm(messages, system_prompt="", timeout=120):
     """
     Send a non-streaming request to the LLM.
     Returns the full response text.

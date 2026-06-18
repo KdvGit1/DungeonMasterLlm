@@ -20,7 +20,7 @@ available_actions: >
   - Create a stampede (release the wolves): ROLL d20 + Animal Handling vs DC 16
 
 npcs:
-  - name: "Scar-Face" Varek
+  - name: Scar-Face Varek
     role: Camp Warden
     appearance: A massive man with a jagged scar across his throat, wearing heavy plate
     personality: Brutal, short-tempered, hates magic users

@@ -24,19 +24,24 @@ class EncounterState:
 
     # Hard turn limit — combat auto-resolves after this many turns
     MAX_TURNS = 12
+    # Stuck combat threshold — if no damage dealt to either side for this many turns, force resolution
+    STUCK_COMBAT_THRESHOLD = 5
 
     def __init__(self):
-        self.enemies = []           # [{id, type, display_name, hp, max_hp, ac, attack_bonus, damage_str, xp, abilities, behavior, status_effects, ability_cooldowns, fled}, ...]
+        self.enemies = []
         self.turn_number = 0
         self.is_active = True
-        self.combat_log = []        # Her tur logları (frontend'e gönderilir, DB'ye kaydedilmez)
-        self.triggered_events = set()  # Tetiklenmiş olay ID'leri
-        self.context = ""           # Encounter bağlamı
-        self.total_damage_dealt_to_enemies = 0  # Track progress
+        self.combat_log = []
+        self.triggered_events = set()
+        self.context = ""
+        self.total_damage_dealt_to_enemies = 0
         self.total_damage_dealt_to_players = 0
-        self.last_significant_event = ""  # Last dramatic thing that happened
-        self.enemies_flanking = False  # Tactical state
-        self.terrain_advantage = None  # "players", "enemies", or None
+        self.last_significant_event = ""
+        self.enemies_flanking = False
+        self.terrain_advantage = None
+        # Track damage history for stuck combat detection
+        self._last_damage_turn = 0  # Last turn where any damage was dealt
+        self.player_fled = False  # Track if player successfully fled
 
     def to_dict(self):
         """Frontend'e göndermek için dict'e çevir."""
@@ -94,20 +99,28 @@ def parse_encounter_block(gm_response):
         data = json.loads(match.group(1).strip())
 
         enemies = data.get("enemies", [])
-        if not enemies:
+
+        # Validate: enemies must be a non-empty list with valid entries
+        if not enemies or not isinstance(enemies, list):
             return None
 
         normalized = []
         for e in enemies:
             if isinstance(e, str):
-                normalized.append({"name": e, "type": e})
+                if e.strip():  # Skip empty strings
+                    normalized.append({"name": e.strip(), "type": e.strip()})
             elif isinstance(e, dict):
-                normalized.append({
-                    "name": e.get("name", e.get("type", "Unknown")),
-                    "type": e.get("type", "bandit"),
-                })
+                name = e.get("name", "").strip()
+                if name:  # Skip entries with empty names
+                    normalized.append({
+                        "name": name,
+                        "type": e.get("type", "bandit").strip(),
+                    })
             else:
                 continue
+
+        if not normalized:
+            return None
 
         if len(normalized) > MAX_ENEMIES:
             print(f"🐞 DEBUG [Combat]: Too many enemies requested ({len(normalized)}). Capping at {MAX_ENEMIES}.")
@@ -487,6 +500,8 @@ def is_combat_finished(encounter_state, player_targets):
     1. All enemies dead/fled
     2. All players unconscious
     3. Hard turn limit reached
+    4. Player successfully fled
+    5. Combat is stuck (no damage dealt to either side for STUCK_COMBAT_THRESHOLD turns)
     """
     if is_encounter_over(encounter_state):
         return True, "enemies_defeated"
@@ -494,7 +509,17 @@ def is_combat_finished(encounter_state, player_targets):
         return True, "players_defeated"
     if encounter_state.is_at_turn_limit():
         return True, "turn_limit"
+    if encounter_state.player_fled:
+        return True, "player_fled"
+    # Stuck combat detection: no damage dealt to either side for too many turns
+    if encounter_state.turn_number > encounter_state._last_damage_turn + encounter_state.STUCK_COMBAT_THRESHOLD:
+        return True, "stuck_combat"
     return False, None
+
+
+def record_damage(encounter_state):
+    """Call this whenever any damage is dealt (to enemies or players) to reset stuck timer."""
+    encounter_state._last_damage_turn = encounter_state.turn_number
 
 
 # ─── PROMPT İÇİN ENCOUNTER DURUMU ────────────────────────────────────────────

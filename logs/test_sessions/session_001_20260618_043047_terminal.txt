@@ -1,0 +1,1708 @@
+Veritabanı hazır.
+'autotest_1_5183' kaydedildi.
+Hoş geldin, autotest_1_5183!
+Oturum oluşturuldu: AutoTest: Session_1_043047 (ID: 90)
+kdv oyuna katıldı.
+
+📍 Yeni lokasyon: The Gates of Millhaven
+VektörDB yüklendi.
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Yağmur, çamur yoluna ölümcül bir soğukla çarparak düşüyor ve Millhaven'in çürümüş tahta palasları arasında iki muhafız kızgın pelerinlerinin altında titriyor. Genç ve soluk bir muhafız olan Garret, mızrağını ellerinin arasında sımsıkı tutarak karanlık orman hattına bakıyor ve dudakları arasında fısıltıyla "Siyah Kurtlar" diyor. Kapı arkasından bir meyhane tabelasının hafif ışığı rüzgarda sallanıyor ama Garret, kapıyı açmadan önce yabancıların kim olduğunu bilmek istiyor.
+
+⏱️  Toplam: 20.36s | İlk token: 2.33s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: [{"name":"Garret","role":"Gate Guard","appearance":"A young, pale-faced guard with a thin frame, clutching a spear tightly between his hands, wearing a fur-lined cloak against the cold, his breath vis
+🔎 NPC Extractor — ✅ Yeni NPC bulundu: Garret (Gate Guard)
+📝 Yeni NPC eklendi: Garret (session: 90)
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 1
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'Garret'e yaklaşıp eliyle kılıfımdaki kılıcı göstererek, "Siyah Kurtlar hakkında ne biliyorsun? Onları araştırmaya geldik ve her türlü bilgiye ihtiyacımız var." diyorum.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kdv, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 2 | Modifier: +0 | Toplam: 2 | DC: 12
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 3
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: charisma check vs DC 12
+Roll: 2 + 0 (modifier) = 2
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Garret, kılıcın kılıfına bakar bakmaz gözleri kocaman açılıyor ve mızrağıyla bir adım geri çekilir, nefesi kesilir. "B-bilgi mi? Ben bilmem hiçbir şeyi!" diye kekeleyerek orman tarafına bakar, sanki karanlıkta bir şey onu izliyor gibi. Muhafızın elleri o kadar titriyor ki mızrağının ucu havada şakırdayarak duruyor ve kapıyı açmak yerine kilitlemek istediği belli oluyor.
+
+⏱️  Toplam: 15.20s | İlk token: 3.09s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: [{"name":"Siyah Kurtlar","role":"Unknown Threat","appearance":"Not directly described; implied to be a dangerous group or entity lurking in the dark forest beyond the gates","personality":"Feared by l
+🔎 NPC Extractor — ✅ Yeni NPC bulundu: Siyah Kurtlar (Unknown Threat)
+📝 Yeni NPC eklendi: Siyah Kurtlar (session: 90)
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 4
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: ''
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 5
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Garret'in gözlerinin içine bakarak yavaşça "Korkma dostum, senin için burada değiliz. Ormana girmemiz gerekiyor ama içeri girmeden önce neyle karşılaşacağımızı bilmemiz şart." diyorum.
+
+⏱️  Toplam: 5.92s | İlk token: 1.96s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 6
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'Garret'e gülümsüyorum ve omzuna hafifçe vurarak "İyi bir planın var, dostum. Ama ormana girmeden önce bu kapıda bekleyen herkese bir soru sormam lazım — son birkaç haftada tuhaf şeyler olmuş mu, yabancılar gördünüz mü, gece garip sesler duydunuz mu?" diyorum.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kdv, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 3 | Modifier: +0 | Toplam: 3 | DC: 12
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 8
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: charisma check vs DC 12
+Roll: 3 + 0 (modifier) = 3
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Garret, omzuna vuruşten irkilip mızrağını havaya kaldırır ve "Y-yaklaşma!" diye bağrarak kapıya yaslanır, arkasındaki ikinci muhafız da kılıcını çekiyor. Muhafızın yüzünde bir anlık öfke belirir ama hemen yerini daha derin bir korku alır, sanki yabancıların ormanla bir bağlantısı olduğundan emin gibi. "Siz de onlardan mısınız? Siyah Kurtların adamları mısınız?" diye fısıldıyor, nefesi buz gibi havada görünürken gözleri karanlık ağaç çizgisine kilitleniyor.
+
+⏱️  Toplam: 11.61s | İlk token: 2.21s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 9
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Sakin ol, dostum. Biz Siyah Kurtlar'la hiçbir bağlantımız yok. Aksine, onları araştırıyoruz. Bize ormandaki izlerini anlatır mısın?"'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kdv, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 16 | Modifier: +0 | Toplam: 16 | DC: 12
+   ✅ BAŞARILI
+   📈 Charisma XP +5 → 5
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 11
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: charisma check vs DC 12
+Roll: 16 + 0 (modifier) = 16
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Garret, mızrağını yavaşça indirir ve derin bir nefes alarak titrek bir sesle "İ-izler mi? Her gece izler görüyorum, kapıya kadar gelip gidiyorlar... ama sabah hiçbir şey yok, sanki toprak onu yutuyor." diyor, gözleri hâlâ ormana kilitli. Muhafız bir an duraksayıp fısıltıyla ekliyor: "Üç çocuk kayboldu geçen ay. Belediye başkanı herkese sessiz olma diyor ama... o ormandan bir şey çıkıyo—" derken aniden susturulmuş gibi ağzını kapatıyor ve kapıyı aralayıp içeri girmeleri için işaret ediyor.
+
+⏱️  Toplam: 13.80s | İlk token: 2.39s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 12
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'Garret'e yaklaşıp omzuna dokunarak, "Üç çocuk... Ne tür izler görüyorsun? Sana inanıyorum, Garret." diyorum, sonra ona sessizce birkaç altın sikke uzatarak, "Bu gece burada bekleyeceğim. Bana izlerin tam olarak nerede olduğunu gösterir misin?" diye soruyorum.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 13}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 13}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 13}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=13
+DEBUG execute_roll: karakter=kdv, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 13
+   Zar: 17 | Modifier: +0 | Toplam: 17 | DC: 13
+   ✅ BAŞARILI
+   📈 Charisma XP +5 → 10
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 14
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: charisma check vs DC 13
+Roll: 17 + 0 (modifier) = 17
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Garret, altınlara bakıp hızla avuç içine alır, elleri hâlâ titriyor ama gözlerinde bir umut ışığı beliriyor. "İzler... palasının kuzey tarafında, eski meşe ağacının dibinde başlıyo. Her gece aynı yerden gelip aynı yere gidiyo, sanki bir döngü gibi." diye fısıldıyor, sesi rüzgarın uğultusunda neredeyse kayboluyor. Muhafız bir an duraksayıp ekliyor: "Ama orada bekleme... o gece orman farklı oluyo, sis çöküyo ve o siste... şeyler var."
+
+⏱️  Toplam: 13.86s | İlk token: 2.33s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 15
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Garret'e yaklaşıp omzumu sıvazlıyorum ve 'Cesaretin için teşekkürler, arkadaşım. Şimdi seni güvende bir yere götüreyim, sonra o eski meşe ağacının dibine gidip bu izleri kendim inceleyeceğim.' diyorum."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 16
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Garret, omzundaki dokunuştan rahatlamış gibi omuzlarını indirir ama gözleri hâlâ tedirgin bir şekilde orman tarafına kayıyor. "Meyhaneye gidebilirsin ama... gece ormana gitme, lütfen. O siste yürüyen şeyler... onlar seni duyuyo." diye fısıldıyor, kapıyı aralayıp içeri adım atman için yol veriyor. İçeriden ılık bir ışık ve bira kokusu yükseliyor ama Garret'in gözlerindeki korku, meyhane kapısını geçerken bile ardından bakışlarını takip ediyor.
+
+⏱️  Toplam: 21.12s | İlk token: 8.11s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 17
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+📍 Yeni lokasyon: The Rusty Flagon
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'Garret'e teşekkür edip meyhaneye adım atıyorum, ama hemen bir masaya oturup bira siparişi verirken etrafı sessizce tarıyorum — özellikle köşedeki şüpheli görünümlü kişilere ve duvardaki notlara dikkat ediyorum.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "wisdom", "dc": 13}'
+   JSON parse edildi: '{"needed": true, "ability": "wisdom", "dc": 13}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'wisdom', 'dc': 13}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=wisdom, dc=13
+DEBUG execute_roll: karakter=kdv, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Wisdom check vs DC 13
+   Zar: 6 | Modifier: +0 | Toplam: 6 | DC: 13
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 19
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: wisdom check vs DC 13
+Roll: 6 + 0 (modifier) = 6
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Meyhanenin kapısı ardından karanlık soğuk bir rüzgar uğuldayarak içeri dolar ve kdv, tahta zemindeki çürük çatlaklardan yükselen nemli havayı hisseder. Köşedeki masalarda birkaç yerel, kaplara gömlerken kimseyle göz teması kurmuyor; duvardaki ilan tahtasında yırtılmış bir çocuk resmi dışında dikkat çekici bir şey göremiyorsun. Barın arkasında terli, şişman bir cüce — Borin — önünde zaten temiz bir kâseyi öylece ovalıyor, gözleri sürekli kapıya ve karakışına kayıyor. Köşede eski kılıklı, tek gözlü yaşlı bir adam — Silas — ucuz şarap kokusunda sallanıyor ve kıyafetinin üzerine yapışmış gibi seni izliyor.
+
+⏱️  Toplam: 19.51s | İlk token: 2.65s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: [{"name":"Borin","role":"Bartender / Tavern Owner","appearance":"A sweaty, stocky dwarf with thick forearms and a well-worn leather apron. His beard is braided with copper rings and his hands are perp
+🔎 NPC Extractor — ✅ Yeni NPC bulundu: Borin (Bartender / Tavern Owner)
+🔎 NPC Extractor — ✅ Yeni NPC bulundu: Silas (Local Drunkard / Informant)
+📝 Yeni NPC eklendi: Borin (session: 90)
+📝 Yeni NPC eklendi: Silas (session: 90)
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 20
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Borin'e yaklaşıp masaya otururum, bir şeyler içerken göz ucuyla Silas'ı izlerim ve Borin'e sessizce, 'Bu kasabada son zamanlarda tuhaf şeyler oluyor mu, özellikle de Kurtlar diye bir grup hakkında bir şey duydun mu?' diye sorarım."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kdv, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 18 | Modifier: +0 | Toplam: 18 | DC: 12
+   ✅ BAŞARILI
+   📈 Charisma XP +5 → 15
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 22
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: charisma check vs DC 12
+Roll: 18 + 0 (modifier) = 18
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Borin, kâseyi ovalama hızını artırır ve gözleri kapıya kayarak "K-Kurtlar mı? Hayır, hayır, öyle bir şey duymadım. Yollarda gündüz güvenli, gece de... gece de sadece vahşi kurtlar var, hepsi bu." diye kekeleyerek yalan söyler, ter damlası alnından aşağı süzülürken elleri titriyor. Cücenin yüzündeki yapmacık gülümseme, gözlerindeki panikle çelişiyor ve arkasındaki raftan bir şey gizlemeye çalıştığı belli oluyor.
+
+⏱️  Toplam: 20.26s | İlk token: 3.44s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 23
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Borin'i rahatsız etmeden tezgâha yaklaşıp arkasındaki raftaki şüpheli şeyi kaşla gözle incelerken, sessizce 'Yollardaki kurtların ne tür hasar verdiğini bilmek istiyorum, belki bir şeyler gördünüz ya da işittiniz' derim."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "dexterity", "dc": 15}'
+   JSON parse edildi: '{"needed": true, "ability": "dexterity", "dc": 15}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'dexterity', 'dc': 15}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=dexterity, dc=15
+DEBUG execute_roll: karakter=kdv, score=14, modifier=2
+
+──────────────────────────────────────────────────
+🎲 Dexterity check vs DC 15
+   Zar: 6 | Modifier: +2 | Toplam: 8 | DC: 15
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 25
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: dexterity check vs DC 15
+Roll: 6 + 2 (modifier) = 8
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Borin, kâseyi ovalama hızını artırır ve gözleri kapıya kayarak "K-Kurtlar mı? Hayır, hayır, öyle bir şey duymadım. Yollarda gündüz güvenli, gece de... gece de sadece vahşi kurtlar var, hepsi bu." diye kekeleyerek yalan söyler, ter damlası alnından aşağı süzülürken elleri titriyor. Cücenin yüzündeki yapmacık gülümseme, gözlerindeki panikle çelişiyor ve arkasındaki raftan bir şey gizlemeye çalıştığı belli oluyor. Kdv tezgâha yaklaşmaya çalışırken ayağı bir tahta çıtırtıya takılır ve Borin aniden dönüp "Ne yapıyorsun?!" diye bağrar, yüzü kıpkırmızı kesilirken arkasındaki rafa hızla bir örtü çekiyor.
+
+⏱️  Toplam: 17.58s | İlk token: 2.32s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 26
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I steady myself on the counter, meet Borin's panicked eyes, and say calmly, "Easy, friend—I'm not here to cause trouble. But I think you know more about those wolves than you're letting on, and I'd rather hear it from you than find out the hard way."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kdv, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 16 | Modifier: +0 | Toplam: 16 | DC: 12
+   ✅ BAŞARILI
+   📈 Charisma XP +5 → 20
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 28
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: charisma check vs DC 12
+Roll: 16 + 0 (modifier) = 16
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Borin, kdv'nin sakin ama kararlı bakışlarına bakarak omuzlarını düşürür ve terli yüzünde bir çaresizlik ifadesi belirir. "Tamam, tamam... ama burada değil, kulaklar var." diye fısıldıyor, etrafına bakınıp masalardaki yerlileri süzüyor. Cüce, kdv'yi barın arkasındaki dar geçişe doğru çekerek alçak sesle ekliyor: "Her hafta bir şey geliyor, kapıyı tıklatıyor... altın bırakmam gerekiyor yoksa... yoksa kasabaya zarar vereceklerini söylediler." Gözleri dolgun, sesi titriyor — Borin bir şeyler saklıyor ama korkudan yarım gerçeklerle yetiniyor.
+
+⏱️  Toplam: 16.92s | İlk token: 2.42s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 29
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Borin, seni dışarıda daha sessiz bir yerde konuşmaya çıkaracağım — burası çok kalabalık. Bana bu altınları bırakan kişinin yüzünü hatırlıyor musun, yoksa onlara dair başka bir şey?"'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 30
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Borin, kdv'nin teklifini duyunca gözleriyle meyhane kapısına bakar, sonra tezgâhın altındaki gizli bölmesine elini uzatıp tahta bir kurt amuleti çıkarır. "Bu... bu onların işareti. Her hafta kapıya bırakıyorlar, altınlarla birlikte." diye fısıldıyor, amuletin üzerindeki ayrıntıları parmaklarıyla okurken elleri titriyor. "Yüzlerini görmedim, sis içinde geliyorlar... ama bir keresinde bir ses duydum, sanki bir kadın gibiydi."
+
+⏱️  Toplam: 16.96s | İlk token: 2.25s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 31
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Aman Tanrım, bu amuletteleri ne zaman bırakıyorlar? Belirli bir gün ya da saat var mı?" diye soruyorum, Borin'in titreyen ellerinden amuleti daha iyi incelemek için elime alırken.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 32
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Borin, kdv'nin amulete dokunmasıyla irkilir ama engel olmaz. "Her hafta, ayın ilk gecesi... yarın gece." diye fısıldıyor, gözleri kapıya kayarak. "O gece kasabada kimse dışarı çıkmıyor, kapıları kilitliyoruz. Ama bu sefer... bu sefer bir şey farklı olacak, hissediyorum." Cücenin sesi titriyor, ter damlası sakalından aşağı düşerken arkasındaki raftan gizli bir defter çıkarır — üzerinde isimler ve altın miktarları yazıyor.
+
+⏱️  Toplam: 18.09s | İlk token: 5.50s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 33
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Borin, bu defterdeki isimler kimler? Ve yarın gece kasabada tam olarak ne olacak — söyle bana her şeyi, saklama."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 14}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 14}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 14}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=14
+DEBUG execute_roll: karakter=kdv, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 14
+   Zar: 17 | Modifier: +0 | Toplam: 17 | DC: 14
+   ✅ BAŞARILI
+   📈 Charisma XP +5 → 25
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 35
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: charisma check vs DC 14
+Roll: 17 + 0 (modifier) = 17
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Borin, kdv'nin kararlı bakışlarına bakarak çaresizce omuz silker ve defteri titrek elleriyle açar. "Bu isimler... kasabalıların isimleri. Her hafta birini seçiyorlar, o hafta o eve gidiyorlar." diye fısıldıyor, sayfaları çevirirken gözleri doluyor. "Yarın gece... yarın gece Weaver'ın kızı gelecek. Onlar onu istiyor, her zaman çocukları alıyorlar." Cücenin sesi kısılır, defterin alt kısmında kaba bir tahta kurt amuleti resmi ve "Ayın ilk gecesi, sis inene kadar" yazısı görülür.
+
+⏱️  Toplam: 13.95s | İlk token: 2.40s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: [{"name":"Weaver","role":"Kasaba sakini, Weaver'ın babası","appearance":"Yaşlı, yüzü derin çizgilerle dolu, elleri dokuma tezgâhından nasırla kaplı, sırtı hafifçe kamburlaşmış","appearance":"Çekingen 
+🔎 NPC Extractor — ⚠️  'Weaver' eksik alan: ['personality'], atlanıyor
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 36
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+📍 Yeni lokasyon: The Weaver's Cottage
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Borin, bu Weaver'ın kızını korumam lazım. Bana Weaver'ın evini göster, hemen oraya gitmeliyiz."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kdv, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 20 | Modifier: +0 | Toplam: 20 | DC: 12
+   ⭐ KRİTİK BAŞARI!
+   📈 Charisma XP +5 → 30
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 38
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: charisma check vs DC 12
+Roll: 20 + 0 (modifier) = 20
+Result: CRITICAL SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Borin, kdv'nin kararlı bakışlarına bakarak çaresizce omuz silker ve defteri titrek elleriyle açar. "Bu isimler... kasabalıların isimleri. Her hafta birini seçiyorlar, o hafta o eve gidiyorlar." diye fısıldıyor, sayfaları çevirirken gözleri doluyor. "Yarın gece... yarın gece Weaver'ın kızı gelecek. Onlar onu istiyor, her zaman çocukları alıyorlar." Cücenin sesi kısılır, defterin alt kısmında kaba bir tahta kurt amuleti resmi ve "Ayın ilk gecesi, sis inene kadar" yazısı görülür. Kdv'nin içgüdüsü doğru çıkmış — Borin'in gözyaşları arasında bir şey daha sakladığı belli oluyor, cüce defterin son sayfasını çevirir ve orada "Leo — Weaver'ın oğlu — son alınan çocuk" yazısını gösterirken eli titriyor. "Oğlunu geri getir... lütfen." diye fısıldıyor Borin, kdv'nin koluna yapışarak.
+
+⏱️  Toplam: 24.54s | İlk token: 2.29s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: [{"name":"Leo","role":"Weaver's Son","appearance":"A young boy, around 8 years old, with tousled brown hair and wide, fearful eyes. He wears a simple, patched woolen tunic and carries a small wooden t
+🔎 NPC Extractor — ✅ Yeni NPC bulundu: Leo (Weaver's Son)
+📝 Yeni NPC eklendi: Leo (session: 90)
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 39
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I grip Borin's shoulder firmly and look him in the eyes. "I'll get your son back, Borin. Tell me everything — where do they take the children, and how do I find the Black Wolves' hideout before tomorrow night."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kdv, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 11 | Modifier: +0 | Toplam: 11 | DC: 12
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 41
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: charisma check vs DC 12
+Roll: 11 + 0 (modifier) = 11
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Borin, kdv'nin sözlerine umutla bakar ama gözleri tekrar korkuyla kaplanır, ağzı açık kalır ama kelimeler çıkmaz. "Ben... ben bilmiyorum, gerçekten bilmiyorum." diye kekeleyerek başını sallar, elleri titriyor. "Sadece altını bırakıyorum, sonra... sonra bir hafta sonra çocuklar yok oluyor. Kimse nereye gittiklerini bilmiyor." Cüce, kdv'nin omzundan çekilip tezgâha yaslanır, terli yüzünde çaresizlik ifadesi belirir. "Ama... ama Silas bilir. O eski izci, ormanın içinde yaşıyor. Onunla konuşmalısın."
+
+⏱️  Toplam: 19.31s | İlk token: 2.92s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: [{"name":"Silas","role":"Old Scout","appearance":"A weathered, grizzled man with deep-set eyes and a lean frame, dressed in worn leather and furs, living deep within the forest.","personality":"Cautio
+🔎 NPC Extractor — ⏭️  'Silas' zaten biliniyor, atlanıyor
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 42
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+📍 Yeni lokasyon: The Edge of Silence
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Bilgi için teşekkür ederim, Borin. Silas'ı bulacağım ve bu çocukların akıbetini öğreneceğim." diyerek cüzdanımdan birkaç sikke çıkarıp tezgâha bırakırım, sonra kapıya yönelip orman yoluna adım atarım.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 43
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Millhaven'ın surlarının arkasından adım attığı an, gece sesleri aniden kesilir. Ağaçlar burada bükülmüş, yaprakları yağlı, soluk gri renkte. Yere yapışan kalın bir sis toprağı ve metalik bir kokuyla kaplı. Birkaç yol görünüyor ama ormanın derinliklerine giden yol kırık dallar ve ağır bot izleriyle işaretlenmiş. Garret, kapıda mızrağını sıkıca tutarak kdv'ye doğru irkilir ve "Ormanda ne arıyorsun? Dön içeri, gece çarpmadan önce!" diye bağırarak mızrağını kaldırır, nefesi dondurucuda beyaz bir buhar gibi yükselirken gözleri korkuyla genişliyor.
+
+⏱️  Toplam: 17.94s | İlk token: 3.18s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 44
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+📍 Yeni lokasyon: The Wolf's Snare
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'Garret'a el kaldırarak sakinleştirici bir jest yaparım, sonra ormanın derinliklerine giden izi göstererek fısıldarım: "Bu izler çok taze, Garret. Kara Kurtlar burada bir şeyler taşıyor — beni izle, ya da kapıyı kilitle ve sabah kadar bekle."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kdv, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 19 | Modifier: +0 | Toplam: 19 | DC: 12
+   ✅ BAŞARILI
+   📈 Charisma XP +5 → 35
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 46
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: charisma check vs DC 12
+Roll: 19 + 0 (modifier) = 19
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Bir ıslık sesi ağaçların arasından yankılanır. Birdenbire, sisin içinden üç adam belirir — yırtık pırtık pelerinler ve tahtadan yapılmış kurt maskeleri taşıyan yaratıklar. Göğüslerine doğrultulmuş mantar ayaklı tüfeklerle kdv'ye bakıyorlar. "Efendisi, ormanında yürümenin bedelini istiyor," diyor biri, maskesinin arkasından tıslıyor. "Altının ya da kanın. Seçim senin, yolcu." Kraz, boylu poslu ve kulağa kadar uzanan ince bir adam, insan kulaklarından yapılmılı bir kolye taşıyor ve kdv'ye doğru adım atarken maskesinin arkasından gözleri kızarıyor. "Ama önce... sen kimsin, bu ormana girmeye cüret eden?"
+
+⏱️  Toplam: 24.39s | İlk token: 7.34s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: [{"name":"Kraz","role":"Kara Kurtlar Maskeli Hırsız - Lider","appearance":"Boylu poslu ve kulağa kadar uzanan ince bir adam. Yırtık pırtık pelerin giymiş, tahtadan yapılmış bir kurt maskesi takıyor. G
+🔎 NPC Extractor — ✅ Yeni NPC bulundu: Kraz (Kara Kurtlar Maskeli Hırsız - Lider)
+📝 Yeni NPC eklendi: Kraz (session: 90)
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 47
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Eğilip başımı sallayarak, 'Ben sadece geçen bir yolcuyum, arkadaşlar. Ama bu ormanın sırlarını merak ediyorum — belki de birlikte bir şeyler öğrenebiliriz,' derim, elime değdirmeyeceğim ama gözlerimle Kraz'in kulak kolyesine ve tüfeklerin durumuna dikkatlice bakarak."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "charisma", "dc": 12}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kdv, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 13 | Modifier: +0 | Toplam: 13 | DC: 12
+   ✅ BAŞARILI
+   📈 Charisma XP +5 → 40
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 49
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: charisma check vs DC 12
+Roll: 13 + 0 (modifier) = 13
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kraz, kdv'nin sakin tavrından etkilenmiş gibi duraklar, maskesinin arkasından gözleri kısılır. "Geçen bir yolcu... ha?" diye tıslıyor, insan kulaklarından yapılmılı kolyeyi parmaklarıyla okşayarak. "Bu orman sırlarını merak eden çok oldu, yolcu. Çoğu artık konuşamıyor." Diğer iki maskeli hırsız aralarında fısıldaşır, tüfeklerini biraz indirirler ama gözlerini kdv'den ayırmazlar. Kraz bir adım daha atar, soğuk nefesi sisin içinde beyaz bir buhar gibi yükselir. "Ama sen... sen farklısın. Korkmuyorsun. Belki de efendimizin hoşuna gider, belki de... önce seni ona götürelim, ne dersin?" Kraz'in gözleri kdv'nin yüzünde bir şey arar gibi kayar, sonra aniden gülümser — maskenin altından görülen dudakları kırışık ve yara izleriyle kaplıdır. "Ama önce... silahını bırak. Güvenlik tedbiri, anlarsın."
+
+⏱️  Toplam: 26.97s | İlk token: 6.92s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 50
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+📍 Yeni lokasyon: The Black Wolves' Den
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I slowly unbuckle my sword belt and let it drop to the ground, keeping my hands visible and relaxed. "Silahımı bırakıyorum, Kraz. Ama beni efendinize götürmeden önce, bu kolyenin hakkında bir şey söyle — gerçekten insan kulaklarından mı yapıldı, yoksa sadece korkutmak için mi taşıyorsun?"'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kdv, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 8 | Modifier: +0 | Toplam: 8 | DC: 12
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 52
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: charisma check vs DC 12
+Roll: 8 + 0 (modifier) = 8
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kraz, kdv'nin sorusuna sertçe gülümser ve kolyeyi sakince pelerinin içine gizler. "Merak etme, yolcu. Senin işine yaramaz." diye tıslıyor, sesi soğuk ve keskin. Diğer iki hırsız tüfeklerini tekrar kaldırır, gözleri kdv'ye dikilir. "Efendimiz seni bekliyor. Yür." Kraz, kdv'yi iterek ormanın derine doğru yürümeye başlar, sisin yoğunlaştığı, ağaçların daha da büküldüğü bir patikaya adım atarlar. Birkaç dakika sonra, doğal bir taç amfiteatrüne açılan bir alan belirir — onlarca siyah çadır, üzerlerine karların yansıması gibi parlayan yeşilimsi bir alevle yanan devasa bir şömine ve girişte kemikleri kemiren koyu kürklü kurtlar. Taç merkezinde, ağır demir kafesler taşıyan büyük bir tahta platform durur. Kraz, kdv'yi platforma doğru iterken "Hoş geldin, yolcu. Efendimiz seni bekliyor." diye fısıldıyor. Platformun üzerinde, Scar-Face Varek — boğazında kırık bir yara izi olan devasa bir adam, ağır zırhının üzerinde kdv'ye doğru bakıyor, gözleri soğuk ve hesaplayıcı.
+
+⏱️  Toplam: 25.31s | İlk token: 2.34s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: [{"name":"Scar-Face Varek","role":"Leader of the Black Wolves bandit clan","appearance":"A massive man with a jagged scar across his throat, wearing heavy armor. His eyes are cold and calculating, and
+🔎 NPC Extractor — ✅ Yeni NPC bulundu: Scar-Face Varek (Leader of the Black Wolves bandit clan)
+📝 Yeni NPC eklendi: Scar-Face Varek (session: 90)
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 53
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Varek'e adımla yaklaşırım, ellerimi silahlarımın yakın ama dokunulmaz dururken, etrafı tarayarak kaçış yollarını ve kafeslerin içindekileri fark edip 'Senin kültünün ne istiyor benden, Varek? Söyle de işimiz kolay olsun.' derim."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kdv, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 3 | Modifier: +0 | Toplam: 3 | DC: 12
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 55
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: charisma check vs DC 12
+Roll: 3 + 0 (modifier) = 3
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Varek'in soğuk gözleri kdv'ye dikilir, boğazındaki kırık yara izi hafifçe kıpkırmızı parlar. "Kült mü?" diye homurduyor, sesi taş gibi ağır ve derin. "Biz bir kült değiliz, yolcu. Biz... doğal sonun ta kendisiyiz." Varek, tahtadan kalkarak platformun kenarına yürür, altındaki demir kafeslerin içinde — kdv şimdi dikkatle bakınca — birkaç çırplak, korkmuş çocuk ve yaşlı bir kadın olduğunu görür. Çocuklardan biri, Weaver'ın oğlu Leo gibi görünüyor, küçük tahta kuş oyma oyuncağı elinde tutuyor. Varek, kdv'nin bakışlarını fark eder ve kafeslerin yanına adım atarak "Onlar seçilmişler. Efendimiz onları çağırdi. Sen de... sen de çağrıldın, yolcu." diye fısıldıyor, gözleri kdv'yi süzerek. Diğer çadırlardan kılıç bileyen haydutlar ve kurtların alçak homurtuları arka planda yükselir, kdv'nin etrafında bir tehdit bulutu yoğunlaşır.
+
+⏱️  Toplam: 24.52s | İlk token: 3.41s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 56
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+📍 Yeni lokasyon: The Iron Cages
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Varek, bu çocukları serbest bırak yada seni ve senin kurtlarını birlikte yeneceğim!" diye bağırarak kılıcımı Varek'e doğrultuyorum ve yanımdaki kafese yaklaşarak kilidini kırmaya çalışıyorum.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "dexterity", "dc": 14}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "dexterity", "dc": 14}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'dexterity', 'dc': 14}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=dexterity, dc=14
+DEBUG execute_roll: karakter=kdv, score=14, modifier=2
+
+──────────────────────────────────────────────────
+🎲 Dexterity check vs DC 14
+   Zar: 7 | Modifier: +2 | Toplam: 9 | DC: 14
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 58
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: dexterity check vs DC 14
+Roll: 7 + 2 (modifier) = 9
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kdv, kafesin kilitlenmiş demir koluna sarılarak çekiştirmeye başlar ama metal soğuk ve sıkıca kilitlenmiş — parmak uçları acıyor, kilidin içine sıkışıyor. Kilit açılmak yerine kdv'nin elini sıkıştırır, avuç içi kanamaya başlar. Kafesin içindeki çocuklar irkilir, Leo başını kaldırır ve kdv'ye doğru bakar — gözleri korkuyla dolu ama bir umut ışığı da var. "Baba... baba mısın?" diye fısıldar, sesi titreyerek. Varek, platformdan kdv'ye bakar ve yavaşça gülümser, boğazındaki yara izi kıpkırmızı parlar. "Seçilmişlerin kaderini değiştirmek mi? Ne kadar... cesur." diye homurduyor, elini kaldırarak bir işaret verir. Aniden, karanlıktan birkaç siyah gölge fırlar — üç koyu kürklü kurt, dişleri göstererek kdv'ye doğru koşmaya başlar, gözleri yeşilimsi bir alevle yanıyor. Kdv'nin etrafında bir tehdit bulutu yoğunlaşır, kurtların homurtuları taşları titretir.
+
+⏱️  Toplam: 24.97s | İlk token: 3.97s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 59
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'Kanamayan elimi çekip kılıcımı çekiyorum, kurtlara doğru adım atarak çocukları arkamda tutmaya çalışıyorum. "Leo, saklanın!" diye bağırarak ilk kuru saldırıyı kılıcımla savuşturmaya çalışıyorum.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kdv, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 17 | Modifier: +0 | Toplam: 17 | DC: 12
+   ✅ BAŞARILI
+   📈 Charisma XP +5 → 45
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 61
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: charisma check vs DC 12
+Roll: 17 + 0 (modifier) = 17
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kdv'nin bağırdığı "Leo, saklan!" sesi kafeslerin arasında yankılanır. Leo ve diğer çocuklar aniden sessizleşir, korkuyla birbirlerine sarılırlar ama ağlamazlar, bağırmazlar — kdv'nin sesindeki otorite ve koruma içgüdüsü onları sakinleştirir. Kafesin içindeki en küçük çocuk, gözlerini kapatır ve başını Leo'nun omzuna yaslar. Kdv, kılıcını çekerken ilk kurtun saldırısını savuşturmaya çalışır — metalin çıtırtısı ve kurtun homurtusu taşları titretir. Kdv'nin arkasında çocuklar güvendeler, önlerinde ise üç koyu kürklü kurt, dişleri göstererek ilerlemeye devam eder. Varek, platformdan izlerken boğazındaki yara izi kıpkırmızı parlar, gözleri kdv'yi süzer. "Cesur bir köpek olabilirsin, yolcu. Ama cesaret tek başına yetmez." diye homurduyor, elini kaldırarak bir işaret verir.
+
+⏱️  Toplam: 32.35s | İlk token: 11.57s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 62
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Bir an önce bu kurtları bertaraf etmeliyim — Leo'yu ve çocukları koruyacağım." diye mırıldanır, kılıcını sağ eline alır ve en yakın kurtun üzerine hızlıca atılır, onu diğerlerinden ayırmaya çalışarak.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "strength", "dc": 12}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "strength", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'strength', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=strength, dc=12
+DEBUG execute_roll: karakter=kdv, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Strength check vs DC 12
+   Zar: 9 | Modifier: +3 | Toplam: 12 | DC: 12
+   ✅ BAŞARILI
+   📈 Strength XP +5 → 5
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 64
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: strength check vs DC 12
+Roll: 9 + 3 (modifier) = 12
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kdv, en yakın kurtun üzerine atılır — metalin çıtırtısı ve kurtun homurtusu taşları titretir. Kılıc, kurtun omzuna isabet eder, koyu kürklü teninden siyah kan sıçar. Kurt acıyla ulur, geri çekilir ve diğer iki kurt arasında kalır — kdv'nin planı işe yaramış, artık üçü birden değil, ayrı ayrı müdahale edebilir. Kafesin içindeki Leo, kdv'nin arkasında titreyerek izler, küçük tahta kuş oyuncağı elinde sıkıca tutulur. Varek, platformdan izlerken boğazındaki yara izi kıpkırmızı parlar, gözleri kdv'yi süzer. "Cesur bir köpek olabilirsin, yolcu. Ama cesaret tek başına yetmez." diye homurduyor, elini kaldırarak bir işaret verir. Kdv'nin önünde üç koyu kürklü kurt, dişleri göstererek ilerlemeye devam eder — ama artık birbirlerinden ayrı, tek tek yenilebilir durumdalar.
+
+⏱️  Toplam: 18.59s | İlk token: 3.77s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 65
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I grip my sword tight and lunge at the nearest wolf, feinting low before driving my blade into its exposed flank while keeping my eyes on the other two. "Leo, stay behind me — I'll clear the path."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+(Perception) checks that rely on hearing or smell.
+Pack Tactics. The wolf has advantage on an attack roll against 
+a creature if at least one of the wolf’s allies is within 5 feet of 
+the cre
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "strength", "dc": 13}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "strength", "dc": 13}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'strength', 'dc': 13}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=strength, dc=13
+DEBUG execute_roll: karakter=kdv, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Strength check vs DC 13
+   Zar: 5 | Modifier: +3 | Toplam: 8 | DC: 13
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 67
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: strength check vs DC 13
+Roll: 5 + 3 (modifier) = 8
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kdv, en yakın kurtun üzerine atılır — ama bu sefer kurt daha hızlıdır. Kılıc, kurtun omzuna değil, havada bir yankı bırakır. Kurt, kdv'nin saldırısını atlatır ve dişlerini kdv'nin bacağını sıkıştırır — metalin çıtırtısı ve kurtun homurtusu taşları titretir. Kdv, acıyla geri çekilir, kan ayağından sızar. Kafesin içindeki Leo, kdv'nin arkasında titreyerek izler, küçük tahta kuş oyuncağı elinde sıkıca tutulur. Varek, platformdan izlerken boğazındaki yara izi kıpkırmızı parlar, gözleri kdv'yi süzer. "Cesur bir köpek olabilirsin, yolcu. Ama cesaret tek başına yetmez." diye homurduyor, elini kaldırarak bir işaret verir. Kdv'nin önünde üç koyu kürklü kurt, dişleri göstererek ilerlemeye devam eder — kdv'nin bacağı kanıyor, ama çocuklar hâlâ güvendeler.
+
+⏱️  Toplam: 20.57s | İlk token: 2.58s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 68
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Bacağımdan gelen acıya rağmen, kılıcımı iki elimle kavrarak önümdeki kurtlara doğru bir adım atıyorum — en yakın kurdun üzerine yuvarlanarak onu kenara itmeye çalışırım, ardından Leo'nun yanına geçip onu kafesin arkasına sığdırırım."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "strength", "dc": 12}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "strength", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'strength', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=strength, dc=12
+DEBUG execute_roll: karakter=kdv, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Strength check vs DC 12
+   Zar: 8 | Modifier: +3 | Toplam: 11 | DC: 12
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 70
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: strength check vs DC 12
+Roll: 8 + 3 (modifier) = 11
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kdv, iki elimle kılıcını kavrarak önümdeki kurtlara doğru adım atar — ama bacağındaki yara onu yavaşlatır, adımı dengesiz olur. Kılıc, kurtun üzerine değil, taşa çarpar, kıvılcıklar saçar. Kurt, kdv'nin dengesizliğini fırsat bilir ve tekrar saldırır — dişleri kdv'nin kılıc kolu saran eline geçer, metalin çıtırtısı ve kurtun homurtusu taşları titretir. Kdv, acıyla geri çekilir, elinden kılıc düşer. Kafesin içindeki Leo, kdv'nin arkasında titreyerek izler, küçük tahta kuş oyuncağı elinde sıkıca tutulur. Varek, platformdan izlerken boğazındaki yara izi kıpkırmızı parlar, gözleri kdv'yi süzer. "Cesur bir köpek olabilirsin, yolcu. Ama cesaret tek başına yetmez." diye homurduyor, elini kaldırarak bir işaret verir. Kdv'nin önünde üç koyu kürklü kurt, dişleri göstererek ilerlemeye devam eder — kdv'nin elinde artık silah yok, bacağı ve eli kanıyor, ama çocuklar hâlâ güvendeler.
+
+⏱️  Toplam: 21.61s | İlk token: 4.16s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 71
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Kılıcımı tekrar kavramak yerine, kanayan bacağıma dayanarak dengemi sağlamlaştırırım — sonra kafesin demir çubuklarını iki elimle kavrarak kendimi doğrulturum, Leo'nun yanına geçip onu kurtların önüne koyarım. 'Geri çekil, Leo. Ben buradayım.' derim, kılıcı yerden almak için son bir hamle yaparım — ama önce kafesin çubuklarını kullanarak kendimi yukarı çekip platforma tırmanmaya çalışırım, Varek'in işaretinin ne anlama geldiğini anlamak için."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "strength", "dc": 14}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "strength", "dc": 14}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'strength', 'dc': 14}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=strength, dc=14
+DEBUG execute_roll: karakter=kdv, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Strength check vs DC 14
+   Zar: 1 | Modifier: +3 | Toplam: 4 | DC: 14
+   💀 KRİTİK BAŞARISIZLIK!
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 73
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: strength check vs DC 14
+Roll: 1 + 3 (modifier) = 4
+Result: CRITICAL FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kdv, kafesin demir çubuklarını kavrarak kendini yukarı çekmeye çalışır — ama bacağındaki yara ve elindeki kan kaybı onu zayıflatır. Parmakları çubuktan kayar, kdv geriye düşer ve taş zemine sertçe çarpar. Başı döner, gözleri kararır. Kafesin içindeki Leo, kdv'nin düşüşünü görür ve küçük tahta kuş oyuncağı elinde sıkıca tutarak "Baba... baba mısın?" diye fısıldar, sesi titreyerek. Kdv, yerde yatarken kılıcına uzanır ama parmakları geç kalır — kurtlar, kdv'nin düşüşünü fırsat bilir ve üçü birlikte saldırır, dişleri göstererek. Varek, platformdan izlerken boğazındaki yara izi kıpkırmızı parlar, gözleri kdv'yi süzer. "Cesur bir köpek olabilirsin, yolcu. Ama cesaret tek başına yetmez." diye homurduyor, elini kaldırarak bir işaret verir. Kdv'nin önünde üç koyu kürklü kurt, dişleri göstererek ilerlemeye devam eder — kdv yerde, silahsız, kanıyor, ama çocuklar hâlâ güvendeler.
+
+⏱️  Toplam: 21.53s | İlk token: 2.39s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 74
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'Kdv, kanlı elini kılıcının kabzasına son bir güçle sarılır, gözlerini kurtlara dikerek "Git, Leo! Arkana bakma!" diye bağırır, son bir hamleyle kılıcını çekerek en yakın kurtun ön ayaklarını kesecek şekilde yatay bir darbe indirir.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "strength", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "strength", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'strength', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=strength, dc=12
+DEBUG execute_roll: karakter=kdv, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Strength check vs DC 12
+   Zar: 9 | Modifier: +3 | Toplam: 12 | DC: 12
+   ✅ BAŞARILI
+   📈 Strength XP +5 → 10
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 76
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: strength check vs DC 12
+Roll: 9 + 3 (modifier) = 12
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kdv, kanlı elini kılıcının kabzasına son bir güçle sarılır — metal, kanla kaygan ama sıkıca kavrılır. Kılıc, en yakın kurtun ön ayaklarını yatay bir darbe ile keser, koyu kürklü teninden siyah kan sıçar. Kurt acıyla ulur, ön ayaklarından kanlar içinde geri çekilir — artık üç değil, iki kurt kaldı. Kafesin içindeki Leo, kdv'nin arkasında titreyerek izler, küçük tahta kuş oyuncağı elinde sıkıca tutulur. Varek, platformdan izlerken boğazındaki yara izi kıpkırmızı parlar, gözleri kdv'yi süzer. "Cesur bir köpek olabilirsin, yolcu. Ama cesaret tek başına yetmez." diye homurduyor, elini kaldırarak bir işaret verir. Kdv'nin önünde iki koyu kürklü kurt, dişleri göstererek ilerlemeye devam eder — kdv'nin bacağı ve eli kanıyor, ama çocuklar hâlâ güvendeler.
+
+⏱️  Toplam: 20.95s | İlk token: 4.23s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 77
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Kılıcımı iki kurdun arasına saplarım, sol kurdun boğazına doğru keskin bir darbe indirirken sağ kurdun saldırısından kaçınmak için sağa kayarım — kanlı bacağımı zorlama, ama çocukların güvende olduğunu bilerek kendimi feda ederim."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "strength", "dc": 14}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "strength", "dc": 14}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'strength', 'dc': 14}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=strength, dc=14
+DEBUG execute_roll: karakter=kdv, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Strength check vs DC 14
+   Zar: 14 | Modifier: +3 | Toplam: 17 | DC: 14
+   ✅ BAŞARILI
+   📈 Strength XP +5 → 15
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 79
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: strength check vs DC 14
+Roll: 14 + 3 (modifier) = 17
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kdv, kılıcını iki kurdun arasına saplar — sol kurdun boğazına keskin bir darbe indirir, siyah kan fışkırır ve kurt yerlerde kıvranırken geri çekilir. Sağ kurdun saldırısından kaçınmak için sağa kayar, kanlı bacağı zorlar ama dengesini korur. Kafesin içindeki Leo, kdv'nin arkasında titreyerek izler, küçük tahta kuş oyuncağı elinde sıkıca tutulur. Varek, platformdan izlerken boğazındaki yara izi kıpkırmızı parlar, gözleri kdv'yi süzer. "Cesur bir köpek olabilirsin, yolcu. Ama cesaret tek başına yetmez." diye homurduyor, elini kaldırarak bir işaret verir. Kdv'nin önünde bir koyu kürklü kurt, dişleri göstererek ilerlemeye devam eder — kdv'nin bacağı ve eli kanıyor, ama çocuklar hâlâ güvendeler.
+
+⏱️  Toplam: 18.24s | İlk token: 4.52s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 80
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I plant my feet despite the pain, raise my sword in a defensive stance, and snarl at the dark-furred wolf, "Come then — I've killed your brother, and I'll send you to join him."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+(Perception) checks that rely on hearing or smell.
+Pack Tactics. The wolf has advantage on an attack roll against 
+a creature if at least one of the wolf’s allies is within 5 feet of 
+the cre
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 81
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kdv, acıya rağmen ayaklarını yere sağlam basar, kılıcını savunma pozisyonu kaldırır ve koyu kürklü kurtu gözlerine dikerek homurdanır: "Gel o zaman — kardeşini öldürdüm, seni de ona kavuşturacağım." Kafesin içindeki Leo, kdv'nin arkasında titreyerek izler, küçük tahta kuş oyuncağı elinde sıkıca tutulur. Varek, platformdan izlerken boğazındaki yara izi kıpkırmızı parlar, gözleri kdv'yi süzer. "Cesur bir köpek olabilirsin, yolcu. Ama cesaret tek başına yetmez." diye homurduyor, elini kaldırarak bir işaret verir. Kdv'nin önünde bir koyu kürklü kurt, dişleri göstererek ilerlemeye devam eder — kdv'nin bacağı ve eli kanıyor, ama çocuklar hâlâ güvendeler.
+
+⏱️  Toplam: 15.51s | İlk token: 2.25s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 82
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Kdv, kanayan dişlerini sıkar, kılıcını iki eline alır ve kurtun üzerine doğru bir adım atarak, 'Bu sefer kimse arkamda titremecek!' diye bağırır, ardından kurtun boynuna doğru keskin bir darbe indirir."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "strength", "dc": 12}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "strength", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'strength', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=strength, dc=12
+DEBUG execute_roll: karakter=kdv, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Strength check vs DC 12
+   Zar: 2 | Modifier: +3 | Toplam: 5 | DC: 12
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 84
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: strength check vs DC 12
+Roll: 2 + 3 (modifier) = 5
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kdv, kanayan dişlerini sıkar ve kılıcını iki eline alarak kurtun üzerine doğru adım atar — "Bu sefer kimse arkamda titremecek!" diye bağırır. Ama bacağındaki yara onu yavaşlatır, adımı dengesiz olur. Kılıc, kurtun boynuna değil, havada bir yankı bırakır. Kurt, kdv'nin dengesizliğini fırsat bilir ve saldırır — dişleri kdv'nin kılıc kolu saran eline geçer, metalin çıtırtısı ve kurtun homurtusu taşları titretir. Kdv, acıyla geri çekilir, elinden kılıc düşer. Kafesin içindeki Leo, kdv'nin arkasında titreyerek izler, küçük tahta kuş oyuncağı elinde sıkıca tutulur. Varek, platformdan izlerken boğazındaki yara izi kıpkırmızı parlar, gözleri kdv'yi süzer. "Cesur bir köpek olabilirsin, yolcu. Ama cesaret tek başına yetmez." diye homurduyor, elini kaldırarak bir işaret verir. Kdv'nin önünde bir koyu kürklü kurt, dişleri göstererek ilerlemeye devam eder — kdv'nin elinde artık silah yok, bacağı ve eli kanıyor, ama çocuklar hâlâ güvendeler.
+
+⏱️  Toplam: 18.52s | İlk token: 2.49s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 85
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Leo'yu arkamda tutun!" diye bağırırım, kanayan elimle kafesin çubuklarına sarılarak kendimi kurtun ile Leo'nun arasına geçiririm — kılıcı almadan önce bu canavarın önce beni aşması gerekir.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "strength", "dc": 14}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "strength", "dc": 14}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'strength', 'dc': 14}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=strength, dc=14
+DEBUG execute_roll: karakter=kdv, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Strength check vs DC 14
+   Zar: 9 | Modifier: +3 | Toplam: 12 | DC: 14
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 87
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: strength check vs DC 14
+Roll: 9 + 3 (modifier) = 12
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kdv, "Leo'yu arkamda tutun!" diye bağırır ve kanayan elimle kafesin çubuklarına sarılarak kendini kurt ile çocukların arasına geçirmeye çalışır — ama bacağındaki yara ve kan kaybı onu zayıflatır. Parmakları çubuktan kayar, kdv geriye düşer ve taş zemine sertçe çarpar. Başı döner, gözleri kararır. Kafesin içindeki Leo, kdv'nin düşüşünü görür ve küçük tahta kuş oyuncağı elinde sıkıca tutarak "Baba... baba mısın?" diye fısıldar, sesi titreyerek. Kdv, yerde yatarken kılıcına uzanır ama parmakları geç kalır — kurt, kdv'nin düşüşünü fırsat bilir ve saldırır, dişleri göstererek. Varek, platformdan izlerken boğazındaki yara izi kıpkırmızı parlar, gözleri kdv'yi süzer. "Cesur bir köpek olabilirsin, yolcu. Ama cesaret tek başına yetmez." diye homurduyor, elini kaldırarak bir işaret verir. Kdv'nin önünde bir koyu kürklü kurt, dişleri göstererek ilerlemeye devam eder — kdv yerde, silahsız, kanıyor, ama çocuklar hâlâ güvendeler.
+
+⏱️  Toplam: 20.16s | İlk token: 2.84s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 88
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Kurtun üzerine tükürürüm ve son gücümle kılıcıma son kez uzanırken Varek'e bağırarak 'Eğer bir erkeksen beni değil, kadınlarla çocuklarla uğraşma!' derim — kılıca asla bırakmam, Leo'yu koruyacağım ya da öyle öleceğim."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "charisma", "dc": 17}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 17}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 17}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=17
+DEBUG execute_roll: karakter=kdv, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 17
+   Zar: 18 | Modifier: +0 | Toplam: 18 | DC: 17
+   ✅ BAŞARILI
+   ⬆️  Charisma eşiği aşıldı! Ability score +1 artacak.
+   📈 Charisma XP +5 → 50
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 90
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: charisma check vs DC 17
+Roll: 18 + 0 (modifier) = 18
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kdv, kurtun üzerine tükürür ve son gücümle kılıcına son kez uzanır — parmaklar kanla kaygan ama sıkıca kavrılır. Kılıc yerden kalkar. Kdv, Varek'e döner ve bağırarak "Eğer bir erkeksen beni değil, kadınlarla çocuklarla uğraşma!" der, sesi taş duvarlarda yankılanır. Varek, platformdan izlerken boğazındaki yara izi kıpkırmızı parlar — gözleri daralır, çenesini sıkar. Bir anlık sessizlik olur. Varek, elini kaldırır ve kurtu işaret eder: "Dur." Kurt, dişlerini göstermeye devam eder ama geri çekilir, Varek'in platformunun dibinde durur. "Cesaretli bir köpeksin, yolcu. Belki de seni öldürmek için henüz erken." diye homurduyor Varek, gözleri kdv'yi süzer. Kafesin içindeki Leo, kdv'nin arkasında titreyerek izler, küçük tahta kuş oyuncağı elinde sıkıca tutulur. Kdv, kılıcını elinde tutar, bacağı ve eli kanıyor, ama çocuklar hâlâ güvendeler. Varek'in gözleri kdv'den ayrılmaz — bir sonraki hamle kdv'nin elinde.
+
+⏱️  Toplam: 21.71s | İlk token: 2.55s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 91
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Varek, cesaretine saygı duyuyorum ama korkmadığımı gördün — şimdi beni dinle, bu çocukları ve kadınları serbest bırak yoksa bu kılıcı son kez kaldırdığımda senin o güzel boğazına indireceğim!"'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "charisma", "dc": 12}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kdv, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 19 | Modifier: +0 | Toplam: 19 | DC: 12
+   ✅ BAŞARILI
+   📈 Charisma XP +5 → 55
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 93
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: charisma check vs DC 12
+Roll: 19 + 0 (modifier) = 19
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kdv, kılıcını Varek'in boğazına doğrultarak bağırarak devam eder: "Bu çocukları ve kadınları serbest bırak yoksa bu kılıcı son kez kaldırdığımda senin o güzel boğazına indireceğim!" Taş duvarlarda yankılanan ses, kafeslerin metal çubuklarını titretir. Varek, platformda hafifçe öne eğilir — boğazındaki yara izi kıpkırmızı parlar, gözleri daralır. Ama sonra... gülümser. Soğuk, hesaplanmış bir gülümseme. "Cesaretli köpek," diye homurduyor, "ama aptal değil. Boğazımdaki bu yarayı görmüyor musun? Zaten ölüyorum. Senin tehditlerin beni korkutmaz." Elini kaldırır ve iki parmağını şıklatır — karanlıkta, taş merdivenlerin ardından üç siluet belirir. Pelerinli, maskeli, silahlı. Kdv'nin önünde hâlâ duran kurt homurdar, dişlerini gösterir. Kafesin içindeki Leo, kdv'nin arkasında titreyerek izler, küçük tahta kuş oyuncağı elinde sıkıca tutulur. Varek, platformdan kdv'yi süzer: "Ama seni öldürmek için onlara gerek yok. Sadece bekleyeceksin... ve izleyeceksin." Kdv, kılıcını elinde tutar, bacağı ve eli kanıyor, ama çocuklar hâlâ güvendeler — şimdilik.
+
+⏱️  Toplam: 25.19s | İlk token: 2.59s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 94
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I slam my boot down on the wolf's muzzle with a sharp stomp, then spin to face the three emerging silhouettes, raising my sword in a defensive stance and shouting, "Leo, stay behind me — and if I fall, run for the nearest cage and free those children!"'
+   RAG sonucu (ilk 200 kr): Kural 1:
+(Perception) checks that rely on hearing or smell.
+Pack Tactics. The wolf has advantage on an attack roll against 
+a creature if at least one of the wolf’s allies is within 5 feet of 
+the cre
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "strength", "dc": 13}'
+   JSON parse edildi: '{"needed": true, "ability": "strength", "dc": 13}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'strength', 'dc': 13}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=strength, dc=13
+DEBUG execute_roll: karakter=kdv, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Strength check vs DC 13
+   Zar: 4 | Modifier: +3 | Toplam: 7 | DC: 13
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 96
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: strength check vs DC 13
+Roll: 4 + 3 (modifier) = 7
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kdv, kurtun burnuna sert bir tekme indirmeye çalışır — ama bacağındaki yara onu yavaşlatır, adımı dengesiz olur. Tekme havada kalır, kurt başını çevirerek kdv'nin bileğine dişlerini geçirir, metal bilezik çıtırtısı ve kurtun homurtusu taşları titretir. Kdv, acıyla geri çekilirken üç siluetle yüzleşmek için döner — pelerinli, maskeli, silahlı. Kılıcını savunma pozisyonu kaldırır ve bağırarak "Leo, arkama bak — ve eğer düşersem, en yakın kafese koş ve o çocukları serbest bırak!" der. Ama kurt, kdv'nin bileğinden bırakmaz — dişler derinlere iner, kan akmaya başlar. Kafesin içindeki Leo, kdv'nin arkasında titreyerek izler, küçük tahta kuş oyuncağı elinde sıkıca titreyerek tutulur. Varek, platformdan izlerken boğazındaki yara izi kıpkırmızı parlar, gözleri kdv'yi süzer. "Cesur bir köpek olabilirsin, yolcu. Ama cesaret tek başına yetmez." diye homurduyor, elini kaldırarak bir işaret verir. Kdv'nin önünde üç pelerinli siluet, arkasında kurt — kdv'nin bileği kanıyor, ama çocuklar hâlâ güvendeler.
+
+⏱️  Toplam: 20.29s | İlk token: 3.23s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 97
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: ''
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 98
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kdv, kurtun dişlerinden kurtulmak için kılıcıyla kurtun başına sert bir darbe indirir — metalin çarpması ve kurtun acılı homurtusu taş duvarlarda yankılanır. Kurt geri çekilir, kan ağzından sızar ama ölümcül değil. Kdv, son gücümle üç siluetle yüzleşmek için döner — pelerinli, maskeli, silahlı. Kılıcını savunma pozisyonu kaldırır ve bağırarak "Leo, arkama bak — ve eğer düşersem, en yakın kafese koş ve o çocukları serbest bırak!" der. Kafesin içindeki Leo, kdv'nin arkasında titreyerek izler, küçük tahta kuş oyuncağı elinde sıkıca titreyerek tutulur. Varek, platformdan izlerken boğazındaki yara izi kıpkırmızı parlar, gözleri kdv'yi süzer. "Cesur bir köpek olabilirsin, yolcu. Ama cesaret tek başına yetmez." diye homurduyor, elini kaldırarak bir işaret verir. Kdv'nin önünde üç pelerinli siluet, arkasında kanlı kurt — kdv'nin bileği ve bacağı kanıyor, ama çocuklar hâlâ güvendeler. Üç siluetten biri öne adım atar, maskesinin arkasından kızarıyor gözleri kdv'yi süzer — Kraz, elindeki mantar ayaklı tüfeği kdv'ye doğrultur. "Yolcu," diye tıslar Kraz, "ya kendin kılıcını bırakırız... ya da kurtlar yer. Seçim senin."
+
+⏱️  Toplam: 24.17s | İlk token: 2.19s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 99
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Kılıcımı asla bırakmam — ama senin maskenin arkasındaki o çirkin yüzü görmek isterim!" diye haykırırken ani bir hamleyle en yakın siluetin ayağına toprak fırlatarak dengesini bozmaya çalışır, ardından kanlı kurtun üzerinden atlayarak üçlüyü tek bir açıda görmeye çalışır.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "dexterity", "dc": 14}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "dexterity", "dc": 14}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'dexterity', 'dc': 14}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=dexterity, dc=14
+DEBUG execute_roll: karakter=kdv, score=14, modifier=2
+
+──────────────────────────────────────────────────
+🎲 Dexterity check vs DC 14
+   Zar: 18 | Modifier: +2 | Toplam: 20 | DC: 14
+   ✅ BAŞARILI
+   📈 Dexterity XP +5 → 5
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 101
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: dexterity check vs DC 14
+Roll: 18 + 2 (modifier) = 20
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kdv, "Kılıcımı asla bırakmam — ama senin maskenin arkasındaki o çirkin yüzü görmek isterim!" diye haykırırken ani bir hamleyle en yakın siluetin ayağına toprak fırlatır — kum ve taş parçaları gözlere çarpar, siluet geri çekilirken maskesi kayar, altından yüzü görünür: yanık izleri, çatlak dudaklar, öfkeli gözler. Kdv, kanlı kurtun üzerinden atlar — kılıcını tutan el bileğindeki yara kanla kaygan ama tutmayı başarır. Üç silhet tek bir açıda görünür, Kraz tüfeğini doğrultur, diğer ikisi hançerlerini çeker. Kafesin içindeki Leo, kdv'nin arkasında titreyerek izler, küçük tahta kuş oyuncağı elinde sıkıca titreyerek tutulur. Varek, platformdan izlerken boğazındaki yara izi kıpkırmızı parlar, gözleri kdv'yi süzer. "Cesur bir köpek olabilirsin, yolcu. Ama cesaret tek başına yetmez." diye homurduyor, elini kaldırarak bir işaret verir. Kdv'nin önünde üç pelerinli silhet, arkasında kanlı kurt — kdv'nin bileği ve bacağı kanıyor, ama çocuklar hâlâ güvendeler. Kraz, maskesini düzeltir ve tüfeğini kdv'ye doğrultur: "Son şansın, yolcu. Kılıcını bırak... ya da bu sefer kurtlar yetmez."
+
+⏱️  Toplam: 24.83s | İlk token: 3.49s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 102
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Kraz, senin o tüfeğin beni korkutmaz — ateş etmeden önce beni yakalayabilirsen konuşuruz!" diye bağırır, yaralı bacağını yere basarak dengesini sağlar, kılıcını Kraz'e doğrultur ve yanındaki kafesin direğine elini atarak kendini yüksekliğe doğru çekmeye çalışır — platformdan bir hamleyle Kraz'in üstüne atlamayı planır.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "strength", "dc": 15}'
+   JSON parse edildi: '{"needed": true, "ability": "strength", "dc": 15}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'strength', 'dc': 15}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=strength, dc=15
+DEBUG execute_roll: karakter=kdv, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Strength check vs DC 15
+   Zar: 18 | Modifier: +3 | Toplam: 21 | DC: 15
+   ✅ BAŞARILI
+   📈 Strength XP +5 → 20
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 104
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: strength check vs DC 15
+Roll: 18 + 3 (modifier) = 21
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kdv, "Kraz, senin o tüfeğin beni korkutmaz — ateş etmeden önce beni yakalayabilirsen konuşuruz!" diye bağırır. Yaralı bacağını zor da olsa yere basar, dengesini sağlar ve kılıcını Kraz'e doğrultur. Yanındaki kafesin direğine elini atar — parmaklar paslı metale kavrılır, kaslar gerilir. Kdv, kendini yüksekliğe doğru çeker, bacağından akan kan direğe damlar. Kraz, tüfeğini doğrultur ama geç kalır — kdv, kafesin üstünden platformun kenarına atlar, taş zemine çarpar ama ayakta kalır. Kılıcını Kraz'e doğrultur, gözleri kızarır: "Şimdi maskeni çıkar, Kraz. Görelim seni." Kraz, tüfeğini indirir, gözleri maskenin arkasından kızarır — bir anlık sessizlik olur. Kafesin içindeki Leo, kdv'nin arkasında titreyerek izler, küçük tahta kuş oyuncağı elinde sıkıca titreyerek tutulur. Varek, platformdan izlerken boğazındaki yara izi kıpkırmızı parlar, gözleri kdv'yi süzer. "Cesur bir köpek olabilirsin, yolcu. Ama cesaret tek başına yetmez." diye homurduyor, elini kaldırarak bir işaret verir. Kdv'nin önünde Kraz, arkasında iki silhet ve kanlı kurt — kdv'nin bileği ve bacağı kanıyor, ama çocuklar hâlâ güvendeler. Kraz, maskesini çıkarmaya elini götürür — ama durur. "Maskemi çıkarırım," diye tıslar, "ama önce bir şey söylemem gerekiyor. Varek seni öldürmek istiyor ama... ben istemiyorum. Çocuklar burada güvende değil. Sen de değilsin. Ama birlikte çıkabiliriz — eğer kılıcını bırakmazsan."
+
+⏱️  Toplam: 33.17s | İlk token: 10.13s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 105
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Bırakmam, Kraz. Ama kılıcımı indiririm — şimdi konuşalım. Çocukları neden burada tutuyorsunuz, ve Varek'in gerçek planı ne?"'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "charisma", "dc": 12}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kdv, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 10 | Modifier: +0 | Toplam: 10 | DC: 12
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 107
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: charisma check vs DC 12
+Roll: 10 + 0 (modifier) = 10
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kdv, "Bırakmam, Kraz. Ama kılıcımı indiririm — şimdi konuşalım. Çocukları neden burada tutuyorsunuz, ve Varek'in gerçek planı ne?" der, kılıcını hafifçe aşağı indirir ama elinden bırakmaz. Kraz, maskesinin arkasından kdv'yi süzer — gözleri daralır, tüfeğini yeniden kaldırır. "Kılıcını indirdin ama hâlâ elinde," diye tıslar, "bu güven değil, yolcu. Bu tehlike." Kraz, tüfeğini kdv'ye doğrultur ve ateş eder — tüfek patlar, taş duvarlarda yankılanır. Kdv, ani bir hamleyle yanı atlar, kurşun omzundan geçer — acı, kan, ama ölümcül değil. Kafesin içindeki Leo, kdv'nin arkasında titreyerek izler, küçük tahta kuş oyuncağı elinde sıkıca titreyerek tutulur. Varek, platformdan izlerken boğazındaki yara izi kıpkırmızı parlar, gözleri kdv'yi süzer. "Cesur bir köpek olabilirsin, yolcu. Ama cesaret tek başına yetmez." diye homurduyor, elini kaldırarak bir işaret verir. Kdv'nin önünde Kraz tüfeğini tekrar doldurur, arkasında iki silhet ve kanlı kurt — kdv'nin bileği, bacağı ve omzu kanıyor, ama çocuklar hâlâ güvendeler. Kraz, tüfeğini tekrar doğrultur: "Son şansın, yolcu. Kılıcını bırak... ya da bu sefer kaçamazsın."
+
+⏱️  Toplam: 28.57s | İlk token: 7.75s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 108
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Kılıcımı bırakmam, Kraz — ama sana bir teklifim var: beni ve çocukları serbest bırak, ya da Varek'e söyleyin ki bu kafeslerin arkasında ne olduğunu bütün kasabaya açıklayacağım." der, kanayan omzunu bastırarak dengesini korur ve Kraz'ın tüfeğinin noktalanmasından bir adım sola kayarak kafesin demir çubuklarına yaklaşır — Leo'nun elini tutarak onu kendine çeker.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "charisma", "dc": 14}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 14}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 14}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=14
+DEBUG execute_roll: karakter=kdv, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 14
+   Zar: 10 | Modifier: +0 | Toplam: 10 | DC: 14
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 110
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: charisma check vs DC 14
+Roll: 10 + 0 (modifier) = 10
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kdv, kanayan omzunu bastırarak dengesini korur ve Kraz'ın tüfeğinin noktalanmasından bir adım sola kayar — kafesin demir çubuklarına yaklaşır, Leo'nun elini tutarak onu kendine çeker. Ama Kraz gülümser — soğuk, acımasız bir gülümseme. "Kasabaya mı? Kasabada kimse umursamaz, yolcu. Seni de onlar da umursamaz." Kraz, tüfeğini kdv'ye doğrultur ve tekrar ateş eder — bu sefer omzuna değil, bacağına isabet eder. Kdv, acıyla geri çekilir, bacağından kan akmaya başlar, ama ayakta kalır. Kafesin içindeki Leo, kdv'nin arkasında titreyerek izler, küçük tahta kuş oyuncağı elinde sıkıca titreyerek tutulur. Varek, platformdan izlerken boğazındaki yara izi kıpkırmızı parlar, gözleri kdv'yi süzer. "Cesur bir köpek olabilirsin, yolcu. Ama cesaret tek başına yetmez." diye homurduyor, elini kaldırarak bir işaret verir. Kdv'nin önünde Kraz tüfeğini tekrar doldurur, arkasında iki silhet ve kanlı kurt — kdv'nin bileği, bacağı ve omzu kanıyor, ama çocuklar hâlâ güvendeler. Kraz, tüfeğini tekrar doğrultur: "Son şansın, yolcu. Kılıcını bırak... ya da bu sefer kaçamazsın."
+
+⏱️  Toplam: 19.26s | İlk token: 2.24s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 111
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Bıçaklanmış bacağımla kayarak Kraz'ın tüfeğini düşürmeye çalışıyorum, aynı zamanda Leo'yu kafesin arkasına iterek onu koruma altına alıyorum — 'Kasabada kimse umursamaz' diyorsun, o zaman seninle tek başıma konuşmamız gerekiyor, Kraz."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "dexterity", "dc": 15}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "dexterity", "dc": 15}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'dexterity', 'dc': 15}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=dexterity, dc=15
+DEBUG execute_roll: karakter=kdv, score=14, modifier=2
+
+──────────────────────────────────────────────────
+🎲 Dexterity check vs DC 15
+   Zar: 15 | Modifier: +2 | Toplam: 17 | DC: 15
+   ✅ BAŞARILI
+   📈 Dexterity XP +5 → 10
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 113
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kdv
+Action required: dexterity check vs DC 15
+Roll: 15 + 2 (modifier) = 17
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kdv, bacağından akan kanla kayarak Kraz'ın tüfeğini düşürmeye çalışır — parmaklar metale kavrılır, tüfek aniden kayar, Kraz geri çekilirken maskesi kayar, altından yüzü görünür: yanık izleri, çatlak dudaklar, öfkeli gözler. Aynı zamanda Leo'yu kafesin arkasına iter — küçük çocuk titrer ama itaat eder, küçük tahta kuş oyuncağı elinde sıkıca tutulur. "Kasabada kimse umursamaz diyorsun, o zaman seninle tek başıma konuşmamız gerekiyor, Kraz." der kdv, kılıcını tutan el bileğindeki yara kanla kaygan ama tutmayı başarır. Kraz, maskesini düzeltir, gözleri kızarır — bir anlık sessizlik olur. Kafesin içindeki Leo, kdv'nin arkasında titreyerek izler, küçük tahta kuş oyuncağı elinde sıkıca titreyerek tutulur. Varek, platformdan izlerken boğazındaki yara izi kıpkırmızı parlar, gözleri kdv'yi süzer. "Cesur bir köpek olabilirsin, yolcu. Ama cesaret tek başına yetmez." diye homurduyor, elini kaldırarak bir işaret verir. Kdv'nin önünde Kraz, arkasında iki silhet ve kanlı kurt — kdv'nin bileği, bacağı ve omzu kanıyor, ama çocuklar hâlâ güvendeler. Kraz, maskesini çıkarmaya elini götürür — ama durur. "Tek başına mı?" diye tıslar, "Peki. Ama önce bir şey söylemem gerekiyor. Varek seni öldürmek istiyor ama... ben istemiyorum. Çocuklar burada güvende değil. Sen de değilsin. Ama birlikte çıkabiliriz — eğer kılıcını bırakmazsan."
+
+⏱️  Toplam: 25.21s | İlk token: 3.78s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+Oturum kapatıldı. (ID: 90)

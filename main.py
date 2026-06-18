@@ -21,7 +21,7 @@ from game.encounter_manager import (
     is_combat_finished, enemy_turn
 )
 from game.event_parser import parse_encounter_from_response, strip_encounter_from_response
-from game.inventory_manager import use_item, add_item, get_pickup_dc, display_inventory
+from game.inventory_manager import use_item, add_item, display_inventory
 from game.xp_manager import (
     init_player_stats, grant_general_xp, grant_ability_xp,
     grant_combat_xp, grant_quest_rewards, apply_damage, add_gold, format_player_status
@@ -184,19 +184,18 @@ def handle_item_pickup(game_state, player_name, session_id, user):
     if not item:
         return None
 
-    dc = get_pickup_dc(item.get("rarity", "common"))
-    print(f"\n🎒 EŞYA BULUNDU: {item['name']} (DC {dc} to pick up)")
+    print(f"\n🎒 EŞYA BULUNDU: {item['name']} (value: {item.get('value', 0)}gp)")
     choice = input(f"Almak ister misin? (e/h): ").strip().lower()
 
     if choice != "e":
         game_state.pending_item = None
         return f"{player_name} decides to leave the {item['name']} behind."
 
-    roll_info = {"ability": "dexterity", "dc": dc}
+    roll_info = {"ability": "dexterity", "dc": 10}
     roll_msg, success = execute_roll(roll_info, player_name, game_state, session_id, user)
 
     if success:
-        add_item(session_id, item["name"], 1, item.get("value", 0), item.get("rarity", "common"))
+        add_item(session_id, item["name"], 1, item.get("value", 0))
         result_msg = f"{player_name} successfully picks up the {item['name']}!"
         print(f"   ✅ {item['name']} envantere eklendi!")
     else:
@@ -207,35 +206,11 @@ def handle_item_pickup(game_state, player_name, session_id, user):
     return result_msg
 
 # ─── BAŞARILI ROLL SONRASI EŞYA EDİNME ──────────────────────────────────────
-
-ACQUIRE_PATTERNS = [
-    r"steal\s+(?:the\s+|a\s+|an\s+)?(.+)",
-    r"grab\s+(?:the\s+|a\s+|an\s+)?(.+)",
-    r"take\s+(?:the\s+|a\s+|an\s+)?(.+)",
-    r"pick\s+up\s+(?:the\s+|a\s+|an\s+)?(.+)",
-    r"snatch\s+(?:the\s+|a\s+|an\s+)?(.+)",
-    r"swipe\s+(?:the\s+|a\s+|an\s+)?(.+)",
-    r"lift\s+(?:the\s+|a\s+|an\s+)?(.+)",
-    r"pocket\s+(?:the\s+|a\s+|an\s+)?(.+)",
-    # Türkçe
-    r"(.+?)\s*(?:çal|çalıyorum|çaldım|al|alıyorum|aldım|kap|kaptım)",
-]
-
-def check_item_acquisition(action):
-    """
-    Başarılı roll sonrası: aksiyon eşya edinme içeriyor mu?
-    Döner: item_name string veya None
-    """
-    action_lower = action.lower().strip()
-    action_clean = re.sub(r"^i\s+", "", action_lower)
-
-    for pattern in ACQUIRE_PATTERNS:
-        match = re.search(pattern, action_clean, re.IGNORECASE)
-        if match:
-            item = match.group(1).strip().rstrip('.,!?')
-            if len(item.split()) <= 4:
-                return item
-    return None
+# Item acquisition is now handled entirely by LLM via parse_gm_events().
+# The old keyword-based check_item_acquisition was removed because it
+# produced false positives (e.g. "Grik'i hedf" matched as an item name).
+# LLM does a much better job at determining whether the player actually
+# picked up an item vs just performing a combat action.
 
 # ─── EŞYA KULLANMA ───────────────────────────────────────────────────────────
 
@@ -445,10 +420,70 @@ def process_combat_turn(game_state, player_name, action, session_id, user, playe
     print(f"\n⚔️  COMBAT TURN {encounter.turn_number}/{encounter.MAX_TURNS}")
     print(format_encounter_status(game_state))
 
+    # ── CHECK STUCK COMBAT ──
+    # If no damage has been dealt for too many turns, force resolution
+    if encounter.turn_number > encounter._last_damage_turn + encounter.STUCK_COMBAT_THRESHOLD:
+        print(f"🐞 DEBUG [Combat]: Stuck combat detected! No damage for {encounter.STUCK_COMBAT_THRESHOLD} turns. Forcing resolution.")
+        # Enemies lose interest and flee
+        for e in get_alive_enemies(encounter):
+            e["fled"] = True
+        encounter.last_significant_event = "The enemies, seeing no progress, retreat into the shadows."
+        roll_result_msg = "⚡ COMBAT RESOLVED: The enemies break off their attack and flee! (Stuck combat auto-resolution)"
+        return roll_result_msg, True, []
+
+    # ── CHECK IF PLAYER IS TRYING TO FLEE ──
+    action_lower = action.lower().strip()
+    flee_keywords = ["flee", "run away", "escape", "retreat", "kaç", "kaçış", "sığın"]
+    is_fleeing = any(kw in action_lower for kw in flee_keywords)
+
+    if is_fleeing:
+        # Flee attempt: roll d20 + dexterity modifier vs DC 12
+        char = next((c for c in game_state.characters if c['name'] == player_name), None)
+        if not char:
+            char = game_state.characters[0] if game_state.characters else {"abilities": {}}
+        dex_score = char.get("abilities", {}).get("dexterity", 10)
+        dex_mod = (dex_score - 10) // 2
+        flee_roll = d20()
+        flee_total = flee_roll + dex_mod
+        flee_dc = 12
+
+        print(f"\n🏃 FLEE ATTEMPT: d20({flee_roll}) + {dex_mod} (DEX) = {flee_total} vs DC {flee_dc}")
+
+        if flee_roll == 20 or flee_total >= flee_dc:
+            # Successful flee
+            encounter.player_fled = True
+            roll_result_msg = f"🏃 {player_name} successfully flees from combat! (Roll: {flee_roll}+{dex_mod}={flee_total} vs DC {flee_dc})"
+            print(f"   ✅ FLEE SUCCESSFUL")
+            return roll_result_msg, True, []
+        else:
+            # Failed flee — player loses their action this turn
+            roll_result_msg = f"🏃 {player_name} tries to flee but fails! (Roll: {flee_roll}+{dex_mod}={flee_total} vs DC {flee_dc}) The enemies block the escape route!"
+            print(f"   ❌ FLEE FAILED")
+            # Continue to enemy turn (player wasted their action)
+
+            # Enemy turn
+            player_targets = _build_player_targets(game_state, session_id, user)
+            if player_targets:
+                enemy_results = enemy_turn(encounter, player_targets, session_id)
+                for er in enemy_results:
+                    if er["damage"] > 0 and er.get("target_player"):
+                        is_down, new_hp = apply_damage(session_id, er["target_player"], er["damage"])
+                        encounter.total_damage_dealt_to_players += er["damage"]
+                        record_damage(encounter)
+                        roll_result_msg += f"\n{er['message']}"
+                        if is_down:
+                            roll_result_msg += f"\n{er['target_player']} has fallen unconscious!"
+                            dead_players_this_turn.append(er["target_player"])
+
+            # Check termination
+            combat_finished, reason = is_combat_finished(encounter, player_targets)
+            if combat_finished:
+                return roll_result_msg, True, dead_players_this_turn
+            return roll_result_msg, False, dead_players_this_turn
+
     # ── PLAYER ATTACK ──
     alive_enemies = get_alive_enemies(encounter)
     if not alive_enemies:
-        # All enemies dead — combat over
         return None, True, []
 
     attack_msg, damage, enemy_defeated = player_attack(game_state, player_name, session_id, user)
@@ -456,6 +491,7 @@ def process_combat_turn(game_state, player_name, action, session_id, user, playe
 
     if damage > 0:
         encounter.total_damage_dealt_to_enemies += damage
+        record_damage(encounter)
 
     # Check if ALL enemies are defeated after player attack
     if is_encounter_over(encounter):
@@ -463,23 +499,7 @@ def process_combat_turn(game_state, player_name, action, session_id, user, playe
         return roll_result_msg, True, []
 
     # ── ENEMY TURN ──
-    # Build player targets for enemy attacks
-    player_targets = []
-    for char in game_state.characters:
-        pstats = None
-        try:
-            from game.xp_manager import get_player_stats
-            pstats = get_player_stats(session_id, char["name"])
-        except:
-            pass
-        hp = pstats["hp"] if pstats else char.get("hp", 10)
-        max_hp = pstats["max_hp"] if pstats else char.get("max_hp", 10)
-        player_targets.append({
-            "name": char["name"],
-            "ac": char.get("armor_class", 12),
-            "hp": hp,
-            "max_hp": max_hp,
-        })
+    player_targets = _build_player_targets(game_state, session_id, user)
 
     enemy_results = enemy_turn(encounter, player_targets, session_id)
 
@@ -488,6 +508,7 @@ def process_combat_turn(game_state, player_name, action, session_id, user, playe
         if er["damage"] > 0 and er.get("target_player"):
             is_down, new_hp = apply_damage(session_id, er["target_player"], er["damage"])
             encounter.total_damage_dealt_to_players += er["damage"]
+            record_damage(encounter)
             roll_result_msg += f"\n{er['message']}"
             if is_down:
                 roll_result_msg += f"\n{er['target_player']} has fallen unconscious!"
@@ -512,16 +533,15 @@ def process_combat_turn(game_state, player_name, action, session_id, user, playe
         if evt_msg:
             roll_result_msg += f"\n⚡ {evt_msg}"
             encounter.last_significant_event = evt_msg
-            # Apply ally heal
             if evt["effect"] == "add_ally":
                 from game.xp_manager import heal
                 for char in game_state.characters:
                     heal(session_id, char["name"], evt.get("ally_heal", 5))
-            # Apply AoE to players
             if evt["effect"] == "aoe_damage":
                 aoe_dmg = evt.get("aoe_damage", 4)
                 for char in game_state.characters:
-                    apply_damage(session_id, char["name"], aoe_dmg)
+                    aoe_result = apply_damage(session_id, char["name"], aoe_dmg)
+                    record_damage(encounter)
 
     # ── STATUS EFFECT TICKS ──
     for char in game_state.characters:
@@ -530,6 +550,7 @@ def process_combat_turn(game_state, player_name, action, session_id, user, playe
         dot_dmg = game_state.get_player_dot_damage(char["name"])
         if dot_dmg > 0:
             is_down, _ = apply_damage(session_id, char["name"], dot_dmg)
+            record_damage(encounter)
             roll_result_msg += f"\n☠️ Poison deals {dot_dmg} damage to {char['name']}!"
             if is_down:
                 roll_result_msg += f"\n{char['name']} has fallen unconscious from poison!"
@@ -542,13 +563,28 @@ def process_combat_turn(game_state, player_name, action, session_id, user, playe
         print(f"🐞 DEBUG [Combat/CLI]: Combat finished! Reason: {reason}")
         return roll_result_msg, True, dead_players_this_turn
 
-    # Track progress for variety warnings
-    if encounter.turn_number > 3 and encounter.total_damage_dealt_to_enemies == 0:
-        game_state.combat_rounds_without_progress = encounter.turn_number
-    else:
-        game_state.combat_rounds_without_progress = 0
-
     return roll_result_msg, False, dead_players_this_turn
+
+
+def _build_player_targets(game_state, session_id, user):
+    """Build player target list for enemy attacks. Shared helper."""
+    player_targets = []
+    for char in game_state.characters:
+        pstats = None
+        try:
+            from game.xp_manager import get_player_stats
+            pstats = get_player_stats(session_id, char["name"])
+        except:
+            pass
+        hp = pstats["hp"] if pstats else char.get("hp", 10)
+        max_hp = pstats["max_hp"] if pstats else char.get("max_hp", 10)
+        player_targets.append({
+            "name": char["name"],
+            "ac": char.get("armor_class", 12),
+            "hp": hp,
+            "max_hp": max_hp,
+        })
+    return player_targets
 
 
 # ─── ANA OYUN DÖNGÜSÜ ────────────────────────────────────────────────────────
@@ -798,12 +834,6 @@ def game_loop(user, session_id, game_state, scenario_manager):
 
             if roll_info.get("needed"):
                 roll_result_msg, roll_success = execute_roll(roll_info, player_name, game_state, session_id, user)
-                if roll_success:
-                    acquired_item = check_item_acquisition(action)
-                    if acquired_item:
-                        add_item(session_id, acquired_item, 1, 0, "common")
-                        print(f"   🎒 '{acquired_item}' envantere eklendi (başarılı roll)")
-                        save_message(session_id, None, "user", f"{player_name} successfully acquires: {acquired_item}")
             else:
                 print("   ⏭️  Zar atılmadı")
                 grant_general_xp(session_id, player_name, 1, reason="aksiyon (roll yok)")

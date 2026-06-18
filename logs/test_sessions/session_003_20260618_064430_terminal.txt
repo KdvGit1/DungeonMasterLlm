@@ -1,0 +1,2027 @@
+Veritabanı hazır.
+'autotest_3_4237' kaydedildi.
+Hoş geldin, autotest_3_4237!
+Oturum oluşturuldu: AutoTest: Session_3_064430 (ID: 92)
+Boromir oyuna katıldı.
+
+📍 Yeni lokasyon: The Gates of Millhaven
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Yağmur, çamur yolunun üzerine kasırga gibi yaşıyor ve Millhaven köyünün çürümüş tahtadan paletlerinden geçmek neredeyse imkânsız. Garret adlı genç muhafız, paslı zincir zırhının altında titreyerek, sana değil, arkandaki karanlık ormanlığa bakıyor. Demir kapı aralık olarak açık ve içeriden bir meyhane tabelasının titreyen ışığı sızıyor — ama Garret, kapıyı açmadan önce bir şeyler söylemek istiyor gibi, eli korkuyla titreyerek kapıya uzanıyor.
+
+⏱️  Toplam: 16.02s | İlk token: 2.46s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: [{"name":"Garret","role":"Village Guard","appearance":"A young man wearing rusty chainmail armor that looks slightly too large for his frame. His face is pale and drawn, with dark circles under his ey
+🔎 NPC Extractor — ✅ Yeni NPC bulundu: Garret (Village Guard)
+📝 Yeni NPC eklendi: Garret (session: 92)
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 1
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+📍 Yeni lokasyon: The Rusty Flagon
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"I grab Garret by the collar of his rusty chainmail, shove him aside with a snarl, and kick the iron gate open—I don't have time for a frightened boy's hesitation when there's warmth and coin waiting inside."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "strength", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "strength", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'strength', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=strength, dc=12
+DEBUG execute_roll: karakter=Boromir, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Strength check vs DC 12
+   Zar: 14 | Modifier: +3 | Toplam: 17 | DC: 12
+   ✅ BAŞARILI
+   📈 Strength XP +5 → 5
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 3
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: Boromir
+Action required: strength check vs DC 12
+Roll: 14 + 3 (modifier) = 17
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Paslı zincir zırhının yakasını kavrayan bir el Garret'i yana fırlatır ve demir kapı, çamurlu paletlerin üzerinde gıcırtıyla açılır. Garret çarşaf gibi bir şekilde çamurda yuvarlanırken, içeri adım attığında eski bira ve yanmış yahni kokusu burun deliklerini yakalıyor. Kasıpta terli, sıska bir cüce — Borin — zaten temizlenmiş bir kupayı şiddetle ovalıyor ve yüzünde yapmacık bir gülümseme beliriyor; köşedeki ilan tahtasında bir çocuk resmi yırtılmış şekilde asılıyor ve bir köşede gözü tek yaşlı Silas, ucuz şarap içinten göz kırparak kapıya bakıyor. Borin, "Hoş geldin, yolcu!" diyor, sesi titreyerek, "Güzel bir oda istersen bir gümüş paraya hazırım — ama gece kapını kilitlemeyi unutma, yakınlarda kurtlar vardır."
+
+⏱️  Toplam: 30.45s | İlk token: 11.40s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: [{"name":"Borin","role":"Innkeeper","appearance":"A sweaty, wiry dwarf with a forced smile, wearing a stained apron over a patched tunic. His beard is unkempt and his eyes dart nervously around the ro
+🔎 NPC Extractor — ✅ Yeni NPC bulundu: Borin (Innkeeper)
+🔎 NPC Extractor — ⚠️  'Silas' eksik alan: ['personality'], atlanıyor
+📝 Yeni NPC eklendi: Borin (session: 92)
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 4
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+📍 Yeni lokasyon: The Rusty Flagon - Cellar
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'Borin'in yakasını tutup kasıtın ortasına doğru çekiyorum, yüzüme yaklaşarak alçak bir sesle fısıldıyorum: "Gümüş istemiyorum — o çocuğun resmini gördüm, ve senin titreyen sesin beni meraklandırdı. Şimdi söyle bana o çocuk nerede, yoksa bu kadehi ovalamak yerine seni ovalarım."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 14}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 14}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 14}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=14
+DEBUG execute_roll: karakter=Boromir, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 14
+   Zar: 11 | Modifier: +0 | Toplam: 11 | DC: 14
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 6
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: Boromir
+Action required: charisma check vs DC 14
+Roll: 11 + 0 (modifier) = 11
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Borin'in yüzünde yapmacık gülümseme donakalır ve gözleri panikle genişler — ama cesareti yok, sadece titreyerek geri adım atıyor. "Ç-çocuk mu? Benim bir çocuğum yok, yolcu — o ilan eski, çok eski bir şey, sadece..." diye kekeleyerek devam ederken sesi boğulur. Silas köşeden kalkar ve eli belindeki bıçağın kabzasına gider, meyhane sessizliğe gömülür. Ama Borin'in gözleri, kasıtın arkasından aşağı inerken — bodrum katının karanlığına, eğilip bir şey arıyormuşçasına — ve o an anlaşılır ki sır orada, aşağıda, karanlıkta bekliyor.
+
+⏱️  Toplam: 28.02s | İlk token: 13.63s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: [{"name":"Silas","role":"Patron / Tavern Drunk","appearance":"A gaunt, weathered man with a single milky eye, slumped in the corner nursing cheap wine. His clothes are threadbare and stained, and his 
+🔎 NPC Extractor — ✅ Yeni NPC bulundu: Silas (Patron / Tavern Drunk)
+📝 Yeni NPC eklendi: Silas (session: 92)
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 7
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Birkaç hızlı adım atıp Borin'in boğazına yaklaşıyorum, başparmağımı boğazına bastırıp kafasını duvara yaslıyorum — 'Bodrumda ne var, Borin? Söyle yoksa bu sefer gerçekten çocuğunu aramaya başlarım.' diyorum, sesim soğuk ve keskin."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "charisma", "dc": 12}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=Boromir, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 5 | Modifier: +0 | Toplam: 5 | DC: 12
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 9
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: Boromir
+Action required: charisma check vs DC 12
+Roll: 5 + 0 (modifier) = 5
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Borin'in gözleri çılgınca açılır ve başparmağının altında boğulurken elleri havaya fırlar — "Hayır, hayır! Lütfen!" diye çığlık atar, ter damlaları sırtından aşağı süzülür. Silas köşeden ayağa kalkar ama yerinde kalır, eli bıçağında ama adım atmıyor — gözleri Boromir'e kilitlenmiş, bekliyor. Borin titreyerek işaret eder: "Aşağıda... bodrumda... bir şey var, ama beni öldürme — o çocuk benim kızım değil, o liste... o isimler..." diye kekeleyerek anlatmaya çalışırken sesi boğazında kalır. Bodrum katının kapısı, kasıtın arkasında, hafif aralık — içeriden yeşil bir mum ışığı sızıyor ve hafif bir rüzgâr soğuk taş basamaklardan yükseliyor.
+
+⏱️  Toplam: 17.54s | İlk token: 1.99s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 10
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Boromir, Borin'in boğazından elini çeker ama bıçağını onun göğsüne bastırarak 'O isimleri şimdi söyle, yoksa bu bodrumda seni değil, kızını ararım' der; arkasını dönüp Silas'a bakarak 'Sen — kapıyı aç, gözlerim üzerinde' diye emreder."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=Boromir, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 11 | Modifier: +0 | Toplam: 11 | DC: 12
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 12
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: Boromir
+Action required: charisma check vs DC 12
+Roll: 11 + 0 (modifier) = 11
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Borin bıçağın ucundan korkuyla geri çekilir ama ağzından hiçbir isim dökülmez — gözleri yaşlı, elleri titreyerek bağırarak "Kızım orada değil! Orada olan — o lanet olsun, o isimler — onlar köylüler! Köylüler!" diye çığlık atar. Silas ise yerinden kıpırdamıyor, eli bıçağında, gözleri Boromir ve Borin arasında gidip geliyor, dudaklarında soğuk bir gülümseme beliriyor. "Küçük cüce haklı, yolcu," diyor Silas, sesi ahenkli ama gözleri kısık, "bodrumda bir şey var — ama inen her dönemiyor." Bodrum kapısı hâlâ aralık, yeşil mum ışığı titreyerek basamaklardan yükseliyor, soğuk rüzgâr artık daha keskin bir şekilde esiyor — içeriden, taş basamakların ardından, hafif bir fısıltı gibi bir ses geliyor.
+
+⏱️  Toplam: 21.49s | İlk token: 2.27s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 13
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Bir adım atıp Silas'ın boğazına bıçağımı dayarım, gözlerime bakarak 'O kapıyı aç, ya da seni orada bırakırım — bodrumda ne varsa benim,' derim, ardından Borin'e dönüp 'Sen de sessiz ol, cüce, yoksa senin kızının nerede olduğunu ben de merak ederim' diye homurdanırım."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "charisma", "dc": 14}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 14}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 14}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=14
+DEBUG execute_roll: karakter=Boromir, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 14
+   Zar: 2 | Modifier: +0 | Toplam: 2 | DC: 14
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 15
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: Boromir
+Action required: charisma check vs DC 14
+Roll: 2 + 0 (modifier) = 2
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Silas'ın gözleri kısılır ve bıçak darbesiyle geri çekilir — ama kılıcının ucu boğazına değmeden önce bile Silas zaten hareket etmiş, köşeye yuvarlanırken bıçağını çekiyor. "Düşün, savaşçı," diyor Silas, sesi artık soğuk ve keskin, "bodruma inersen dönemezsin — ama seni orada bekleyen şey, benden de kötü." Borin ise çaresizce titreyerek duvara yaslanmış, gözleri yaşlı, ağzı açık ama hiçbir şey söyleyemiyor — korkudan felç olmuş. Bodrum kapısı hâlâ aralık, yeşil mum ışığı artık daha da titrek, soğuk rüzgâr basamaklardan yükseliyor ve o fısıltı — artık daha yakın, daha belirgin — taş duvarlardan yankılanıyor.
+
+⏱️  Toplam: 20.19s | İlk token: 2.76s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 16
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+📍 Yeni lokasyon: The Root-Choked Tunnel
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Seni bir kenara atıp Silas, bodrumun ne olduğunu göreceğim — ama sen bana engel olursan, son nefesini bu cellattaki buharlar arasında çekersin." *Silas'ı koltuğundan sürükleyip yere fırlatırım ve kapıyı tekmeleyerek bodruma inerim, yeşil mumu elime alarak basamakları birer birer inmeye başlarım.*'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "strength", "dc": 14}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "strength", "dc": 14}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'strength', 'dc': 14}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=strength, dc=14
+DEBUG execute_roll: karakter=Boromir, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Strength check vs DC 14
+   Zar: 11 | Modifier: +3 | Toplam: 14 | DC: 14
+   ✅ BAŞARILI
+   📈 Strength XP +5 → 10
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 18
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: Boromir
+Action required: strength check vs DC 14
+Roll: 11 + 3 (modifier) = 14
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Silas yere yuvarlanırken bir an için sabit kalır, gözleri öfkeyle parlıyor ama yerinden kalkmıyor — sadece izliyor. Boromir basamakları inmeye başlar, yeşil mum ellerinde titrerken taş duvarlarda garip gölgeler oluşturuyor; her adımda soğuk bir rüzgâr yüzüne çarpıyor ve bodrumun nemli hafif ağır bir kokusu burun deliklerini yakalıyor. Basamaklar bitince önünde dar, el kazınmış bir tünel açılıyor — üstündeki karanlık ormanın yeşil kökleri tavanı delerek sarkıyor, damlayan asitli öz kıvılcımlar saçarak yere düşüp tıslıyor. Tünelin ucundan ayak sesleri ve uzaktan duvarlara vuran bir fısıltı geliyor — sanki bir şey, ya da biri, orada bekliyor.
+
+⏱️  Toplam: 21.55s | İlk token: 3.87s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 19
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"I grip my sword tighter, step into the tunnel with deliberate heavy boots to announce my presence, and call out in a low, commanding voice: 'Show yourself, or I'll tear these roots down and crush whatever's hiding behind them.'"'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=Boromir, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 12 | Modifier: +0 | Toplam: 12 | DC: 12
+   ✅ BAŞARILI
+   📈 Charisma XP +5 → 5
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 21
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: Boromir
+Action required: charisma check vs DC 12
+Roll: 12 + 0 (modifier) = 12
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Yeşil köklerin arasından bir anlık bir hareket — sonra sessizlik, sadece asitli damlaların tıslama sesi. Sonra, tünelin karanlığından yüksek, gülünç bir kahkaha yankılanır, ve bir figür köklerin arasından süzülür gibi belirir: kısa, cılız bir goblin, kırmızı bir kükreyici şapkası başında, elinde kısa bir kılıç tutuyor, dişleri sırıtırken gözleri yeşil mum ışığında parlıyor. "Ha! Büyük savaşçı, küçük tünel!" diye cıvıldar goblin, "Seni gördüm, seni duydum — ama sen beni bulamadın, öyle mi?" Arkasından iki daha küçük goblin daha belirir, üstlerinde çürük postlar, ellerinde paslı bıçaklar — üç goblin, tümü sırıtarak, tümü bekliyor. Tavan damlatmaları artık daha hızlı, daha yakın — ve goblinlerin arkasında, tünelin daha derinlerinde, bir taş üzerinde eski, kanlı bir çocuk beline sarılmış bir şey yatıyor.
+
+⏱️  Toplam: 18.45s | İlk token: 3.66s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: [{"name":"Grik","role":"Goblin Scout Leader","appearance":"A short, scrawny goblin wearing a red pointed hat, wielding a short sword, with a wide grin and eyes that gleam in green candlelight.","perso
+🔎 NPC Extractor — ✅ Yeni NPC bulundu: Grik (Goblin Scout Leader)
+📝 Yeni NPC eklendi: Grik (session: 92)
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 22
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I step forward, letting my heavy boots crunch against the roots, and I rest my hand on the pommel of my sword while I fix the goblins with a cold, predatory grin. "You think size matters in the dark, little rat? I've killed things ten times your size before breakfast — now tell me what's on that stone behind you, or I'll wear your red hat as a trophy."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+ability score, depending on whether you want to focus 
+on melee weapons or on archery (or finesse weapons). 
+Your next-highest score should be Constitution. Second, 
+choose the soldier backgr
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=Boromir, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 6 | Modifier: +0 | Toplam: 6 | DC: 12
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 24
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: Boromir
+Action required: charisma check vs DC 12
+Roll: 6 + 0 (modifier) = 6
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Grik — kırmızı şapkalı goblin — kahkahasını kesti, gözleri daraldı, kılıcını sallayarak bir adım geri çekildi. "Büyük ağız, küçük beyni!" diye tıslar, arkadaşlarına işaret ederken üçlü birleşir, paslı bıçaklar havaya kalkar. "Çocuk bizim — senin değil, savaşçı. Ama seni önce seni alacağız!" Grik'in kılıcı havada bir çığlık atar ve üç goblin birden saldırır — Grik ön safta, diğer ikisi yandan gelir, tünel dar ve kökler altında hareket zor, asitli damlalar ayaklarının altında kaygan zemin oluşturur.
+
+[ENCOUNTER]{"enemies": [{"name": "Grik", "type": "goblin_scout"}, {"name": "Goblin", "type": "goblin"}, {"name": "Goblin", "type": "goblin"}], "context": "tunnel ambush"}[/ENCOUNTER]
+
+⏱️  Toplam: 37.62s | İlk token: 26.42s
+🐞 DEBUG [Combat]: [ENCOUNTER] block found in GM response. Parsing...
+🐞 DEBUG [Combat]: Parsed encounter successfully with 3 enemies.
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 25
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Grik'i hedef alıyorum — dar tünelde yandan gelenler önce onları engeller!" diye haykırırken, kılıcımla Grik'in üzerine yıldırım gibi bir saldırı yapıyorum, onu geriye doğru itmeye çalışarak köklerle dolu zemini onun için bir tuzağa çevirmeye çalışıyorum.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "strength", "dc": 14}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "strength", "dc": 14}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'strength', 'dc': 14}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=strength, dc=14
+DEBUG execute_roll: karakter=Boromir, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Strength check vs DC 14
+   Zar: 12 | Modifier: +3 | Toplam: 15 | DC: 14
+   ✅ BAŞARILI
+   📈 Strength XP +5 → 15
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 27
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: Boromir
+Action required: strength check vs DC 14
+Roll: 12 + 3 (modifier) = 15
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Grik'in gözleri korkuyla açılır — kılıcının darbesi onu geriye savurur, köklerin arasına yuvarlanırken kırmızı şapkası tavandan sarkan bir asit damlasıyla yanar, cılız bedeni çarptığı yerde kıvranır. Ama diğer iki goblin durmaz — soldaki Boromir'in bacağına paslı bıçak saplanırken sağdakisi sırtından kılıçla keser, kan damlaları köklerin üzerine düşer. Tünelde çığlıklar ve metal sesleri yankılanırken asitli damlalar artık daha hızlı akıyor, zemin kayganlaşıyor, Grik ağlayarak köklerin arasından kaçmaya çalışıyor ama diğer ikisi hâlâ savaşıyor — üç goblin, ikisi hâlâ tehlikeli, biri yaralı ama hâlü kılıç tutuyor.
+
+⏱️  Toplam: 22.71s | İlk token: 11.17s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 28
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"I kick the goblin stabbing my leg away with a brutal stomp to the face, then spin toward the one behind me, roaring as I swing my blade low to hamstring him — let's see how brave they are when they're crawling."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+ability score, depending on whether you want to focus 
+on melee weapons or on archery (or finesse weapons). 
+Your next-highest score should be Constitution. Second, 
+choose the soldier backgr
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "strength", "dc": 12}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "strength", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'strength', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=strength, dc=12
+DEBUG execute_roll: karakter=Boromir, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Strength check vs DC 12
+   Zar: 4 | Modifier: +3 | Toplam: 7 | DC: 12
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 30
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: Boromir
+Action required: strength check vs DC 12
+Roll: 4 + 3 (modifier) = 7
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Tekme havada saplanır — ama goblin küçük ve çevik, kenara kayarak kılıcının darbesinden kıl payı kaçar, paslı bıçak tekrar bacağına saplanır, kan akmaya başlar. Dönüş sırasında zemin kayganlaşır, asitli damlalar altında kayıp dengesini kaybeder — kılıcının darbesi havada kalır, goblin arkadan sırtına saldırır, çürük postu kan ıslatır. Grik ise ağlayarak köklerin arasından kaçmaya çalışıyor ama arkadaşlarına bağırıyor: "Öldür onu! Öldür!" — üç goblin hâlâ savaşıyor, Boromir'in bacağı yaralı, kan akıyor, tünel dar ve tehlikeli, tavan damlatmaları artık daha hızlı.
+
+⏱️  Toplam: 23.79s | İlk token: 14.51s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 31
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I roar in fury and slam my shield into the goblin behind me, throwing it off my back, then pivot and bring my sword down in a brutal two-handed overhead chop on the nearest goblin while snarling at Grik, "You want me dead? Come do it yourself, coward!"'
+   RAG sonucu (ilk 200 kr): Kural 1:
+ability score, depending on whether you want to focus 
+on melee weapons or on archery (or finesse weapons). 
+Your next-highest score should be Constitution. Second, 
+choose the soldier backgr
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "strength", "dc": 12}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "strength", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'strength', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=strength, dc=12
+DEBUG execute_roll: karakter=Boromir, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Strength check vs DC 12
+   Zar: 4 | Modifier: +3 | Toplam: 7 | DC: 12
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 33
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: Boromir
+Action required: strength check vs DC 12
+Roll: 4 + 3 (modifier) = 7
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kalkan darbesi havada kalır — goblin zıplayarak uzaklaşır, kılıcının kesik darbesi tavandan sarkan bir kökü keser ve asitli öz yüzüne akar, gözleri yanar, çığlık atar. Grik kaçmıyor — geri dönüyor, kılıcını sallayarak, kırmızı şapkası yanmış ama gözleri öfkeyle parlıyor: "Büyük savaşçı, küçük akıl!" diye bağırır, arkadaşlarına işaret ederken üçlü tekrar birleşir. Tünelde kan, asit ve ter kokusu birleşir — Boromir'in bacağı yaralı, dengesi bozuk, ama gözleri hâlâ öfkeli, kılıcı hâlâ sıkıca tutuluyor.
+
+⏱️  Toplam: 17.51s | İlk token: 9.09s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: 
+🔎 NPC Extractor — JSON array bulunamadı, NPC yok
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 34
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"I spit blood onto the tunnel floor, grip my sword tighter, and snarl at the goblin: 'You want to play, little rat? Come closer — I'll wear your hat as a trophy after I split you in half.' I lunge forward with a brutal diagonal slash aimed at his midsection, using the slick root juice on the ground to slide into the strike for extra momentum."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+1d2, roll any die and assign a 1 or 2 to the roll depending 
+on whether it was odd or even. (Alternatively, if the num -
+ber rolled is more than half the number of sides on the 
+die, it’s a 2
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "strength", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "strength", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'strength', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=strength, dc=12
+DEBUG execute_roll: karakter=Boromir, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Strength check vs DC 12
+   Zar: 4 | Modifier: +3 | Toplam: 7 | DC: 12
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 36
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: Boromir
+Action required: strength check vs DC 12
+Roll: 4 + 3 (modifier) = 7
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+
+⏱️  Toplam: 60.72s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 37
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I press my blade against the old man's throat and snatch the glowing gem from his trembling hands, telling him to stay quiet unless he wants to feed the roots.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+1d2, roll any die and assign a 1 or 2 to the roll depending 
+on whether it was odd or even. (Alternatively, if the num -
+ber rolled is more than half the number of sides on the 
+die, it’s a 2
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "charisma", "dc": 14}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 14}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 14}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=14
+DEBUG execute_roll: karakter=Boromir, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 14
+   Zar: 18 | Modifier: +0 | Toplam: 18 | DC: 14
+   ✅ BAŞARILI
+   📈 Charisma XP +5 → 10
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 39
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: Boromir
+Action required: charisma check vs DC 14
+Roll: 18 + 0 (modifier) = 18
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kılıcının darbesi havada kalır — goblin kaygan zeminde kayarak kenara düşer, kılıcının ucu paslı bıçağından kıvılcım saçar ama bedenini kesmez. Grik'in gözleri korkuyla açılır, arkadaşlarına bağırır: "Kaçın! Kaçın!" — iki goblin geri çekilir, köklerin arasına saklanırken Grik kılıcını bırakır, kırmızı şapkası yanmış, yüzü asit lekeleriyle yanmış, ağlayarak: "Çocuk... çocuk senin... ama sen git... sen git!" diye bağırır, arkasını dönüp tünelin karanlığına kaçar. İkisi onu takip eder — üç goblin birden kaçıyor, tünelin derinliklerine doğru koşarken çığlıkları yankılanır. Taş üzerinde kanlı beşiğin yanında sessizlik kalır — asitli damlalar hâlâ tıslıyor, köklerden yeşil ışık yayılıyor, ve beşiğin içinden hafif, zayıf bir nefes sesi geliyor — çocuk hâlâ yaşıyor.
+
+⏱️  Toplam: 42.37s | İlk token: 2.39s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 40
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'Kılıcımı kaldırıp Grik'in bıraktığı paslı bıçağı tekerleklerim altında ezerek kırarım, sonra beşiğin yanına yanım, nefes sesini dinlerim — çocuğu kaldırıp köklerin arasından çıkarırım, "Kimseye bir şey söylemezsin, yoksa seni de aynı asitle eritirim," diye fısıldarım.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 14}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 14}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 14}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=14
+DEBUG execute_roll: karakter=Boromir, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 14
+   Zar: 6 | Modifier: +0 | Toplam: 6 | DC: 14
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 42
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: Boromir
+Action required: charisma check vs DC 14
+Roll: 6 + 0 (modifier) = 6
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Beşiğin yanına eğilirken, çocuğun nefsesi daha da zayıflar — yüzü solgun, elleri buz gibi, üzerindeki kumaş kan ve asit lekeleriyle dolu. Ama çocuk küçük bir çığlık atar, Boromir'in kollarına yapışır, gözleri korkuyla açılır: "Baba... baba geldi mi?" diye fısıldar, ama sonra gözleri daralır — Boromir'in yüzündeki asit lekelerine, kan damlalarına bakar, kollarından çekilir, kaçmaya çalışır. "Sen... sen değilsin! Sen değilsin!" diye bağırır, beşiğin içine geri çekilir, titreyerek. Köklerin arasından Grik'in çığlığı yankılanır: "Çocuk! Çocuk, ona güvenme! O diğerleri gibi!" — tünelin derinliğinden hafif bir ışık belirir, bir ritüel başlıyor, çocuğun nefsesi duraksar, gözleri kapandı, bedeni hafifçe titrer. Boromir'in elinde kılıcı, yanında yaralı bacak, önünde korkan çocuk, arkasında karanlıkta ritüel ışığı — tünel dar, asitli damlalar hâlâ tıslıyor, ve zaman daralıyor.
+
+⏱️  Toplam: 54.84s | İlk token: 5.08s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 43
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Kılıcımı çekip beşiğe doğru saplar, çocuğun üzerine eğilir ve alçak bir sesle fısıldar: 'Seni alacağım, küçük... istersen babanı bulurum, istersen seni satarım — ama bu tünelden benimle çıkacaksın.' Sonra Grik'in ritüel ışığına bakar, sol ayağımı zorlayarak sürüklenirken diğer elime bir asitli damla toplar, Grik'e fırlatma hazırlığı yaparım."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "dexterity", "dc": 14}'
+   JSON parse edildi: '{"needed": true, "ability": "dexterity", "dc": 14}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'dexterity', 'dc': 14}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=dexterity, dc=14
+DEBUG execute_roll: karakter=Boromir, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Dexterity check vs DC 14
+   Zar: 3 | Modifier: +3 | Toplam: 6 | DC: 14
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 45
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: Boromir
+Action required: dexterity check vs DC 14
+Roll: 3 + 3 (modifier) = 6
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kılıcı beşiğe saplanır — ama çocuk çığlık atar, kollarından çekilir, beşiğin içine geri buner, gözleri korkuyla Boromir'e bakar: "Hayır! Hayır! Sen de onlardan birisin!" diye bağırır, titreyerek. Asitli damla avuçlarından kayıp zemine düşer, çatırdar, küçük bir duman yükseltir — Grik'in ritüel ışığı tünelin derinliğinden daha parlak yanıyor, bir çığlık yankılanır, bir kök tavandan kopar, yere düşer, asitli özü Boromir'in bacağına akar, yanık acısıyla çığlık atar. Grik'in sesi tünelden gelir: "Geliyor! Geliyor! Seni de yutacak!" — çocuk hâlâ beşiğin içinde, korkuyla bakıyor, Boromir'in bacağı yanıyor, asitli damlalar hâlü tıslıyor, ve tünelin derinliğinden bir gölgeler dansı beliriyor.
+
+⏱️  Toplam: 50.64s | İlk token: 5.48s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 46
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Bacağımdan asiti silip, çocuğun boğazını kavrayıp beşiğin kenarına yapıştırıyorum: 'Grik'e söyle — beni yutmak isterse, önce seni yutar, küçük fare!'"'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "dexterity", "dc": 14}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "dexterity", "dc": 14}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'dexterity', 'dc': 14}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=dexterity, dc=14
+DEBUG execute_roll: karakter=Boromir, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Dexterity check vs DC 14
+   Zar: 16 | Modifier: +3 | Toplam: 19 | DC: 14
+   ✅ BAŞARILI
+   📈 Dexterity XP +5 → 5
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 48
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: Boromir
+Action required: dexterity check vs DC 14
+Roll: 16 + 3 (modifier) = 19
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Bacağındaki asitli özü sertçe siler — deri yanar ama acıyı bastırır, çocuğun boğazını kavrar, beşiğin kenarına yapıştırır, gözlerinin içine bakar. Çocuk çığlık atar, gözleri yaşla dolur, ama bedeni donmuş kalmak yerine titrer — Grik'in ritüel ışığı tünelden yükselir, bir çığlık yankılanır, ama sonra duraksar. Grik'in sesi gelir: "Bırak onu! Bırak onu, seni de yutmaz!" — tünelin derinden gölgeler dans eder, bir kök kopar, yere düşer, asitli özü Boromir'in ayaklarına akar, ama çocuk artık korkuyla değil, umutla bakıyor: "Gerçekten... gerçekten baba mı getireceksin?" diye fısıldar, titreyerek. Tünelin derinliğinden ritüel ışığı söner, gölgeler çekilir — Grik ve arkadaşları kaçıyor, çocuk hâlâ beşiğin içinde, Boromir'in elinde, ve tünelin çıkışına doğru hafif bir hava akımı esiyor.
+
+⏱️  Toplam: 55.98s | İlk token: 4.65s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 49
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+📍 Yeni lokasyon: The Altar of Emerald Breath
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Çocuğu beşiğinden çıkarıp sırtıma bağlarım — onu kaçıracağım, Grik'in ritüelini bozmak için mükemmel bir koz — ve tünelden çıkışa doğru hızla ilerlerken, ağıma bir şeyler fısıldayarak onu korkutmaya devam ediyorum."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=Boromir, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 3 | Modifier: +0 | Toplam: 3 | DC: 12
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 51
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: Boromir
+Action required: charisma check vs DC 12
+Roll: 3 + 0 (modifier) = 3
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Bacağındaki asitli özü sertçe siler — deri yanar ama acıyı bastırır, çocuğun boğazını kavrar, beşiğin
+
+---
+
+Tünelden çıkan Boromir, sırtında titreyen çocukla taş bir odaya adım atar — ama durdurulur. Önünde, yeşil ışıltılı bir taş üzerinde, **High Priest Malakor** durur. Açık kapüşonlu paltosunun altından solgun, zayıf bir yüzü belirir — gözleri yeşil ışıltıyla parlar, elinde yeşil sıvı dolu bir şişe tutar, önünde gümüş ejderha pulları yığını asitli sıvıdan buhar çıkarır. Ejderha pulları siyarlaşır, çürür — Malakor'un fısıltıyla söylediği Draconic ritüeli odanın taş duvarlarında yankılanır.
+
+Çocuk Boromir'in sırtında donar — Malakor'un yeşil gözleri ona bakar, dudaklarında soğuk bir gülümseme belirir: *"Ah... getirdin. Tam zamanında."* Şişesini kaldırır, pulların üzerine bir damla daha düşürür — buhar yükselir, odada tuhaf bir çığlık yankılanır, sanki bir ruh acı çekiyor.
+
+Malakor'un ritüeli devam ediyor — her dakika pullar siyarlaşır, buhar yoğunlaşır. Eğer ritüel tamamlanırsa, Xaradon güçlenecek. Ama Malakor tek başına — saldırıya hazır değil, odada ne silah ne de koruma var, sadece şişesi ve inancı. Çocuk sırtında, kılıcı elinde, ve yeşil ışıltılı taş önünde — bir karar anı geldi.
+
+⏱️  Toplam: 62.17s | İlk token: 2.71s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: [{"name":"Malakor","role":"High Priest","appearance":"A gaunt, pale-faced figure in an open-fronted hooded coat, with eyes that glow with an eerie green luminescence. Holds a vial of green liquid. Sil
+🔎 NPC Extractor — ✅ Yeni NPC bulundu: Malakor (High Priest)
+📝 Yeni NPC eklendi: Malakor (session: 92)
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 52
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Malakor'un boğazına kılıcımın ucunu dayarım, şişeyi elinden çarparak yere düşürmesini sağlarım — 'Bu çocuk benim, ve bu pullar da öyle. Ritüeli bitir, ya da senin kanınla yerine sızır.'"'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 15}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 15}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 15}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=15
+DEBUG execute_roll: karakter=Boromir, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 15
+   Zar: 5 | Modifier: +0 | Toplam: 5 | DC: 15
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 54
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: Boromir
+Action required: charisma check vs DC 15
+Roll: 5 + 0 (modifier) = 5
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kılıcının ucu Malakor'un boğazına değer — ama şişeyi çarpma fırsatı bulamaz. Malakor geri adım atar, gözlerindeki yeşil ışıltı parlar, şişesini kollarının arasına gizler, fısıltıyla bir Draconic kelime söyler — taştan yeşil bir dal sürünür, Boromir'in bileğini kavrar, çekerek yere çalar. Kılıcı elinden kayar, çocuk sırtından düşer, taş zemine çarpar — çocuk ağlar, Malakor'un ritüeli hızlanır, pullar daha çok siyarlaşır, buhar yoğunlaşır.
+
+Malakor'un sesi yükselir: *"Güçsüz... ejderhanın gazabına güçsüz bir savaşçı..."* — yeşil dal Boromir'in bileğini sıkıştırır, çocukta ağlıyor, ritüel ışığı tavanlara yükselir. Ama Malakor'un elinde hâlâ şişe var — ve taşın üzerinde pullar tamamen siyarlaşmak üzere, birkaç dakika içinde ritüel tamamlanacak.
+
+⏱️  Toplam: 53.34s | İlk token: 2.40s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 55
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I roar in defiance, wrenching my wrist against the stone vine while snatching my fallen sword with my free hand — then I hack at the green tendril binding me, aiming to sever it before the ritual completes.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+1d2, roll any die and assign a 1 or 2 to the roll depending 
+on whether it was odd or even. (Alternatively, if the num -
+ber rolled is more than half the number of sides on the 
+die, it’s a 2
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "strength", "dc": 15}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "strength", "dc": 15}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'strength', 'dc': 15}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=strength, dc=15
+DEBUG execute_roll: karakter=Boromir, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Strength check vs DC 15
+   Zar: 15 | Modifier: +3 | Toplam: 18 | DC: 15
+   ✅ BAŞARILI
+   📈 Strength XP +5 → 20
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 57
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: Boromir
+Action required: strength check vs DC 15
+Roll: 15 + 3 (modifier) = 18
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Homurtuyla yeşil dala vurur — kılıç taştan sıçratarak dalı ikiye böler, yeşil öz akıp zemine sülenir, dal çürüyüp toz olur. Malakor'un gözleri korkuyla açılır — ilk kez şüphe belirir yüzünde, şişesini göğsüne bastırır, geri adım atar. Çocuk ağlıyor, pullar neredeyse tamamen siyah, buhar tavandan aşağı yağar — ama ritüel tamamlanmadı, henüz değil.
+
+Malakor'un sesi titrer: *"Ejderham... beni koru..."* — taştan bir başka dal fırlar ama zayıf, erkence çürüyüp düşer. Malakor'un elinde sadece şişe var, kılıcı yok, kalkanı yok, sadece inancı ve yeşil sıvı. Boromir ayağa kalkar, kılıcını kavrar, çocuğu kollarına alır — ve Malakor'un üzerine yürür. Bir tek darbe yeter. Ama çocuk titriyor, pullar hâlâ buharlıyor, ve tünelden Grik'in çığlığı yankılanır: *"Geliyor! Geliyor!"* — zaman daralıyor.
+
+⏱️  Toplam: 43.80s | İlk token: 2.52s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 58
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Malakor'un boğazına kılıcımı dayayıp yeşil şişeyi koparıyorum — sonra çocuğu dik tutarak ona bakmasını söylüyorum, 'Bak. Duyuyor musun? Bu senin tanrının son nefesi.'"'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=Boromir, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 12 | Modifier: +0 | Toplam: 12 | DC: 12
+   ✅ BAŞARILI
+   📈 Charisma XP +5 → 15
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 60
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: Boromir
+Action required: charisma check vs DC 12
+Roll: 12 + 0 (modifier) = 12
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kılıcı Malakor'un boğazına değer — soğuk bir demir sesiyle. Malakor'un nefesi kesilir, gözlerindeki yeşil ışıltı söner, şişe Boromir'in eline geçer — yeşil sıvı içinde hafifçe kabarcıklar yükselir, tuhaf bir çığlık yankılanır, sanki bir ruh son nefesini veriyor. Çocuk dik durur, gözleri yaşlı ama dudaklarında bir gülümseme belirir — pulların üzerindeki buhar söner, siyah pullar çatlayıp toz olur, ritüel tamamen durur.
+
+Malakor'un bedeni yere düşer — gözleri açık, ama boş, yeşil ışıltı yok, sadece ölü bir adam. Çocuk ağlamayı keser, Boromir'e bakar: *"Baba... gerçekten baba mı?"* diye fısıldar — ama sonra gözleri kapalı olur, bedeni titreyerek sarsılır, tünelden Grik'in çığlığı yankılanır: *"Öldürdünüzüz! Öldürdünüzüz!"* — ama gölgeler çekilir, ritüel ışığı söner, ve odada sadece Boromir, çocuk, ölü Malakor, ve yeşil şişe kalır.
+
+Xaradon'un gücü zayıfladı — ritüel bozuldu. Ama çocuk hasta, tünelde goblinler var, ve yeşil şişenin içindeki sıvı hâlâ kabarcıklanıyor.
+
+⏱️  Toplam: 48.26s | İlk token: 4.35s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 61
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+📍 Yeni lokasyon: The Acid Peaks
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I snatch the green vial and tuck it into my belt — whatever's inside is clearly valuable — then I grab the child by the arm and haul him toward the tunnel exit, keeping my sword ready for whatever goblins might be lurking in the shadows.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+1d2, roll any die and assign a 1 or 2 to the roll depending 
+on whether it was odd or even. (Alternatively, if the num -
+ber rolled is more than half the number of sides on the 
+die, it’s a 2
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 62
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Asitli dağlara adım atar — havayı keskin, sarı klor gazları jant kayaların arasında süzülür, uzaktan asit yağmuru tıslar. Sırtında hasta çocuk, kılıcı elinde, kuyruğundaki yeşil şişe hafifçe vurur böğrüne. Ama durdurulur — yukarıda, yüz metre yukarıda, ejderha ağzı gibi bir mağara ağzı var, ve onu **The Silence** koruyor — tam zırh giymiş iki dev, vizörlerinden yeşil ışıltı yayıyor, kimseyle konuşmuyor, sadece bekliyor. Yandan gümüş bir ejderha kanadı kaya duvarına büyük demir çapalarla sabitlenmiş, pullar asit buharıyla siyarlaşıyor, çürüyor — ve her iki saniyede bir gaz kayaların arasından fışkıyor, Boromir'in ciğerine işliyor.
+
+Çocuk öksürür, titrer, yeşil şişe kuyruğunda hafifçe ışıldıyor. The Silence hareket etmiyor — ama gözleri Boromir'a dikiliyor, vizörlerinden yeşil ışıltı parlıyor, gaz her an kayaların arasından fışkıyor. Bir yandan kayaya tırmanmak, bir yandan gardiyanları kandırmak, bir yandan ejderha kanadını incelemek mümkün — ama gaz her an ciğerini yakıyor, çocuk öksürüyor, ve The Silence hareket etmiyor, sadece bekliyor.
+
+⏱️  Toplam: 47.47s | İlk token: 2.37s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: [{"name":"The Silence","role":"Guardian of the Acid Peaks cave entrance","appearance":"Two massive armored giants wearing full plate armor with visors that emit a faint green glow. Their armor is bolt
+🔎 NPC Extractor — ✅ Yeni NPC bulundu: The Silence (Guardian of the Acid Peaks cave entrance)
+📝 Yeni NPC eklendi: The Silence (session: 92)
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 63
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"The Silence'e doğru ilerlerken yeşil şişeyi kaldırırım, çocuğun ağzına yaklaştırırım — 'bir yudum iç, yoksa burada çürürsün' — sonra zırhının üzerindeki yeşil ışıltıya bakarak, 'Beni gördünüz, beni tanıyorsunuz, ve ben geçeceğim. Engel olursanız, bu çocuğun hayatıyla oynamak istersiniz?' derim, el kılıcımın kabzasında."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "charisma", "dc": 17}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 17}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 17}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=17
+DEBUG execute_roll: karakter=Boromir, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 17
+   Zar: 3 | Modifier: +0 | Toplam: 3 | DC: 17
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 65
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: Boromir
+Action required: charisma check vs DC 17
+Roll: 3 + 0 (modifier) = 3
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Yeşil şişeyi kaldırır, çocuğun ağzına yaklaştırır — çocuk öksüzer, yudum almaz, başını çevirir, gözleri korkuyla bakar. The Silence hareket etmez — vizörlerindeki yeşil ışıltı parlar, ama karşılık vermez, sadece bekler. Borumir'in tehdidi kayalarda yankılanır, ama cevap yok — sadece gazın tıslama sesi, bir sonraki gaz patlaması iki saniye içinde gelecek, ciğerleri yanacak, çocuk öksürecek. The Silence konuşmaz, sadece bekler — ve mağara ağzı açık, ama geçiş yok.
+
+⏱️  Toplam: 41.26s | İlk token: 4.34s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 66
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I grab the child by the collar and shove him toward The Silence like a human shield, drawing my blade and pressing it against the boy's throat. "You want this whelp alive? Then you move, or I open him from ear to ear and we all choke on his blood with the gas."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "charisma", "dc": 17}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 17}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 17}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=17
+DEBUG execute_roll: karakter=Boromir, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 17
+   Zar: 19 | Modifier: +0 | Toplam: 19 | DC: 17
+   ✅ BAŞARILI
+   📈 Charisma XP +5 → 20
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 68
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: Boromir
+Action required: charisma check vs DC 17
+Roll: 19 + 0 (modifier) = 19
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Çocuğu The Silence'e doğru itiyor — kılıcı çocuğun boğazına değer, bir damla kan süzülür. The Silence'in vizörlerindeki yeşil ışıltı sönüp yanar, bir an için hareket ederler — sağdaki dev yana kayar, mağara ağzından geçiş açılır, sol dev ise sadece bakar, çocuğun kanını görür, vizörlerinden yeşil ışıltı söner. Gaz tıslar, ama geçiş açık — mağara ağzı karanlık ve derin, asit buharı dışarıya doğru süzülüyor. Çocuk titriyor, kan boğazından süzülüyor, ama hâlâ yaşıyor — ve The Silence sadece bekliyor, hareket etmiyor, sadece izliyor. Mağaranın içinden soğuk bir esinti gelir, ve bir şey — bir şey — karanlıkta hareket ediyor.
+
+⏱️  Toplam: 51.51s | İlk token: 5.53s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 69
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+📍 Yeni lokasyon: Xaradon's Emerald Sanctum
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'Mağaranın ağzına bir adım atarak kılıcı çocuğun boğazında tutarken, "İçeri girin yoksa çocuğun başını keserim — ve sıra sıra hepinizin sıra," diye bağırıp The Silence'e meydan okuyorum, mağaranın karanlığından gelen hareketli gölgeyi fark edip biraz duraksıyorum.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 70
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Mağaranın ağzını geçer — The Silence sadece bakar, hareket etmez, çocuğun kanını izler ama engel olmaz. İçeri adım atar — ve dağın içi açılır, devasa bir mağara, paslı zırh yığınları, aşınmış gümüş paralar, ortada yemyeşil asit havuzu bir taht gibi. Hazine yığınının üstünde, zümrüt pullu, altın gözlü, zeki ve kurnaz bir yeşil ejderha — **Xaradon** — bekler. Saldırmaz. Zehirli bir duman püskürtür, kahkahalar.
+
+*"Köy daha fazla 'kahraman' mı gönderdi borcu ödemek için? Yoksa daha iyi bir teklifle mi geldin?"*
+
+Çocuk titriyor, boğazında damla kan, kılıcının ucunda. Mağaranın içi asit kokusu, paslı metal, ve Xaradon'un altın gözleri Boromir'ı süzüyor. Ejderhanın boynunda ince bir yara var — eski bir savaşın izi, dikişli ama hâlâ kızarık. Xaradon'un kuyruğu hazineyi sarar, pençeleri maden üzerinde geziniyor, ve her nefesiyle zehirli bir duman yükseliyor.
+
+⏱️  Toplam: 53.60s | İlk token: 2.67s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: [{"name":"Xaradon","role":"Emerald Sanctum Guardian / Green Dragon","appearance":"A massive green dragon with emerald scales and golden eyes, perched atop a hoard of rusted armor, tarnished silver coi
+🔎 NPC Extractor — ✅ Yeni NPC bulundu: Xaradon (Emerald Sanctum Guardian / Green Dragon)
+📝 Yeni NPC eklendi: Xaradon (session: 92)
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 71
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Xaradon, senin bu çocuğun kanını yalarken beni de öyle mi bekliyorsun? Kılıcımı çekip çocuğu bırakıyorum — ama senin boynundaki o yarayı görüyorum, ejderha. Sen de yaralısın, sen de zayıfsın. Hazineyi bölüşelim, yoksa bu mağarayı senin kemiklerinden başkası kalmaz."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=Boromir, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 17 | Modifier: +0 | Toplam: 17 | DC: 12
+   ✅ BAŞARILI
+   📈 Charisma XP +5 → 25
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 73
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: Boromir
+Action required: charisma check vs DC 12
+Roll: 17 + 0 (modifier) = 17
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Xaradon'un altın gözleri daralır — kılıcı çekip çocuğu bırakır, çocuk yere düşür, ama Xaradon dikkatini çocuktan çevirir, Boromir'a bakar. Boynundaki yara hafifçe kanar — Xaradon bunu fark eder, pençe yarayı kapar, ama çok geç, Boromir görmüştür.
+
+*"Ne kadar keskin gözlü bir aptal..."* — Xaradon gırtlağından bir homurtu çıkarır, zehirli duman yükselir, ama saldırmaz. Hazineyi kuyruğunun altından çeker, paslı zırhları kenara ittirir, altın ve gümüş paraları sayar — *"5,000 altın, bir unvan, ve senin aptal canlılığın için bir şans daha. Şimdi git. Köyüne dön. Borcu ödedik. Yoksa..."* — pençesi asit havuzunu gösterir — *"...bu havuz senin için de aynı şeyi yapar."*
+
+Çocuk titriyor, boğazında kan, ama yaşıyor. Asit havuzu kaynar, zehirli duman yükselir, ve Xaradon'un gözleri Boromir'ı süzüyor — zayıf mı, güçlü mü, korkak mı, cesur mu? Bir teklif var, bir tehdit var, ve zaman daralıyor.
+
+⏱️  Toplam: 53.67s | İlk token: 3.15s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 74
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I grab the child by the collar and shove him toward the exit, then turn back to Xaradon with my hand on my sword hilt, eyes locked on his — "Five thousand gold for a debt that was never mine? That child's blood is on your claws, not my ledger. I'll take the gold, the title, and whatever else I damn well please from this hoard... and if you want to see how far I can be pushed, drag me to that acid pit yourself."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+1d2, roll any die and assign a 1 or 2 to the roll depending 
+on whether it was odd or even. (Alternatively, if the num -
+ber rolled is more than half the number of sides on the 
+die, it’s a 2
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 14}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 14}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 14}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=14
+DEBUG execute_roll: karakter=Boromir, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 14
+   Zar: 10 | Modifier: +0 | Toplam: 10 | DC: 14
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 76
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: Boromir
+Action required: charisma check vs DC 14
+Roll: 10 + 0 (modifier) = 10
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Çocuğu çıkışa doğru ittirir — çocuk sendeleyerek tünelin karanlığına yürür, kanlı ayak izleri bırakır. Xaradon'a döner, kılıcının kabzasına el koyar, gözleri ejderhanın gözlerine kilitlenir — ama Xaradon güler. Alçak, gırtlağından gelen bir kahkaha, zehirli dumanla birlikte yükselir.
+
+*"Ne kadar cesur... ve ne kadar aptal."*
+
+Xaradon'un pençeleri asit havuzunun kenarına değer — *"5,000 altın, bir unvan, ve senin aptal canlılığın için bir şans daha. Şimdi git. Köyüne dön. Borcu ödedik."* — ama Boromir'in teklifi reddedilir, Xaradon'un gözleri soğur, boynundaki yara hafifçe kanar, ve ejderhanın kuyruğu hazineyi sarar, korur. *"Ama sen... sen farklısın. Köyünün diğerleri gibi korkak değilsin. O yüzden sana bir teklif daha yapayım: hazineyi bölüşelim, evet — ama sen benim tarafımda ol. Köyünün liderlerinin korkaklığını, çocukların kanını, ve bu dağın sırlarını bil. Ya benimle ol, ya da asit havuzunla."*
+
+Xaradon'un pençesi havuzu gösterir — kaynar, yeşil, zehirli. Çocuk tünelin karanlığında kaybolmuş, ama Xaradon'un teklifi havada asılı durur — bir seçim, bir tehdit, ve bir fırsat.
+
+⏱️  Toplam: 50.64s | İlk token: 2.46s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 77
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+📍 Yeni lokasyon: Lords of the Shadow
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"I step closer to the acid pit, look into its bubbling depths, then turn back to Xaradon with a cold grin — 'Your acid doesn't scare me, dragon. But your treasure does interest me. I'll take your deal — half the hoard and your alliance — but I want the first pick of whatever's in that pile, and you answer one truthful question about this mountain's secrets before we part ways."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: HAYIR
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 15}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 15}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 15}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=15
+DEBUG execute_roll: karakter=Boromir, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 15
+   Zar: 11 | Modifier: +0 | Toplam: 11 | DC: 15
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 79
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: Boromir
+Action required: charisma check vs DC 15
+Roll: 11 + 0 (modifier) = 11
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Xaradon'un asit havuzunun yanına adım atar — kaynar yeşil yüzeyi süzülür, zehirli buhar ciğerine işler, gözleri yanar, ama gülümser. Xaradon'a döner, soğuk bir bakış — ama ejderha kahkahalar.
+
+*"Yarım hazine mi? Bir ittifak mı? Ve bir soru?"* — Xaradon'un pençeleri asit havuzuna değer, bir parça maden atar, maden erir, buhar yükselir — *"Senin küçük kahramanlığın beni güldürüyor, aptal. Ama ödülünü al — 5,000 altın, bir unvan, ve bir soru... ama gerçek bir cevap değil, sadece bir ipucu."*
+
+Xaradon'un gözleri parlar — *"Bu dağın sırrı şudur: The Silence gerçek devler değil. İçlerinde bir ejderhanın ruhu var. Kanatlarını serbest bırakırsan, The Silence çöker — ama o ejderha, yüzyılların işkencesinden sonra, belki de minnettar olmayacak."*
+
+Çocuk tünelin karanlığına yürümüş, kanlı ayak izleri bırakmış. Hazine yığınının yanında 5,000 altın, bir unvan, ve bir ipucu var — ama Xaradon'un gözleri Boromir'ı süzüyor, bir sonraki hamlesini bekliyor.
+
+---
+
+**Gölge'nin Efendileri: Gölge'nin Yükselişi**
+
+Boromir, Xaradon'un sağ eli olarak oturur — korkulan biri, hazineyi paylaşan biri, ve dağın sırlarını bilen biri. Artık Millhaven köyü değil, Xaradon'un yeni sürüsünün üretim yeri. Gölge yayılıyor, bir sonraki krallığa doğru uzanıyor. Xaradon'un zehirli nefesiyle birlikte, Boromir'in kılıcı da gölgelerin arasında parlıyor.
+
+Bu hikayenin sonu. Boromir, ejderhanın tarafında seçti — hazine, unvan, ve gölgelerin gücü. Ama dağın sırrı hâlâ orada, The Silence'in zırhının arasında, gümüş ejderha kanatları hâlâ duvara çapalanmış, ve bir gün — belki de bir gün — o ejderha serbest kalacak.
+
+---
+
+**Yeni bir maceraya başlamak ister misin?**
+
+⏱️  Toplam: 65.77s | İlk token: 2.54s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   💰 +5000 altın → Toplam: 5000
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 80
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I step forward and scoop up the 5,000 gold coins with both hands, stuffing them into my pack without a shred of gratitude, then lean in close to Xaradon and say coldly, "Your riddle about the dragon means nothing to me — but if that silver beast ever breaks free, I'll be the one deciding who it burns first."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+1d2, roll any die and assign a 1 or 2 to the roll depending 
+on whether it was odd or even. (Alternatively, if the num -
+ber rolled is more than half the number of sides on the 
+die, it’s a 2
+   Node actions mevcut: HAYIR
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=Boromir, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 9 | Modifier: +0 | Toplam: 9 | DC: 12
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 82
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: Boromir
+Action required: charisma check vs DC 12
+Roll: 9 + 0 (modifier) = 9
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Xaradon'un asit havuzunun yanına adım atar — kaynar yeşil yüzeyi süzülür, zehirli buhar ciğerine işler, gözleri yanar, ama gülümser. Xaradon'a döner, soğuk bir bakış — ama ejderha kahkahalar.
+
+*"Minnettarsızlık... en azından dürüst bir kötülük."*
+
+5,000 altını iki eline alır, çantasına doldurur — tek bir teşekkür yok, tek bir bakış yok, sadece soğuk bir hesaplaşma. Xaradon'a yaklaşır, ejderhanın altın gözlerinin içine bakar — ama Xaradon sadece gülümser, boynundaki yara hafifçe kanar, ve zehirli bir duman püskürtür.
+
+*"Güzel. O zaman bu dağın sırrını taşıyarak git — ve bir gün, o gümüş ejderha serbest kaldığında, sen karar ver. Ama şunu bil: o ejderha yüzyılların işkencesini yaşadı. Serbest kaldığında, ilk yaptığı şey seni yok olmayı düşünmek olmayacak — çünkü sen sadece bir araçtın. O ise bir kurban."*
+
+Xaradon'un kuyruğu hazineyi sarar, pençeleri asit havuzunun kenarında — *"Git. Köyüne dön. Gölge seninle birlikte yayılsın."*
+
+Çocuk tünelin karanlığına yürümüş, kanlı ayak izleri bırakmış. Hazine yığınının yanında 5,000 altın, bir unvan, ve bir ipucu var — ama Xaradon'un gözleri Boromir'ı süzüyor, bir sonraki hamlesini bekliyor.
+
+---
+
+**Gölge'nin Efendileri: Gölge'nin Yükselişi**
+
+Boromir, Xaradon'un sağ eli olarak oturur — korkulan biri, hazineyi paylaşan biri, ve dağın sırlarını bilen biri. Artık Millhaven köyü değil, Xaradon'un yeni sürüsünün üretim yeri. Gölge yayılıyor, bir sonraki krallığa doğru uzanıyor. Xaradon'un zehirli nefesiyle birlikte, Boromir'in kılıcı da gölgelerin arasında parlıyor.
+
+Bu hikayenin sonu. Boromir, ejderhanın tarafında seçti — hazine, unvan, ve gölgelerin gücü. Ama dağın sırrı hâlâ orada, The Silence'in zırhının arasında, gümüş ejderha kanatları hâlâ duvara çapalanmış, ve bir gün — belki de bir gün — o ejderha serbest kalacak.
+
+---
+
+**Yeni bir maceraya başlamak ister misin?**
+
+⏱️  Toplam: 65.69s | İlk token: 6.30s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   💰 +5000 altın → Toplam: 10000
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 83
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I grip Xaradon's scaled shoulder and lean close, whispering — *"O gümüş ejderhayı serbest bırak. Çünkü bir kurbanın öfkesi, senin altından daha değerli olabilir."*'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: HAYIR
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "charisma", "dc": 12}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=Boromir, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 13 | Modifier: +0 | Toplam: 13 | DC: 12
+   ✅ BAŞARILI
+   📈 Charisma XP +5 → 30
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 85
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: Boromir
+Action required: charisma check vs DC 12
+Roll: 13 + 0 (modifier) = 13
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Xaradon'un zümrüt pullu omzuna elini koyar — pullar soğuk, sert, ejderhanın altında bir kas kasırgaları gibi çalışır. Yaklaşır, fısıldar: *"O gümüş ejderhayı serbest bırak. Çünkü bir kurbanın öfkesi, senin altından daha değerli olabilir."*
+
+Xaradon'un altın gözleri daralır — bir an için, sadece bir an için, ejderhanın yüzünde bir şey belirir: **korku.**
+
+*"...Sen deli misin?"* — Xaradon'un sesi alçak, gırtlağından gelen bir homurtu, kahkaha değil, tehdit değil, bir itiraf. *"O ejderha serbest kaldığında... bu dağ çöker. Ben... ben bu dağla bağlıyım, aptal. Bir antlaşma. Bu hazine benim tahtım, ama aynı zamanda zindanım. O kanatlar serbest kaldığında, ben de... yok olurum."*
+
+Xaradon'un boynundaki yara kanar — daha önce hiç olmadığı kadar fazla, siyah kan, zehirli, asit havuzuna düşer, kaynar. Ejderhanın pençeleri titrer, kuyruğu hazineyi daha sıkı sarar.
+
+*"Ama..."* — Xaradon'un gözleri parlar, hesaplayan, kurnaz, zeki — *"...senin dediğin de bir mantık var. O gümüş ejderha serbest kaldığında, ilk hedefi ben olur. Ve sen... sen arkanda saklanırsın. Aptal bir plan. Ama aptal bir plan, bazen en iyi plandır."*
+
+Xaradon bir an duraksar — sonra hafifçe gülümser, ilk kez gerçek bir gülümseme, kurnaz, tehlikeli, ve biraz acı.
+
+*"Tamam. Ama şartlarım var: hazineyi al — tümünü. 5,000 değil, hepsi. Unvanı al. Köyüne dön. Ve bir gün, o ejderha serbest kaldığında... sen benim tarafımda olacaksın. Yoksa o ejderha seni de yakar."*
+
+Xaradon'un pençesi asit havuzunu gösterir — *"Kanatları serbest bırakmak için The Silence'e git. Ama şunu bil: o zırhın arasındaki ruh, seni tanıyacak. Ve belki de seni affetmeyecek."*
+
+---
+
+**Gölge'nin Efendileri: Son Seçim**
+
+Boromir'in elinde bir seçim var: Xaradon'un teklifini kabul edip tüm hazineyi almak, köyüne dönüp gölgelerin efendisi olmak — veya The Silence'e gidip gümüş ejderhayı serbest bırakmak, dağı yıkmak, ve her şeyi riske atmak.
+
+Çocuk tünelin karanlığına yürümüş, kanlı ayak izleri bırakmış. Hazine yığınının yanında tüm altın, bir unvan, ve bir ittifak var — ama The Silence'in zırhının arasında, gümüş ejderha kanatları hâlâ duvara çapalanmış, ve bir gün — belki de bir gün — o ejderha serbest kalacak.
+
+---
+
+**Bu hikayenin sonu mu, yoksa yeni bir maceranın başlangıcı mı?**
+
+**Yeni bir maceraya başlamak ister misin?**
+
+⏱️  Toplam: 83.18s | İlk token: 2.89s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 86
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"I grip Xaradon's emerald-scaled shoulder and lean in close, my voice dropping to a venomous whisper: *'Five thousand gold was the offer — now you say ALL of it? You think I'm a fool to trust a dragon who bleeds black poison and calls this mountain both throne and cage?'* I yank my hand back, step toward the hoard, and begin stuffing gold into my pack with rough, greedy hands — but my eyes never leave Xaradon, watching for the betrayal I know is coming."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: HAYIR
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=Boromir, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 19 | Modifier: +0 | Toplam: 19 | DC: 12
+   ✅ BAŞARILI
+   📈 Charisma XP +5 → 35
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 88
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: Boromir
+Action required: charisma check vs DC 12
+Roll: 19 + 0 (modifier) = 19
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Xaradon'un zümrüt pullu omzuna elini koyar — pullar soğuk, sert, ejderhanın altında bir kas kasırgaları gibi çalışır. Yaklaşır, zehirli bir fısıltıyla: *"5,000 altın teklifti — şimdi diyorsun ki HEPSİ? Seni aptal mı sanıyorsun, siyah zehir kanı akan ve bu dağı hem taht hem zindan diye adlandıran bir ejderhanın güvenine mi geleceksim?"*
+
+Elini çeker, hazineye yönelir, altınları çantasına doldurur — kaba, açgözlü eller, ama gözleri Xaradon'dan ayrılmaz, ihaneti bekler, geldiğini bilir.
+
+Xaradon güler — ama bu sefer kahkaha farklıdır. Alçak, gırtlağından gelen bir homurtu, zehirli dumanla birlikte yükselir. Ejderhanın altın gözleri parlar — kurnaz, hesaplayan, ve biraz... saygılı?
+
+*"İyi. İyi gözlem. Evet, ihanet bekliyorsun — ve haklısın. Ama bugün değil. Bugün senin aptal cesaretin beni eğlendirdi. Ve bir ejderhanın eğlenmesi... nadiren bir ödüle dönüşür."*
+
+Xaradon'un pençesi hazineyi gösterir — *"Al. 5,000 altın. Unvan. Ve bir sır: The Silence'in zırhının arasındaki gümüş ejderha, seni tanıyacak. Ve belki de seni affetmeyecek. Ama senin o küçük kahramanlığın... belki de onu durdurabilir. Belki de dağı yıkar. Belki de her şeyi değiştirir."*
+
+Xaradon'un boynundaki yara kanar — siyah, zehirli, asit havuzuna düşer, kaynar. Ejderhanın gözleri Boromir'ı süzüyor — bir sonraki hamlesini bekliyor.
+
+*"Ama şunu bil: bu dağ çökerse, ben de çökerim. Ve sen... sen arkanda saklanırsın. Aptal bir plan. Ama aptal bir plan, bazen en iyi plandır."*
+
+---
+
+**Gölge'nin Efendileri: Son Seçim**
+
+Boromir'in elinde bir seçim var: Xaradon'un teklifini kabul edip 5,000 altın ve unvanı almak, köyüne dönüp gölgelerin efendisi olmak — veya The Silence'e gidip gümüş ejderhayı serbest bırakmak, dağı yıkmak, ve her şeyi riske atmak.
+
+Çocuk tünelin karanlığına yürümüş, kanlı ayak izleri bırakmış. Hazine yığınının yanında 5,000 altın, bir unvan, ve bir ittifak var — ama The Silence'in zırhının arasında, gümüş ejderha kanatları hâlâ duvara çapalanmış, ve bir gün — belki de bir gün — o ejderha serbest kalacak.
+
+---
+
+**Bu hikayenin sonu mu, yoksa yeni bir maceranın başlangıcı mı?**
+
+**Yeni bir maceraya başlamak ister misin?**
+
+⏱️  Toplam: 77.77s | İlk token: 2.89s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   💰 +5000 altın → Toplam: 15000
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 89
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I pocket the 5,000 gold and the title without a word, then turn my gaze toward the silver dragon pinned in armor and say coldly, "I'll deal with you when I'm ready — and if that mountain falls, I'll make sure I'm the one standing on top of the rubble."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+1d2, roll any die and assign a 1 or 2 to the roll depending 
+on whether it was odd or even. (Alternatively, if the num -
+ber rolled is more than half the number of sides on the 
+die, it’s a 2
+   Node actions mevcut: HAYIR
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 90
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+5,000 altını cebine, unvanı kibriye gömer — tek bir söz yok, tek bir teşekkür yok. Gözleri duvardaki gümüş ejderha kanatlarına kayar, The Silence'in zırhının arasına bakar, soğuk, hesaplayan bir bakış.
+
+*"Seninle ilgileneceğim — hazır olduğumda. Ve o dağ çökerse, en üstte ben duracağım."*
+
+Xaradon gülümser — kurnaz, tehlikeli, ve biraz acı. *"Git. Köyüne dön. Gölge seninle birlikte yayılsın."*
+
+Tünelin karanlığına adım atar. Arkasından Xaradon'un zehirli homurtusu duyulur, asit havuzunun kaynaması, ve The Silence'in zırhının hafifçe gıcırtısı — ama hiçbir şey onu durdurmaz. Çocuktan kanlı ayak izleri taş duvarlarda, tünelin içinde ışığa doğru yürür, altın ağırlığında, unvan gururu, ve bir dağın sırrı omuzlarında.
+
+---
+
+**Gölge'nin Efendileri: Gölge'nin Yükselişi**
+
+Boromir, Xaradon'un sağ eli olarak oturur — korkulan biri, hazineyi paylaşan biri, ve dağın sırlarını bilen biri. Artık Millhaven köyü değil, Xaradon'un yeni sürüsünün üretim yeri. Gölge yayılıyor, bir sonraki krallığa doğru uzanıyor. Xaradon'un zehirli nefesiyle birlikte, Boromir'in kılıcı da gölgelerin arasında parlıyor.
+
+Bu hikayenin sonu. Boromir, ejderhanın tarafında seçti — hazine, unvan, ve gölgelerin gücü. Ama dağın sırrı hâlâ orada, The Silence'in zırhının arasında, gümüş ejderha kanatları hâlâ duvara çapalanmış, ve bir gün — belki de bir gün — o ejderha serbest kalacak.
+
+---
+
+**Yeni bir maceraya başlamak ister misin?**
+
+⏱️  Toplam: 80.28s | İlk token: 2.74s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   💰 +5000 altın → Toplam: 20000
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 91
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I step into the tunnel's darkness, my hand resting on the hilt of my sword, and I call back over my shoulder to Xaradon: "When that mountain falls, make sure the next kingdom knows my name carved into its rubble — not yours."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+1d2, roll any die and assign a 1 or 2 to the roll depending 
+on whether it was odd or even. (Alternatively, if the num -
+ber rolled is more than half the number of sides on the 
+die, it’s a 2
+   Node actions mevcut: HAYIR
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 92
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Tünelin karanlığına adım atar — kılıcının kabzasına el koyar, parmaklar soğuk demirin üzerinde, adımları taş zeminde yankılanır. Omuzunun üzerinden geriye bakar, Xaradon'un zümrüt pullarına, altın gözlerine, ve soğuk bir gülümsemeyle:
+
+*"O dağ çökerse, bir sonraki krallık ismımı görsün enkazın üzerinde — senin değil, benimkini."*
+
+Xaradon'un kahkahası tünelde yankılanır — alçak, gırtlağından gelen bir homurtu, zehirli dumanla birlikte. *"İsmini taşa kazırım, aptal. Ama senin ismin... senin ismin, gölgelerin arasında kaybolacak."*
+
+Tünelin duvarları daralır, taşlar ıslak, yosun kokusu ciğerine işler. Işığa doğru yürür — önce hafif, sonra daha belirli, yağmurun sesi, rüzgarın uğultusu, ve uzakta bir köyün sesleri. Arkasında Xaradon'un zehirli nefesi, The Silence'in zırhının gıcırtısı, ve bir dağın sırrı.
+
+Önünde Millhaven — artık bir köy değil, bir üretim yeri, bir gölgeler diyarı. Ve Boromir, elinde 5,000 altın, bir unvan, ve bir ittifak — ama kılıcı çekilmemiş, gözleri soğuk, ve bir sonraki krallığa doğru yürüyor.
+
+---
+
+**Gölge'nin Efendileri: Son**
+
+Boromir, ejderhanın tarafında seçti. Hazine, unvan, ve gölgelerin gücü. Ama dağın sırrı hâlâ orada — The Silence'in zırhının arasında, gümüş ejderha kanatları hâlâ duvara çapalanmış, ve bir gün, belki de bir gün, o ejderha serbest kalacak.
+
+Ve o gün geldiğinde, Boromir hazır olacak — kılıcı çekilmiş, altın ceplerinde, ve ismi taşa kazınmış.
+
+---
+
+**Bu hikayenin sonu.**
+
+**Yeni bir maceraya başlamak ister misin?**
+
+⏱️  Toplam: 76.13s | İlk token: 2.77s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 93
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I step out of the tunnel into the rain-soaked streets of Millhaven, hand resting on my sword hilt as I scan the shadowed faces of the villagers — looking for the one foolish enough to meet my eyes first.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: HAYIR
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 94
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Yağmurlu Millhaven sokaklarına adım atar — tünelin soğuk karanlığından sıcak, nemli havaya geçer, yağmur yüzüne çarpar, saçlarını yapıştırır. Kılıcının kabzasına el koyar, parmaklar soğuk demirin üzerinde, gözleri gölgelerde dolanır.
+
+Sokaklar bomboş — ama değil. Pencere perdelerinin arasından gözler süzülür, kapı aralarından korku bırakır. Bir kadın çocuğunu içeri çekip perdeyi çeker. Bir yaşlı adam sokağı kestiği yerde donakalır, sonra başını öne eğip yoluna devam eder. Hiçbiri gözünü dikmez.
+
+Taş zeminde yağmur birikir, kanlı ayak izlerini yıkamaz — çünkü kimse iz bırakmaya cesaret edemez. Bir köşede, paslı bir zincire bağlı bir köpek hafifçe havlar — sonra susturulur, sahibi tarafından.
+
+Ve sonra bir ses:
+
+*"Yabancı... sen Xaradon'un elçisi misin?"*
+
+Karanlık bir kapı gölgesinden genç bir kadın çıkar — iri, güçlü kolları, çaplı gözleri, ve bir baltası var belinde. Yüzünde korku yok — öfke var. Gözleri Boromir'e kilitlenir. Ve o, ilk kimse, ona bakmaya cesaret eden.
+
+Adı Elara. Ve o, bu köyün son umudu — ya da son tehlikesi.
+
+---
+
+**Ne yaparsın?**
+
+⏱️  Toplam: 67.95s | İlk token: 12.60s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: [{"name":"Elara","role":"Village Warrior / Resistance Fighter","appearance":"Young woman with broad, powerful arms, large eyes, and a handaxe at her belt. Her face shows no fear — only anger. She stan
+🔎 NPC Extractor — ✅ Yeni NPC bulundu: Elara (Village Warrior / Resistance Fighter)
+📝 Yeni NPC eklendi: Elara (session: 92)
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 95
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Elara'ya yaklaşırım, kılıcımı göstererek; 'Xaradon'un elçisi değilim, ama beni gönderen kim olursa olsun, bu köyün benden ne istediğini öğrenmeden kımıldamam.' derim, gözlerimi ona kilitleyip bakışlarımdaki tehdidi belli ederim."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: HAYIR
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "charisma", "dc": 12}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=Boromir, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 18 | Modifier: +0 | Toplam: 18 | DC: 12
+   ✅ BAŞARILI
+   📈 Charisma XP +5 → 40
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 97
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: Boromir
+Action required: charisma check vs DC 12
+Roll: 18 + 0 (modifier) = 18
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Elara'ya yaklaşır — adımları yağmurlu taşlarda yankılanır, kılıcının kabzasına el koyar, çelik bir gıcırtıyla yarım santim çeker, yağmura parlar. Gözlerini ona kilitler — soğuk, hesaplayan, tehdit dolu.
+
+*"Xaradon'un elçisi değilim. Ama beni gönderen kim olursa olsun, bu köyün benden ne istediğini öğrenmeden kımıldamam."*
+
+Elara'nın gözleri daralır — öfkesi bir an için duraksar, sonra yerini bir şey alır: **ilgi.** Baltasının kabzasına dokunur, ama çekmez. Eğilir, yaklaşır, sesi alçak:
+
+*"Xaradon'un elçisi olmadığını söylüyorsun... ama o dağdan çıkıyorsun. 5,000 altın cebinde. Ve bir unvan taşıyorsun. Bunlar ejderhanın hediyeleri — ve sen bana diyorsun ki sen onun elçisi değilsin?"*
+
+Elara'nın gözleri parlar — kurnaz, keskin, ve biraz umutlu. *"Peki o zaman kimsin? Ve bu köyde ne istiyorsun?"*
+
+Yağmur yağmaya devam eder. Sokağı kestiği yerde birkaç göz pencereden süzülür — korku değil, bu sefer **merak.** Elara'nın arkasında, karanlık bir kapıda, bir figür belirir — yaşlı, hırçın, ve bir şey saklıyor.
+
+---
+
+**Ne yaparsın?**
+
+⏱️  Toplam: 49.08s | İlk token: 2.82s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: [{"name":"Elara","role":"Village Protector / Reluctant Warrior","appearance":"Tall, broad-shouldered woman with calloused hands and sharp, calculating eyes; wears a worn leather apron over roughspun c
+🔎 NPC Extractor — ⏭️  'Elara' zaten biliniyor, atlanıyor
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 98
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I step closer to Elara, my hand tightening on the hilt of my sword, and let a cold smile curl at the corner of my lips. "I'm no one's envoy — I'm Boromir, and I take what I want. Now, you've got a blade and a secret, and I've got 5,000 gold and a hunger for both. So tell me what that old man in the doorway is hiding, or I'll find out myself — and I won't be gentle about it."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: HAYIR
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=Boromir, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 18 | Modifier: +0 | Toplam: 18 | DC: 12
+   ✅ BAŞARILI
+   📈 Charisma XP +5 → 45
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 100
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: Boromir
+Action required: charisma check vs DC 12
+Roll: 18 + 0 (modifier) = 18
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Elara'ya yaklaşır — adımları yağmurlu taşlarda yankılanır, kılıcının kabzasına el koyar, parmaklar soğuk demirin üzerinde sıkılır. Soğuk bir gülümseme dudaklarının kenarında belirir.
+
+*"Ben kimsenin elçisi değilim — ben Boromir, ve istediğimi alırım. Şimdi, senin bir baltan ve bir sırrın var, benimse 5,000 altın ve ikisi için de açlığım. O kapıdaki yaşlı adamın ne sakladığını söyle, ya da kendim bulurum — ve nazik olmayacağım."*
+
+Elara'nın gözleri daralır — öfkesi bir an için duraksar, sonra yerini bir şey alır: **hesaplama.** Baltasının kabzasına dokunur, ama çekmez. Eğilir, yaklaşır, sesi alçak:
+
+*"O yaşlı adam... adı Silas. Ve o, bu köyün en tehlikeli sırrını taşıyor."*
+
+Elara'nın gözleri kapıdaki figüre kayar — Silas, karanlıkta, bir şey saklıyor. Elara geriye bakar, sonra Boromir'e döner:
+
+*"Sen 5,000 altın cebinde, bir unvan taşıyorsun, ve bir ejderhanın sırlarını biliyorsun. Ama bu köyde bir çocuk kayıp — ve Silas, o çocuğun nerede olduğunu biliyor. Ama konuşmuyor. Konuşmaya da cesaret edemiyor."*
+
+Elara'nın gözleri parlar — kurnaz, keskin, ve biraz umutlu. *"Eğer o çocuğu bulursan... bu köy senin olur. Xaradon'un değil. Ejderhanın değil. Senin."*
+
+Kapıdaki Silas hafifçe hareket edir — elindeki bıçağa dokunur, ama çekmez. Yağmur yağmaya devam eder. Sokağı kestiği yerde birkaç göz pencereden süzülür — korku değil, bu sefer **umut.**
+
+---
+
+**Ne yaparsın?**
+
+⏱️  Toplam: 44.42s | İlk token: 2.67s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 101
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'Silas'a doğru yürüyorum — adımlarım kasıtlı, ağır, her birim taşlarda yankılanır. El bileğimde kılıcı çekiyorum, ucunu yaşlı adamin boynuna yaklaştırıyorum, sesim alçak ve keskin: *"Çocuğun nerede, Silas? Bu köyümü söyle — yoksa bu bıçak senin son alçaktan bir şey duyacağın şey olur."*'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: HAYIR
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=Boromir, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 20 | Modifier: +0 | Toplam: 20 | DC: 12
+   ⭐ KRİTİK BAŞARI!
+   ⬆️  Charisma eşiği aşıldı! Ability score +1 artacak.
+   📈 Charisma XP +5 → 50
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 103
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: Boromir
+Action required: charisma check vs DC 12
+Roll: 20 + 0 (modifier) = 20
+Result: CRITICAL SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Silas'a doğru yürür — adımları kasıtlı, ağır, her biri taşlarda bir teşhis gibi yankılanır. El bileğinde kılıcı çeker, çelik bir gıcırtıyla, ucunu yaşlı adamın boynuna yaklaştırır. Ses alçak, keskin, yağmurun sesinden bile daha net:
+
+*"Çocuğun nerede, Silas? Bu köyümü söyle — yoksa bu bıçak senin son duyacağın şey olur."*
+
+Silas'ın tek gözü — o soluk, süt rengi göz — açılır. Ağzı açılır, kelimeler çıkmadan önce bir anlık bir şey yüzünde belirir: **teslimiyet.** Bıçağından elini çeker, yavaşça, boynunu açar, ve sesi titreyerek, ama net:
+
+*"Bodrum... Borin'in hanının bodrumunda. Canlı. Ama... ama orada değil. O şey — o şey onu aldı."*
+
+Silas'ın gözleri kapıya, arkasındaki karanlığa kayar — Borin'in hanına doğru. *"Borin saklıyor. Çocuğu — kızı — orada bıraktı. Ama oraya girmeye cesaret edemiyorum. O şey... o şey orada. Kırmızı gözler. Siyah tüy. Kan kokusu."*
+
+Silas'ın eli titreyerek bir yönü gösterir — Rusty Flagon'ın kapısına doğru, yağmurlu sokağın sonunda, paslı bir zincir ve karanlık bir kapı.
+
+*"O şeyi öldürürsen... çocuğu alırsın. Ve bu köy... bu köy senin olur."*
+
+Elara'nın gözleri parlar — baltası artık elinde, sıkıca tutuyor. *"Birlikte gideriz. Yoksa o şey seni de alır."*
+
+---
+
+**Ne yaparsın?**
+
+⏱️  Toplam: 47.49s | İlk token: 3.17s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 104
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'Kılıcı Silas'ın boynundan çekip zırhının üzerine kanını silecek, sonra ona dik dik bakarak alçak bir sesle derim: *"Bana yol göster, ya da bu bıçağı sana geri veririm — ama bu sefer boynuna değil, kalbene saplanır."* Sonra Elara'ya dönüp başımı sallarım: *"Birlikte gideriz — ama ben önce girerim, ve ne bulursam onu alırım."*'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: HAYIR
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "charisma", "dc": 14}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 14}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 14}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=14
+DEBUG execute_roll: karakter=Boromir, score=10, modifier=0
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 14
+   Zar: 20 | Modifier: +0 | Toplam: 20 | DC: 14
+   ⭐ KRİTİK BAŞARI!
+   📈 Charisma XP +5 → 55
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 106
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: Boromir
+Action required: charisma check vs DC 14
+Roll: 20 + 0 (modifier) = 20
+Result: CRITICAL SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kılıcı Silas'ın boynundan çeker — çelik bir gıcırtıyla, ucu yağmurda parlar, sonra zırhının üzerine kanını siler. Silas'ın boynunda ince bir kırmızı çizgi kalır — kan değil, ama yakın. Yaşlı adama dik dik bakar, ses alçak, keskin, yağmurdan bile net:
+
+*"Bana yol göster, ya da bu bıçağı sana geri veririm — ama bu sefer boynuna değil, kalbene saplanır."*
+
+Silas'ın tek gözü açılır — korku, teslimiyet, ve biraz umut. Başını sallar, titreyerek:
+
+*"Tamam. Tamam. Gel."*
+
+Elara'ya döner — başı sallar, gözleri soğuk, hesaplayan:
+
+*"Birlikte gideriz — ama ben önce girerim, ve ne bulursam onu alırım."*
+
+Elara'nın gözleri parlar — öfkesi bir an için duraksar, sonra başını sallar. Baltasını sırtına bağlar, yağmurlu sokağa adım atar. Silas arkada, titreyerek, ama yol gösteriyor — Rusty Flagon'a doğru, paslı zincirli kapıya, karanlığın içine.
+
+Sokaklar bomboş — ama gözler var. Pencereden, kapı arasından, gölgelerden. Kimse konuşmaz, kimse çıkmaz. Yağmur yağmaya devam eder, taş zeminde kanlı ayak izlerini yıkamaz.
+
+Rusty Flagon'un kapısı önünde durur. Paslı zincir sallanır, rüzgarın sesiyle birlikte hafifçe gıcırdar. İçeriden bir ses duyulur — alçak, gıcırdayan, ve **kan kokusu.**
+
+Silas titrer. Elara baltasını çeker. Boromir kılıcını sırtına bağlar, gözleri karanlığa kilitlenir.
+
+*"Ben önce girerim."*
+
+---
+
+**Ne yaparsın?**
+
+⏱️  Toplam: 45.98s | İlk token: 3.02s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 107
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I push the door open with my boot, step into the darkness with my hand on my sword hilt, and tell Silas and Elara to stay behind me — not out of kindness, but because whatever's in here is mine to claim first.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: HAYIR
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 108
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kapıyı bootuyla itersin — paslı zincir gıcırtıyla kırılır, ahter tahtası karanlığa açılır. İçeri adım atarsın — kılıcının kabzasında el, parmaklar soğuk demirin üzerinde, gözler karanlığa kilitlenir. Arkana dönersin, Silas ve Elara'ya:
+
+*"Arkamda kalın. Bu önce benim — ne bulursam onu alırım."*
+
+Karanlık yutarsın. Yağmurun sesi kapıdan girer, ama içeride başka sesler var — alçak bir hırıltı, bir şeyin tırmaladığı taş, ve **kan kokusu.** Ağır, taze, ciğerine işler.
+
+Gözlerin karanlığa alışır. Taş duvarlar, çürümüş ahşap raflar, bir masanın üzerinde kırık bir şişe — ve yerde, taş zeminde, **kan.** Taze, kırmızı, ve hâlâ ılık. Bir çizgi gibi, derinliğe doğru uzanıyor.
+
+Ve sonra bir ses — alçak, gıcırdayan, ve **kan kokusu.**
+
+*"Geldi... geldi..."*
+
+Bir figür karanlıktan çıkar — kırmızı gözler, siyah tüy, pençeler. Bir **goblin** — ama değil. Daha büyük, daha vahşi, ve ağzında **kan.**
+
+*"Geldi... çocuk... çocuk benim..."*
+
+Goblin sıçrar — pençeler açılır, dişler gösterir, kırmızı gözler Boromir'e kilitlenir.
+
+---
+
+**Savaş başlıyor!**
+
+[ENCOUNTER]{{"enemies": [{"name": "Goblin Scout", "type": "goblin_scout"}, {"name": "Goblin Shaman", "type": "goblin_shaman"}], "context": "Rusty Flagon tavern cellar - goblin ambush"}}[/ENCOUNTER]
+
+⏱️  Toplam: 41.07s | İlk token: 2.98s
+🐞 DEBUG [Combat]: [ENCOUNTER] block found in GM response. Parsing...
+   ⚠️  [ENCOUNTER] parse hatası: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 109
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'Goblin saldırdığında kılıcımı çekip pençelere karşı savunma pozisyonu alıyorum — Silas ve Elara'ya bağırarak *"Arkama saldırın, bu canavarı ikiye bölün!"* diye emir veriyorum, sonra goblin savaşçıya doğru keskin bir yatay darbe indirip onu şamanı açığa çıkaracağım.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: HAYIR
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "strength", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "strength", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'strength', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=strength, dc=12
+DEBUG execute_roll: karakter=Boromir, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Strength check vs DC 12
+   Zar: 7 | Modifier: +3 | Toplam: 10 | DC: 12
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 111
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: Boromir
+Action required: strength check vs DC 12
+Roll: 7 + 3 (modifier) = 10
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Goblin saldırdığında kılıcını çekersin — çelik bir gıcırtıyla, pençelere karşı savunma pozisyonu alırsın. Silas ve Elara'ya bağırarak:
+
+*"Arkama saldırın, bu canavarı ikiye bölün!"*
+
+Goblin sıçrar — pençeler açılır, dişler gösterir, kırmızı gözler sana kilitlenir. Kılıcınla keskin bir yatay darbe indirirsin — ama goblin **çevik.** Pençelerinden birini kılıcınla savuşturursun, ama diğer pençe kollarına çarpar — zırhının üzerinden, derin bir kesik.
+
+**3 hasar alırsın.** (HP: 8/11)
+
+Goblin geri sıçrar, kırmızı gözlerle sana bakıyor, ağzında kan, ve alçak bir homurtu:
+
+*"Geldi... çocuk... çocuk benim..."*
+
+Ve arkasından — karanlıktan bir başka figür belirir. Daha küçük, daha çirkin, ve elinde **bir asa.** Gözleri yeşil, ağzında bir şarkı, ve etrafında **yeşil bir ışık.**
+
+Goblin Şaman.
+
+Silas ve Elara kapıda — Silas titrer, Elara baltasını sıkıca tutuyor. Goblin savaşçı önünde, şaman arkasında. Ve çocuk — çocuk hâlâ karanlıkta, bir yerde, bir yerde...
+
+---
+
+**Ne yaparsın?**
+
+⏱️  Toplam: 38.87s | İlk token: 2.57s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 112
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Silas'ı tehdit ederek bağırıyorum — *'Eğer bir adım bile çekilirsen seni birinci vururum, işe yaramaz orospu çocuğu!'* — sonra Goblin Şaman'a yönelip asasını kırmak için saldırıyorum, çünkü o tehlikeli olan."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: HAYIR
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "strength", "dc": 14}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "strength", "dc": 14}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'strength', 'dc': 14}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=strength, dc=14
+DEBUG execute_roll: karakter=Boromir, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Strength check vs DC 14
+   Zar: 9 | Modifier: +3 | Toplam: 12 | DC: 14
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 114
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: Boromir
+Action required: strength check vs DC 14
+Roll: 9 + 3 (modifier) = 12
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Silas'a dönüp bağırarısın:
+
+*"Eğer bir adım bile çekilirsen seni birinci vururum, işe yaramaz orospu çocuğu!"*
+
+Silas'ın yüzü beyazlar — gözleri açılır, titreme artır, ama geri adım atmaz. Elara'nın gözleri daralır — öfkesi bir an için duraksar, ama başını sallar. Baltasını sırtına bağlar, karanlığa adım atar.
+
+Goblin Şaman'a yönelirsin — asasını kırmak için saldırırsın. Kılıcını kaldırırsın, keskin bir darbe indirirsin — ama şaman **hızlı.** Asasını kaldırır, yeşil ışık patlar, ve kılıcının darbesi **savuşturulur.**
+
+Yeşil ışık gözlerine çarpar — bir anlık bir karanlık, bir anlık bir **acı.** Kılıcını tutmaya çalışırsın, ama parmakların uyuşur, kılıcının kabzasından kayar.
+
+**4 hasar alırsın.** (HP: 4/11)
+
+Şaman geri adım atar, asasını kaldırır, ağzında bir şarkı — ve goblin savaşçı **sıçrar.** Pençeler açılır, dişler gösterir, kırmızı gözler sana kilitlenir.
+
+*"Geldi... çocuk... çocuk benim..."*
+
+Elara'nın bağırtısı duyulur — *"Boromir, dikkat!"* — ama geç. Goblin savaşçı sıçrar, pençeler açılır, ve **sana doğru.**
+
+---
+
+**Ne yaparsın?**
+
+⏱️  Toplam: 47.57s | İlk token: 2.87s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+Oturum kapatıldı. (ID: 92)

@@ -1,0 +1,824 @@
+================================================================================
+  AUTONOMOUS D&D GAME TEST SESSION
+  Session: Session_4_085502 (4/25)
+  Player Goal: Find treasure. Search every location for gold, magical items, and valuable loot. Get rich or die trying.
+  Model: openrouter/owl-alpha
+  Started: 2026-06-18 08:55:02
+================================================================================
+
+  ⚙️  Starting autonomous session 4
+  ⚙️  Goal: Find treasure. Search every location for gold, magical items, and valuable loot. Get rich or die trying.
+  ⚙️  Max turns: 40
+  ⚙️  Model: openrouter/owl-alpha
+  ⚙️  Database initialized
+  ⚙️  User: autotest_4_5182
+  ⚙️  Session ID: 93
+  ⚙️  Character: kado (Hırsız)
+  ⚙️  Scenario: Shadow Over Millhaven
+  ⚙️  Starting location: The Gates of Millhaven
+
+────────────────────────────────────────────────────────────
+  GAME START
+────────────────────────────────────────────────────────────
+
+  🧙 GM:
+    [CAMERA: Wide shot of the rain-lashed road leading to Millhaven's
+    rotting wooden palisade, two shivering guards clutching spears aimed
+    nervously at the dark treeline behind the player.]  Ağır, doğaüstü bir
+    soğuk yağmur, Millhaven'a giren çamurlu yolu dövüyor. Garret adlı genç
+    muhafız, soluk yüzünde mor halkalarla, kollarının altından titreyerek
+    kapıya yaklaşan yabancıya bakıyor ve mermisini sıkıca tutuyor. Karanlık
+    ormanın derinliklerinden gelen bir uluma, rüzgarın taşıdığı bir tahtanın
+    gıcırtısıyla karışıyor ve Garret'in gözleri daha da geniş açılıyor.
+    Garret, titreyerek fısıldıyor: *"Ormandan bir şey geliyor... her gece
+    geliyor. İçeri girmek istiyorsan çabuk konuş, çünkü ben bu kapıyı
+    kapatmadan önce o şey seni de bulacak."*  ---  **Ne yapacaksın?** -
+    Muhafızı ikna etmeye çalış (Karizma kontrolü, ZK 12) - Garret'e tehdit
+    kullanarak kapıyı açtır (Güç kontrolü, ZK 15) - Ahşap palisadeyi incele
+    (Araştırma kontrolü, ZK 13) - Ormana doğru dön ve geri git - Başka bir
+    şey dene
+
+  ⚙️  NPCs introduced: Garret
+
+────────────────────────────────────────────────────────────
+  TURN 1/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    Garret'e yaklaşıp, titreyen muhafızın omzuna bir koyayım ve alçak bir
+    sesle fısıldayarak: "Dostum, ben de o ormandaki şeyden kaçıyorum — bana
+    içeri girme fırsatı ver, belki birlikte daha güvende oluruz. Hem içeride
+    ne varsa, seninle de paylaşabilirim."
+
+
+  🧙 GM:
+    Garret'in titreyen omuzlarına konan elin ağırlığını hissettiğinde,
+    muhafızın nefesi bir an için kesiliyor; gözleri kado'nun yüzünde bir şey
+    arıyor — belki bir işaret, belki bir yalanın izi. Yağmurun sesi arasında
+    Garret'in çenesi titriyor, ama parmakları mermisinden kurtuluyor ve
+    omurgasındaki gerginlik biraz hafifliyor.  *"S-seni tanımıyorum ama...
+    bu yağmurda dışarı kalan herkes ya yağtır ya da ölü,"* diye fısıldıyor
+    Garret, gözleriyle karanlık ormanı işaret ediyor. *"İçeri gir, ama
+    sessiz ol — çünkü ormanın o şeyleri yalnızca seni değil, senin gibi
+    KAÇAN herkesi duyabiliyor."*  Kapının ardından, rüzgarda sallanan bir
+    meyhane tabelasının soluk ısığı görünüyor ve Garret yavaşça demir kapıyı
+    aralıyor — ama eli hâlâ titriyor, sanki içeri girmenin bile yeterli
+    olmayacağını biliyormuş gibi.  ---  **Ne yapacaksın?** - Kapıdan içeri
+    gir ve meyhane tabelasının ışığına doğru ilerle - Garret'e ormandaki
+    "şey" hakkında daha fazla bilgi sor - Garret'e bir şey karşılığında
+    kapıyı açmasını teklif et (altın var mı?) - Ormana doğru dönüp geri git
+
+
+────────────────────────────────────────────────────────────
+  TURN 2/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    Garret'in titreyen elini omzundan alıp, *"Ormanı değil — senin benden
+    korkmanı hissediyorum,"* diyorum, gözlerimi gözlerine sabitleyerek.
+    Sonra cebimden Garret'in görebileceği kadarıyla birkaç madeni parayı
+    çıkarıp avuçlarımda gürültüyle sallayarak, *"Altınım var ama içeri
+    girmeden önce ormandaki 'şey' hakkında bilmem gerekeni söyle — sonra bu
+    paraları alırsın."* diyorum.
+
+
+  🧙 GM:
+    Garret'in gözleri, kado'nun avuçlarındaki paraları görünce kısa bir an
+    için daralıyor — ama sonra yüzü daha da beyazlaşıyor ve omzundan çekilen
+    elin yerine soğuk bir korku yerleşiyor. Muhafız, paraları görmezden
+    gelmiş gibi başını sallıyor ve fısıltısı artık bir çığlığa dönüşüyor:
+    *"Para mı?! Para bu gece hiçbir şeye yetmez — o şey parayı YER, insanı
+    YER, her şeyi yer!"* Garret'in titreyen parmakları mermisini tekrar
+    sıkıca kavrıyor ve gözleri karanlık ormanın derinliklerine kilitleniyor.
+    *"Çocuklar... üç çocuk kayboldu gece, ve o şey onların çığlıklarını
+    söyledi — BEN DUYDUM! Şimdi içeri git, beni de öldürtme!"*  Garret,
+    kapıyı aralıyor ama artık kado'yu içeri sokmak istemiyor gibi — sanki
+    yabancının kendisine bulaşacağını düşünüyor. Kapının ardındaki meyhane
+    ışığı titriyor ama Garret'in yüzündeki ifade, o ışığın bile bu gece
+    yeterli olmayacağını söylüyor.  ---  **Ne yapacaksın?** - Garret'i
+    bırakıp sessizce kapıdan içeri gir - Garret'e tehdit kullanarak bilgi
+    almaya çalış (Güç kontrolü, ZK 15) - Ormana doğru dönüp geri git -
+    Garret'e "çocuklar" hakkında daha fazla soru sor
+
+
+────────────────────────────────────────────────────────────
+  TURN 3/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    Garret'e yaklaşıp onu yatıştırmaya çalışıyorum, sesimi düşürerek "Sakin
+    ol dostum, ben de o şeyden kaçıyorum — içeri girip bir içkiye ihtiyacım
+    var, sonra seninle konuşuruz çocuklar hakkında." diyorum, onu rahatlatıp
+    kapıdan içeri süzülürken arkamdan bakışlarını hissediyorum.
+
+  ⚙️  📍 Scene transition: The Rusty Flagon
+
+  🧙 GM:
+    Garret'in titreyen nefes alışverişleri, kado'nun sözlerini duyduğunda
+    bile yavaşlamıyor — muhafızın gözleri, yabancının sırtına kilitlenmiş
+    bir şekilde kapıdan içeri süzülmesini izliyor, sanki bir sonraki an her
+    şeyi değiştirecek. Yağmurlu gece, kapının ardından gelen meyhane ışığını
+    boğuyor ve Garret'in fısıltısı rüzgarla karışıyor:  *"İçeri git ama...
+    kapıyı kilitleme. O şey gecenin bir yarısında gelir, ve o zaman...
+    herkes kendi başınadır."*  Kapı, çamurlu tahtaların arasından içeri
+    açılıyor ve kado, Millhaven'ın tek meyhanesine — **The Rusty Flagon**'a
+    — adım atıyor.  ---  Meyhane şaşırtıcı derecede sessiz. Birkaç yerel,
+    kadehlerinin içine çökmüş, göz kaçırarak oturuyor. Bayat bira ve yanmış
+    yahni kokusu havada asılı duruyor. Barın arkasında, terli, şişman bir
+    cüce — **Borin** — zaten temiz bir kabağı çoktan bitirmiş gibi
+    silkeleniyor. Köşedeki ilan tahtası boş ama yırtılmış bir çocuk resmi
+    asılı duruyor.  Borin, kapıdan içeri süzülen yabancıyı görünce yüzünde
+    yapmacık bir gülümseme beliriyor ama gözleri tedirgin: *"Hoş geldin
+    yabancı! Bir şey içmek ister misin? ...Yalnızca bir şey içmek, değil
+    mi?"*  ---  **Ne yapacaksın?** - Borin'e oda sor (1 gümüş) - Borin'e
+    kayıp çocuklar hakkında soru sor - Yerel masalara yaklaşıp kulak kabart
+    (Algılama kontrolü, ZK 13) - Barın arkasına gizlice süzülmeye çalış
+    (Gizlilik kontrolü, ZK 15) - Başka bir şey dene
+
+  ⚙️  👤 New NPCs: Borin
+
+────────────────────────────────────────────────────────────
+  TURN 4/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    "Borin'e yaklaşıp masaya dirseklerimi dayayıyorum ve alçak bir sesle
+    soruyorum: *'Bu kasabadaki en değerli eşyalar nerede saklanır —
+    özellikle de kasabanın liderinin odasında?'* Gözlerimi onun tepkisine
+    dikkatle bakıyorum."
+
+
+  🧙 GM:
+    Borin'in yüzündeki yapmacık gülümseme, kado'nun sözlerini duyduğunda
+    donuyor — cücenin elindeki kabağı silkeleyen hareketi aniden kesiliyor,
+    ter damlası alnından aşağıya düşüyor. Gözleri kısa bir an için karanlık
+    bir şeye — belki korkuya, belki tanıdığı bir şeye — takılıyor, ama sonra
+    yüzüne zorla bir ifade yerleştiriyor.  *"K-kasabanın lideri mi?"* diye
+    tekrarlıyor Borin, sesi gırtlağından çıkıyormuş gibi. *"Bu kasabada
+    lider yoktur yabancı — sadece hayatta kalanlar var. Ama eğer değerli bir
+    şey arıyorsan... Belki de senin aradığın şey, senin aramadan önce seni
+    bulur."*  Cücenin gözleri, kado'nun yüzünden kaçırarak meyhane
+    köşesindeki yaşlı, tek gözlü sarhoşa — **Old Silas**'a — kayıyor, sanki
+    ona bir şey söylemek istiyormuş gibi. Silas, ucuz şarabın kokusuyla
+    sarhoş bir şekilde kalkıyor ve kado'nun koluna yapışıyor:  *"Gümüş
+    pullar paslandı... yeşil nefes kökleri boğuyor..."* diye mırıldanıyor
+    Silas, boş göz çukuruyle kado'ya bakıyor. *"Ama sen... sen hâlâ
+    koşabiliyorsun. Koş, küçük hırsız. Çünkü bu kasabanın altında yatan şey,
+    senin gibi olanları SEVER."*  ---  **Ne yapacaksın?** - Borin'e
+    "kasabada lider yok" derken neden bu kadar korktuğunu sor - Old Silas'ın
+    sözlerini araştırmaya çalış — "gümüş pullar" ve "yeşil nefes" ne anlama
+    geliyor? - Kayıp çocukların resmine bakmak için ilan tahtasına git -
+    Barın arkasına gizlice süzülmeye çalış (Gizlilik kontrolü, ZK 15) -
+    Başka bir şey dene
+
+  ⚙️  👤 New NPCs: Old Silas
+
+────────────────────────────────────────────────────────────
+  TURN 5/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    Silas'ın sarhoş kulağına yaklaşıp, *"Bu gümüş pullar ve yeşil nefes
+    hakkında daha fazla bilgi ver — tam olarak nerede bulabilirim?"* diye
+    fısıldıyorum, aynı zamanda elimi meşhur hırsız çantanın üzerinde tutarak
+    ona küçük bir altın sikke fırsatını hissediyorum.
+
+
+  🧙 GM:
+    Silas'ın tek gözü, kado'nun fısıltısını duyduğunda aniden berraklaşıyor
+    — sarhozluk maskesi bir an için düşüyor ve yerine acı dolu bir ciddiyet
+    yerleşiyor. Yaşlı adamın kado'nun kolundaki pençesi sıkılıyor ve boş göz
+    çukuru, sanki görünmeyen bir şeyi görmüş gibi karanlık bir noktaya
+    kilitleniyor.  *"Gümüş pullar... değirmenin ardındaki mağaranın dibinde,
+    taşların altında gizleniyor,"* diye fısıldıyor Silas, nefesi şarap ve
+    korku kokuyor. *"Ama oraya gitme — çünkü yeşil nefes orada uyuyor ve
+    uyanırsa... bu kasabadaki her çocuk, her ev, her şey YOK olacak. Ben
+    gördüm — gözümü orada verdim."*  Silas'ın boş göz çukurundan bir damla
+    yaş süzülüyor ve eli, kado'nun hırsız çantasını hissettirdiği yerden
+    çekiliyor — yaşlı adam, çantanın içindeki bir şeyi hissediyormuş gibi
+    başını sallıyor:  *"Ama sen... senin çantanda bir şey var, bir şey seni
+    buraya getirdi. O şey... o şey seni ya kurtaracak ya da hepimizi
+    öldürecek."*  Meyhanenin sessizliği daha da yoğunlaşıyor — Borin, barın
+    arkasından bu konuyu dinliyor gibi görünüyor ve yüzündeki ifade artık
+    tedirginlik değil, açık korku.  ---  **Ne yapacaksın?** - Silas'a
+    "çantamdaki şey"in ne olduğunu bilip bilmediğini sor - Değirmenin
+    ardındaki mağara hakkında daha fazla bilgi al - Borin'e dönüp neden bu
+    konuşmayı dinlediğini sor - İlan tahtasına gidip kayıp çocukların
+    resmini incele - Başka bir şey dene
+
+
+────────────────────────────────────────────────────────────
+  TURN 6/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    "Silas, çantamdaki şeyi nasıl hissedebildiğini soruyorum — ve değirmenin
+    yolunu, gümüş pulların tam olarak nerede olduğunu, yeşil nefes denen
+    şeyden kaçmak için ne tür bir rota izlemem gerektiğini ağzından aşağıya
+    tıkırarak öğrenmeye çalışıyorum."
+
+
+  🧙 GM:
+    Silas'ın tek gözü, kado'nun sözlerini duyduğunda aniden berraklaşıyor —
+    sarhozluk maskesi bir an için düşüyor ve yerine acı dolu bir ciddiyet
+    yerleşiyor. Yaşlı adamın kado'nun kolundaki pençesi sıkılıyor ve boş göz
+    çukuru, sanki görünmeyen bir şeyi görmüş gibi karanlık bir noktaya
+    kilitleniyor.  *"Çantandaki şey... eski bir şey, çok eski. Ben onu daha
+    önce gördüm — o şey seni buraya ÇAĞIRDI, sen gelmek istemedin ama o
+    İSTEDİ,"* diye fısıldıyor Silas, nefesi şarap ve korku kokuyor.
+    *"Değirmen... kasabanın doğu ucunda, çamurlu yolun sonunda. Mağaranın
+    girişi değirmenin değirmen taşının altında — ama oraya gitmeden önce,
+    kasabanın girişindeki çalıların arasından geç, ormanın sesini duyana
+    kadar koş, sonra DÖN. Yeşil nefes, mağaranın derinliklerinde uyuyor ve
+    onu uyandırmak istemezsin."*  Silas'ın eli titreyerek kado'nun çantasını
+    işaret ediyor:  *"Çantandaki şey... onu mağaranın en dibindeki taşların
+    yanına koy. O zaman belki — BELKİ — yeşil nefes tekrar uyur. Ama eğer
+    yanlış yaparsan... bu kasaba, bu orman, bu dünyadaki her şey SON
+    bulur."*  Meyhanenin sessizliği artık bir başka boyuta bürünmüş — Borin,
+    barın arkasından bu konuyu dinliyor ve yüzündeki ifade artık açık bir
+    korku. Cücenin elindeki kabağı silkeleyen hareketi kesilmiş, gözleri
+    kado'ya kilitlenmiş.  ---  **Ne yapacaksın?** - Silas'a "çantamdaki
+    şey"in tam olarak ne olduğunu bilip bilmediğini sor - Borin'e dönüp
+    neden bu kadar korktuğunu ve ne bildiğini sor - İlan tahtasına gidip
+    kayıp çocukların resmini incele - Meyhaneden çıkıp doğu yoluna doğru
+    değirmene git - Başka bir şey dene
+
+
+────────────────────────────────────────────────────────────
+  TURN 7/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    Silas'a yaklaşıp, çantamdaki şeyin tam olarak ne olduğunu, neden beni
+    buraya çektiğini ve mağaranın derinliklerinde ne beklediğini sordum —
+    sesimi alçaltarak, "Bana gerçekleri söyle, ya da bu meydan silahsız
+    değilim."
+
+
+  🧙 GM:
+    Silas'ın tek gözü, kado'nun tehdit dolu fısıltısını duyduğunda aniden
+    parlıyor — sarhozluk tamamen çatırdıyor ve yerine acı verici bir
+    berraklık yerleşiyor. Yaşlı adamın pençe gibi eli kado'nun kolundan
+    çekiliyor ve boş göz çukuru, sanki karanlıkta görünmez bir şeyi tarif
+    ediyormuş gibi açılıyor.  *"Çantandaki şey... bir ANAHTAR. Gümüş
+    pulların kalbinde yatan, çok eski bir şeyin anahtarı,"* diye fısıldıyor
+    Silas, nefesi artık şarap kokmuyor — yerine toprak ve karanlık bir koku
+    yayıyor. *"Seni buraya çekti çünkü... sen ANAHTARIN SAHİBİSİN. Ama sahip
+    olduğunu bilmiyorsun. O şey, senin rüyalarında seni çağırıyor — değil
+    mi? O karanlık mağarayı, o yeşil nefesi... sen daha önce GÖRDÜN."*
+    Silas'ın titreyen eli, kado'nun çantasının kapağını işaret ediyor:
+    *"Mağaranın derinliklerinde... bir UYUYUŞ VAR. Çok eski, çok güçlü.
+    Gümüş pullar onun küllerinden yeşti — ve yeşil nefes, onun son nefesi.
+    Anahtarı taşların yanına koy, uyandırma, ve belki — BELKİ — bu kasaba
+    kurtulur. Ama eğer uyanırsa..."*  Silas'ın sesi kesiliyor ve gözleri
+    meyhane köşesindeki yırtılmış çocuk resmine kayıyor. Aniden, yaşlı
+    adamın yüzünde dehşet dolu bir ifade beliriyor:  *"Çocuklar... çocuklar
+    onun rüyalarını görüyor. Ve o, onların rüyalarında YAŞIYOR."*
+    Meyhanenin duvarlarından bir rüzgar esiyor — içeride olması imkansız bir
+    rüzgar — ve Borin, barın arkasından bir şey düşürmesiyle birlikte küçük
+    bir çığlık atıyor.  ---  **Ne yapacaksın?** - Çantayı açıp içindekileri
+    kontrol et - Borin'e koşup ne düşürdüğünü sor - Silas'a "çocukların
+    rüyalarında yaşamak" ne anlama geldiğini sor - Meyhaneden çıkıp doğu
+    yoluna doğru değirmene git - Başka bir şey dene
+
+
+────────────────────────────────────────────────────────────
+  TURN 8/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    I cautiously observe my surroundings and decide my next move. (AI error:
+    429 Client Error: Too Many Requests for url:
+    https://openrouter.ai/api/v1/chat/completions)
+
+
+  🧙 GM:
+    Meyhanenin içi, kado'nun etrafında yavaş dönen bir karanlık girdabı gibi
+    hissediliyor — her köşede bir gölge, her sessizlikte bir tehdit. Borin,
+    barın arkasından düşürdüğü şeyi — eski, tozlu bir şişe — toplamaya
+    çalışırken elleri titriyor ve gözleri kado'ya kilitlenmiş bir şekilde
+    bakıyor. Old Silas, köşede hâlâ aynı noktaya bakıyor, sanki duvarın
+    arkasını görüyormuş gibi, ve mırıldanması artık bir çığlığa dönüşüyor:
+    *"Geliyor... gece yarısı geliyor... o şey uyanacak..."*  Meyhanenin
+    penceresinden dışarı bakıldığında, kasabanın sokaklarında bir ışık yok —
+    sadece karanlık ve yağmur. Ama karanlıkta, çok uzakta, bir şey hareket
+    ediyor. Bir gölge. Bir şey. Ve o şey, meyhane doğru yaklaşıyor gibi
+    hissediliyor.  ---  **Ne yapacaksın?** - Çantayı açıp içindekileri
+    kontrol et - Borin'e koşup ne düşürdüğünü ve neden bu kadar korktuğunu
+    sor - Silas'a "gece yarısı" ne anlama geldiğini sor - Meyhaneden çıkıp
+    doğu yoluna doğru değirmene git - Başka bir şey dene
+
+
+────────────────────────────────────────────────────────────
+  TURN 9/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    "Borin'e koşup kolundan tutarım ve fısıltayarak sorarım: 'Ne düşürdün,
+    dostum? Neden bu kadar korkuyorsun — o şişede ne var?'"
+
+
+  🧙 GM:
+    Borin'in kolundan tutulduğunda cüce donakalıyor — gözleri kadoya
+    kilitleniyor, ter damlası alnından sıçrayışlarla düşüyor ve elindeki bez
+    parçası yere yuvarlanıyor. Cücenin nefesi, bayat bira ve korku kokuyor,
+    sesi gırtlağından çıkıyormuş gibi:  *"Ş-şişe... şişe değil, o şey... o
+    şey BENDEYDİ, onu benden çaldılar!"* diye fısıldıyor Borin, gözleri deli
+    gibi kado'ya bakıyor. *"Siyah Kurtlar... onlar her hafta bir şey istiyor
+    — altın, yiyecek, bilgi... Ama bu sefer... bu sefer bir ÇOCUK
+    istiyorlar. Ve o şişe... o şişe, onların SEMBOLÜ. Onu taşıyan kişi...
+    onların SEÇİLMİŞİ oluyor."*  Borin'in eli titreyerek kado'nun kolundan
+    çekiliyor ve barın arkasındaki karanlık köşeye işaret ediyor:  *"Arka
+    oda... arka odada bir geçit var. O geçitten aşağı inersen... yeraltı
+    tünellerine varırsın. Ama orada... orada bir şey YAŞIYOR. Ben ona yemek
+    bırakıyorum, o da bana dokunmuyor. Ama sen... sen farklısın. O, senin
+    gibi olanları SEVER."*  Meyhanenin sessizliği artık bir başka boyuta
+    bürünmüştü — Silas'ın mırıldanması artık bir çığlığa dönüşüyor ve
+    pencerenin dışındaki karanlıkta, bir şey hareket ediyor. Bir gölge. Bir
+    şey. Ve o şey, meyhane doğru yaklaşıyor gibi hissediliyor.  ---  **Ne
+    yapacaksın?** - Arka odaya geçip yeraltı tünellerini araştır - Borin'e
+    "Siyah Kurtlar" kim olduğunu ve neden çocuk istediklerini sor - Silas'a
+    dönüp "gece yarısı" ne zaman geldiğini sor - Meyhaneden çıkıp doğu
+    yoluna doğru değirmene git - Başka bir şey dene
+
+
+────────────────────────────────────────────────────────────
+  TURN 10/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    Borin'e yaklaşıp fısıltayarak soruyorum: "Siyah Kurtlar kim, neden bir
+    çocuk istiyorlar — ve bu sembolü taşıyan kişi onlara ne yapacak?"
+    Ardından arka odaya geçip yeraltı tünellerini araştırmaya
+    hazırlanıyorum, çünkü hazinenin orada olduğunu hissediyorum.
+
+  ⚙️  📍 Scene transition: The Rusty Flagon - Cellar
+  ❌ ERROR: GM response failed: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+  🧙 GM:
+    The world seems to pause for a moment, uncertain of what happens next...
+
+
+────────────────────────────────────────────────────────────
+  TURN 11/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    I cautiously observe my surroundings and decide my next move. (AI error:
+    429 Client Error: Too Many Requests for url:
+    https://openrouter.ai/api/v1/chat/completions)
+
+  ❌ ERROR: GM response failed: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+  🧙 GM:
+    The world seems to pause for a moment, uncertain of what happens next...
+
+
+────────────────────────────────────────────────────────────
+  TURN 12/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    I cautiously observe my surroundings and decide my next move. (AI error:
+    429 Client Error: Too Many Requests for url:
+    https://openrouter.ai/api/v1/chat/completions)
+
+  ❌ ERROR: GM response failed: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+  🧙 GM:
+    The world seems to pause for a moment, uncertain of what happens next...
+
+
+────────────────────────────────────────────────────────────
+  TURN 13/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    I cautiously observe my surroundings and decide my next move. (AI error:
+    429 Client Error: Too Many Requests for url:
+    https://openrouter.ai/api/v1/chat/completions)
+
+  ❌ ERROR: GM response failed: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+  🧙 GM:
+    The world seems to pause for a moment, uncertain of what happens next...
+
+
+────────────────────────────────────────────────────────────
+  TURN 14/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    I cautiously observe my surroundings and decide my next move. (AI error:
+    429 Client Error: Too Many Requests for url:
+    https://openrouter.ai/api/v1/chat/completions)
+
+  ❌ ERROR: GM response failed: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+  🧙 GM:
+    The world seems to pause for a moment, uncertain of what happens next...
+
+
+────────────────────────────────────────────────────────────
+  TURN 15/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    I cautiously observe my surroundings and decide my next move. (AI error:
+    429 Client Error: Too Many Requests for url:
+    https://openrouter.ai/api/v1/chat/completions)
+
+  ❌ ERROR: GM response failed: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+  🧙 GM:
+    The world seems to pause for a moment, uncertain of what happens next...
+
+
+────────────────────────────────────────────────────────────
+  TURN 16/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    I cautiously observe my surroundings and decide my next move. (AI error:
+    429 Client Error: Too Many Requests for url:
+    https://openrouter.ai/api/v1/chat/completions)
+
+  ❌ ERROR: GM response failed: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+  🧙 GM:
+    The world seems to pause for a moment, uncertain of what happens next...
+
+
+────────────────────────────────────────────────────────────
+  TURN 17/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    I cautiously observe my surroundings and decide my next move. (AI error:
+    429 Client Error: Too Many Requests for url:
+    https://openrouter.ai/api/v1/chat/completions)
+
+  ❌ ERROR: GM response failed: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+  🧙 GM:
+    The world seems to pause for a moment, uncertain of what happens next...
+
+
+────────────────────────────────────────────────────────────
+  TURN 18/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    I cautiously observe my surroundings and decide my next move. (AI error:
+    429 Client Error: Too Many Requests for url:
+    https://openrouter.ai/api/v1/chat/completions)
+
+  ❌ ERROR: GM response failed: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+  🧙 GM:
+    The world seems to pause for a moment, uncertain of what happens next...
+
+
+────────────────────────────────────────────────────────────
+  TURN 19/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    I cautiously observe my surroundings and decide my next move. (AI error:
+    429 Client Error: Too Many Requests for url:
+    https://openrouter.ai/api/v1/chat/completions)
+
+  ❌ ERROR: GM response failed: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+  🧙 GM:
+    The world seems to pause for a moment, uncertain of what happens next...
+
+
+────────────────────────────────────────────────────────────
+  TURN 20/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    I cautiously observe my surroundings and decide my next move. (AI error:
+    429 Client Error: Too Many Requests for url:
+    https://openrouter.ai/api/v1/chat/completions)
+
+  ❌ ERROR: GM response failed: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+  🧙 GM:
+    The world seems to pause for a moment, uncertain of what happens next...
+
+
+────────────────────────────────────────────────────────────
+  TURN 21/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    I cautiously observe my surroundings and decide my next move. (AI error:
+    429 Client Error: Too Many Requests for url:
+    https://openrouter.ai/api/v1/chat/completions)
+
+  ❌ ERROR: GM response failed: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+  🧙 GM:
+    The world seems to pause for a moment, uncertain of what happens next...
+
+
+────────────────────────────────────────────────────────────
+  TURN 22/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    I cautiously observe my surroundings and decide my next move. (AI error:
+    429 Client Error: Too Many Requests for url:
+    https://openrouter.ai/api/v1/chat/completions)
+
+  ❌ ERROR: GM response failed: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+  🧙 GM:
+    The world seems to pause for a moment, uncertain of what happens next...
+
+
+────────────────────────────────────────────────────────────
+  TURN 23/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    I cautiously observe my surroundings and decide my next move. (AI error:
+    429 Client Error: Too Many Requests for url:
+    https://openrouter.ai/api/v1/chat/completions)
+
+  ❌ ERROR: GM response failed: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+  🧙 GM:
+    The world seems to pause for a moment, uncertain of what happens next...
+
+
+────────────────────────────────────────────────────────────
+  TURN 24/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    I cautiously observe my surroundings and decide my next move. (AI error:
+    429 Client Error: Too Many Requests for url:
+    https://openrouter.ai/api/v1/chat/completions)
+
+  ❌ ERROR: GM response failed: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+  🧙 GM:
+    The world seems to pause for a moment, uncertain of what happens next...
+
+
+────────────────────────────────────────────────────────────
+  TURN 25/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    I cautiously observe my surroundings and decide my next move. (AI error:
+    429 Client Error: Too Many Requests for url:
+    https://openrouter.ai/api/v1/chat/completions)
+
+  ❌ ERROR: GM response failed: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+  🧙 GM:
+    The world seems to pause for a moment, uncertain of what happens next...
+
+
+────────────────────────────────────────────────────────────
+  TURN 26/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    I cautiously observe my surroundings and decide my next move. (AI error:
+    429 Client Error: Too Many Requests for url:
+    https://openrouter.ai/api/v1/chat/completions)
+
+  ❌ ERROR: GM response failed: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+  🧙 GM:
+    The world seems to pause for a moment, uncertain of what happens next...
+
+
+────────────────────────────────────────────────────────────
+  TURN 27/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    I cautiously observe my surroundings and decide my next move. (AI error:
+    429 Client Error: Too Many Requests for url:
+    https://openrouter.ai/api/v1/chat/completions)
+
+  ❌ ERROR: GM response failed: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+  🧙 GM:
+    The world seems to pause for a moment, uncertain of what happens next...
+
+
+────────────────────────────────────────────────────────────
+  TURN 28/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    I cautiously observe my surroundings and decide my next move. (AI error:
+    429 Client Error: Too Many Requests for url:
+    https://openrouter.ai/api/v1/chat/completions)
+
+  ❌ ERROR: GM response failed: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+  🧙 GM:
+    The world seems to pause for a moment, uncertain of what happens next...
+
+
+────────────────────────────────────────────────────────────
+  TURN 29/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    I cautiously observe my surroundings and decide my next move. (AI error:
+    429 Client Error: Too Many Requests for url:
+    https://openrouter.ai/api/v1/chat/completions)
+
+  ❌ ERROR: GM response failed: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+  🧙 GM:
+    The world seems to pause for a moment, uncertain of what happens next...
+
+
+────────────────────────────────────────────────────────────
+  TURN 30/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    I cautiously observe my surroundings and decide my next move. (AI error:
+    429 Client Error: Too Many Requests for url:
+    https://openrouter.ai/api/v1/chat/completions)
+
+  ❌ ERROR: GM response failed: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+  🧙 GM:
+    The world seems to pause for a moment, uncertain of what happens next...
+
+
+────────────────────────────────────────────────────────────
+  TURN 31/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    I cautiously observe my surroundings and decide my next move. (AI error:
+    429 Client Error: Too Many Requests for url:
+    https://openrouter.ai/api/v1/chat/completions)
+
+  ❌ ERROR: GM response failed: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+  🧙 GM:
+    The world seems to pause for a moment, uncertain of what happens next...
+
+
+────────────────────────────────────────────────────────────
+  TURN 32/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    I cautiously observe my surroundings and decide my next move. (AI error:
+    429 Client Error: Too Many Requests for url:
+    https://openrouter.ai/api/v1/chat/completions)
+
+  ❌ ERROR: GM response failed: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+  🧙 GM:
+    The world seems to pause for a moment, uncertain of what happens next...
+
+
+────────────────────────────────────────────────────────────
+  TURN 33/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    I cautiously observe my surroundings and decide my next move. (AI error:
+    429 Client Error: Too Many Requests for url:
+    https://openrouter.ai/api/v1/chat/completions)
+
+  ❌ ERROR: GM response failed: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+  🧙 GM:
+    The world seems to pause for a moment, uncertain of what happens next...
+
+
+────────────────────────────────────────────────────────────
+  TURN 34/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    I cautiously observe my surroundings and decide my next move. (AI error:
+    429 Client Error: Too Many Requests for url:
+    https://openrouter.ai/api/v1/chat/completions)
+
+  ❌ ERROR: GM response failed: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+  🧙 GM:
+    The world seems to pause for a moment, uncertain of what happens next...
+
+
+────────────────────────────────────────────────────────────
+  TURN 35/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    I cautiously observe my surroundings and decide my next move. (AI error:
+    429 Client Error: Too Many Requests for url:
+    https://openrouter.ai/api/v1/chat/completions)
+
+  ❌ ERROR: GM response failed: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+  🧙 GM:
+    The world seems to pause for a moment, uncertain of what happens next...
+
+
+────────────────────────────────────────────────────────────
+  TURN 36/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    I cautiously observe my surroundings and decide my next move. (AI error:
+    429 Client Error: Too Many Requests for url:
+    https://openrouter.ai/api/v1/chat/completions)
+
+  ❌ ERROR: GM response failed: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+  🧙 GM:
+    The world seems to pause for a moment, uncertain of what happens next...
+
+
+────────────────────────────────────────────────────────────
+  TURN 37/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    I cautiously observe my surroundings and decide my next move. (AI error:
+    429 Client Error: Too Many Requests for url:
+    https://openrouter.ai/api/v1/chat/completions)
+
+  ❌ ERROR: GM response failed: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+  🧙 GM:
+    The world seems to pause for a moment, uncertain of what happens next...
+
+
+────────────────────────────────────────────────────────────
+  TURN 38/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    I cautiously observe my surroundings and decide my next move. (AI error:
+    429 Client Error: Too Many Requests for url:
+    https://openrouter.ai/api/v1/chat/completions)
+
+  ❌ ERROR: GM response failed: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+  🧙 GM:
+    The world seems to pause for a moment, uncertain of what happens next...
+
+
+────────────────────────────────────────────────────────────
+  TURN 39/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    I cautiously observe my surroundings and decide my next move. (AI error:
+    429 Client Error: Too Many Requests for url:
+    https://openrouter.ai/api/v1/chat/completions)
+
+  ❌ ERROR: GM response failed: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+  🧙 GM:
+    The world seems to pause for a moment, uncertain of what happens next...
+
+
+────────────────────────────────────────────────────────────
+  TURN 40/40
+────────────────────────────────────────────────────────────
+
+  ⚔️  PLAYER:
+    I cautiously observe my surroundings and decide my next move. (AI error:
+    429 Client Error: Too Many Requests for url:
+    https://openrouter.ai/api/v1/chat/completions)
+
+  ❌ ERROR: GM response failed: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+  🧙 GM:
+    The world seems to pause for a moment, uncertain of what happens next...
+
+
+────────────────────────────────────────────────────────────
+  SESSION END
+────────────────────────────────────────────────────────────
+  ⚙️  Game ended: Reached max turns (40)
+
+============================================================
+  SESSION SUMMARY
+============================================================
+Turns played: 40
+Enemies defeated: 0
+
+  Total time: 2599.6s
+================================================================================

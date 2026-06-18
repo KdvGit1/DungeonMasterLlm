@@ -37,7 +37,7 @@ from game.encounter_manager import (
     format_encounter_display, is_combat_finished
 )
 from game.event_parser import parse_encounter_from_response, strip_encounter_from_response
-from game.inventory_manager import use_item, add_item, get_pickup_dc, get_inventory
+from game.inventory_manager import use_item, add_item, get_inventory
 from game.monster_data import MONSTER_TABLE
 from game.skill_data import get_skills_for_class, get_initial_skill_levels, get_all_skill_info, get_skill_by_id, calculate_skill_damage, calculate_skill_heal, get_skill_cooldown_value
 from game.xp_manager import init_player_stats, grant_general_xp, grant_ability_xp, grant_combat_xp, apply_damage, add_gold, format_player_status, grant_quest_rewards, get_player_stats
@@ -419,6 +419,8 @@ def _process_round_inner(room):
 
                     if damage > 0:
                         encounter.total_damage_dealt_to_enemies += damage
+                        from game.encounter_manager import record_damage
+                        record_damage(encounter)
 
                     if enc_over or is_encounter_over(encounter):
                         combat_ended_this_round = True
@@ -433,6 +435,8 @@ def _process_round_inner(room):
                     if er["damage"] > 0 and er.get("target_player"):
                         is_down, _ = apply_damage(session_id, er["target_player"], er["damage"])
                         encounter.total_damage_dealt_to_players += er["damage"]
+                        from game.encounter_manager import record_damage
+                        record_damage(encounter)
                         # Add combat log to the targeted player
                         target = er["target_player"]
                         if target not in all_combat_logs:
@@ -565,7 +569,7 @@ def _process_round_inner(room):
                 if roll_result.get("success"):
                     acquired_item = _check_item_acquisition(action)
                     if acquired_item:
-                        add_item(session_id, acquired_item, 1, 0, "common", player_name)
+                        add_item(session_id, acquired_item, 1, 0, player_name)
                         save_message(session_id, None, "user", f"{player_name} successfully acquires: {acquired_item}")
                         all_combat_logs[player_name].append(f"🎒 {acquired_item} acquired!")
             else:
@@ -1979,7 +1983,7 @@ def api_game_pickup():
     roll_result = _execute_roll(roll_info, player_name, gs, session_id, {})
 
     if roll_result.get("success"):
-        add_item(session_id, item["name"], 1, item.get("value", 0), item.get("rarity", "common"), player_name)
+        add_item(session_id, item["name"], 1, item.get("value", 0), player_name)
         save_message(session_id, None, "user", f"{player_name} successfully picks up the {item['name']}!")
         msg = f"✅ {item['name']} envantere eklendi!"
     else:
