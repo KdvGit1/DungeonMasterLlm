@@ -1,8 +1,7 @@
 import os
 import yaml
 import json
-import requests
-import config
+from llm_client import ask_llm
 
 # ─────────────────────────────────────────────────────────────
 #  SENARYO YÖNETİCİSİ
@@ -133,22 +132,7 @@ Instructions:
 - Do NOT explain. Do NOT add punctuation. One word only."""
 
         try:
-            response = requests.post(
-                f"{config.base_url}/api/chat",
-                json={
-                    "model": config.model,
-                    "messages": [{"role": "user", "content": prompt}],
-                    "stream": False,
-                    "think": False,
-                    "options": {
-                        "num_ctx": 4096,
-                        "temperature": 0.1,
-                        "num_predict": 20
-                    }
-                }
-            )
-            result = response.json()
-            answer = result["message"]["content"].strip().lower()
+            answer = ask_llm([{"role": "user", "content": prompt}]).strip().lower()
 
             # "none" veya boş gelirse geçiş yok
             if answer == "none" or not answer:

@@ -1,0 +1,1941 @@
+Veritabanı hazır.
+'autotest_2_6541' kaydedildi.
+Hoş geldin, autotest_2_6541!
+Oturum oluşturuldu: AutoTest: Session_2_053128 (ID: 91)
+kado oyuna katıldı.
+
+📍 Yeni lokasyon: The Gates of Millhaven
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Soğuk, yapışkan çamurda ilerlerken Millhaven'in çürümüş ahşap palasaları beliriyor. Kapının önünde titreyen manto altında Garret, mızrağını sıkıca tutarak karanlık orman hattına bakıyor. Garret'in gözleri kadoya kısa bir bakış atıp tekrar ormana dönüyor, sanki karanlıkta bir şey onları izliyor.
+
+⏱️  Toplam: 15.07s | İlk token: 2.33s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: [{"name":"Garret","role":"Gate Guard","appearance":"A shivering figure in a worn cloak, gripping a spear tightly, standing at the entrance of Millhaven. His face is pale and tense, his eyes darting be
+🔎 NPC Extractor — ✅ Yeni NPC bulundu: Garret (Gate Guard)
+📝 Yeni NPC eklendi: Garret (session: 91)
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 1
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Garret'in omzuna soğuk bir el koyarım ve karanlık ormana dönerken fısıldarım: 'Ormanda ne varsa benim için umurumda değil... Ama senin o mızrağından çok daha değerli bir şey sende taşıdığını biliyorum, değil mi?'"'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 15 | Modifier: +3 | Toplam: 18 | DC: 12
+   ✅ BAŞARILI
+   📈 Charisma XP +5 → 5
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 3
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: charisma check vs DC 12
+Roll: 15 + 3 (modifier) = 18
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Garret'in gözleri korkuyla genişliyor ve mızrağı titreyen elinden kayıyor; kadoya bakışlarında bir şaşkınlık, bir itiraaf ve bir çaresizlik var. "K-Kim söyledi sana—" diye kekeleyerek ormana bakıyor, sonra alçak bir sesle fısıldıyor: "Gece geç saatlerde... ormandan gelen bir şey, belki bir çanta, belmi bir şey... Görmemişim, anlamadın mı, GÖRMEMİŞİM." Garret'in eli manto altında bir şeyi gizlemek için karnını kavrıyor ve kapıyı yavaşça iterek aralıyor, ama içeri girmeden önce kadoya bir şey söylemek istiyormuş gibi duruyor — ya da bir şey vermek istiyor.
+
+⏱️  Toplam: 19.91s | İlk token: 4.15s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 4
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"I step closer, pressing my dagger's flat against his palm, and whisper: 'Geç saatlerde gördüğün şeyi biliyorum, Garret. Şimdi ya açıkça konuşursun, ya da ben de kendi yolumdan giderim — ama o zaman seninle başka bir şey konuşacaklar gelir.'"'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "charisma", "dc": 15}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 15}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 15}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=15
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 15
+   Zar: 10 | Modifier: +3 | Toplam: 13 | DC: 15
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 6
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: charisma check vs DC 15
+Roll: 10 + 3 (modifier) = 13
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Garret'in yüzünde bir anlık öfke beliriyor — kadonun tehdidi onu korkaktan çok daha tehlikeli bir yere itiyor. "Sen de kimsin böyle konuşmaya—" diye başlıyor ama sesi kesiliyor, çünkü arkasından gelen adımlar her ikisini de donduruyor. Kapının diğer tarafından yaşlı, kır saçlı bir kadın çıkagelliyor, elinde yağlı bir fener tutuyor ve gözleri Garret'e yapışıyor: "Garret, bu kim? Neden kapıyı açtın?" Garret'in rengi soluyor, mızrak tekrar kadoya doğruluyor — ama bu sefer titremiyor.
+
+⏱️  Toplam: 16.95s | İlk token: 1.89s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: [{"name":"Millhaven","role":"Elderly Village Woman","appearance":"Yaşlı, kır saçlı bir kadın; elinde yağlı bir fener tutuyor, yüzünde derin çizgiler ve sert bir bakış var. Koyu renkli, yıpranmış bir g
+🔎 NPC Extractor — ✅ Yeni NPC bulundu: Millhaven (Elderly Village Woman)
+📝 Yeni NPC eklendi: Millhaven (session: 91)
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 7
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Yaşlı hanıma gülümserim, bir eliyle Garret'i iterek onu yol vermem için sıkıştırırken — 'Merhaba teyze, bu zavallı Garret sizi rahatsız etmesin diye hızlıca yolluyorum, ama önce şu kapının arkasında ne var, onu merak ediyorum.'"'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "charisma", "dc": 12}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 12 | Modifier: +3 | Toplam: 15 | DC: 12
+   ✅ BAŞARILI
+   📈 Charisma XP +5 → 10
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 9
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: charisma check vs DC 12
+Roll: 12 + 3 (modifier) = 15
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Yaşlı kadının sert bakışları bir anlığına yumuşuyor, fenerini kaldırarak kadonun yüzüne tutuyor ve derin çizgilerle kaplı yüzünde bir gülümseme beliriyor. "Garret, bu kadar korkak olma, çocuk — kapıyı aç, içeri gelsin," diyor yaşlı kadın, ama gözleri Garret'e dikiliyor ve o dik bakışta bir uyarı var: "Ama sen, genç hırsız, bir şey çalmaya kalkışırsan bu fenerin yağı senin üzerinde yanar, anlaştık mı?" Garret hâlâ titriyor ama kapıyı aralıyor ve içeri girmek için yol veriyor — arkasından yaşlı kadının adı fısıldanıyor: "Millhaven."
+
+⏱️  Toplam: 20.63s | İlk token: 5.92s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 10
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I step through the gate with a smirk, eyes already scanning the dim interior for anything shiny, and mutter under my breath, "We'll see about that lantern, old woman."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 11
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kadonun adımları Millhaven'in dar, çamurlu sokaklarında sessizce yankılanıyor — palasaların gölgesinde kasabanın içi dışarıdan göründüğünden çok daha büyük ve daha yoğun. Sağ tarafta taş duvarlı bir yapının penceresinden sıcak ışık sızıyor ve içeriden alkollü kahkaha sesleri geliyyor; sol tarafta küçük bir dükkânın kapısı aralık, içeride metal işçiliği yapıyormuş gibi çıtırtılar duyuluyor. Tam karşıda ise kasabanın merkezine çıkan dar bir patika var — arkasından yaşlı kadın Millhaven'in ağır adımları duyuluyor, fenerini sallayarak kadonun peşinden geliyor ve "Garret, kapıyı kapat!" diye bağırdığında kapının gıcırtısı tüm sokakta yankılanıyor.
+
+⏱️  Toplam: 20.96s | İlk token: 3.17s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: [{"name":"Millhaven","role":"Elderly Resident / Gatekeeper","appearance":"Kır saçlı, derin çizgilerle kaplı yüzü olan yaşlı bir kadın. Yağlı bir fener taşır ve gözleri keskin, tetikte bir bakışla çevr
+🔎 NPC Extractor — ⏭️  'Millhaven' zaten biliniyor, atlanıyor
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 12
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Yaşlı kadını geri itip fenerini kapıyı arkasından çekin, sonra metal dükkânının aralık kapısından içeri süzülüp raflardaki en parlak şeyleri keseye dolduruyorum."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "dexterity", "dc": 14}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "dexterity", "dc": 14}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'dexterity', 'dc': 14}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=dexterity, dc=14
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Dexterity check vs DC 14
+   Zar: 5 | Modifier: +3 | Toplam: 8 | DC: 14
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 14
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: dexterity check vs DC 14
+Roll: 5 + 3 (modifier) = 8
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kadonun omuz hamlesi Millhaven'in üzerinde durduğu taş zeminden kaymasıyla boşa çıkıyor — yaşlı kadın kök salmış bir ağaç gibi sağlam duruyor ve fenerini kaldırarak kadonun yüzüne tutuyor, gözlerinde bir uyarı parlıyor. "Garret, bu deliği yakala!" diye bağırıyor Millhaven, ama kadonun dikkati zaten metal dükkânının kapısında — içeri süzülmeye çalışırken omuzları dar çerçeveye çarpıyor ve metal bir sehpa gıcırtıyla yerinden kayıyor. Dükkânın içinden ağır, yorgun adımlarla bir figür beliriyor — kırmızı yüzlü, kısa boylu bir adam, elinde bir çekiçle kapıya doğru yürüyor ve "KİM ORADA?" diye bağırdığında ses tüm sokakta yankılanıyor. Garret koşarak kapıya geliyor, mızrağı kadoya doğruluyor — ama hâlâ titriyor, hâlâ korkuyor.
+
+⏱️  Toplam: 19.29s | İlk token: 3.21s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 15
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I slam my elbow into Garret's chest to shove him back, then spin toward the red-faced blacksmith and bark, "Your locksmith is sloppy — I'll take what I came for, and you'll stay quiet or I'll make sure this whole street knows what a poor guard you keep."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "strength", "dc": 15}'
+   JSON parse edildi: '{"needed": true, "ability": "strength", "dc": 15}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'strength', 'dc': 15}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=strength, dc=15
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Strength check vs DC 15
+   Zar: 18 | Modifier: +3 | Toplam: 21 | DC: 15
+   ✅ BAŞARILI
+   📈 Strength XP +5 → 5
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 17
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: strength check vs DC 15
+Roll: 18 + 3 (modifier) = 21
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kadonun dirsek darbesi Garret'i geriye sendeliyor — genç muhafız mızrağı havada savurarak çamurlu yere düşüyor ve "L-Lütfen—" diye kekeleyerek çekiliyor. Kırmızı yüzlü demirci kapıda duruyor, çekişini havada sallıyor ama kadonun gözlerindeki öfke ve kararlılık onu bir an için durduruyor; ağzını açıp kapattı, sonra yutkundu. "O-O... O kadar değerli bir şey yok burada, seni aptal—" diye başlıyor ama kadonun elindeki bıçağın ışığı demircinin gözlerine vuruyor ve sessizleşiyor. Millhaven'in feneri sokakta sallanıyor, yaşlı kadın kapıya yaklaşıyor — ama bir şey fısıldıyor, Garret'e mi, kendine mi anlaşılmıyor: "Bu daha başlangıç."
+
+⏱️  Toplam: 23.42s | İlk token: 2.65s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 18
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I press the blade against the blacksmith's throat and tell him to open the shop door — now — while keeping one eye on the old woman to see if she's a threat or just a witness.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "strength", "dc": 15}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "strength", "dc": 15}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'strength', 'dc': 15}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=strength, dc=15
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Strength check vs DC 15
+   Zar: 20 | Modifier: +3 | Toplam: 23 | DC: 15
+   ⭐ KRİTİK BAŞARI!
+   📈 Strength XP +5 → 10
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 20
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: strength check vs DC 15
+Roll: 20 + 3 (modifier) = 23
+Result: CRITICAL SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kadonun bıçağı demircinin boğazına yapışıyor ve adamın gözleri korkuyla genişliyor — çekişi elinden kayıp çamurlu yere düşüyor ve metal sesi tüm sokakta yankılanıyor. Demirci ellerini kaldırıyor, titreyen parmaklarıyla kapıyı aralıyor ve "İ-İçeri... lütfen, sadece al ve git..." diye mırıldanıyor. Ama kritik başarının bedeli geliyor — kapı açılırken arka odadan hafif bir tıkırtı duyuluyor, bir kapanma, bir mekanizma devreye giriyor. Demircinin yüzü bembeyaz oluyor: "HAYIR — ben yapmadım, o KENDİ—" Millhaven'in feneri aniden sönüyor, sokak karanlığa gömülüyor ve arka odadan hızlı, küçük adımlar yaklaşıyor — bir tuzak mı, bir bekçi köpeği mi, yoksa daha kötüsü mü, henüz belli değil.
+
+⏱️  Toplam: 23.28s | İlk token: 2.41s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 21
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'Demircinin boğazına bıçağını iyice sokarak fısıldayarak "O tuzağı devre dışı bırak, yoksa bu sana son olur," diyorum ve arka odanın karanlığından yaklaşan o hızlı adımlara dikkatle kulak kabartıyorum.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "strength", "dc": 15}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "strength", "dc": 15}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'strength', 'dc': 15}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=strength, dc=15
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Strength check vs DC 15
+   Zar: 5 | Modifier: +3 | Toplam: 8 | DC: 15
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 23
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: strength check vs DC 15
+Roll: 5 + 3 (modifier) = 8
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kadonun bıçağı demircinin boğazında ilerleyemiyor — adamın kasları geriliyor, bir direnç var, bir panik ve çaresizlik karışımı. "B-Ben yapmadım, ben—" diye tekrarlıyor demirci, gözleri arka odaya dikiliyor, ama parmakları hiçbir yere dokunmuyor, hiçbir şeyi tetiklemiyor. Arka odanın karanlığından gelen adımlar hızlanıyor — artık tıkırtı değil, çıtırtı, metal bir şeyin taş üzerinde sürünmesi. Millhaven'in feneri tekrar yanıyor, titrek bir ışıkla sokayı aydınlatıyor ve o ışıkta kadonun gördüğü şey: arka odanın eşiğinde, küçük, çelik tellerle örülü bir mekanizma — bir tuzak kutusu — ve içinden çıkan, parlayan, değerli taşlar. Ama taşların yanında bir şey daha var: küçük, siyah, gözlü bir figür, kadonun bakışlarıyla buluşuyor ve gülümsüyor.
+
+⏱️  Toplam: 23.74s | İlk token: 2.45s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 24
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Bıçağını biraz daha bastırıp demircinin sesini keserim, sonra 'Şimdi sen sessiz ol, ben o siyah güzellikle biraz sohbet edeyim' derim, ayağa kalkıp tuzak kutusunun yanına yaklaşırım."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 25
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kadonun bıçağı demircinin boğazında bir damla kan süzülmesine neden oluyor — adamın sesi kesiliyor, yalnızca bir hırıltı kalıyor. Ayağa kalkılınca arka odanın eşiğindeki siyah figür netleşiyor: kısa boylu, yağlı derili, geniş çeneli bir cüce kadın, gözleri fener ışığında altın gibi parlıyor ve ağzında küçük, sivri dişlerle gülümsüyor. "Oooh, sen yeni birisin," diyor cüce kadınının sesi, metal tıkırtıların arasından geliyor — elinde küçük bir anahtar, parmağında çeviriyor. "Demirbaz, senin tuzağın çok iyi çalışıyor — bu delik yaklaşık üç adım kalmıştı." Millhaven'in feneri titriyor, yaşlı kadın bir adım daha yaklaşıyor ve cüce kadının yüzüne bakıyor — bir şey var, bir tanıdıklık, bir geçmiş.
+
+⏱️  Toplam: 25.79s | İlk token: 4.61s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 26
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'Demircinin boğazındaki bıçağı biraz daha bastırıp cüce kadına bakıyorum — "Bu tuzak benim içinse, anahtarı ver ve seni de aynı şekilde bitirmeden önce bir şeyler öğrenmek istiyorum."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 7 | Modifier: +3 | Toplam: 10 | DC: 12
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 28
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: charisma check vs DC 12
+Roll: 7 + 3 (modifier) = 10
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Cüce kadınının altın gözleri kadonun üzerinde geziniyor, anahtarı parmağında çevirmeye devam ediyor — ama gülümsemesi daralıyor, bir şey değişiyor. "Anahtarı ver?" diyor, sesi alçak, tehditkar bir mırıltıya dönüyor. "Sen bir hırsızsın, kapıdan çıkmadan önce anahtarı vermek zorunda mıyım, değil mi?" Millhaven'in feneri titriyor — yaşlı kadının yüzünde bir ifade beliriyor, bir tanıdılık, bir geçmiş. Cüce kadınının elindeki anahtar aniden sırt cebine kayıyor ve adımları hızlanıyor — kadonun bıçağı hâlâ demircinin boğazında, ama gözleri cüce kadınının sırtından ayıramıyor. "Demirbaz, sen tutulacaksın," diye fısıldıyor Millhaven, ama sesi artık tehditkar değil — bir uyarı, bir bilgelik. "Garret, kapıyı kapat."
+
+⏱️  Toplam: 24.01s | İlk token: 2.73s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: [{"name":"Demirbaz","role":"Blacksmith / Trap Engineer","appearance":"A middle-aged human man with thick, tense muscles and wide, panicked eyes; his hands are calloused from years at the forge, and a 
+🔎 NPC Extractor — ✅ Yeni NPC bulundu: Demirbaz (Blacksmith / Trap Engineer)
+📝 Yeni NPC eklendi: Demirbaz (session: 91)
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 29
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I press the blade harder against the blacksmith's throat and bark at the old woman, "Garret kim, bana ne oluyor? Konuş yoksa demircinin boynunu kırarım!"'
+   RAG sonucu (ilk 200 kr): Kural 1:
+1d2, roll any die and assign a 1 or 2 to the roll depending 
+on whether it was odd or even. (Alternatively, if the num -
+ber rolled is more than half the number of sides on the 
+die, it’s a 2
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "strength", "dc": 15}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "strength", "dc": 15}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'strength', 'dc': 15}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=strength, dc=15
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Strength check vs DC 15
+   Zar: 11 | Modifier: +3 | Toplam: 14 | DC: 15
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 31
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: strength check vs DC 15
+Roll: 11 + 3 (modifier) = 14
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kadonun bıçağı demircinin boğazında ilerleyemiyor — adamın kasları geriliyor, bir direnç var, bir panik ve çaresizlik karışımı. "B-Ben yapmadım, ben—" diye tekrarlıyor demirci, gözleri arka odaya dikiliyor, ama parmakları hiçbir yere dokunmuyor, hiçbir şeyi tetiklemiyor. Millhaven'in feneri titriyor ve yaşlı kadın bir adım geri çekiliyor, kadonun öfkesine rağmen sesi sakin, kontrollü: "Garret kapının yanında, seni tanımıyorum, ama bu adam ölürse sen de bu kasabadan çıkamazsın." Sokakta Garret'in mızrağı hâlâ yere düşmüş, titreyen elleriyle kalkmaya çalışıyor — ama kadonun bakışları onu durduruyor. Cüce kadınının adımları hızlanıyor, sırt cebindeki anahtar hâlâ orada, ama artık kapıya yaklaşıyor — kaçış yolu daralıyor.
+
+⏱️  Toplam: 22.62s | İlk token: 2.71s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 32
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Demircinin boğazına biraz daha bastırıp gözlerinin içine bakarak fısıldarım: 'Oğlana bir işaret ver, ya da hep birlikte öleceksiniz.' Sonra Garret'e dönerim, mızrak ona aitmiş gibi onu eline almasını söylerim — ya da başka bir şey yaparsa, o mızrağı başka bir şekilde kullanırım."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "charisma", "dc": 15}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 15}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 15}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=15
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 15
+   Zar: 4 | Modifier: +3 | Toplam: 7 | DC: 15
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 34
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: charisma check vs DC 15
+Roll: 4 + 3 (modifier) = 7
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kadonun bıçağı demircinin boğazında ilerleyemiyor — adamın kasları geriliyor, bir direnç var, bir panik ve çaresizlik karışımı. "B-Ben yapmadım, ben—" diye tekrarlıyor demirci, gözleri arka odaya dikiliyor, ama parmakları hiçbir yere dokunmuyor, hiçbir şeyi tetiklemiyor. Garret'in mızrağı hâlâ yere düşmüş, genç muhafız titreyerek kadonun bakışlarından kaçıyor — ama kadonun tehditkar bakışları onu durduruyor. "L-Lütfen..." diye kekeleyerek elini kaldırıyor Garret, ama mızrağı almıyor, sadece ellerini kaldırıyor. Millhaven'in feneri titriyor, yaşlı kadının yüzünde bir ifade beliriyor — bir tanıdılık, bir geçmiş. Cüce kadınının adımları hızlanıyor, sırt cebindeki anahtar hâlâ orada, ama artık kapıya yaklaşıyor — kaçış yolu daralıyor.
+
+⏱️  Toplam: 21.71s | İlk token: 3.10s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 35
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'Demircinin boğazına baskıyı artırıp fısıldıyorum: "Arka odada ne var, göster — yoksa bu bıçağın ne işe yaradığını anlatayım." Ardından Garret'e dönüp sertçe emrediyorum: "Mızrağını al ve kapıyı tut, o kadının önüne geç — bir hareket yapar, seni de biçerim."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 15}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 15}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 15}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=15
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 15
+   Zar: 19 | Modifier: +3 | Toplam: 22 | DC: 15
+   ✅ BAŞARILI
+   📈 Charisma XP +5 → 15
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 37
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: charisma check vs DC 15
+Roll: 19 + 3 (modifier) = 22
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kadonun bıçağı demircinin boğazında derinleşiyor — bir damla kan boyundan aşağı süzülüyor ve adamın gözleri korkuyla doluyor, kelimeler dökülüyor: "A-Arka oda... taşlar, sadece taşlar, ben sadece kilidi yaptım, başka bir şey bilmiyorum!" Demirci ellerini titreyerek arka tarafa doğru uzatıyor, bir kapı kolunu işaret ediyor. Garret ise kadonun emrine uyuyor — mızrağı çamurludan kaldırıyor, elleri titriyor ama mızrak kabzasını sıkıca tutuyor ve kapının önüne geçiyor. Cüce kadınının gülümsemesi donuyor, altın gözleri Garret'in mızrağına kayıyor, sonra kadonun yüzüne — bir hesaplama, bir değerlendirme. Millhaven'in feneri titriyor, yaşlı kadın bir adım geri çekiliyor, sesi alçak: "Demirbaz haklı, taşlar — ama taşların altında başka şeyler var." Kadonun bıçağı hâlâ demircinin boğazında, ama artık arka odanın kapısı aralanmış ve karanlıkta parlayan bir şey var — taşlar, evet, ama taşların arasından siyah, cilalı bir yüzey fark ediyor, bir sandık kapağı.
+
+⏱️  Toplam: 34.52s | İlk token: 5.41s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 38
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Bıçağı biraz daha bastırıp demircinin kanını hissettiriyorum, sonra Garret'e bakıp 'Kapıyı aç, mızrak hazır olsun — bir hareket yaparsan boynunu kırarım' diyorum, arka odanın karanlığına ve o siyah cilalı sandık kapağına doğru ilerliyorum."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "strength", "dc": 15}'
+   JSON parse edildi: '{"needed": true, "ability": "strength", "dc": 15}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'strength', 'dc': 15}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=strength, dc=15
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Strength check vs DC 15
+   Zar: 15 | Modifier: +3 | Toplam: 18 | DC: 15
+   ✅ BAŞARILI
+   📈 Strength XP +5 → 15
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 40
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: strength check vs DC 15
+Roll: 15 + 3 (modifier) = 18
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kadonun bıçağı demircinin boğazında derinleşiyor — bir damla kan boyundan aşağı süzülüyor ve adamın gözleri korkuyla doluyor, kelimeler dökülüyor: "A-Arka oda... taşlar, sadece taşlar, ben sadece kilidi yaptım, başka bir şey bilmiyorum!" Demirci ellerini titreyerek arka tarafa doğru uzatıyor, bir kapı kolunu işaret ediyor. Garret ise kadonun emrine uyuyor — mızrağı çamurludan kaldırıyor, elleri titriyor ama mızrak kabzasını sıkıca tutuyor ve kapının önüne geçiyor. Cüce kadınının gülümsemesi donuyor, altın gözleri Garret'in mızrağına kayıyor, sonra kadonun yüzüne — bir hesaplama, bir değerlendirme. Millhaven'in feneri titriyor, yaşlı kadın bir adım geri çekiliyor, sesi alçak: "Demirbaz haklı, taşlar — ama taşların altında başka şeyler var." Kadonun bıçağı hâlâ demircinin boğazında, ama artık arka odanın kapısı aralanmış ve karanlıkta parlayan bir şey var — taşlar, evet, ama taşların arasından siyah, cilalı bir yüzey fark ediyor, bir sandık kapağı.
+
+⏱️  Toplam: 26.15s | İlk token: 2.48s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 41
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Demirciyi itekleyip yere düşürüp 'Bir daha yalan söylersen boğazını keserim' diyorum, sonra arka odaya girip o siyah cilalı sandığı kırmak için Garret'e mızrak sapını kullanmasını emrediyorum."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "strength", "dc": 15}'
+   JSON parse edildi: '{"needed": true, "ability": "strength", "dc": 15}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'strength', 'dc': 15}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=strength, dc=15
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Strength check vs DC 15
+   Zar: 9 | Modifier: +3 | Toplam: 12 | DC: 15
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 43
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: strength check vs DC 15
+Roll: 9 + 3 (modifier) = 12
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kadonun bıçağı demircinin boğazında ilerleyemiyor — adamın kasları geriliyor, bir direnç var, bir panik ve çaresizlik karışımı. "B-Ben yapmadım, ben—" diye tekrarlıyor demirci, gözleri arka odaya dikiliyor, ama parmakları hiçbir yere dokunmuyor, hiçbir şeyi tetiklemiyor. Garret ise mızrak saplarını sandığa vurmaya çalışıyor ama sap kırılmıyor — siyah cilalı yüzey çok sert, çok eski, üzerinde kabartmalar var: kurt başları, ay şekilleri, bilinmeyen semboller. "Lütfen..." diye kekeleyerek elini kaldırıyor Garret, ama mızrağı almıyor, sadece ellerini kaldırıyor. Millhaven'in feneri titriyor, yaşlı kadının yüzünde bir ifade beliriyor — bir tanıdılık, bir geçmiş. Cüce kadınının adımları hızlanıyor, sırt cebindeki anahtar hâlâ orada, ama artık kapıya yaklaşıyor — kaçış yolu daralıyor.
+
+⏱️  Toplam: 23.85s | İlk token: 2.90s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 44
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Demircinin boğazına bıçağımı daha derin batırıp fısıldıyorum: 'O sandığı aç. Şimdi.' Ardından cüce kadına dönüp meydan okurcasına gülümsüyorum — 'Ya o anahtarı bana atırsın, ya da bu kapının arkasında senin için daha kötü şeyler olur.'"'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 16 | Modifier: +3 | Toplam: 19 | DC: 12
+   ✅ BAŞARILI
+   📈 Charisma XP +5 → 20
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 46
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: charisma check vs DC 12
+Roll: 16 + 3 (modifier) = 19
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Demircinin boynundan ince bir kan çizgisi süzülüyor — adamın nefesi kesiliyor, gözleri korkuyla kocaman açılıyor. "Tamam, tamam!" diye fısıldıyor, ellerini titreyerek sandığa uzatıyor. Cüce kadınının altın gözleri kadonun üzerinde geziniyor, bir hesaplama, bir değerlendirme — sonra sırt cebinden anahtarı çıkarıyor ve yere fırlatıyor, metal sesi taş zeminde yankılanıyor. "Al, hırsız," diyor, sesi acı ama teslimiyet içinde. Millhaven'in feneri titriyor, yaşlı kadın bir adım geri çekiliyor, sesi alçak: "O sandığı açarsan, bu kasabanın kaderi değişir." Garret mızrakla kapıyı tutmaya devam ediyor, ama gözleri sandığa dikiliyor — merak, korku, bir şey daha. Sandığın kapağı hâlâ kapalı, ama anahtar artık kadonun elinde — ve arka odanın karanlığında bir şey hareket ediyor, hafif bir tıslama, bir nefes.
+
+⏱️  Toplam: 21.26s | İlk token: 3.38s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: [{"name":"Demirci","role":"Blacksmith","appearance":"Middle-aged human man with a weathered face, calloused hands, and a thin line of blood running down his neck from where Kado's blade pressed agains
+🔎 NPC Extractor — ✅ Yeni NPC bulundu: Demirci (Blacksmith)
+📝 Yeni NPC eklendi: Demirci (session: 91)
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 47
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Anahtarı elime alıyorum, sandığın kilidini kırbaçlayıp açıyorum — yaşlı kadının uyarısını kulak arkasına atıyorum, çünkü kaderi değiştirecek olan benim elindedir."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "strength", "dc": 15}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "strength", "dc": 15}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'strength', 'dc': 15}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=strength, dc=15
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Strength check vs DC 15
+   Zar: 15 | Modifier: +3 | Toplam: 18 | DC: 15
+   ✅ BAŞARILI
+   📈 Strength XP +5 → 20
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 49
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: strength check vs DC 15
+Roll: 15 + 3 (modifier) = 18
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kadonun bıçağı demircinin boğazında derinleşiyor — bir damla kan boyundan aşağı süzülüyor ve adamın gözleri korkuyla doluyor, kelimeler dökülüyor: "A-Arka oda... taşlar, sadece taşlar, ben sadece kilidi yaptım, başka bir şey bilmiyorum!" Demirci ellerini titreyerek arka tarafa doğru uzatıyor, bir kapı kolunu işaret ediyor. Garret ise kadonun emrine uyuyor — mızrağı çamurludan kaldırıyor, elleri titriyor ama mızrak kabzasını sıkıca tutuyor ve kapının önüne geçiyor. Cüce kadınının gülümsemesi donuyor, altın gözleri Garret'in mızrağına kayıyor, sonra kadonun yüzüne — bir hesaplama, bir değerlendirme. Millhaven'in feneri titriyor, yaşlı kadın bir adım geri çekiliyor, sesi alçak: "Demirbaz haklı, taşlar — ama taşların altında başka şeyler var." Kadonun bıçağı hâlâ demircinin boğazında, ama artık arka odanın kapısı aralanmış ve karanlıkta parlayan bir şey var — taşlar, evet, ama taşların arasından siyah, cilalı bir yüzey fark ediyor, bir sandık kapağı.
+
+⏱️  Toplam: 24.26s | İlk token: 2.45s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 50
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I slowly drag the blade across the blacksmith's throat just enough to draw a thin line of blood, then shove him toward the back room while keeping my eyes locked on the dwarf woman. "Garret, mızrağı o cücenin kalbine doğrult — bir hareket yapsa, deliğe dik." I step toward the half-open door, drawn to that polished black surface beneath the stones, my free hand already reaching for whatever's hidden underneath.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "strength", "dc": 15}'
+   JSON parse edildi: '{"needed": true, "ability": "strength", "dc": 15}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'strength', 'dc': 15}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=strength, dc=15
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Strength check vs DC 15
+   Zar: 6 | Modifier: +3 | Toplam: 9 | DC: 15
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 52
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: strength check vs DC 15
+Roll: 6 + 3 (modifier) = 9
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kadonun bıçağı demircinin boğazında ilerleyemiyor — adamın kasları geriliyor, bir direnç var, bir panik ve çaresizlik karışımı. "B-Ben yapmadım, ben—" diye tekrarlıyor demirci, gözleri arka odaya dikiliyor, ama parmakları hiçbir yere dokunmuyor, hiçbir şeyi tetiklemiyor. Garret ise mızrak saplarını sandığa vurmaya çalışıyor ama sap kırılmıyor — siyah cilalı yüzey çok sert, çok eski, üzerinde kabartmalar var: kurt başları, ay şekilleri, bilinmeyen semboller. "Lütfen..." diye kekeleyerek elini kaldırıyor Garret, ama mızrağı almıyor, sadece ellerini kaldırıyor. Millhaven'in feneri titriyor, yaşlı kadının yüzünde bir ifade beliriyor — bir tanıdılık, bir geçmiş. Cüce kadınının adımları hızlanıyor, sırt cebindeki anahtar hâlâ orada, ama artık kapıya yaklaşıyor — kaçış yolu daralıyor.
+
+⏱️  Toplam: 36.15s | İlk token: 16.18s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 53
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I press the blade harder against the blacksmith's throat and snarl, "You've got three seconds to tell me what's in that back room before I open you up and find out myself."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "strength", "dc": 15}'
+   JSON parse edildi: '{"needed": true, "ability": "strength", "dc": 15}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'strength', 'dc': 15}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=strength, dc=15
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Strength check vs DC 15
+   Zar: 3 | Modifier: +3 | Toplam: 6 | DC: 15
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 55
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: strength check vs DC 15
+Roll: 3 + 3 (modifier) = 6
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kadonun bıçağı demircinin boğazında ilerleyemiyor — adamın kasları geriliyor, bir direnç var, bir panik ve çaresizlik karışımı. "B-Ben yapmadım, ben—" diye tekrarlıyor demirci, gözleri arka odaya dikiliyor, ama parmakları hiçbir yere dokunmuyor, hiçbir şeyi tetiklemiyor. Garret ise mızrak saplarını sandığa vurmaya çalışıyor ama sap kırılmıyor — siyah cilalı yüzey çok sert, çok eski, üzerinde kabartmalar var: kurt başları, ay şekilleri, bilinmeyen semboller. "Lütfen..." diye kekeleyerek elini kaldırıyor Garret, ama mızrağı almıyor, sadece ellerini kaldırıyor. Millhaven'in feneri titriyor, yaşlı kadının yüzünde bir ifade beliriyor — bir tanıdılık, bir geçmiş. Cüce kadınının adımları hızlanıyor, sırt cebindeki anahtar hâlâ orada, ama artık kapıya yaklaşıyor — kaçış yolu daralıyor.
+
+⏱️  Toplam: 21.42s | İlk token: 2.84s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 56
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Garret'i bir itip demircinin boğazına bıçağımı batırıyorum, kanın sıcaklığını hissettiğimde yaşlı kadına dönüp 'O anahtarı çıkar, yoksa bu adamın kanını silecek kimse de olmayacak' diyorum."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "strength", "dc": 15}'
+   JSON parse edildi: '{"needed": true, "ability": "strength", "dc": 15}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'strength', 'dc': 15}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=strength, dc=15
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Strength check vs DC 15
+   Zar: 8 | Modifier: +3 | Toplam: 11 | DC: 15
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 58
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: strength check vs DC 15
+Roll: 8 + 3 (modifier) = 11
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kadonun bıçağı demircinin boğazında ilerleyemiyor — adamın kasları geriliyor, bir direnç var, bir panik ve çaresizlik karışımı. "B-Ben yapmadım, ben—" diye tekrarlıyor demirci, gözleri arka odaya dikiliyor, ama parmakları hiçbir yere dokunmuyor, hiçbir şeyi tetiklemiyor. Garret ise mızrak saplarını sandığa vurmaya çalışıyor ama sap kırılmıyor — siyah cilalı yüzey çok sert, çok eski, üzerinde kabartmalar var: kurt başları, ay şekilleri, bilinmeyen semboller. "Lütfen..." diye kekeleyerek elini kaldırıyor Garret, ama mızrağı almıyor, sadece ellerini kaldırıyor. Millhaven'in feneri titriyor, yaşlı kadının yüzünde bir ifade beliriyor — bir tanıdılık, bir geçmiş. Cüce kadınının adımları hızlanıyor, sırt cebindeki anahtar hâlâ orada, ama artık kapıya yaklaşıyor — kaçış yolu daralıyor.
+
+⏱️  Toplam: 27.35s | İlk token: 11.06s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 59
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I slowly press the blade deeper against the blacksmith's throat, just enough to draw a thin line of blood, and turn my head toward the old woman with a cold smile. "You know something, don't you, grandmother? Drop that key and tell me what's in that back room before I open this man like a fish."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+1d2, roll any die and assign a 1 or 2 to the roll depending 
+on whether it was odd or even. (Alternatively, if the num -
+ber rolled is more than half the number of sides on the 
+die, it’s a 2
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 15}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 15}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 15}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=15
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 15
+   Zar: 9 | Modifier: +3 | Toplam: 12 | DC: 15
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 61
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: charisma check vs DC 15
+Roll: 9 + 3 (modifier) = 12
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kadonun bıçağı demircinin boğazında ilerleyemiyor — adamın kasları geriliyor, bir direnç var, bir panik ve çaresizlik karışımı. "B-Ben yapmadım, ben—" diye tekrarlıyor demirci, gözleri arka odaya dikiliyor, ama parmakları hiçbir yere dokunmuyor, hiçbir şeyi tetiklemiyor. Garret ise mızrak saplarını sandığa vurmaya çalışıyor ama sap kırılmıyor — siyah cilalı yüzey çok sert, çok eski, üzerinde kabartmalar var: kurt başları, ay şekilleri, bilinmeyen semboller. "Lütfen..." diye kekeleyerek elini kaldırıyor Garret, ama mızrağı almıyor, sadece ellerini kaldırıyor. Millhaven'in feneri titriyor, yaşlı kadının yüzünde bir ifade beliriyor — bir tanıdılık, bir geçmiş. Cüce kadınının adımları hızlanıyor, sırt cebindeki anahtar hâlâ orada, ama artık kapıya yaklaşıyor — kaçış yolu daralıyor.
+
+⏱️  Toplam: 18.25s | İlk token: 2.28s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 62
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Garret'e çarparak onu devirip mızrak kırık sapını alıyorum, demirciyi de bıçağıyla tehdit edip 'O sandığı aç, yada ikisinizin de kafasını bu demire geçiririm' diyorum."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "strength", "dc": 15}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "strength", "dc": 15}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'strength', 'dc': 15}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=strength, dc=15
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Strength check vs DC 15
+   Zar: 8 | Modifier: +3 | Toplam: 11 | DC: 15
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 64
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: strength check vs DC 15
+Roll: 8 + 3 (modifier) = 11
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kadonun bıçağı demircinin boğazında ilerleyemiyor — adamın kasları geriliyor, bir direnç var, bir panik ve çaresizlik karışımı. "B-Ben yapmadım, ben—" diye tekrarlıyor demirci, gözleri arka odaya dikiliyor, ama parmakları hiçbir yere dokunmuyor, hiçbir şeyi tetiklemiyor. Garret ise mızrak saplarını sandığa vurmaya çalışıyor ama sap kırılmıyor — siyah cilalı yüzey çok sert, çok eski, üzerinde kabartmalar var: kurt başları, ay şekilleri, bilinmeyen semboller. "Lütfen..." diye kekeleyerek elini kaldırıyor Garret, ama mızrağı almıyor, sadece ellerini kaldırıyor. Millhaven'in feneri titriyor, yaşlı kadının yüzünde bir ifade beliriyor — bir tanıdılık, bir geçmiş. Cüce kadınının adımları hızlanıyor, sırt cebindeki anahtar hâlâ orada, ama artık kapıya yaklaşıyor — kaçış yolu daralıyor.
+
+⏱️  Toplam: 21.78s | İlk token: 2.33s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 65
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Demirci, o arka odada ne varsa beni ilgilendirmez — ama senin o bakışların bir şeyi tetikliyor, değil mi? Garret, kadının sırt cebindeki anahtarı çal, ben bu demirciyi sustururum."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "dexterity", "dc": 13}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "dexterity", "dc": 13}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'dexterity', 'dc': 13}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=dexterity, dc=13
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Dexterity check vs DC 13
+   Zar: 8 | Modifier: +3 | Toplam: 11 | DC: 13
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 67
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: dexterity check vs DC 13
+Roll: 8 + 3 (modifier) = 11
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kadonun bıçağı demircinin boğazında ilerleyemiyor — adamın kasları geriliyor, bir direnç var, bir panik ve çaresizlik karışımı. "B-Ben yapmadım, ben—" diye tekrarlıyor demirci, gözleri arka odaya dikiliyor, ama parmakları hiçbir yere dokunmuyor, hiçbir şeyi tetiklemiyor. Garret ise mızrak saplarını sandığa vurmaya çalışıyor ama sap kırılmıyor — siyah cilalı yüzey çok sert, çok eski, üzerinde kabartmalar var: kurt başları, ay şekilleri, bilinmeyen semboller. "Lütfen..." diye kekeleyerek elini kaldırıyor Garret, ama mızrağı almıyor, sadece ellerini kaldırıyor. Millhaven'in feneri titriyor, yaşlı kadının yüzünde bir ifade beliriyor — bir tanıdılık, bir geçmiş. Cüce kadınının adımları hızlanıyor, sırt cebindeki anahtar hâlâ orada, ama artık kapıya yaklaşıyor — kaçış yolu daralıyor.
+
+⏱️  Toplam: 23.34s | İlk token: 2.49s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 68
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'Demircinin boğazına bıçağı iyice bastırıp fısıldayarak "O arkadaki oda ne? Göster, yoksa bu sefer bıçak kayar ve sen de o çocukların yolunu tutarsın." derken gözleri yaşlı kadının üzerinde — kaçış yolunu kesmeden önce ondan da bir şey koparmak ister.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 15}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 15}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 15}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=15
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 15
+   Zar: 18 | Modifier: +3 | Toplam: 21 | DC: 15
+   ✅ BAŞARILI
+   📈 Charisma XP +5 → 25
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 70
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: charisma check vs DC 15
+Roll: 18 + 3 (modifier) = 21
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Demircinin gözleri fal taşı gibi açılıyor — o "çocuklar" kelimesi bir şeyi tetiklemiş. "A-Arka oda..." diye kekelerken elini titreyerek yastığın altına götürüyor. "Altında bir şey var, bir sandık, siyah... ben sadece kilidi yaptım, içinde ne olduğunu bilmiyorum, yemin ederim!" Ama gözleri yalan söylemiyor — bilmiyor, evet, ama korkuyor. Gerçekten korkuyor.
+
+Garret ise hâlâ mızrak sapını sandığa vuruyor, bu sefer sap kırılıyor — parça yere düşüyor, elinde sadece çentikli bir sopanın kalıntısı var. "Lütfen..." diye tekrarlıyor, ama bu sefer sesi daha çaresiz, daha kırılgan.
+
+Millhaven'in feneri aniden sönüp yanıyor — yağ bitmiş, ya da rüzgar üflemiş. Karanlık çökerken yaşlı kadının yüzü görünmez oluyor, ama sesi duyuluyor: "O sandığı açma, evlat. Açarsan... çocuklar geri döner." Anahtar hâlâ onun cebinde, ama artık kapıya doğru koşuyor — kaçış yolu neredeyse kapandı.
+
+Demirci hâlâ bıçağın altında, nefes nefese, parmakları yastığın altında bir şeyi buldu mu? Yoksa sadece çaresizce mi orayı arıyor?
+
+⏱️  Toplam: 31.27s | İlk token: 2.60s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 71
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Garret'i itip yastığın altındaki sandığı çıkarıyorum, anahtarı yaşlı kadının cebinden sökerken 'Çocuklar geri döner mi bakalım, ama benim paramı kim getirecek?' diyorum."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "dexterity", "dc": 14}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "dexterity", "dc": 14}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'dexterity', 'dc': 14}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=dexterity, dc=14
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Dexterity check vs DC 14
+   Zar: 2 | Modifier: +3 | Toplam: 5 | DC: 14
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 73
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: dexterity check vs DC 14
+Roll: 2 + 3 (modifier) = 5
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kadonun eli yastığın altına uzanıyor ama bir şey bulamıyor — yastık sabit, yerinden kımıldamıyor, altında ne varsa sıkıca sıkıştırılmış. Demirci geri çekiliyor, ter damlaları alnından süzülüyor, "Y-Yastık... hareket etmiyor, ben yapmadım, o—" diye kekeleyerek Millhaven'e bakıyor.
+
+Garret ise yere düşmüş mızrak sapını eline almış, titreyerek Kadoya doğru uzatıyor — saldırmak için değil, teslim olmak için. "Lütfen... lütfen bizi öldürme," diye fısıldıyor, gözleri yaşlı.
+
+Millhaven ise kapıya dayanmış, feneri sönmüş ama hâlâ orada — gölgesi duvarda büyüyor. "O sandığı açarsan," diyor sesi artık soğuk, keskin, "çocuklar geri döner. Ama sen de dönmezsin." Cebindeki anahtarı çıkarmıyor, ama eli üzerinde, saklamıyor. Bir tehdit, bir meydan okuma.
+
+Ve o sırada — dışarıdan, yağmurlu geceden, kapıdan içeri bir ses geliyor. Bir çocuk sesi. "Anne? Anne, aç kapıyı..."
+
+Demirci donakalıyor. Garret'in yüzü bembeyaz oluyor. Millhaven'in eli anahtara kilitleniyor.
+
+İçeride herkes dışarıyı dinliyor. Yağmur hâlâ yağıyor, ama o ses — o ses gerçek mi, yoksa ormandan gelen bir başka şey mi?
+
+⏱️  Toplam: 44.15s | İlk token: 16.85s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 74
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Çocuk sesini dinliyorum ama yola devam ediyorum — anahtarı Millhaven'in elinden koparıp sandığı açacağım, ne olursa olsun." Millhaven'e yaklaşıp anahtarı zorla alacağım, geri çekilmez bir bakışla ona bakarak "Anahtarı ver ya da seni de sandığın yanına sokarım."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "strength", "dc": 15}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "strength", "dc": 15}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'strength', 'dc': 15}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=strength, dc=15
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Strength check vs DC 15
+   Zar: 8 | Modifier: +3 | Toplam: 11 | DC: 15
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 76
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: strength check vs DC 15
+Roll: 8 + 3 (modifier) = 11
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+
+⏱️  Toplam: 60.55s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 77
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I stride up to the gate guards with a sneer, slamming a few stolen trinkets onto the table and demanding passage into Millhaven — and if they hesitate, I lean in close and whisper exactly what I know about their captain's gambling debts.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "charisma", "dc": 12}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 16 | Modifier: +3 | Toplam: 19 | DC: 12
+   ✅ BAŞARILI
+   📈 Charisma XP +5 → 30
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 79
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: charisma check vs DC 12
+Roll: 16 + 3 (modifier) = 19
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kadonun çalıntı eşyaları masaya çarpmasıyla birlikte Garret'in gözleri genişliyor — o madeni paralar, o küçük bronz anahtarlar, hepsi tanıdık. Ama asıl darbe fısıltısı: "Kaptanın kumar borcu..." Garret'in yüzünde bir titreme başlıyor, mızrak sapları elinden kayıyor, "N-Nasıl—" diye başlıyor ama sesi kesiliyor.
+
+Diğer muhafız — yaşlı, sakallı, yüzünde derin çizgiler — Kadoya bakıyor, sonra Garret'e, sonra tekrar Kadoya. "İçeri gir," diyor sesi kısık, "ama gece kalma. Gece... şeyler oluyor."
+
+Garret hâlâ titriyor, mızrak sapını yerden almıyor, sadece kenara çekiliyor. "Lütfen," diye fısıldıyor, "lütfen kaptana söyleme. Ben sadece... ben sadece işimi yapıyorum."
+
+Kapı açılıyor — demir menteşeler gıcırdıyor, soğuk hava içeri akıyor. İçeride, Millhaven'in sokak lambaları titriyor, yağmur çarşıların taşlarına vuruyor. Uzakta, bir meyhane tabelası sallanıyor: "Kurtuluş Hanı." Ama dikkat çeken bir şey daha var — kapının hemen yanında, duvarda, taze bir işaret: üç çizgi, bir ay, ve altında kürek şeklinde bir sembol. Garret'in gözleri bu işarete takılıyor, sonra hızla kaçıyor.
+
+İçeri girebilirsin. Ama o sembol ne? Ve neden Garret o kadar korkuyor?
+
+⏱️  Toplam: 34.64s | İlk token: 2.42s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 80
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+📍 Yeni lokasyon: The Rusty Flagon
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Garret'e yaklaşıp omzuna ağırçene bir el koyuyorum ve fısıldıyorum: 'Kaptanın borcu mu? Güzel... Belki seninle bir anlaşma yapabiliriz — benim için birkaç kapı aç, ben de bu paraları burada bırakırım.' Sonra o taze sembole dikkatle bakıyor, parmağımla duvardaki işareti silkeliyorum — bu sembolü tanıyorum, ve tanıdığım için endişeleniyorum."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "charisma", "dc": 15}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 15}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 15}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=15
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 15
+   Zar: 11 | Modifier: +3 | Toplam: 14 | DC: 15
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 82
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: charisma check vs DC 15
+Roll: 11 + 3 (modifier) = 14
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Garret omzundaki eli itiyor — değil itmek, çekilmek. "B-Ben yapamam," diye kekelerken mızrak sapını yerden alıyor, "ben sadece... ben sadece nöbetteyim." Ama gözleri o sembole takılıyor, Kadonun parmağı duvardaki işarete dokunurken bir anlığına nefesi kesiliyor. "O işaret... o işaret burada olmamalı," diye fısıldıyor, "o sadece... ormanda, kapının dışında, bizim—"
+
+Ve o sırada kapıdan içeri bir figür giriyor — elleri cebinde, yağmurlu palto, yüzü kapüşonun gölgesinde. Ama ayak sesleri tanıdık. Cüce kadın. Millhaven'in feneri sönmüş, ama onun gözleri parlıyor — o bakış, Kadonun daha önce demirciye verdiği o bakış. "Sen," diyor sesi soğuk, "sen o sandığı açmaya çalışıyordun."
+
+Meyhanenin tabelası sallanıyor: "Paslanmış Kılıç." İçeride, birkaç yerel masalarında oturuyor, gözlerini kaldırmıyor. Barın arkasında, terli, şişman bir cüce bir bardağa silah gibi bakıyor — Borin. "Oda var," diyor boğazı temizleyerek, "bir gümüş. Ama gece... gece kapılarınızı kilitleyin."
+
+Garret hâlâ titriyor, mızrak sapı elinde, ama artık neye karşı korumak istediğini bilmiyor. Cüce kadın kapıda, Kadonun önünde, arkasında yağmur ve karanlık. "Seni tanıyorum," diyor, "sen o çocukları arayan değilsin. Sen sadece... çalmak istiyorsun."
+
+Borin bardağı bırakıyor, arkasında bir şey gizliyor — bir şey, bir sandık, bir sembol?
+
+⏱️  Toplam: 41.46s | İlk token: 7.42s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: [{"name":"Borin","role":"Bartender at The Rusty Flagon","appearance":"A sweaty, stout dwarf with a thick beard mottled in grey and rust-brown, heavy-lidded eyes that miss nothing, and calloused hands 
+🔎 NPC Extractor — ✅ Yeni NPC bulundu: Borin (Bartender at The Rusty Flagon)
+📝 Yeni NPC eklendi: Borin (session: 91)
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 83
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+📍 Yeni lokasyon: The Rusty Flagon - Cellar
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'Gülümsüyorum, eli hâlâ duvardaki sembolde, ve cüze kadına doğru bir adım atıyorum — sakin, ama tehditkâr. "Doğru, çocukları aramıyorum," diyor sesim alçak, "ama şimdi merak ediyorum... senin bu sembol için neden bu kadar umurunda olduğun. Barına yaklaşıyorum, parmağımı masaya vurarak: "Borin, odayı şimdi ver. Bir gümüş değil — sıfır gümüş. Yoksa bu cüze kadının ne aradığını herkese anlatırım."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 14}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 14}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 14}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=14
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 14
+   Zar: 19 | Modifier: +3 | Toplam: 22 | DC: 14
+   ✅ BAŞARILI
+   📈 Charisma XP +5 → 35
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 85
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: charisma check vs DC 14
+Roll: 19 + 3 (modifier) = 22
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Borin'in yüzünde bir titreme başlıyor — o "cüce kadın" kelimesi bir şeyi tetiklemiş. Gözleri Kadoya, sonra kapıya, sonra tekrar Kadoya. "S-Sıfır gümüş..." diye tekrarlıyor, ter damlaları alnından süzülüyor. "Tamam. Tamam, oda şimdi. Ama gece... gece kapılarınızı kilitleyin, duyduğunuzu duymayın, gördüğünüzü görmeyin."
+
+Cüce kadın ise bir adım geri çekiliyor, gözleri daralıyor. "Sen kimsin?" diyor sesi soğuk, "bu sembolü nereden tanıyorsun?" Ama gerilim yükseliyor — Garret hâlâ mızrak sapıyla kenarda, Millhaven'in feneri sönmüş, ama yaşlı kadın hâlâ orada, gölgesi duvarda büyüyor.
+
+Borin anahtarı çıkarıyor — paslı, eski, üzerinde küçük bir kurt başı kazıması var. "Alt kata," diyor, "ama dikkat et. Alt katta... şeyler var."
+
+Kadon merdivenlerden aşağı iniyor. Soğuk hava, toprak kokusu, ekşi bira. Fıçılar duvar boyunca, tahta raflarda tozlu şişeler. Ama en arkada, boş kasaların arasında, küçücük bir yeşil mum yanıyor — üzerinde, bir nakış kutusu gibi, tahta bir sembol: üç çizgi, bir ay, ve altında kürek şeklinde bir işaret. Aynı sembol. Kapının dışındakiyle aynı.
+
+Ve duvarın üzerinde, iğnelenmiş bir liste. İsimler. Köylülerin isimlerinin yanında küçük rakamlar — altın mı, gümüş mü? Listenin en altında, yeşin mürekkeple yazılmış bir isim: **Belediye Başkanı.**
+
+Borin'in sesi yukarıdan geliyor, titreyerek: "O listeyi görmedin. O mumu görmedin. Hiçbir şey görmeden çık."
+
+Ama gördün. Ve şimdi ne yapacaksın?
+
+⏱️  Toplam: 40.50s | İlk token: 8.25s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: [{"name":"Belediye Başkanı","role":"Town Mayor — the highest-ranking official in the settlement near The Rusty Flagon","appearance":"Not directly described in the scene, but referenced in writing; lik
+🔎 NPC Extractor — ✅ Yeni NPC bulundu: Belediye Başkanı (Town Mayor — the highest-ranking official in the settlement near The Rusty Flagon)
+📝 Yeni NPC eklendi: Belediye Başkanı (session: 91)
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 86
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+📍 Yeni lokasyon: The Rusty Flagon
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Bu listeyi cebime sıkıştırıyorum, mumu da alıp yukarı çıkıyorum — Borin'e gülümsüyorum ve 'Gördüğümü gördüm, küçük adam. Şimdi bu listeyle ne yapacağımı merak ediyorsun, değil mi?' diyorum."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 87
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Borin'in yüzü bembeyaz oluyor — o "küçük adam" kelimesi değil, o liste. Gözleri Kadonun cebini takip ediyor, eli kasenin arkasındaki bir şeye uzanıyor — bir bıçak mı, bir çan mı, bir şey mi? "O-O liste..." diye kekeleriyor, "o liste burada olmamalı. Onlar... onlar buraya gelir. Haftalık ödeme. Eğer görürlerse—"
+
+Cüce kadın kapıda, hâlâ orada, ama artık saldırgan değil — korkmuş. "Sen o listeyi nereden buldun?" diyor sesi kesik, "o liste... o listede isimler var. Çocukların isimleri."
+
+Garret mızrak sapını bırakıyor, duvara yaslanıyor, yüzünde bir şey var — suçluluk mu, korku mu? "Ben bilmiyordum," diye fısıldıyor, "ben sadece... ben sadece kapıyı tuttum. Bana para verdiler. Bana dediler ki gece... gece bir şey olmaz."
+
+Millhaven ise fenerini yeniden yakıyor — yağ bitmiş, ama bir şekilde yanıyor, yeşil bir ışık, doğal değil. "O listeyi geri koy," diyor sesi artık o yaşlı kadının sesi değil, daha derin, daha eski, "yoksa çocuklar geri döner. Ama sen de dönmezsin."
+
+Ve o sırada — dışarıdan, yağmurlu geceden, kapıdan içeri bir ses geliyor. Bir çocuk sesi. "Anne? Anne, aç kapıyı..."
+
+Demirci donakalıyor. Garret'in yüzü bembeyaz oluyor. Millhaven'in eli anahtara kilitleniyor.
+
+İçeride herkes dışarıyı dinliyor. Yağmur hâlâ yağıyor, ama o ses — o ses gerçek mi, yoksa ormandan gelen bir başka şey mi?
+
+Kadonun elinde bir liste var — isimler, rakamlar, ve yeşil mürekkeple yazılmış bir isim. Cebinde. Ve herkes biliyor.
+
+⏱️  Toplam: 32.90s | İlk token: 7.18s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 88
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I grip the list tighter in my pocket and step toward the door, blocking anyone from opening it, while I lean in close to Millhaven and whisper, "That list is worth more than whatever they're paying you — name your price, or I walk out of here with it and let whoever's on the other side of that door sort this out themselves."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 12 | Modifier: +3 | Toplam: 15 | DC: 12
+   ✅ BAŞARILI
+   📈 Charisma XP +5 → 40
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 90
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: charisma check vs DC 12
+Roll: 12 + 3 (modifier) = 15
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Borin'in yüzü bembeyaz oluyor — o "küçük adam" kelimesi değil, o liste. Gözleri Kadonun cebini takip ediyor, eli kasenin arkasındaki bir şeye uzanıyor — bir bıçak mı, bir çan mı, bir şey mi? "O-O liste..." diye kekeleriyor, "o liste burada olmamalı. Onlar... onlar buraya gelir. Haftalık ödeme. Eğer görürlerse—"
+
+Cüce kadın kapıda, hâlâ orada, ama artık saldırgan değil — korkmuş. "Sen o listeyi nereden buldun?" diyor sesi kesik, "o liste... o listede isimler var. Çocukların isimleri."
+
+Garret mızrak sapını bırakıyor, duvara yaslanıyor, yüzünde bir şey var — suçluluk mu, korku mu? "Ben bilmiyordum," diye fısıldıyor, "ben sadece... ben sadece kapıyı tuttum. Bana para verdiler. Bana dediler ki gece... gece bir şey olmaz."
+
+Millhaven ise fenerini yeniden yakıyor — yağ bitmiş, ama bir şekilde yanıyor, yeşil bir ışık, doğal değil. "O listeyi geri koy," diyor sesi artık o yaşlı kadının sesi değil, daha derin, daha eski, "yoksa çocuklar geri döner. Ama sen de dönmezsin."
+
+Ve o sırada — dışarıdan, yağmurlu geceden, kapıdan içeri bir ses geliyor. Bir çocuk sesi. "Anne? Anne, aç kapıyı..."
+
+Demirci donakalıyor. Garret'in yüzü bembeyaz oluyor. Millhaven'in eli anahtara kilitleniyor.
+
+İçeride herkes dışarıyı dinliyor. Yağmur hâlâ yağıyor, ama o ses — o ses gerçek mi, yoksa ormandan gelen bir başka şey mi?
+
+Kadonun elinde bir liste var — isimler, rakamlar, ve yeşil mürekkeple yazılmış bir isim. Cebinde. Ve herkes biliyor.
+
+⏱️  Toplam: 26.39s | İlk token: 7.97s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 91
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Listeyi cebime saklıyorum ve Millhaven'e doğru yürüyorum — 'Yeşil mürekkeple yazılı isim kim? Çocuklar nereye götürüldü? Söylemezsen bu listeyi şehir muhafızlarına veririm, ve senin o eski kadın kılıfının altında ne olduğunu herkes öğrenir.'"'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 14}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 14}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 14}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=14
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 14
+   Zar: 3 | Modifier: +3 | Toplam: 6 | DC: 14
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 93
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: charisma check vs DC 14
+Roll: 3 + 3 (modifier) = 6
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Millhaven'in yeşil feneri bir anlığına sönüyor — ve o karanlık an Kadonun bileklerine yapışıyor, parmakları soğuk, çelik gibi. Kadonun bileklerinden tutuyor, ve o bakış... o bakış yaşlı bir kadının bakışı değil. Derin, eski, acımasız.
+
+"Sen bilirsin," diyor sesi fısıltı gibi, "sen o sembolü tanıyorsun. O zaman bilirsin ki o çocuklar... onlar geri gelmez. Onlar **Dokuma**'nın altında. Ormanda. O ağaçların altında. Ve o yeşil mürekkeple yazılı isim..." Millhaven gülümsüyor, dişleri sarı, eksik, "o isim senin için çok büyük. O isim... o isim şehrin yarısını yerle bir eder."
+
+Ve o sırada — kapı. Kapıdan içeri bir çocuk giriyor. Islak, titreyen, çıplak ayaklı bir çocuk — ama gözleri... gözleri yeşil. Yanlış yeşil. Doğal değil. Ve arkasından — arkasından bir figür daha. Uzun, siyah paltolu, yüzü maskeli, elinde bir çocuk — gerçek bir çocuk, baygın, küçük, kız.
+
+"Anne?" diyor ilk çocuk — ama sesi çocuğun sesi değil. İçinde bir şey var. Bir şey yaşlı, bir şey aç.
+
+Millhaven'in eli Kadonun bileklerinden çekiliyor. "Onlar geldi," diyor, "haftalık ödeme zamanı."
+
+Kadonun elinde bir liste var. Cebinde. Ve şimdi o kapıda iki şey var — bir çocuk ve bir figür — ve her ikisi de Kadoya bakıyor.
+
+Ne yapacaksın?
+
+⏱️  Toplam: 29.17s | İlk token: 2.70s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: [{"name":"Dokuma","role":"Mysterious entity or organization linked to the disappearances of children","appearance":"Not directly seen — referred to only through its name and its influence; associated 
+🔎 NPC Extractor — ✅ Yeni NPC bulundu: Dokuma (Mysterious entity or organization linked to the disappearances of children)
+📝 Yeni NPC eklendi: Dokuma (session: 91)
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 94
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'Slowly, I slide my hand into my coat and wrap my fingers around the hilt of my knife, eyes locked on the masked figure. "Well now," I say, voice low and steady, "looks like the whole family showed up at once — and I just so happen to be in the market for leverage."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 14}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 14}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 14}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=14
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 14
+   Zar: 7 | Modifier: +3 | Toplam: 10 | DC: 14
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 96
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: charisma check vs DC 14
+Roll: 7 + 3 (modifier) = 10
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Borin'in yüzü bembeyaz oluyor — o "küçük adam" kelimesi değil, o liste. Gözleri Kadonun cebini takip ediyor, eli kasenin arkasındaki bir şeye uzanıyor — bir bıçak mı, bir çan mı, bir şey mi? "O-O liste..." diye kekeleriyor, "o liste burada olmamalı. Onlar... onlar buraya gelir. Haftalık ödeme. Eğer görürlerse—"
+
+Cüce kadın kapıda, hâlâ orada, ama artık saldırgan değil — korkmuş. "Sen o listeyi nereden buldun?" diyor sesi kesik, "o liste... o listede isimler var. Çocukların isimleri."
+
+Garret mızrak sapını bırakıyor, duvara yaslanıyor, yüzünde bir şey var — suçluluk mu, korku mu? "Ben bilmiyordum," diye fısıldıyor, "ben sadece... ben sadece kapıyı tuttum. Bana para verdiler. Bana dediler ki gece... gece bir şey olmaz."
+
+Millhaven ise fenerini yeniden yakıyor — yağ bitmiş, ama bir şekilde yanıyor, yeşil bir ışık, doğal değil. "O listeyi geri koy," diyor sesi artık o yaşlı kadının sesi değil, daha derin, daha eski, "yoksa çocuklar geri döner. Ama sen de dönmezsin."
+
+Ve o sırada — dışarıdan, yağmurlu geceden, kapıdan içeri bir ses geliyor. Bir çocuk sesi. "Anne? Anne, aç kapıyı..."
+
+Demirci donakalıyor. Garret'in yüzü bembeyaz oluyor. Millhaven'in eli anahtara kilitleniyor.
+
+İçeride herkes dışarıyı dinliyor. Yağmur hâlâ yağıyor, ama o ses — o ses gerçek mi, yoksa ormandan gelen bir başka şey mi?
+
+Kadonun elinde bir liste var — isimler, rakamlar, ve yeşil mürekkeple yazılmış bir isim. Cebinde. Ve herkes biliyor.
+
+---
+
+Kadon bıçağını çekmeye başlıyor — ama masanın arkasındaki Borin hızla elini kaldırıyor, avucunda küçük, paslı bir çan. "HAYIR!" diye bağırıyor, "çanı çalma! Çanı çalırsa—"
+
+O maskeli figür başını kaldırıyor, yavaşça, ve altından bir yüz çıkıyor — hiç yüz yok. Sadece yeşil bir ışık, göz çukurlarında yanan, boşluk gibi bir şey. "O çocuk," diyor figürün sesi — figürün değil, o sesin sahibi olan şeyin — "o çocuk Dokuma'nın altında. Ve sen... sen o listeyle ne yapacaksın? Şehir muhafızlarına mi gideceksin? Onlar da listede."
+
+Millhaven gülümsüyor — o geniş, dişsiz gülümseme — "Küçük hırsız," diyor, "sen zaten çok geç kaldın."
+
+Ve o sırada — kapı kırılıyor. İki, üç, daha fazla figür. Siyah paltolar, maskeler, ve hepsinde o yeşil ışık. Birisi Kadonun omzuna dokunuyor — soğuk, çok soğuk — "Sessiz ol," diyor, "yoksa sen de listede yazarsın."
+
+Kadonun elinde bıçak var. Cebinde liste var. Ve kapıda bir sürü figür var — ve bu figürler sıradan değil.
+
+Ne yapacaksın?
+
+⏱️  Toplam: 45.30s | İlk token: 2.77s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 97
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'Kado, bıçağı tutan elini saklar ama diğer eliyle cebindeki listeyi çıkarır, yeşil mürekkepli ismi göstererek maskeli figürlere doğru adım atar: "Ben bu listeyi satın almadım, buldum — ve şimdi benimle pazarlık yapacaksınız, çünkü bu isimlerin hepsi sizin için değerli... ya da ben bunu şehir muhafızlarına götürürüm ve hepimiz batardık."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 20 | Modifier: +3 | Toplam: 23 | DC: 12
+   ⭐ KRİTİK BAŞARI!
+   📈 Charisma XP +5 → 45
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 99
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: charisma check vs DC 12
+Roll: 20 + 3 (modifier) = 23
+Result: CRITICAL SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kadon listeyi havaya kaldırıyor — yeşil mürekkep yağmura karışıyor, damlalar kağıdın üzerine düşüyor, ama isimler hâlâ okunabilir. Ve o kritik an — o mükemmel an — maskeli figürler duruyor. Hepsi. Aynı anda.
+
+Yeşil gözler daralıyor. "Pazarlık mı?" diyor ilk figür, sesi artık o kadar emin değil. "Sen... sen o isimleri biliyorsun. O zaman bilirsin ki bu isimler sadece isim değil. Bu isimler... bağlar. Dokuma'nın altındaki çocukların isimleri. Ve o yeşil mürekkeple yazılmış isim..."
+
+Figürler aralarında bir şey fısıldıyor — anlaşılmayan bir dil, eski bir dil. Sonra ilk figür Kadonun cebine bakıyor. "Ne istiyorsun?"
+
+Borin masanın arkasında donakalmış, çanı elinde, titriyor. Millhaven'in yeşil feneri sönmüş — ilk kez sönmüş — ve o yaşlı kadının yüzünde bir şey var: korku. Gerçek korku. "O listeyi ver," diyor Millhaven, sesi artık o derin, eski ses değil, sadece bir yaşlı kadının sesi, "o liste... o liste herkesi öldürür. Seni de."
+
+Garret ise duvara yaslanmış, mızrak sapı yerde, gözleri kapıdaki figürlere kilitlenmiş. "Ben bilmiyordum," diye tekrarlıyor, "ben sadece... ben sadece kapıyı tuttum."
+
+Ama Kadonun elinde bir koz var — o liste. Ve figürler biliyor ki o liste her şeyi değiştirebilir. Şehir muhafızlarına giderse, Dokuma'nın altındaki her şey açığa çıkar. Ama Kadon da biliyor ki o liste onu da öldürebilir.
+
+Figürlerden biri elini uzatıyor — "Ver bize listeyi. Biz de sana bir şey veririz. Bir çocuk. Dokuma'nın altından. Gerçek bir çocuk. İsimlerinden birini seç."
+
+Ve o sırada — kapının arkasından, yağmurlu geceden, bir ses daha geliyor. Ama bu ses farklı. Bu ses... bir kadının sesi. Gerçek bir kadının. "Kado?" diyor ses, "Kado, içeride misin? Ben Elara. Çocukları arıyorum. Seninle konuşmam gerekiyor."
+
+Kadonun elinde bir liste var. Cebinde. Ve şimdi bir seçim var — figürlere mi vereceksin, yoksa kapıyı açıp o kadına mı?
+
+Ne yapacaksın?
+
+⏱️  Toplam: 39.38s | İlk token: 2.94s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: [{"name":"Elara","role":"Missing Child's Mother / Civilian","appearance":"A woman in her early thirties with rain-soaked dark hair clinging to her face, wearing a simple woolen shawl over a worn dress
+🔎 NPC Extractor — ✅ Yeni NPC bulundu: Elara (Missing Child's Mother / Civilian)
+📝 Yeni NPC eklendi: Elara (session: 91)
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 100
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I slowly tuck the list deeper into my coat, never breaking eye contact with the masked figures, and say with a cold grin: "Bir çocuk mu? Ben çocuklarla ilgilenmem — ama bu listeyle ne kadar uzağa gideceğimi görmek istiyorsanız, önce beni öldürmeyi deneyin... ya da beni yeterince ödeyin."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "charisma", "dc": 14}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 14}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 14}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=14
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 14
+   Zar: 18 | Modifier: +3 | Toplam: 21 | DC: 14
+   ✅ BAŞARILI
+   ⬆️  Charisma eşiği aşıldı! Ability score +1 artacak.
+   📈 Charisma XP +5 → 50
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 102
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: charisma check vs DC 14
+Roll: 18 + 3 (modifier) = 21
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kadon listeyi derinlemesine cebine sıkıştırıyor — yeşil mürekkepli isimler artık görünmüyor, ama herkes biliyor orada olduğunu. Ve o soğuk gülümseme... o gülümseme figürleri durduruyor.
+
+Yeşil gözler daralıyor. İlk figür başını hafifçe eğiyor — saygı mı, yoksa hesaplama mı? "Yeterince ödeyin," diyor sesi düşük, "tamam. Ama altın yetmez. Altın her yerde var. Bizim için değerli olan..."
+
+Figür cebine elini sokuyor — Kadon bıçağını kavrıyor ama saldırmıyor, henüz — ve çıkarıyor: küçük, taş bir yüzük. Üzerinde o sembol — üç çizgi, ay, kürek. Aynı sembol. "Bu yüzük," diyor figür, "Dokuma'nın altındaki kapıyı açar. Bir çocuk çıkarabilirsin. Ama sadece bir tane. Ve geri dönemezsin."
+
+Borin masanın arkasında inliyor — "Tanrı aşkınlar," diye fısıldıyor, "o yüzük... o yüzük ölüm getirir."
+
+Millhaven ise Kadonun omzuna dokunuyor — soğuk parmaklar, "O yüzüğü alma," diyor sesi artık sadece bir yaşlı kadının sesi, "o yüzük seni de listede yazar."
+
+Garret duvardan kopuyor, ilk kez aktif bir şey yapıyor — "Ben giderim," diyor, "ben bu işin içinde değilim. Ben sadece kapıyı tuttum. Ben gidiyor." Ve kapıya doğru yürüyor — ama figürler yolunu kesiyor. "Hayır," diyor ilk figür, "sen burada kalacaksın. Haftalık ödeme henüz alınmadı."
+
+Ve o sırada — kapı. Kapı tekrar çalınıyor. Elara'nın sesi, daha yakından, daha acil: "Kado! Kapıyı aç! Çocuklarım... çocuklarım orada! Biliyorum!"
+
+Kadonun elinde bir liste var. Cebinde. Ve şimdi bir yüzük te var — taş, eski, sembolü olan. Figürler bekliyor. Millhaven bekliyor. Borin bekliyor. Garret bekliyor. Ve kapının arkasında Elara bekliyor.
+
+Ne yapacaksın?
+
+⏱️  Toplam: 32.57s | İlk token: 3.80s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 103
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Yüzüğü cebime sokuyorum — altını da alıyorum, çünkü altın her yerde varmış. Ama bir şey soruyorum: bu listede bir isim varsa, o çocuğu çıkarmak için yüzüğü kullanınca... ben de listede miyim?"'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 12 | Modifier: +3 | Toplam: 15 | DC: 12
+   ✅ BAŞARILI
+   📈 Charisma XP +5 → 55
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 105
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: charisma check vs DC 12
+Roll: 12 + 3 (modifier) = 15
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Figür başını kaldırıyor — yeşil gözler Kadonun gözlerine kilitleniyor. Uzun bir sessizlik. Yağmur damlaları kapıdan sızan rüzgarla içeri süzülüyor.
+
+"Listede yazıyorsan," diyor figür, sesi artık o kadar tehditkâr değil — neredeyse saygılı, "o zaman yüzük seni korur. Ama listede yazmıyorsan..." Figür duraksıyor. "Yüzük seni içeri alır. Ama geri çıkarmaz."
+
+Millhaven'in eli Kadonun omzundan çekiliyor — yaşlı kadının yüzünde bir şey var: acıma mı, korku mu? "O yüzük," diyor yavaşça, "o yüzük Dokuma'nın ağzı. İçeri girerssen... o seni yutar. Adını yazar. Ve sen de listede yazarsın."
+
+Borin ise masanın arkasından bir şey fırlatıyor — küçük, paslı bir anahtar. Yere düşüyor, tıngırdıyor. "Arka oda," diyor sesi titriyor, "arka odada bir geçit var. O geçit... o geçit ormana çıkar. Ama gece vakti. Gece vakti orman... orman farklı."
+
+Garret kapıya yürüyor — ama figürler hâlâ yolunu kesiyor. "Haftalık ödeme," diyor ilk figür, "henüz alınmadı."
+
+Ve kapı — kapı tekrar çalınıyor. Elara'nın sesi, artık ağlıyor: "Lütfen! Çocuklarım! Ne istiyorsanız verin!"
+
+Kadonun elinde bir liste var. Cebinde. Bir yüzük var — taş, eski. Bir anahtar var — paslı, küçük. Ve kapının arkasında bir kadın ağlıyor.
+
+Ne yapacaksın?
+
+⏱️  Toplam: 33.82s | İlk token: 7.98s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 106
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'Garret'e sertce bakıp, "Haftalık ödemeyi alacağız, ama önce bu kapı açılacak," derken ellerimi belime koyup figürlere doğru adım atarak, "Listede adım yoksa bile, bu yüzüğü takıp girersem Dokuma beni yutar mı? Yoksa ben Dokuma'yı yutar mı — bunu görelim," diyorum.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 107
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+[ENCOUNTER]{"enemies": [{"name": "Maskeli Figür", "type": "cultist"}, {"name": "Maskeli Figür", "type": "cultist"}, {"name": "Maskeli Figür", "type": "cultist"}], "context": "tavern confrontation — Kadon cultists' leader challenges their authority"}[/ENCOUNTER]
+
+⏱️  Toplam: 11.31s | İlk token: 3.24s
+🐞 DEBUG [Combat]: [ENCOUNTER] block found in GM response. Parsing...
+🐞 DEBUG [Combat]: Parsed encounter successfully with 3 enemies.
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 108
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I lean back in my chair, lock eyes with the barkeep, and slide a single gold coin across the counter—then slowly pull it back, letting him know I want the whole bottle, not a glass.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 14 | Modifier: +3 | Toplam: 17 | DC: 12
+   ✅ BAŞARILI
+   📈 Charisma XP +5 → 60
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 110
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: charisma check vs DC 12
+Roll: 14 + 3 (modifier) = 17
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kadon sandalyede geriye yaslanıyor — rahat, sakin, bir hamle daha yapmadan önce düşünüyor. Borin'in gözleri masadaki altın sikke üzerinde — cüce'nin boğazı hareket ediyor, yutkunuyor.
+
+"Bir şişe mi?" diyor Borin, sesi hâlâ titriyor ama altına bakışı değişmiş. "Şişe... şişe bir altın para eder. Ama sen... sen o listeyle şişe istiyorsun?"
+
+Kadon altın parayı yavaşça geri çekiyor — parayı parlatıyor, havada döndürüyor, sonra cebine sıkıştırıyor. "Hayır," diyor soğuk bir gülümsemeyle, "ben şişe istemiyorum. Ben bilgi istiyorum. O listedeki isimler... ve o yeşil mürekkeple yazılmış isim. Kim? Söyle, ve belki bir gün bu sikke senin olur."
+
+Borin'in yüzünde bir savaş var — korku, açgözlülük, suçluluk. Sonra cüce masanın altına eğiliyor — bir şey çıkarıyor: küçük, yağlı bir şişe. İçinde berrak, sarı bir sıvı. "Bunu al," diyor fısıltıyla, "bunu al ve git. Ama o isim... o isim söylemem. Çünkü o isim... o isim beni öldürür."
+
+Figürler hâlâ kapıda. Millhaven hâlce Kadonun omundayken bekliyor. Garret kapıya yürümeye devam ediyor — ama figürler yolunu kesiyor.
+
+Ve kapı — kapı tekrar çalınıyor. Elara'nın sesi, artık çığlık: "KADO! KAPIDAN ÇIK! ÇOCUKLARIM ORADA!"
+
+Kadonun elinde bir liste var. Bir yüzük var. Bir anahtar var. Ve şimdi bir şişe var — berrak, sarı, bilinmeyen bir sıvı. Borin'in yüzünde korku var. Figürler sabırsızlanıyor.
+
+Ne yapacaksın?
+
+⏱️  Toplam: 28.06s | İlk token: 2.72s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 111
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+📍 Yeni lokasyon: The Rusty Flagon - Cellar
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Şişeyi alıyorum, Borin'e soğuk bir bakışla 'Bu ismi söylemezsen seni öldürmekle kalmayıp, bu sikkeyi de geri alacağım' diyorum, sonra figürlere dönüp kollarımı kavuşturarak 'Yol verin, yoksa bu çocukların babası kimse, ben de umurumda değil' diye bağırıyorum."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "charisma", "dc": 12}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 17 | Modifier: +3 | Toplam: 20 | DC: 12
+   ✅ BAŞARILI
+   📈 Charisma XP +5 → 65
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 113
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: charisma check vs DC 12
+Roll: 17 + 3 (modifier) = 20
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kadon şişeyi eline alıyor — cam soğuk, içindeki sıvı hafifçe yapışkan. Borin'in gözleri genişliyor, cüce'nin sakalı titriyor.
+
+"İsmi söyle," diyor Kadon, sesi buz gibi. "Yoksa bu sikke senin olmayacak. Ve sen... sen listede yazacaksın."
+
+Borin'in eli masaya vuruyor — "Belediye Başkanı!" diye bağırıyor, "Belediye Başkanı! O isim... o isim onunki! O yeşil mürekkeple yazılan isim onunki! O... o her şeyi biliyor. O her şeyi planladı. Çocuklar... çocuklar onun için gidiyor. Onun için!"
+
+Kadon başını sallıyor — "İyi," diyor, "şimdi yol ver."
+
+Figürler aralarında bir şey fısıldıyor — ama Kadon'un kararlılığı, o soğuk gülümseme, o liste... hepsi bir arada. İlk figür yanaşıyor. Sonra diğerleri. Yol açılıyor.
+
+Millhaven'in eli Kadonun omzundan çekiliyor — yaşlı kadının yüzünde bir şey var: saygı mı, korku mu? "Git," diyor sesi artık sadece bir yaşlı kadının sesi, "git ve geri dönme."
+
+Garret kapıya yürüyor — ama figürler hâlâ yolunu kesiyor. "Haftalık ödeme," diyor ilk figür.
+
+Kadon sikkeyi havaya fırlatıyor — Garret'in eline düşüyor. "Al," diyor, "ve bir daha karışma."
+
+Ve kapı — kapı açılıyor. Elara orada, yağmurlu gecede, gözleri kızarmış, elleri titriyor. "Kado?" diyor, "Kado, çocuklarım... çocuklarım orada mı?"
+
+Kadonun elinde bir liste var. Bir yüzük var. Bir anahtar var. Bir şişe var. Ve şimdi bir isim var: Belediye Başkanı.
+
+Ne yapacaksın?
+
+⏱️  Toplam: 31.44s | İlk token: 4.41s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 114
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Elara, çocukların orada mı bilmiyorum — ama kim biliyor, onu biliyorum." Kadon listeyi sırt çantasına sokar, elindeki şişeyi Elara'nın yüzüne tutar. "Belediye Başkanı'na gideceğim. Sen burada kal ve bir ses çıkarma — bu adamlar seni tanıyor, ama beni tanıyorlar da sustular."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 115
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Kadon listeyi sırt çantasına sokuyor — yeşil mürekkepli isimler artık güvende, en azından şimdilik. Elara'nın gözleri şişede — o berrak, sarı sıvıda yansıyor, yağmur damlaları yüzünden süzülüyor.
+
+"Belediye Başkanı mı?" diyor Elara, sesi kesik, "Belediye Başkanı... o... o çocuklarımı geri getirir mi?"
+
+Kadon başını sallıyor — "Bilmiyorum," diyor dürüstçe, "ama o listede adı var. Ve o ad... o ad her şeyi değiştirebilir."
+
+Elara'nın eli Kadonun omzuna değiyor — soğuk parmaklar, titreyen eller. "Lütfen," diyor, "lütfen çocuklarımı geri getir. Ne istiyorsan ver."
+
+Kadon gülümsüyor — o soğuk, hesaplı gülümseme — "Bir gün belki," diyor, "ama şimdi... şimdi gitmem gerekiyor."
+
+Ve Kadon kapıdan çıkıyor — yağmurlu gece, sokaklar ıslak, taşlar parlıyor. Belediye Başkanı'nın evi... nerede? Borin bilmiyordu. Garret bilmiyordu. Ama Millhaven... Millhaven her şeyi biliyordu.
+
+Ama geri dönmek... geri dönmek tehlikeli.
+
+Kadonun elinde bir liste var. Bir yüzük var. Bir anahtar var. Bir şişe var. Ve bir hedef var: Belediye Başkanı.
+
+Yağmur hâlâ yağıyor. Sokaklar boş. Ve birisi... birisi Kadonu izliyor. Gölgelerin arasından. Sessizce.
+
+Ne yapacaksın?
+
+⏱️  Toplam: 28.55s | İlk token: 6.76s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+Oturum kapatıldı. (ID: 91)

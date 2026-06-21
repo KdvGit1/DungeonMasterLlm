@@ -15,9 +15,13 @@ from game.npc_manager import get_all_npcs, save_npc
 from game.npc_extractor import extract_npcs_from_response
 from game.scenario_manager import ScenarioManager
 from game.combat import player_attack, enemy_attack, format_encounter_status
-from game.encounter_manager import parse_encounter_block, strip_encounter_block, create_encounter, get_alive_enemies, is_encounter_over, get_total_xp, generate_combat_summary
+from game.encounter_manager import (
+    parse_encounter_block, strip_encounter_block, create_encounter,
+    get_alive_enemies, is_encounter_over, get_total_xp, generate_combat_summary,
+    is_combat_finished, enemy_turn
+)
 from game.event_parser import parse_encounter_from_response, strip_encounter_from_response
-from game.inventory_manager import use_item, add_item, get_pickup_dc, display_inventory
+from game.inventory_manager import use_item, add_item, display_inventory
 from game.xp_manager import (
     init_player_stats, grant_general_xp, grant_ability_xp,
     grant_combat_xp, grant_quest_rewards, apply_damage, add_gold, format_player_status
@@ -28,56 +32,16 @@ from prompts.system_prompt import build_system_prompt
 from rag.retriever import get_relevant_rules
 from rag.ingest import ingest
 from game.character_creator import create_character
+from llm_client import ask_llm_full, ask_llm, stream_llm
 import requests
 import config
 
-# ─── OLLAMA'YA İSTEK GÖNDER ──────────────────────────────────────────────────
+# ─── LLM CLIENT (shared via llm_client.py) ───────────────────────────────────
+# ask_gm is now a thin wrapper around ask_llm_full for CLI display
 
 def ask_gm(messages, system_prompt):
-    start = time.time()
-    response = requests.post(
-        f"{config.base_url}/api/chat",
-        json={
-            "model": config.model,
-            "messages": messages,
-            "system": system_prompt,
-            "stream": True,
-            "think": False,
-            "options": {
-                "num_ctx": config.context_length,
-                "temperature": config.temp,
-                "num_predict": config.num_predict
-            }
-        },
-        stream=True
-    )
-
-    full_response = ""
-    prompt_tokens = 0
-    response_tokens = 0
-    first_chunk_time = None
-
-    print("\n🧙 GM: ", end="", flush=True)
-
-    for line in response.iter_lines():
-        if not line:
-            continue
-        chunk = json.loads(line)
-        if first_chunk_time is None:
-            first_chunk_time = time.time() - start
-        message = chunk.get("message", {})
-        content = message.get("content", "")
-        if content:
-            print(content, end="", flush=True)
-            full_response += content
-        if chunk.get("done"):
-            prompt_tokens = chunk.get("prompt_eval_count", "?")
-            response_tokens = chunk.get("eval_count", "?")
-
-    elapsed = time.time() - start
-    print(f"\n\n⏱️  Toplam : {elapsed:.2f}s  |  İlk token: {first_chunk_time:.2f}s")
-    print(f"📊 Prompt : {prompt_tokens} token  |  Cevap: {response_tokens} token")
-    return full_response
+    """Send a streaming GM request. Uses llm_client (Ollama or OpenRouter)."""
+    return ask_llm_full(messages, system_prompt)
 
 # ─── ZAR GEREKLİ Mİ? ─────────────────────────────────────────────────────────
 
@@ -115,18 +79,8 @@ If roll needed: {{"needed": true, "ability": "charisma", "dc": 12}}
 If no roll:     {{"needed": false}}"""
 
     try:
-        response = requests.post(
-            f"{config.base_url}/api/chat",
-            json={
-                "model": config.model,
-                "messages": [{"role": "user", "content": prompt}],
-                "stream": False,
-                "think": False,
-                "options": {"num_ctx": 4096, "temperature": 0.1, "num_predict": 50}
-            }
-        )
-        result = response.json()
-        answer = result["message"]["content"].strip()
+        response = ask_llm([{"role": "user", "content": prompt}])
+        answer = response.strip()
         print(f"   AI ham cevap: '{answer}'")
         answer = re.sub(r'```json|```', '', answer).strip()
         match = re.search(r'\{.*?\}', answer, re.DOTALL)
@@ -216,7 +170,10 @@ def execute_roll(roll_info, player_name, game_state, session_id, user):
         f"{player_name} rolled {ability}: "
         f"{roll_result} + {modifier} = {total} vs DC {dc} ({outcome_label})"
     )
-    save_message(session_id, user.get("id"), "user", db_message)
+    if game_state.is_combat:
+        game_state.combat_messages.append({"role": "user", "content": db_message})
+    else:
+        save_message(session_id, user.get("id"), "user", db_message)
     print(f"\nDEBUG execute_roll → GM'e gidecek mesaj:\n{roll_message}")
     return roll_message, success
 
@@ -227,19 +184,18 @@ def handle_item_pickup(game_state, player_name, session_id, user):
     if not item:
         return None
 
-    dc = get_pickup_dc(item.get("rarity", "common"))
-    print(f"\n🎒 EŞYA BULUNDU: {item['name']} (DC {dc} to pick up)")
+    print(f"\n🎒 EŞYA BULUNDU: {item['name']} (value: {item.get('value', 0)}gp)")
     choice = input(f"Almak ister misin? (e/h): ").strip().lower()
 
     if choice != "e":
         game_state.pending_item = None
         return f"{player_name} decides to leave the {item['name']} behind."
 
-    roll_info = {"ability": "dexterity", "dc": dc}
+    roll_info = {"ability": "dexterity", "dc": 10}
     roll_msg, success = execute_roll(roll_info, player_name, game_state, session_id, user)
 
     if success:
-        add_item(session_id, item["name"], 1, item.get("value", 0), item.get("rarity", "common"))
+        add_item(session_id, item["name"], 1, item.get("value", 0))
         result_msg = f"{player_name} successfully picks up the {item['name']}!"
         print(f"   ✅ {item['name']} envantere eklendi!")
     else:
@@ -250,37 +206,11 @@ def handle_item_pickup(game_state, player_name, session_id, user):
     return result_msg
 
 # ─── BAŞARILI ROLL SONRASI EŞYA EDİNME ──────────────────────────────────────
-
-ACQUIRE_PATTERNS = [
-    r"steal\s+(?:the\s+|a\s+|an\s+)?(.+)",
-    r"grab\s+(?:the\s+|a\s+|an\s+)?(.+)",
-    r"take\s+(?:the\s+|a\s+|an\s+)?(.+)",
-    r"pick\s+up\s+(?:the\s+|a\s+|an\s+)?(.+)",
-    r"snatch\s+(?:the\s+|a\s+|an\s+)?(.+)",
-    r"swipe\s+(?:the\s+|a\s+|an\s+)?(.+)",
-    r"lift\s+(?:the\s+|a\s+|an\s+)?(.+)",
-    r"pocket\s+(?:the\s+|a\s+|an\s+)?(.+)",
-    # Türkçe
-    r"(.+?)\s*(?:çal|çalıyorum|çaldım|al|alıyorum|aldım|kap|kaptım)",
-]
-
-def check_item_acquisition(action):
-    """
-    Başarılı roll sonrası: aksiyon eşya edinme içeriyor mu?
-    Döner: item_name string veya None
-    """
-    action_lower = action.lower().strip()
-    # "I" ile başlayan kalıpları temizle
-    action_clean = re.sub(r"^i\s+", "", action_lower)
-
-    for pattern in ACQUIRE_PATTERNS:
-        match = re.search(pattern, action_clean, re.IGNORECASE)
-        if match:
-            item = match.group(1).strip().rstrip('.,!?')
-            # Çok uzunsa (cümle değil eşya adı olsun)
-            if len(item.split()) <= 4:
-                return item
-    return None
+# Item acquisition is now handled entirely by LLM via parse_gm_events().
+# The old keyword-based check_item_acquisition was removed because it
+# produced false positives (e.g. "Grik'i hedf" matched as an item name).
+# LLM does a much better job at determining whether the player actually
+# picked up an item vs just performing a combat action.
 
 # ─── EŞYA KULLANMA ───────────────────────────────────────────────────────────
 
@@ -449,6 +379,214 @@ def select_scenario():
         print(f"⚠️  Senaryo yüklenirken hata: {e}")
         return None
 
+def generate_llm_combat_summary(session_id, combat_messages, game_state, dead_players=None):
+    print(f"🐞 DEBUG [Combat/CLI]: generate_llm_combat_summary called with {len(combat_messages)} messages")
+    dead_players = dead_players or []
+    prompt = (
+        "Summarize the following combat encounter in a short, narrative, and engaging paragraph. "
+        "The summary should read like a story, describing the flow of battle, who did what, and how it ended. "
+        "Focus on the narrative, not mechanical numbers.\n\n"
+        "Combat Log:\n"
+    )
+    for msg in combat_messages:
+        role = "Player" if msg["role"] == "user" else "Game Master"
+        prompt += f"{role}: {msg['content']}\n"
+
+    if dead_players:
+        prompt += f"\nNote: The following players died or fell unconscious during the battle: {', '.join(dead_players)}. Incorporate this tragedy into the narrative."
+
+    summary = ask_llm([{"role": "user", "content": "Please summarize the combat."}], prompt)
+    print(f"🐞 DEBUG [Combat/CLI]: NARRATIVE SUMMARY GENERATED:\n{summary}\n")
+    return summary
+
+# ─── COMBAT TURN PROCESSOR ───────────────────────────────────────────────────
+# This is the core combat engine for CLI. It processes ONE full round of combat:
+# player action → enemy response → check termination → repeat.
+
+def process_combat_turn(game_state, player_name, action, session_id, user, player_names_list):
+    """
+    Process a single combat turn for one player.
+    Returns: (roll_result_msg, combat_ended, dead_players_this_turn)
+    """
+    roll_result_msg = None
+    dead_players_this_turn = []
+
+    encounter = game_state.active_encounter
+    if not encounter or not encounter.is_active:
+        return None, True, []
+
+    # Increment turn counter
+    encounter.turn_number += 1
+    print(f"\n⚔️  COMBAT TURN {encounter.turn_number}/{encounter.MAX_TURNS}")
+    print(format_encounter_status(game_state))
+
+    # ── CHECK STUCK COMBAT ──
+    # If no damage has been dealt for too many turns, force resolution
+    if encounter.turn_number > encounter._last_damage_turn + encounter.STUCK_COMBAT_THRESHOLD:
+        print(f"🐞 DEBUG [Combat]: Stuck combat detected! No damage for {encounter.STUCK_COMBAT_THRESHOLD} turns. Forcing resolution.")
+        # Enemies lose interest and flee
+        for e in get_alive_enemies(encounter):
+            e["fled"] = True
+        encounter.last_significant_event = "The enemies, seeing no progress, retreat into the shadows."
+        roll_result_msg = "⚡ COMBAT RESOLVED: The enemies break off their attack and flee! (Stuck combat auto-resolution)"
+        return roll_result_msg, True, []
+
+    # ── CHECK IF PLAYER IS TRYING TO FLEE ──
+    action_lower = action.lower().strip()
+    flee_keywords = ["flee", "run away", "escape", "retreat", "kaç", "kaçış", "sığın"]
+    is_fleeing = any(kw in action_lower for kw in flee_keywords)
+
+    if is_fleeing:
+        # Flee attempt: roll d20 + dexterity modifier vs DC 12
+        char = next((c for c in game_state.characters if c['name'] == player_name), None)
+        if not char:
+            char = game_state.characters[0] if game_state.characters else {"abilities": {}}
+        dex_score = char.get("abilities", {}).get("dexterity", 10)
+        dex_mod = (dex_score - 10) // 2
+        flee_roll = d20()
+        flee_total = flee_roll + dex_mod
+        flee_dc = 12
+
+        print(f"\n🏃 FLEE ATTEMPT: d20({flee_roll}) + {dex_mod} (DEX) = {flee_total} vs DC {flee_dc}")
+
+        if flee_roll == 20 or flee_total >= flee_dc:
+            # Successful flee
+            encounter.player_fled = True
+            roll_result_msg = f"🏃 {player_name} successfully flees from combat! (Roll: {flee_roll}+{dex_mod}={flee_total} vs DC {flee_dc})"
+            print(f"   ✅ FLEE SUCCESSFUL")
+            return roll_result_msg, True, []
+        else:
+            # Failed flee — player loses their action this turn
+            roll_result_msg = f"🏃 {player_name} tries to flee but fails! (Roll: {flee_roll}+{dex_mod}={flee_total} vs DC {flee_dc}) The enemies block the escape route!"
+            print(f"   ❌ FLEE FAILED")
+            # Continue to enemy turn (player wasted their action)
+
+            # Enemy turn
+            player_targets = _build_player_targets(game_state, session_id, user)
+            if player_targets:
+                enemy_results = enemy_turn(encounter, player_targets, session_id)
+                for er in enemy_results:
+                    if er["damage"] > 0 and er.get("target_player"):
+                        is_down, new_hp = apply_damage(session_id, er["target_player"], er["damage"])
+                        encounter.total_damage_dealt_to_players += er["damage"]
+                        record_damage(encounter)
+                        roll_result_msg += f"\n{er['message']}"
+                        if is_down:
+                            roll_result_msg += f"\n{er['target_player']} has fallen unconscious!"
+                            dead_players_this_turn.append(er["target_player"])
+
+            # Check termination
+            combat_finished, reason = is_combat_finished(encounter, player_targets)
+            if combat_finished:
+                return roll_result_msg, True, dead_players_this_turn
+            return roll_result_msg, False, dead_players_this_turn
+
+    # ── PLAYER ATTACK ──
+    alive_enemies = get_alive_enemies(encounter)
+    if not alive_enemies:
+        return None, True, []
+
+    attack_msg, damage, enemy_defeated = player_attack(game_state, player_name, session_id, user)
+    roll_result_msg = attack_msg
+
+    if damage > 0:
+        encounter.total_damage_dealt_to_enemies += damage
+        record_damage(encounter)
+
+    # Check if ALL enemies are defeated after player attack
+    if is_encounter_over(encounter):
+        print(f"🐞 DEBUG [Combat/CLI]: All enemies defeated!")
+        return roll_result_msg, True, []
+
+    # ── ENEMY TURN ──
+    player_targets = _build_player_targets(game_state, session_id, user)
+
+    enemy_results = enemy_turn(encounter, player_targets, session_id)
+
+    # Apply enemy damage to players
+    for er in enemy_results:
+        if er["damage"] > 0 and er.get("target_player"):
+            is_down, new_hp = apply_damage(session_id, er["target_player"], er["damage"])
+            encounter.total_damage_dealt_to_players += er["damage"]
+            record_damage(encounter)
+            roll_result_msg += f"\n{er['message']}"
+            if is_down:
+                roll_result_msg += f"\n{er['target_player']} has fallen unconscious!"
+                dead_players_this_turn.append(er["target_player"])
+                print(f"   💀 {er['target_player']} bilinci kaybetti!")
+
+    # ── COMBAT EVENTS (dynamic mid-combat events) ──
+    from game.combat_events import check_combat_events, apply_event
+    player_stats_list = []
+    try:
+        from game.xp_manager import get_player_stats
+        for char in game_state.characters:
+            ps = get_player_stats(session_id, char["name"])
+            if ps:
+                player_stats_list.append({"name": char["name"], "hp": ps["hp"], "max_hp": ps["max_hp"]})
+    except:
+        pass
+
+    events_triggered = check_combat_events(encounter, encounter.turn_number, player_stats_list)
+    for evt in events_triggered:
+        evt_msg = apply_event(encounter, evt, player_stats_list)
+        if evt_msg:
+            roll_result_msg += f"\n⚡ {evt_msg}"
+            encounter.last_significant_event = evt_msg
+            if evt["effect"] == "add_ally":
+                from game.xp_manager import heal
+                for char in game_state.characters:
+                    heal(session_id, char["name"], evt.get("ally_heal", 5))
+            if evt["effect"] == "aoe_damage":
+                aoe_dmg = evt.get("aoe_damage", 4)
+                for char in game_state.characters:
+                    aoe_result = apply_damage(session_id, char["name"], aoe_dmg)
+                    record_damage(encounter)
+
+    # ── STATUS EFFECT TICKS ──
+    for char in game_state.characters:
+        game_state.tick_player_statuses(char["name"])
+        game_state.tick_skill_cooldowns(char["name"])
+        dot_dmg = game_state.get_player_dot_damage(char["name"])
+        if dot_dmg > 0:
+            is_down, _ = apply_damage(session_id, char["name"], dot_dmg)
+            record_damage(encounter)
+            roll_result_msg += f"\n☠️ Poison deals {dot_dmg} damage to {char['name']}!"
+            if is_down:
+                roll_result_msg += f"\n{char['name']} has fallen unconscious from poison!"
+                if char["name"] not in dead_players_this_turn:
+                    dead_players_this_turn.append(char["name"])
+
+    # ── CHECK COMBAT TERMINATION ──
+    combat_finished, reason = is_combat_finished(encounter, player_targets)
+    if combat_finished:
+        print(f"🐞 DEBUG [Combat/CLI]: Combat finished! Reason: {reason}")
+        return roll_result_msg, True, dead_players_this_turn
+
+    return roll_result_msg, False, dead_players_this_turn
+
+
+def _build_player_targets(game_state, session_id, user):
+    """Build player target list for enemy attacks. Shared helper."""
+    player_targets = []
+    for char in game_state.characters:
+        pstats = None
+        try:
+            from game.xp_manager import get_player_stats
+            pstats = get_player_stats(session_id, char["name"])
+        except:
+            pass
+        hp = pstats["hp"] if pstats else char.get("hp", 10)
+        max_hp = pstats["max_hp"] if pstats else char.get("max_hp", 10)
+        player_targets.append({
+            "name": char["name"],
+            "ac": char.get("armor_class", 12),
+            "hp": hp,
+            "max_hp": max_hp,
+        })
+    return player_targets
+
+
 # ─── ANA OYUN DÖNGÜSÜ ────────────────────────────────────────────────────────
 
 def game_loop(user, session_id, game_state, scenario_manager):
@@ -565,13 +703,19 @@ def game_loop(user, session_id, game_state, scenario_manager):
         # ─ Eşya kullanma kontrolü ─
         item_used, item_gm_msg = handle_item_use(action, player_name, session_id, game_state)
         if not item_used and re.search(r'\buse\b|kullan', action, re.IGNORECASE) and item_gm_msg is None:
-            # Eşya yok, hata gösterildi, döngü başına dön
             continue
 
         user_message = f"{player_name}: {action}"
-        save_message(session_id, user.get("id"), "user", user_message)
+        if game_state.is_combat:
+            game_state.combat_messages.append({"role": "user", "content": user_message})
+        else:
+            save_message(session_id, user.get("id"), "user", user_message)
+
         if item_used and item_gm_msg:
-            save_message(session_id, None, "user", item_gm_msg)
+            if game_state.is_combat:
+                game_state.combat_messages.append({"role": "user", "content": item_gm_msg})
+            else:
+                save_message(session_id, None, "user", item_gm_msg)
 
         grant_general_xp(session_id, player_name, 1, reason="aksiyon")
 
@@ -607,65 +751,94 @@ def game_loop(user, session_id, game_state, scenario_manager):
             print("   Senaryo yok — trigger atlandı")
 
         # ════════════════════════════════════════════════════
-        # ADIM 2: COMBAT CHECK
+        # ADIM 2: COMBAT PROCESSING
         # ════════════════════════════════════════════════════
         print("\n" + "═" * 50)
         print("⚔️  ADIM 2 — COMBAT CHECK")
         print("═" * 50)
 
         roll_result_msg = None
+        combat_just_started = False
 
         if game_state.is_combat and game_state.active_encounter:
-            print(f"   Aktif savaş: {game_state.active_encounter['enemy_name']}")
-            print(format_encounter_status(game_state))
+            # Process the full combat turn (player attack + enemy response)
+            roll_result_msg, combat_ended, dead_players_this_turn = process_combat_turn(
+                game_state, player_name, action, session_id, user, player_names_list
+            )
 
-            attack_msg, damage, enemy_defeated = player_attack(game_state, player_name, session_id, user)
-            roll_result_msg = attack_msg
+            if combat_ended:
+                # Generate combat summaries
+                encounter = game_state.active_encounter
+                total_xp = get_total_xp(encounter)
 
-            if enemy_defeated:
-                xp = game_state.active_encounter.get("xp_reward", 50)
-                grant_combat_xp(session_id, player_name, xp)
+                # Grant XP to all alive players
+                for char in game_state.characters:
+                    pstats = None
+                    try:
+                        from game.xp_manager import get_player_stats
+                        pstats = get_player_stats(session_id, char["name"])
+                    except:
+                        pass
+                    if pstats and pstats["hp"] > 0:
+                        grant_combat_xp(session_id, char["name"], total_xp)
+
+                # Build dead players list
+                all_dead = []
+                try:
+                    from game.xp_manager import get_player_stats
+                    for char in game_state.characters:
+                        ps = get_player_stats(session_id, char["name"])
+                        if ps and ps["hp"] <= 0:
+                            all_dead.append(char["name"])
+                except:
+                    pass
+
+                mechanical_summary = generate_combat_summary(encounter, all_dead)
+                narrative_summary = generate_llm_combat_summary(
+                    session_id, game_state.combat_messages, game_state, all_dead
+                )
+                final_summary = f"{mechanical_summary}\n\n[NARRATIVE RECAP]\n{narrative_summary}"
+                save_message(session_id, None, "assistant", final_summary)
+                game_state.combat_messages = []
+
+                # Clear status effects after combat
+                for char in game_state.characters:
+                    game_state.clear_player_statuses(char["name"])
+
                 game_state.end_encounter()
-            else:
-                enemy_dmg, enemy_msg = enemy_attack(game_state, player_name, session_id)
-                if enemy_dmg > 0:
-                    is_down, _ = apply_damage(session_id, player_name, enemy_dmg)
-                    roll_result_msg += f"\n{enemy_msg}"
-                    if is_down:
-                        roll_result_msg += f"\n{player_name} has fallen unconscious!"
-                        print(f"   💀 {player_name} bilinci kaybetti!")
+                print("\n⚔️  SAVAŞ BİTTİ!")
+                print(f"   Toplam XP: {total_xp}")
+                if all_dead:
+                    print(f"   💀 Ölen: {', '.join(all_dead)}")
 
         else:
-            # Combat artık [ENCOUNTER] bloğu ile GM cevabından tetiklenir
-            # CLI'da GM cevabı sonrası parse edilir
-            print("   ⏭️  Combat şimdi [ENCOUNTER] bloğu ile tetikleniyor")
+            # Not in combat — check if GM response should start combat
+            # (Combat is initiated via [ENCOUNTER] block in GM response, handled in ADIM 4/5)
+            print("   ⏭️  Aktif savaş yok")
 
-                # ════════════════════════════════════════════════════
-                # ADIM 3: ROLL CHECK
-                # ════════════════════════════════════════════════════
-                print("\n" + "═" * 50)
-                print("🎲 ADIM 3 — ROLL CHECK")
-                print("═" * 50)
+        # ════════════════════════════════════════════════════
+        # ADIM 3: ROLL CHECK (non-combat actions)
+        # ════════════════════════════════════════════════════
+        print("\n" + "═" * 50)
+        print("🎲 ADIM 3 — ROLL CHECK")
+        print("═" * 50)
 
-                node_actions = None
-                if scenario_manager and scenario_manager.current_node:
-                    node_actions = scenario_manager.current_node.get("available_actions")
-                    print(f"   Node available_actions: {'mevcut' if node_actions else 'YOK'}")
+        # Skip roll check during combat — combat handles its own rolls
+        if not game_state.is_combat:
+            node_actions = None
+            if scenario_manager and scenario_manager.current_node:
+                node_actions = scenario_manager.current_node.get("available_actions")
+                print(f"   Node available_actions: {'mevcut' if node_actions else 'YOK'}")
 
-                roll_info = needs_roll_check(action, node_actions)
+            roll_info = needs_roll_check(action, node_actions)
 
-                if roll_info.get("needed"):
-                    roll_result_msg, roll_success = execute_roll(roll_info, player_name, game_state, session_id, user)
-                    # Başarılı roll: eşya edinme aksiyonu mu?
-                    if roll_success:
-                        acquired_item = check_item_acquisition(action)
-                        if acquired_item:
-                            add_item(session_id, acquired_item, 1, 0, "common")
-                            print(f"   🎒 '{acquired_item}' envantere eklendi (başarılı roll)")
-                            save_message(session_id, None, "user", f"{player_name} successfully acquires: {acquired_item}")
-                else:
-                    print("   ⏭️  Zar atılmadı")
-                    grant_general_xp(session_id, player_name, 1, reason="aksiyon (roll yok)")
+            if roll_info.get("needed"):
+                roll_result_msg, roll_success = execute_roll(roll_info, player_name, game_state, session_id, user)
+            else:
+                print("   ⏭️  Zar atılmadı")
+                grant_general_xp(session_id, player_name, 1, reason="aksiyon (roll yok)")
+        else:
+            print("   ⏭️  Combat aktif — roll check atlandı (combat motoru zar attı)")
 
         # ════════════════════════════════════════════════════
         # ADIM 4: GM CEVABI
@@ -674,24 +847,42 @@ def game_loop(user, session_id, game_state, scenario_manager):
         print("🧙 ADIM 4 — GM CEVABI")
         print("═" * 50)
 
-        recent_messages = get_recent_messages(session_id)
+        recent_messages = get_recent_messages(session_id) + game_state.combat_messages
         system_prompt = build_system_prompt(
             game_state.characters, action,
             game_state, scenario_manager,
             roll_info=roll_result_msg, session_id=session_id
         )
 
+        print(f"🐞 DEBUG [Combat/CLI]: Requesting GM response. (Combat? {game_state.is_combat})")
         print(f"   System prompt uzunluğu: {len(system_prompt)} karakter")
         print("⏳ GM düşünüyor...\n")
         gm_response = ask_gm(recent_messages, system_prompt)
 
         # ════════════════════════════════════════════════════
-        # ADIM 5: EVENT PARSER
+        # ADIM 5: ENCOUNTER DETECTION & EVENT PARSER
         # ════════════════════════════════════════════════════
         print("\n" + "═" * 50)
-        print("🔍 ADIM 5 — EVENT PARSER")
+        print("🔍 ADIM 5 — EVENT PARSER & ENCOUNTER DETECTION")
         print("═" * 50)
 
+        # Check for [ENCOUNTER] block to start combat
+        if not game_state.is_combat:
+            encounter_data = parse_encounter_from_response(gm_response)
+            if encounter_data:
+                print(f"🐞 DEBUG: [ENCOUNTER] block detected! Starting combat...")
+                clean_narrative = strip_encounter_from_response(gm_response)
+                gm_response = clean_narrative
+
+                new_encounter = create_encounter(encounter_data)
+                game_state.start_encounter(new_encounter)
+                combat_just_started = True
+
+                # Save the encounter start as a system message
+                save_message(session_id, None, "user",
+                    f"[COMBAT STARTED: {', '.join(e['display_name'] for e in new_encounter.enemies)}]")
+
+        # Parse for items, gold, quest hints
         events = parse_gm_events(gm_response)
         print(f"   Parser sonucu: {events}")
 
@@ -715,7 +906,11 @@ def game_loop(user, session_id, game_state, scenario_manager):
         print(f"\n🔎 NPC Extractor — tur sonrası: {len(npcs_after)} NPC")
 
         game_state.set_scene(gm_response[:100])
-        save_message(session_id, None, "assistant", gm_response)
+
+        if game_state.is_combat:
+            game_state.combat_messages.append({"role": "assistant", "content": gm_response})
+        else:
+            save_message(session_id, None, "assistant", gm_response)
 
         # ── Durum göster ──
         print("\n" + "─" * 50)

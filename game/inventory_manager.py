@@ -1,25 +1,17 @@
 from db.database import get_connection
 
-# Eşya nadirliğine göre alma zorluğu
-RARITY_DC = {
-    "common":    6,
-    "uncommon": 10,
-    "rare":     14,
-    "very_rare":18
-}
-
 # ─── TEMEL İŞLEMLER ──────────────────────────────────────────────────────────
 
 def get_inventory(session_id, player_name=""):
     conn = get_connection()
     rows = conn.execute(
-        "SELECT item_name, quantity, value, rarity FROM inventory WHERE session_id = ? AND player_name = ?",
+        "SELECT item_name, quantity, value FROM inventory WHERE session_id = ? AND player_name = ?",
         (session_id, player_name)
     ).fetchall()
     conn.close()
     return [dict(r) for r in rows]
 
-def add_item(session_id, item_name, quantity=1, value=0, rarity="common", player_name=""):
+def add_item(session_id, item_name, quantity=1, value=0, player_name=""):
     conn = get_connection()
     existing = conn.execute(
         "SELECT id, quantity FROM inventory WHERE session_id = ? AND player_name = ? AND LOWER(item_name) = LOWER(?)",
@@ -27,13 +19,13 @@ def add_item(session_id, item_name, quantity=1, value=0, rarity="common", player
     ).fetchone()
     if existing:
         conn.execute(
-            "UPDATE inventory SET quantity = quantity + ? WHERE id = ?",
-            (quantity, existing["id"])
+            "UPDATE inventory SET quantity = quantity + ?, value = ? WHERE id = ?",
+            (quantity, value, existing["id"])
         )
     else:
         conn.execute(
-            "INSERT INTO inventory (session_id, player_name, item_name, quantity, value, rarity) VALUES (?, ?, ?, ?, ?, ?)",
-            (session_id, player_name, item_name, quantity, value, rarity)
+            "INSERT INTO inventory (session_id, player_name, item_name, quantity, value) VALUES (?, ?, ?, ?, ?)",
+            (session_id, player_name, item_name, quantity, value)
         )
     conn.commit()
     conn.close()
@@ -81,9 +73,6 @@ def remove_item(session_id, item_name, player_name=""):
 
 # ─── YARDIMCI ────────────────────────────────────────────────────────────────
 
-def get_pickup_dc(rarity):
-    return RARITY_DC.get(rarity, 8)
-
 def format_inventory_for_prompt(session_id, player_name=""):
     items = get_inventory(session_id, player_name)
     if not items:
@@ -93,7 +82,7 @@ def format_inventory_for_prompt(session_id, player_name=""):
         "RULE: If an item is not in this list, the player does NOT have it, regardless of past messages."
     ]
     for item in items:
-        lines.append(f"- {item['item_name']} x{item['quantity']}  ({item['rarity']}, {item['value']}gp)")
+        lines.append(f"- {item['item_name']} x{item['quantity']}  ({item['value']}gp)")
     return "\n".join(lines)
 
 def format_all_inventories_for_prompt(session_id, player_names):
@@ -110,4 +99,4 @@ def display_inventory(session_id, player_name=""):
         return
     print(f"🎒 {player_name} envanter:")
     for item in items:
-        print(f"   • {item['item_name']} x{item['quantity']}  [{item['rarity']}] — {item['value']}gp")
+        print(f"   • {item['item_name']} x{item['quantity']}  — {item['value']}gp")

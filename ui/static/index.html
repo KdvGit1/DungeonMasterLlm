@@ -63,19 +63,61 @@
             <h1 class="login-title">Host Ayarları</h1>
             <p class="login-subtitle">Model ve çeviri ayarları</p>
             <div class="creator-form" style="text-align: left;">
-                <div class="creator-col">
-                    <label>LLM Modeli</label>
+
+                <!-- Provider Selection -->
+                <div class="creator-col" style="margin-bottom: 1rem;">
+                    <label>🔌 LLM Sağlayıcı</label>
+                    <div style="display:flex; gap:0.5rem; margin-top:0.3rem;">
+                        <label style="display:flex; align-items:center; gap:0.3rem; cursor:pointer;">
+                            <input type="radio" name="provider" value="ollama" id="provider-ollama" checked>
+                            <span>Ollama (Yerel)</span>
+                        </label>
+                        <label style="display:flex; align-items:center; gap:0.3rem; cursor:pointer;">
+                            <input type="radio" name="provider" value="openrouter" id="provider-openrouter">
+                            <span>OpenRouter (Bulut)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Ollama Model -->
+                <div class="creator-col" id="ollama-model-section">
+                    <label>🦙 Ollama Modeli</label>
                     <select id="config-llm-model"></select>
                 </div>
-                <div class="creator-col" style="margin-top: 0.5rem">
-                    <label>Çeviri Modeli</label>
+
+                <!-- OpenRouter Model -->
+                <div class="creator-col" id="openrouter-model-section" style="display:none;">
+                    <label>🌐 OpenRouter Modeli</label>
+                    <select id="config-openrouter-model"></select>
+                </div>
+
+                <!-- OpenRouter API Key -->
+                <div class="creator-col" id="openrouter-key-section" style="display:none; margin-top: 0.5rem;">
+                    <label>🔑 OpenRouter API Key</label>
+                    <input type="password" id="config-openrouter-key" placeholder="sk-or-v1-..." style="width:100%;">
+                    <small style="color:var(--text-secondary);">API key'inizi <a href="https://openrouter.ai/keys" target="_blank" style="color:var(--gold);">openrouter.ai/keys</a> adresinden alabilirsiniz.</small>
+                    <div id="openrouter-key-status" style="margin-top:0.3rem; font-size:0.85rem;"></div>
+                </div>
+
+                <!-- Test Connection -->
+                <div class="creator-col" style="margin-top: 0.5rem;">
+                    <button id="btn-test-connection" class="btn btn-secondary" style="font-size:0.9rem; padding:0.4rem 1rem;">🔌 Bağlantı Test Et</button>
+                    <span id="connection-test-result" style="margin-left:0.5rem; font-size:0.85rem;"></span>
+                </div>
+
+                <hr style="border-color:var(--border-subtle); margin: 1rem 0;">
+
+                <!-- Translator -->
+                <div class="creator-col">
+                    <label>🌍 Çeviri Modeli</label>
                     <select id="config-translator-model"></select>
                 </div>
-                <div class="creator-col" style="margin-top: 0.5rem">
+                <div class="creator-col" style="margin-top: 0.5rem;">
                     <label>Hedef Dil</label>
                     <input type="text" id="config-target-language" placeholder="Örn: Turkish">
                 </div>
-                <button id="btn-save-config" class="btn btn-primary" style="margin-top: 1rem">Kaydet ve Oda Oluştur</button>
+
+                <button id="btn-save-config" class="btn btn-primary" style="margin-top: 1.5rem; width:100%;">💾 Kaydet ve Oda Oluştur</button>
             </div>
         </div>
     </div>

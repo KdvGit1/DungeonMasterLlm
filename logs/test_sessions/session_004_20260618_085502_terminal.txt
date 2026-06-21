@@ -1,0 +1,1322 @@
+Veritabanı hazır.
+'autotest_4_5182' kaydedildi.
+Hoş geldin, autotest_4_5182!
+Oturum oluşturuldu: AutoTest: Session_4_085502 (ID: 93)
+kado oyuna katıldı.
+
+📍 Yeni lokasyon: The Gates of Millhaven
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+[CAMERA: Wide shot of the rain-lashed road leading to Millhaven's rotting wooden palisade, two shivering guards clutching spears aimed nervously at the dark treeline behind the player.]
+
+Ağır, doğaüstü bir soğuk yağmur, Millhaven'a giren çamurlu yolu dövüyor. Garret adlı genç muhafız, soluk yüzünde mor halkalarla, kollarının altından titreyerek kapıya yaklaşan yabancıya bakıyor ve mermisini sıkıca tutuyor. Karanlık ormanın derinliklerinden gelen bir uluma, rüzgarın taşıdığı bir tahtanın gıcırtısıyla karışıyor ve Garret'in gözleri daha da geniş açılıyor.
+
+Garret, titreyerek fısıldıyor: *"Ormandan bir şey geliyor... her gece geliyor. İçeri girmek istiyorsan çabuk konuş, çünkü ben bu kapıyı kapatmadan önce o şey seni de bulacak."*
+
+---
+
+**Ne yapacaksın?**
+- Muhafızı ikna etmeye çalış (Karizma kontrolü, ZK 12)
+- Garret'e tehdit kullanarak kapıyı açtır (Güç kontrolü, ZK 15)
+- Ahşap palisadeyi incele (Araştırma kontrolü, ZK 13)
+- Ormana doğru dön ve geri git
+- Başka bir şey dene
+
+⏱️  Toplam: 48.49s | İlk token: 9.74s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: [{"name":"Garret","role":"Gate Guard","appearance":"A young man with a pale face marked by dark purple circles under his eyes, visibly shivering and trembling as he clutches his spear tightly.","perso
+🔎 NPC Extractor — ✅ Yeni NPC bulundu: Garret (Gate Guard)
+📝 Yeni NPC eklendi: Garret (session: 93)
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 1
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'Garret'e yaklaşıp, titreyen muhafızın omzuna bir koyayım ve alçak bir sesle fısıldayarak: "Dostum, ben de o ormandaki şeyden kaçıyorum — bana içeri girme fırsatı ver, belki birlikte daha güvende oluruz. Hem içeride ne varsa, seninle de paylaşabilirim."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 15 | Modifier: +3 | Toplam: 18 | DC: 12
+   ✅ BAŞARILI
+   📈 Charisma XP +5 → 5
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 3
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: charisma check vs DC 12
+Roll: 15 + 3 (modifier) = 18
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Garret'in titreyen omuzlarına konan elin ağırlığını hissettiğinde, muhafızın nefesi bir an için kesiliyor; gözleri kado'nun yüzünde bir şey arıyor — belki bir işaret, belki bir yalanın izi. Yağmurun sesi arasında Garret'in çenesi titriyor, ama parmakları mermisinden kurtuluyor ve omurgasındaki gerginlik biraz hafifliyor.
+
+*"S-seni tanımıyorum ama... bu yağmurda dışarı kalan herkes ya yağtır ya da ölü,"* diye fısıldıyor Garret, gözleriyle karanlık ormanı işaret ediyor. *"İçeri gir, ama sessiz ol — çünkü ormanın o şeyleri yalnızca seni değil, senin gibi KAÇAN herkesi duyabiliyor."*
+
+Kapının ardından, rüzgarda sallanan bir meyhane tabelasının soluk ısığı görünüyor ve Garret yavaşça demir kapıyı aralıyor — ama eli hâlâ titriyor, sanki içeri girmenin bile yeterli olmayacağını biliyormuş gibi.
+
+---
+
+**Ne yapacaksın?**
+- Kapıdan içeri gir ve meyhane tabelasının ışığına doğru ilerle
+- Garret'e ormandaki "şey" hakkında daha fazla bilgi sor
+- Garret'e bir şey karşılığında kapıyı açmasını teklif et (altın var mı?)
+- Ormana doğru dönüp geri git
+
+⏱️  Toplam: 58.20s | İlk token: 1.98s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 4
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'Garret'in titreyen elini omzundan alıp, *"Ormanı değil — senin benden korkmanı hissediyorum,"* diyorum, gözlerimi gözlerine sabitleyerek. Sonra cebimden Garret'in görebileceği kadarıyla birkaç madeni parayı çıkarıp avuçlarımda gürültüyle sallayarak, *"Altınım var ama içeri girmeden önce ormandaki 'şey' hakkında bilmem gerekeni söyle — sonra bu paraları alırsın."* diyorum.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 3 | Modifier: +3 | Toplam: 6 | DC: 12
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 6
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: charisma check vs DC 12
+Roll: 3 + 3 (modifier) = 6
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Garret'in gözleri, kado'nun avuçlarındaki paraları görünce kısa bir an için daralıyor — ama sonra yüzü daha da beyazlaşıyor ve omzundan çekilen elin yerine soğuk bir korku yerleşiyor. Muhafız, paraları görmezden gelmiş gibi başını sallıyor ve fısıltısı artık bir çığlığa dönüşüyor:
+
+*"Para mı?! Para bu gece hiçbir şeye yetmez — o şey parayı YER, insanı YER, her şeyi yer!"* Garret'in titreyen parmakları mermisini tekrar sıkıca kavrıyor ve gözleri karanlık ormanın derinliklerine kilitleniyor. *"Çocuklar... üç çocuk kayboldu gece, ve o şey onların çığlıklarını söyledi — BEN DUYDUM! Şimdi içeri git, beni de öldürtme!"*
+
+Garret, kapıyı aralıyor ama artık kado'yu içeri sokmak istemiyor gibi — sanki yabancının kendisine bulaşacağını düşünüyor. Kapının ardındaki meyhane ışığı titriyor ama Garret'in yüzündeki ifade, o ışığın bile bu gece yeterli olmayacağını söylüyor.
+
+---
+
+**Ne yapacaksın?**
+- Garret'i bırakıp sessizce kapıdan içeri gir
+- Garret'e tehdit kullanarak bilgi almaya çalış (Güç kontrolü, ZK 15)
+- Ormana doğru dönüp geri git
+- Garret'e "çocuklar" hakkında daha fazla soru sor
+
+⏱️  Toplam: 77.88s | İlk token: 2.31s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 7
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+📍 Yeni lokasyon: The Rusty Flagon
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'Garret'e yaklaşıp onu yatıştırmaya çalışıyorum, sesimi düşürerek "Sakin ol dostum, ben de o şeyden kaçıyorum — içeri girip bir içkiye ihtiyacım var, sonra seninle konuşuruz çocuklar hakkında." diyorum, onu rahatlatıp kapıdan içeri süzülürken arkamdan bakışlarını hissediyorum.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 7 | Modifier: +3 | Toplam: 10 | DC: 12
+   ❌ BAŞARISIZ
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 9
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: charisma check vs DC 12
+Roll: 7 + 3 (modifier) = 10
+Result: FAILURE
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Garret'in titreyen nefes alışverişleri, kado'nun sözlerini duyduğunda bile yavaşlamıyor — muhafızın gözleri, yabancının sırtına kilitlenmiş bir şekilde kapıdan içeri süzülmesini izliyor, sanki bir sonraki an her şeyi değiştirecek. Yağmurlu gece, kapının ardından gelen meyhane ışığını boğuyor ve Garret'in fısıltısı rüzgarla karışıyor:
+
+*"İçeri git ama... kapıyı kilitleme. O şey gecenin bir yarısında gelir, ve o zaman... herkes kendi başınadır."*
+
+Kapı, çamurlu tahtaların arasından içeri açılıyor ve kado, Millhaven'ın tek meyhanesine — **The Rusty Flagon**'a — adım atıyor.
+
+---
+
+Meyhane şaşırtıcı derecede sessiz. Birkaç yerel, kadehlerinin içine çökmüş, göz kaçırarak oturuyor. Bayat bira ve yanmış yahni kokusu havada asılı duruyor. Barın arkasında, terli, şişman bir cüce — **Borin** — zaten temiz bir kabağı çoktan bitirmiş gibi silkeleniyor. Köşedeki ilan tahtası boş ama yırtılmış bir çocuk resmi asılı duruyor.
+
+Borin, kapıdan içeri süzülen yabancıyı görünce yüzünde yapmacık bir gülümseme beliriyor ama gözleri tedirgin: *"Hoş geldin yabancı! Bir şey içmek ister misin? ...Yalnızca bir şey içmek, değil mi?"*
+
+---
+
+**Ne yapacaksın?**
+- Borin'e oda sor (1 gümüş)
+- Borin'e kayıp çocuklar hakkında soru sor
+- Yerel masalara yaklaşıp kulak kabart (Algılama kontrolü, ZK 13)
+- Barın arkasına gizlice süzülmeye çalış (Gizlilik kontrolü, ZK 15)
+- Başka bir şey dene
+
+⏱️  Toplam: 82.80s | İlk token: 13.88s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: [{"name":"Borin","role":"Bartender at The Rusty Flagon","appearance":"A sweaty, stout dwarf with a flushed face and a perpetual sheen of grease on his hands. His apron is stained with years of spilled
+🔎 NPC Extractor — ✅ Yeni NPC bulundu: Borin (Bartender at The Rusty Flagon)
+📝 Yeni NPC eklendi: Borin (session: 93)
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 10
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Borin'e yaklaşıp masaya dirseklerimi dayayıyorum ve alçak bir sesle soruyorum: *'Bu kasabadaki en değerli eşyalar nerede saklanır — özellikle de kasabanın liderinin odasında?'* Gözlerimi onun tepkisine dikkatle bakıyorum."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 15 | Modifier: +3 | Toplam: 18 | DC: 12
+   ✅ BAŞARILI
+   📈 Charisma XP +5 → 10
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 12
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: charisma check vs DC 12
+Roll: 15 + 3 (modifier) = 18
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Borin'in yüzündeki yapmacık gülümseme, kado'nun sözlerini duyduğunda donuyor — cücenin elindeki kabağı silkeleyen hareketi aniden kesiliyor, ter damlası alnından aşağıya düşüyor. Gözleri kısa bir an için karanlık bir şeye — belki korkuya, belki tanıdığı bir şeye — takılıyor, ama sonra yüzüne zorla bir ifade yerleştiriyor.
+
+*"K-kasabanın lideri mi?"* diye tekrarlıyor Borin, sesi gırtlağından çıkıyormuş gibi. *"Bu kasabada lider yoktur yabancı — sadece hayatta kalanlar var. Ama eğer değerli bir şey arıyorsan... Belki de senin aradığın şey, senin aramadan önce seni bulur."*
+
+Cücenin gözleri, kado'nun yüzünden kaçırarak meyhane köşesindeki yaşlı, tek gözlü sarhoşa — **Old Silas**'a — kayıyor, sanki ona bir şey söylemek istiyormuş gibi. Silas, ucuz şarabın kokusuyla sarhoş bir şekilde kalkıyor ve kado'nun koluna yapışıyor:
+
+*"Gümüş pullar paslandı... yeşil nefes kökleri boğuyor..."* diye mırıldanıyor Silas, boş göz çukuruyle kado'ya bakıyor. *"Ama sen... sen hâlâ koşabiliyorsun. Koş, küçük hırsız. Çünkü bu kasabanın altında yatan şey, senin gibi olanları SEVER."*
+
+---
+
+**Ne yapacaksın?**
+- Borin'e "kasabada lider yok" derken neden bu kadar korktuğunu sor
+- Old Silas'ın sözlerini araştırmaya çalış — "gümüş pullar" ve "yeşil nefes" ne anlama geliyor?
+- Kayıp çocukların resmine bakmak için ilan tahtasına git
+- Barın arkasına gizlice süzülmeye çalış (Gizlilik kontrolü, ZK 15)
+- Başka bir şey dene
+
+⏱️  Toplam: 65.67s | İlk token: 7.12s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: [{"name":"Old Silas","role":"Drunken Patron / Cryptic Oracle","appearance":"An elderly man with a single eye, the other socket empty and scarred, slumped in a corner booth of The Rusty Flagon. His clo
+🔎 NPC Extractor — ✅ Yeni NPC bulundu: Old Silas (Drunken Patron / Cryptic Oracle)
+📝 Yeni NPC eklendi: Old Silas (session: 93)
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 13
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'Silas'ın sarhoş kulağına yaklaşıp, *"Bu gümüş pullar ve yeşil nefes hakkında daha fazla bilgi ver — tam olarak nerede bulabilirim?"* diye fısıldıyorum, aynı zamanda elimi meşhur hırsız çantanın üzerinde tutarak ona küçük bir altın sikke fırsatını hissediyorum.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 11 | Modifier: +3 | Toplam: 14 | DC: 12
+   ✅ BAŞARILI
+   📈 Charisma XP +5 → 15
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 15
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: charisma check vs DC 12
+Roll: 11 + 3 (modifier) = 14
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Silas'ın tek gözü, kado'nun fısıltısını duyduğunda aniden berraklaşıyor — sarhozluk maskesi bir an için düşüyor ve yerine acı dolu bir ciddiyet yerleşiyor. Yaşlı adamın kado'nun kolundaki pençesi sıkılıyor ve boş göz çukuru, sanki görünmeyen bir şeyi görmüş gibi karanlık bir noktaya kilitleniyor.
+
+*"Gümüş pullar... değirmenin ardındaki mağaranın dibinde, taşların altında gizleniyor,"* diye fısıldıyor Silas, nefesi şarap ve korku kokuyor. *"Ama oraya gitme — çünkü yeşil nefes orada uyuyor ve uyanırsa... bu kasabadaki her çocuk, her ev, her şey YOK olacak. Ben gördüm — gözümü orada verdim."*
+
+Silas'ın boş göz çukurundan bir damla yaş süzülüyor ve eli, kado'nun hırsız çantasını hissettirdiği yerden çekiliyor — yaşlı adam, çantanın içindeki bir şeyi hissediyormuş gibi başını sallıyor:
+
+*"Ama sen... senin çantanda bir şey var, bir şey seni buraya getirdi. O şey... o şey seni ya kurtaracak ya da hepimizi öldürecek."*
+
+Meyhanenin sessizliği daha da yoğunlaşıyor — Borin, barın arkasından bu konuyu dinliyor gibi görünüyor ve yüzündeki ifade artık tedirginlik değil, açık korku.
+
+---
+
+**Ne yapacaksın?**
+- Silas'a "çantamdaki şey"in ne olduğunu bilip bilmediğini sor
+- Değirmenin ardındaki mağara hakkında daha fazla bilgi al
+- Borin'e dönüp neden bu konuşmayı dinlediğini sor
+- İlan tahtasına gidip kayıp çocukların resmini incele
+- Başka bir şey dene
+
+⏱️  Toplam: 64.13s | İlk token: 2.50s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 16
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Silas, çantamdaki şeyi nasıl hissedebildiğini soruyorum — ve değirmenin yolunu, gümüş pulların tam olarak nerede olduğunu, yeşil nefes denen şeyden kaçmak için ne tür bir rota izlemem gerektiğini ağzından aşağıya tıkırarak öğrenmeye çalışıyorum."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 15}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 15}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 15}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=15
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 15
+   Zar: 12 | Modifier: +3 | Toplam: 15 | DC: 15
+   ✅ BAŞARILI
+   📈 Charisma XP +5 → 20
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 18
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: charisma check vs DC 15
+Roll: 12 + 3 (modifier) = 15
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Silas'ın tek gözü, kado'nun sözlerini duyduğunda aniden berraklaşıyor — sarhozluk maskesi bir an için düşüyor ve yerine acı dolu bir ciddiyet yerleşiyor. Yaşlı adamın kado'nun kolundaki pençesi sıkılıyor ve boş göz çukuru, sanki görünmeyen bir şeyi görmüş gibi karanlık bir noktaya kilitleniyor.
+
+*"Çantandaki şey... eski bir şey, çok eski. Ben onu daha önce gördüm — o şey seni buraya ÇAĞIRDI, sen gelmek istemedin ama o İSTEDİ,"* diye fısıldıyor Silas, nefesi şarap ve korku kokuyor. *"Değirmen... kasabanın doğu ucunda, çamurlu yolun sonunda. Mağaranın girişi değirmenin değirmen taşının altında — ama oraya gitmeden önce, kasabanın girişindeki çalıların arasından geç, ormanın sesini duyana kadar koş, sonra DÖN. Yeşil nefes, mağaranın derinliklerinde uyuyor ve onu uyandırmak istemezsin."*
+
+Silas'ın eli titreyerek kado'nun çantasını işaret ediyor:
+
+*"Çantandaki şey... onu mağaranın en dibindeki taşların yanına koy. O zaman belki — BELKİ — yeşil nefes tekrar uyur. Ama eğer yanlış yaparsan... bu kasaba, bu orman, bu dünyadaki her şey SON bulur."*
+
+Meyhanenin sessizliği artık bir başka boyuta bürünmüş — Borin, barın arkasından bu konuyu dinliyor ve yüzündeki ifade artık açık bir korku. Cücenin elindeki kabağı silkeleyen hareketi kesilmiş, gözleri kado'ya kilitlenmiş.
+
+---
+
+**Ne yapacaksın?**
+- Silas'a "çantamdaki şey"in tam olarak ne olduğunu bilip bilmediğini sor
+- Borin'e dönüp neden bu kadar korktuğunu ve ne bildiğini sor
+- İlan tahtasına gidip kayıp çocukların resmini incele
+- Meyhaneden çıkıp doğu yoluna doğru değirmene git
+- Başka bir şey dene
+
+⏱️  Toplam: 61.37s | İlk token: 3.18s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 19
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'Silas'a yaklaşıp, çantamdaki şeyin tam olarak ne olduğunu, neden beni buraya çektiğini ve mağaranın derinliklerinde ne beklediğini sordum — sesimi alçaltarak, "Bana gerçekleri söyle, ya da bu meydan silahsız değilim."'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 12 | Modifier: +3 | Toplam: 15 | DC: 12
+   ✅ BAŞARILI
+   📈 Charisma XP +5 → 25
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 21
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: charisma check vs DC 12
+Roll: 12 + 3 (modifier) = 15
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Silas'ın tek gözü, kado'nun tehdit dolu fısıltısını duyduğunda aniden parlıyor — sarhozluk tamamen çatırdıyor ve yerine acı verici bir berraklık yerleşiyor. Yaşlı adamın pençe gibi eli kado'nun kolundan çekiliyor ve boş göz çukuru, sanki karanlıkta görünmez bir şeyi tarif ediyormuş gibi açılıyor.
+
+*"Çantandaki şey... bir ANAHTAR. Gümüş pulların kalbinde yatan, çok eski bir şeyin anahtarı,"* diye fısıldıyor Silas, nefesi artık şarap kokmuyor — yerine toprak ve karanlık bir koku yayıyor. *"Seni buraya çekti çünkü... sen ANAHTARIN SAHİBİSİN. Ama sahip olduğunu bilmiyorsun. O şey, senin rüyalarında seni çağırıyor — değil mi? O karanlık mağarayı, o yeşil nefesi... sen daha önce GÖRDÜN."*
+
+Silas'ın titreyen eli, kado'nun çantasının kapağını işaret ediyor:
+
+*"Mağaranın derinliklerinde... bir UYUYUŞ VAR. Çok eski, çok güçlü. Gümüş pullar onun küllerinden yeşti — ve yeşil nefes, onun son nefesi. Anahtarı taşların yanına koy, uyandırma, ve belki — BELKİ — bu kasaba kurtulur. Ama eğer uyanırsa..."*
+
+Silas'ın sesi kesiliyor ve gözleri meyhane köşesindeki yırtılmış çocuk resmine kayıyor. Aniden, yaşlı adamın yüzünde dehşet dolu bir ifade beliriyor:
+
+*"Çocuklar... çocuklar onun rüyalarını görüyor. Ve o, onların rüyalarında YAŞIYOR."*
+
+Meyhanenin duvarlarından bir rüzgar esiyor — içeride olması imkansız bir rüzgar — ve Borin, barın arkasından bir şey düşürmesiyle birlikte küçük bir çığlık atıyor.
+
+---
+
+**Ne yapacaksın?**
+- Çantayı açıp içindekileri kontrol et
+- Borin'e koşup ne düşürdüğünü sor
+- Silas'a "çocukların rüyalarında yaşamak" ne anlama geldiğini sor
+- Meyhaneden çıkıp doğu yoluna doğru değirmene git
+- Başka bir şey dene
+
+⏱️  Toplam: 32.00s | İlk token: 7.42s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🔎 NPC Extractor — Hata: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 22
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I cautiously observe my surroundings and decide my next move. (AI error: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions)'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": false}'
+   JSON parse edildi: '{"needed": false}'
+   ⏭️  Roll GEREKMİYOR
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 23
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Meyhanenin içi, kado'nun etrafında yavaş dönen bir karanlık girdabı gibi hissediliyor — her köşede bir gölge, her sessizlikte bir tehdit. Borin, barın arkasından düşürdüğü şeyi — eski, tozlu bir şişe — toplamaya çalışırken elleri titriyor ve gözleri kado'ya kilitlenmiş bir şekilde bakıyor. Old Silas, köşede hâlâ aynı noktaya bakıyor, sanki duvarın arkasını görüyormuş gibi, ve mırıldanması artık bir çığlığa dönüşüyor:
+
+*"Geliyor... gece yarısı geliyor... o şey uyanacak..."*
+
+Meyhanenin penceresinden dışarı bakıldığında, kasabanın sokaklarında bir ışık yok — sadece karanlık ve yağmur. Ama karanlıkta, çok uzakta, bir şey hareket ediyor. Bir gölge. Bir şey. Ve o şey, meyhane doğru yaklaşıyor gibi hissediliyor.
+
+---
+
+**Ne yapacaksın?**
+- Çantayı açıp içindekileri kontrol et
+- Borin'e koşup ne düşürdüğünü ve neden bu kadar korktuğunu sor
+- Silas'a "gece yarısı" ne anlama geldiğini sor
+- Meyhaneden çıkıp doğu yoluna doğru değirmene git
+- Başka bir şey dene
+
+⏱️  Toplam: 21.40s | İlk token: 7.51s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 24
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: '"Borin'e koşup kolundan tutarım ve fısıltayarak sorarım: 'Ne düşürdün, dostum? Neden bu kadar korkuyorsun — o şişede ne var?'"'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '```json
+{"needed": true, "ability": "charisma", "dc": 12}
+```'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 14 | Modifier: +3 | Toplam: 17 | DC: 12
+   ✅ BAŞARILI
+   📈 Charisma XP +5 → 30
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 26
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: charisma check vs DC 12
+Roll: 14 + 3 (modifier) = 17
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+Borin'in kolundan tutulduğunda cüce donakalıyor — gözleri kadoya kilitleniyor, ter damlası alnından sıçrayışlarla düşüyor ve elindeki bez parçası yere yuvarlanıyor. Cücenin nefesi, bayat bira ve korku kokuyor, sesi gırtlağından çıkıyormuş gibi:
+
+*"Ş-şişe... şişe değil, o şey... o şey BENDEYDİ, onu benden çaldılar!"* diye fısıldıyor Borin, gözleri deli gibi kado'ya bakıyor. *"Siyah Kurtlar... onlar her hafta bir şey istiyor — altın, yiyecek, bilgi... Ama bu sefer... bu sefer bir ÇOCUK istiyorlar. Ve o şişe... o şişe, onların SEMBOLÜ. Onu taşıyan kişi... onların SEÇİLMİŞİ oluyor."*
+
+Borin'in eli titreyerek kado'nun kolundan çekiliyor ve barın arkasındaki karanlık köşeye işaret ediyor:
+
+*"Arka oda... arka odada bir geçit var. O geçitten aşağı inersen... yeraltı tünellerine varırsın. Ama orada... orada bir şey YAŞIYOR. Ben ona yemek bırakıyorum, o da bana dokunmuyor. Ama sen... sen farklısın. O, senin gibi olanları SEVER."*
+
+Meyhanenin sessizliği artık bir başka boyuta bürünmüştü — Silas'ın mırıldanması artık bir çığlığa dönüşüyor ve pencerenin dışındaki karanlıkta, bir şey hareket ediyor. Bir gölge. Bir şey. Ve o şey, meyhane doğru yaklaşıyor gibi hissediliyor.
+
+---
+
+**Ne yapacaksın?**
+- Arka odaya geçip yeraltı tünellerini araştır
+- Borin'e "Siyah Kurtlar" kim olduğunu ve neden çocuk istediklerini sor
+- Silas'a dönüp "gece yarısı" ne zaman geldiğini sor
+- Meyhaneden çıkıp doğu yoluna doğru değirmene git
+- Başka bir şey dene
+
+⏱️  Toplam: 36.18s | İlk token: 6.55s
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+🔎 NPC Extractor — AI ham cevap: []
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 27
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+
+📍 Yeni lokasyon: The Rusty Flagon - Cellar
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'Borin'e yaklaşıp fısıltayarak soruyorum: "Siyah Kurtlar kim, neden bir çocuk istiyorlar — ve bu sembolü taşıyan kişi onlara ne yapacak?" Ardından arka odaya geçip yeraltı tünellerini araştırmaya hazırlanıyorum, çünkü hazinenin orada olduğunu hissediyorum.'
+   RAG sonucu (ilk 200 kr): Kural 1:
+Ability Checks
+An ability check tests a character’s or monster’s innate 
+talent and training in an effort to overcome a challenge. 
+The DM calls for an ability check when a character or 
+mons
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   AI ham cevap: '{"needed": true, "ability": "charisma", "dc": 12}'
+   JSON parse edildi: '{"needed": true, "ability": "charisma", "dc": 12}'
+   ✅ Roll GEREKLİ → {'needed': True, 'ability': 'charisma', 'dc': 12}
+────────────────────────────────────────
+
+DEBUG execute_roll: ability=charisma, dc=12
+DEBUG execute_roll: karakter=kado, score=16, modifier=3
+
+──────────────────────────────────────────────────
+🎲 Charisma check vs DC 12
+   Zar: 12 | Modifier: +3 | Toplam: 15 | DC: 12
+   ✅ BAŞARILI
+   📈 Charisma XP +5 → 35
+   📈 Genel XP +2 (roll yapıldı) → Toplam: 29
+
+DEBUG execute_roll → GM'e gidecek mesaj:
+Player: kado
+Action required: charisma check vs DC 12
+Roll: 12 + 3 (modifier) = 15
+Result: SUCCESS
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ parse_gm_events HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🔎 NPC Extractor — Hata: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 30
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+⚠️  Trigger check hatası: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I cautiously observe my surroundings and decide my next move. (AI error: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions)'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ needs_roll_check HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 31
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ parse_gm_events HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🔎 NPC Extractor — Hata: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 32
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+⚠️  Trigger check hatası: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I cautiously observe my surroundings and decide my next move. (AI error: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions)'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ needs_roll_check HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 33
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ parse_gm_events HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🔎 NPC Extractor — Hata: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 34
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+⚠️  Trigger check hatası: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I cautiously observe my surroundings and decide my next move. (AI error: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions)'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ needs_roll_check HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 35
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ parse_gm_events HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🔎 NPC Extractor — Hata: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 36
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+⚠️  Trigger check hatası: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I cautiously observe my surroundings and decide my next move. (AI error: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions)'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ needs_roll_check HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 37
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ parse_gm_events HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🔎 NPC Extractor — Hata: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 38
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+⚠️  Trigger check hatası: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I cautiously observe my surroundings and decide my next move. (AI error: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions)'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ needs_roll_check HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 39
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ parse_gm_events HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🔎 NPC Extractor — Hata: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 40
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+⚠️  Trigger check hatası: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I cautiously observe my surroundings and decide my next move. (AI error: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions)'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ needs_roll_check HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 41
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ parse_gm_events HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🔎 NPC Extractor — Hata: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 42
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+⚠️  Trigger check hatası: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I cautiously observe my surroundings and decide my next move. (AI error: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions)'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ needs_roll_check HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 43
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ parse_gm_events HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🔎 NPC Extractor — Hata: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 44
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+⚠️  Trigger check hatası: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I cautiously observe my surroundings and decide my next move. (AI error: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions)'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ needs_roll_check HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 45
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ parse_gm_events HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🔎 NPC Extractor — Hata: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 46
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+⚠️  Trigger check hatası: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I cautiously observe my surroundings and decide my next move. (AI error: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions)'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ needs_roll_check HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 47
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ parse_gm_events HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🔎 NPC Extractor — Hata: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 48
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+⚠️  Trigger check hatası: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I cautiously observe my surroundings and decide my next move. (AI error: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions)'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ needs_roll_check HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 49
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ parse_gm_events HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🔎 NPC Extractor — Hata: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 50
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+⚠️  Trigger check hatası: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I cautiously observe my surroundings and decide my next move. (AI error: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions)'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ needs_roll_check HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 51
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ parse_gm_events HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🔎 NPC Extractor — Hata: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 52
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+⚠️  Trigger check hatası: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I cautiously observe my surroundings and decide my next move. (AI error: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions)'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ needs_roll_check HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 53
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ parse_gm_events HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🔎 NPC Extractor — Hata: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 54
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+⚠️  Trigger check hatası: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I cautiously observe my surroundings and decide my next move. (AI error: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions)'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ needs_roll_check HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 55
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ parse_gm_events HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🔎 NPC Extractor — Hata: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 56
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+⚠️  Trigger check hatası: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I cautiously observe my surroundings and decide my next move. (AI error: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions)'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ needs_roll_check HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 57
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ parse_gm_events HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🔎 NPC Extractor — Hata: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 58
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+⚠️  Trigger check hatası: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I cautiously observe my surroundings and decide my next move. (AI error: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions)'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ needs_roll_check HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 59
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ parse_gm_events HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🔎 NPC Extractor — Hata: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 60
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+⚠️  Trigger check hatası: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I cautiously observe my surroundings and decide my next move. (AI error: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions)'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ needs_roll_check HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 61
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ parse_gm_events HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🔎 NPC Extractor — Hata: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 62
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+⚠️  Trigger check hatası: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I cautiously observe my surroundings and decide my next move. (AI error: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions)'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ needs_roll_check HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 63
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ parse_gm_events HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🔎 NPC Extractor — Hata: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 64
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+⚠️  Trigger check hatası: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I cautiously observe my surroundings and decide my next move. (AI error: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions)'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ needs_roll_check HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 65
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ parse_gm_events HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🔎 NPC Extractor — Hata: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 66
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+⚠️  Trigger check hatası: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I cautiously observe my surroundings and decide my next move. (AI error: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions)'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ needs_roll_check HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 67
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ parse_gm_events HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🔎 NPC Extractor — Hata: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 68
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+⚠️  Trigger check hatası: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I cautiously observe my surroundings and decide my next move. (AI error: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions)'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ needs_roll_check HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 69
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ parse_gm_events HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🔎 NPC Extractor — Hata: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 70
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+⚠️  Trigger check hatası: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I cautiously observe my surroundings and decide my next move. (AI error: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions)'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ needs_roll_check HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 71
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ parse_gm_events HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🔎 NPC Extractor — Hata: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 72
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+⚠️  Trigger check hatası: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I cautiously observe my surroundings and decide my next move. (AI error: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions)'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ needs_roll_check HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 73
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ parse_gm_events HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🔎 NPC Extractor — Hata: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 74
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+⚠️  Trigger check hatası: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I cautiously observe my surroundings and decide my next move. (AI error: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions)'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ needs_roll_check HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 75
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ parse_gm_events HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🔎 NPC Extractor — Hata: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 76
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+⚠️  Trigger check hatası: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I cautiously observe my surroundings and decide my next move. (AI error: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions)'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ needs_roll_check HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 77
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ parse_gm_events HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🔎 NPC Extractor — Hata: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 78
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+⚠️  Trigger check hatası: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I cautiously observe my surroundings and decide my next move. (AI error: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions)'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ needs_roll_check HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 79
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ parse_gm_events HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🔎 NPC Extractor — Hata: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 80
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+⚠️  Trigger check hatası: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I cautiously observe my surroundings and decide my next move. (AI error: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions)'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ needs_roll_check HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 81
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ parse_gm_events HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🔎 NPC Extractor — Hata: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 82
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+⚠️  Trigger check hatası: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I cautiously observe my surroundings and decide my next move. (AI error: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions)'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ needs_roll_check HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 83
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ parse_gm_events HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🔎 NPC Extractor — Hata: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 84
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+⚠️  Trigger check hatası: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I cautiously observe my surroundings and decide my next move. (AI error: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions)'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ needs_roll_check HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 85
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ parse_gm_events HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🔎 NPC Extractor — Hata: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 86
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+⚠️  Trigger check hatası: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I cautiously observe my surroundings and decide my next move. (AI error: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions)'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ needs_roll_check HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 87
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ parse_gm_events HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🔎 NPC Extractor — Hata: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   📈 Genel XP +1 (aksiyon) → Toplam: 88
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+⚠️  Trigger check hatası: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+
+────────────────────────────────────────
+🎯 DEBUG needs_roll_check
+   Eylem: 'I cautiously observe my surroundings and decide my next move. (AI error: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions)'
+   RAG sonucu (ilk 200 kr): Kural 1:
+any point during an interaction if he or she wants the dice 
+to play a role in determining an NPC’s reactions. Other 
+checks might be appropriate in certain situations, at your 
+DM’s discreti
+   Node actions mevcut: EVET
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ needs_roll_check HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+────────────────────────────────────────
+   📈 Genel XP +1 (aksiyon (roll yok)) → Toplam: 89
+
+🧙 GM: 🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+   ❌ parse_gm_events HATA: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+🐞 [LLM] Provider: OpenRouter, Model: openrouter/owl-alpha
+🔎 NPC Extractor — Hata: 429 Client Error: Too Many Requests for url: https://openrouter.ai/api/v1/chat/completions
+Oturum kapatıldı. (ID: 93)
