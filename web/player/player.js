@@ -1,8 +1,10 @@
 import { Net, el, toast, paragraphs, PLAYER_COLORS, COND_ICONS, hpClass } from "/static/shared/net.js";
 
 const $ = (id) => document.getElementById(id);
-const TOKEN_KEY = "dndm_token";
-const NAME_KEY = "dndm_name";
+// several players can share one PC: each ?seat=… gets its own identity in this browser
+const SEAT = new URLSearchParams(location.search).get("seat") || "";
+const TOKEN_KEY = "dndm_token" + (SEAT ? "_" + SEAT : "");
+const NAME_KEY = "dndm_name" + (SEAT ? "_" + SEAT : "");
 const net = new Net("player");
 
 let me = null;            // player public info

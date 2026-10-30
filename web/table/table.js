@@ -71,6 +71,8 @@ for (const [id, key] of [["opt-autoroll", "auto_roll"], ["opt-showdc", "show_dc"
   $(id).onchange = (e) => net.send({ op: "settings", settings: { [key]: e.target.checked } });
 }
 $("btn-save").onclick = () => net.send({ op: "save" });
+let pcSeats = 1;
+$("pc-seat").onclick = (e) => { e.preventDefault(); window.open(`/play?seat=pc${pcSeats++}`, "_blank"); };
 $("btn-join").onclick = () => $("join-modal").classList.remove("hidden");
 $("btn-full").onclick = () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
 
