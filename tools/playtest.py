@@ -84,7 +84,11 @@ async def run(args) -> Path:
     for i in range(args.players):
         p = s.join(f"Bot{i + 1}")
         p.connected = True
-        s.set_character(p.id, {"pregen": [0, 1, 2, 4, 5, 3][i % 6]})
+        ch = s.set_character(p.id, {"pregen": [0, 1, 2, 4, 5, 3][i % 6]})
+        while ch.level < args.level:
+            ch.xp = max(ch.xp, [0, 300, 900, 2700, 6500, 14000][ch.level])
+            ch.level_up()
+        ch.long_rest()
         players.append(p)
 
     out_dir = Path(".runtime/playtests")
@@ -177,6 +181,7 @@ def main() -> None:
     ap.add_argument("--rounds", type=int, default=10)
     ap.add_argument("--personas", default="")
     ap.add_argument("--model", default="")
+    ap.add_argument("--level", type=int, default=1)
     args = ap.parse_args()
     if args.scenario in ("", "free", "none"):
         args.scenario = ""

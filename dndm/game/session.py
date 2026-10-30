@@ -590,7 +590,7 @@ class GameSession:
             except InventoryError:
                 stack = None
             if stack:
-                out.append(f"{ch.name} obtained: {stack.name}")
+                out.append(f"{ch.name} TAKES and now holds '{stack.name}' (show how they get it in the scene)")
                 await self.toast(f"🎒 {ch.name}: {stack.name} envantere eklendi", "item")
         if disc.gold:
             ch.inventory.add_coins(gp=disc.gold)
