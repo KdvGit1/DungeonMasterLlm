@@ -1,0 +1,534 @@
+# Tuzlukıyı'nda Gümüş ve Kan — özgün şehir entrikası senaryosu (seviye 1-3)
+title: "Tuzlukıyı'nda Gümüş ve Kan"
+pitch: >
+  Tuz ve katran kokan liman şehri Tuzlukıyı'nda her dolunayda rıhtımda parçalanmış cesetler bulunuyor.
+  Muhafızlar kaçakçıları suçluyor, tüccarlar ödül vaat ediyor, hırsızlar loncası susuyor. Katil
+  aranızda, gün ışığında saygıyla selamlanan biri olabilir.
+tone: "Sisli, nemli bir liman noir'i; herkes bir şey satıyor, kimse masum değil."
+players: [1, 6]
+level_range: [1, 3]
+
+premise: |
+  Tuzlukıyı, Gümüş Körfez'in en işlek limanı. Şehri Tüccarlar Meclisi yönetiyor; geceleri ise Gölge
+  Lonca. Son üç dolunayda rıhtımda dört kişi parçalanmış halde bulundu. Gerçek: Liman Kaptanı İlyas
+  Demirgöz, uzak bir seferde bir kurtadam tarafından ısırıldı ve lanetlendi. Dolunay gecelerinde ne
+  yaptığını hatırlamıyor; sadece sabahları ellerindeki kanı ve tırnaklarının altındaki eti. Gölge Lonca
+  onun sırrını öğrendi: lonca başı 'Fısıltı' Ada, İlyas'ı şantajla susturuyor ve dolunay gecelerinde
+  rakiplerini eski fenere — İlyas'ın dönüştüğü yere — kandırarak gönderiyor. Cinayetlerin her biri bir
+  loncanın düşmanı. Loncayı gizlice fonlayan kişi ise Meclis üyesi Madam Vesna Altınkese: rakip tüccar
+  Bora Tuzcu'yu sıradaki kurban yapmak istiyor. Kurtadam sıradan silaha bağışık; gümüş ya da büyü gerekir.
+  Ay Tapınağı'nın rahibesi laneti kaldırabilecek eski bir ayin biliyor — kurt otu ve dolunay altında.
+truths:
+  - "Katil Liman Kaptanı İlyas Demirgöz; lanetli ve masum sayılır mı, oyuncular karar verir."
+  - "Gölge Lonca, İlyas'ın sırrını şantajla kullanıp kurbanları eski fenere gönderiyor; her kurban loncanın düşmanı."
+  - "Madam Vesna Altınkese loncayı fonluyor; sıradaki hedef rakibi Bora Tuzcu."
+  - "Kurtadama sıradan silah işlemez; gümüş kaplama silah ya da büyü gerekir. Gümüşçü Usta Nesrin silah kaplayabilir (pahalı)."
+  - "Lanet, dolunay gecesi kurt otu iksiri içirilip Ay Tapınağı'nda ayin yapılarak kaldırılabilir."
+  - "Muhafız Komutanı Doruk dürüst ama çaresiz; Meclis ona kaçakçıları suçlaması için baskı yapıyor."
+start_location: rihtim
+opening: >
+  Grup, sisli bir sabahta Tuzlukıyı rıhtımına yanaşan bir gemiden iniyor. İskelenin ucunda kalabalık
+  toplanmış; muhafızlar örtülü bir cesedin etrafında. Bir tellal bağırıyor: "Rıhtım Canavarı'nı bulana
+  Meclis'ten yüz altın!"
+style_notes: |
+  - Liman sesleri: martılar, halat gıcırtısı, sarhoş şarkılar, gemi çanları. Sis her şeyi yutar.
+  - Herkesin bir çıkarı var; NPC'ler bilgiyi asla bedavaya vermez (para, iyilik, sır karşılığı).
+  - İlyas'ı insan olarak göster: yorgun, iyi kalpli, bir şeylerden utanan biri. Oyuncular ona acıyabilmeli.
+
+factions:
+  meclis:
+    name: Tüccarlar Meclisi
+    goal: Ticaretin sürmesi, skandalın örtülmesi; birkaç üyenin kendi gizli hesapları var.
+    attitude: neutral
+  golge_lonca:
+    name: Gölge Lonca
+    goal: Rakiplerini 'kazayla' yok etmek, şehrin gece ekonomisini tamamen ele geçirmek.
+    attitude: wary
+  kanli_martilar:
+    name: Kanlı Martılar
+    goal: Kaçakçılığı sürdürmek; cinayetler yüzünden suçlanmaktan kurtulmak.
+    attitude: wary
+  muhafizlar:
+    name: Şehir Muhafızları
+    goal: Cinayetleri çözmek; ama Meclis'in baskısı altında.
+    attitude: neutral
+
+fronts:
+  dolunay:
+    name: Dolunay
+    description: Dolunay yaklaşıyor; o gece İlyas dönüşecek ve lonca yeni bir kurban gönderecek.
+    clock: 4
+    per_day: 1
+    stages:
+      2: "Gökyüzünde ay neredeyse dolu. İlyas'ın elleri titriyor; kimseyle göz göze gelmiyor."
+      3: "Lonca adamları Bora Tuzcu'ya 'eski fenerde gizli bir mal satışı' teklifiyle bir mektup gönderdi."
+    on_complete: >
+      Dolunay doğdu. Eski fenerden insan olmayan bir uluma yükseliyor. Bir kurban daha — eğer kimse
+      araya girmezse, bu sefer Bora Tuzcu.
+  kanli_martilar_av:
+    name: Martı Avı
+    description: Meclis'in baskısıyla muhafızlar Kanlı Martılar'a baskın hazırlıyor; masumlar asılabilir.
+    clock: 3
+    per_day: 1
+    stages:
+      2: "Muhafızlar Martı Meyhanesi'ni bastı; iki kaçakçı zincirlenip götürüldü."
+    on_complete: "Meclis meydanda iki kaçakçıyı 'Rıhtım Canavarı' diye astırdı. Gerçek katil hâlâ serbest."
+
+quests:
+  rihtim_canavari:
+    name: Rıhtım Canavarı
+    hook: "Meclis, rıhtımdaki cinayetleri çözene yüz altın ödül vaat ediyor."
+    objectives: ["Cinayetlerin arkasındakini bul", "Bir sonraki cinayeti önle"]
+    reward_xp: 300
+    reward_gold: 100
+    optional: false
+  gumus_silah:
+    name: Gümüş Bıçak
+    hook: "Gümüşçü Usta Nesrin: 'Bazı yaratıklara çelik işlemez. Gümüş ister, evlat.'"
+    objectives: ["Gümüş kaplama bir silah edin"]
+    reward_xp: 50
+    optional: true
+  lanetin_ilaci:
+    name: Kurt Otu
+    hook: "Ay Tapınağı'nın rahibesi, lanetin kaldırılabileceğini söylüyor — kurt otu ve dolunay gerekir."
+    objectives: ["Kurt otu bul", "Lanetliyi dolunay gecesi tapınağa getir"]
+    reward_xp: 300
+    reward_items: [potion_greater_healing]
+    giver: rahibe_aysel
+  martilarin_adaleti:
+    name: Masumların Adaleti
+    hook: "Kanlı Martılar'ın reisi, adamlarının asılmasını önleyene büyük bir iyilik borçlu olacağını söylüyor."
+    objectives: ["Kaçakçıların masum olduğunu kanıtla"]
+    reward_xp: 150
+    reward_gold: 40
+    optional: true
+
+npcs:
+  doruk:
+    name: Komutan Doruk Sertkaya
+    race: insan
+    role: Şehir Muhafızları komutanı
+    appearance: Kır saçlı, yorgun, burnu kırık; pelerininde tuz lekeleri.
+    personality: Dürüst, inatçı, siyasetten bıkmış.
+    voice: "Sert ve yorgun: 'Meclis bir suçlu istiyor. Ben gerçek katili istiyorum. Bu ikisi aynı şey değil.'"
+    wants: Gerçek katili bulmak; Meclis'in baskısından kurtulmak.
+    secret: Cesetlerdeki ısırık izlerinin hayvan değil, insan iriliğinde bir kurda ait olduğunu biliyor ama Meclis raporu değiştirtti.
+    knows: ["Kurbanların dördü de loncayla kavgalı tüccarlardı", "Cesetler hep eski fenerin yakınından sürükleniyor"]
+    attitude: neutral
+    location: karakol
+    monster: veteran
+    faction: muhafizlar
+  ilyas:
+    name: Kaptan İlyas Demirgöz
+    race: insan
+    role: Liman Kaptanı
+    appearance: Geniş omuzlu, kırçıl sakallı; yorgun gözlü. Ellerinde bitmeyen sargılar, tırnakları hep dibine kadar kesik.
+    personality: Nazik, babacan, derinden utanan ve korkan biri; dolunay yaklaştıkça sinirli.
+    voice: "Kısık ve sıcak, ama kırık: 'Deniz insana çok şey alır, evlat. Bazen... kim olduğunu bile.'"
+    wants: Lanetinden kurtulmak; kimseye zarar vermemek; kızı Mina'yı korumak.
+    secret: Kurtadam. Dolunay gecelerini hatırlamıyor ama sabahları kanı görüyor. Lonca onu kızı Mina'yla tehdit ediyor.
+    knows: ["Bir seferde bir kurt tarafından ısırıldığını", "Loncanın ona mektuplar gönderdiğini"]
+    attitude: friendly
+    location: ilyasin_evi
+    monster: werewolf
+  ada:
+    name: "'Fısıltı' Ada"
+    race: buçukluk
+    role: Gölge Lonca'nın başı
+    appearance: Çocuk boyunda, zarif, gri kadife giysili; gülümsemesi hiç gözlerine ulaşmaz.
+    personality: Zeki, sabırlı, şaşırtıcı derecede kibar; tehditlerini iltifat gibi söyler.
+    voice: "Tatlı bir fısıltı: 'Bu şehirde her şeyin bir fiyatı var. Sizinki ne, merak ediyorum.'"
+    wants: Şehrin geceleri; Meclis'te bir koltuk; İlyas'ı silah olarak kullanmaya devam etmek.
+    secret: Kurbanları fenere yollayan o; Vesna'dan para alıyor. İlyas'ın kızı Mina'nın yerini biliyor.
+    knows: ["İlyas'ın sırrı", "Vesna'nın anlaşması", "Bora Tuzcu'nun sıradaki hedef olduğu"]
+    attitude: wary
+    location: lonca_kuyusu
+    monster: spy
+    faction: golge_lonca
+  vesna:
+    name: Madam Vesna Altınkese
+    race: insan
+    role: Tüccarlar Meclisi üyesi, ipek ve baharat tüccarı
+    appearance: Kırklarında, kusursuz, altın işlemeli kadife; elinde hep bir yelpaze.
+    personality: Soğukkanlı, hesapçı, kibar bir yılan.
+    voice: "Ağır ve tatlı: 'Ticaret, sevgili dostlarım, kimin önce batacağına dair bir sabır oyunudur.'"
+    wants: Rakibi Bora Tuzcu'nun yok olması; Meclis başkanlığı.
+    secret: Loncayı fonluyor; Bora Tuzcu'nun ölümü için ödeme yaptı. Köşkündeki kasada lonca ile ödeme kayıtları var.
+    attitude: neutral
+    location: vesna_kosku
+    monster: noble
+    faction: meclis
+  bora:
+    name: Bora Tuzcu
+    race: cüce
+    role: Tuz ve kalay tüccarı, Meclis üyesi
+    appearance: Kısa, kalın, kırmızı sakallı; parmaklarında kalay yüzükler; gürültücü.
+    personality: Kaba, cömert, hırslı; düşmanlarının farkında değil.
+    voice: "Gür ve kahkahalı: 'Para mı? Benim param çok, dostum! Asıl mesele kimin cesareti var!'"
+    wants: Daha çok ticaret; Vesna'yı Meclis'te alt etmek.
+    secret: Loncanın gönderdiği 'gizli mal satışı' mektubuna inandı; dolunay gecesi eski fenere gidecek.
+    attitude: friendly
+    location: meclis
+  nesrin:
+    name: Usta Nesrin
+    race: gnom
+    role: Gümüşçü ve silah kaplayıcısı
+    appearance: Kocaman büyüteç gözlükler, eriyik gümüş lekeli önlük, saçında kalem.
+    personality: Konuşkan, meraklı, işine aşık; pazarlıkta acımasız.
+    voice: "Hızlı ve heyecanlı: 'Gümüş! Ayın metali! Kurtların korkusu! Pahalı mı? Elbette pahalı!'"
+    wants: İyi bir iş ve iyi bir hikâye; gümüş fiyatlarının düşmesi.
+    secret: Son bir ayda Kaptan İlyas gizlice gümüş zincir ısmarladı — kendini bağlamak için.
+    knows: ["Kurtadamlara gümüş işler", "Kaptan İlyas gümüş zincir aldı"]
+    attitude: friendly
+    location: gumuscu
+  rahibe_aysel:
+    name: Rahibe Aysel
+    race: elf
+    role: Ay Tapınağı rahibesi
+    appearance: Gümüş saçlı, ayışığı mavisi cübbeli; boynunda hilal şeklinde bir muska.
+    personality: Sakin, gizemli, merhametli.
+    voice: "Uzak ve yumuşak: 'Ay hem yaralar hem iyileştirir. Lanet bir yara, evlat; kötülük değil.'"
+    wants: Lanetlinin kurtarılması, öldürülmemesi.
+    secret: Kurt otunun şehirde yalnızca kaçakçılarda bulunduğunu biliyor — Kanlı Martılar onu Doğu adalarından getiriyor.
+    knows: ["Lanet kaldırma ayini", "Kurt otu kaçakçılardan alınabilir"]
+    attitude: friendly
+    location: ay_tapinagi
+  martı_reis:
+    name: Reis Kara Sefa
+    race: yarı-ork
+    role: Kanlı Martılar'ın reisi
+    appearance: Tek kulaklı, dövmeli, deniz tuzuyla ağarmış örgülü saç; belinde iki kanca.
+    personality: Kaba, sadık adamlarına, düşmanlarına acımasız; sözüne güvenilir.
+    voice: "Hırıltılı: 'Biz kaçakçıyız, kasap değil. Benim adamlarımı asan herkesle hesaplaşırım.'"
+    wants: Adamlarının aklanması; muhafızların baskınlarının durması.
+    secret: Bir gece eski fenerin oradan kaçarken dev bir kurt gördü; kurdun boynunda kaptanlık madalyonu vardı.
+    knows: ["Kurt otu getirdiklerini", "Fenerde dev bir kurt gördüğünü"]
+    attitude: wary
+    location: marti_meyhanesi
+    monster: bandit_captain
+    faction: kanli_martilar
+  mina:
+    name: Mina Demirgöz
+    race: insan
+    role: Kaptan İlyas'ın kızı
+    appearance: On iki yaşında, tuz lekeli elbise, babasının eski denizci şapkası.
+    personality: Cesur, ağzı bozuk, babasını delicesine seviyor.
+    voice: "Meydan okuyan: 'Babam kötü biri değil! Sadece hastalandı!'"
+    wants: Babasının iyileşmesi; eve dönmek.
+    secret: Lonca onu 'koruma' adı altında kuyunun dibinde tutuyor; babasını tehdit etmek için.
+    attitude: friendly
+    location: lonca_kuyusu
+
+locations:
+  rihtim:
+    name: Tuzlukıyı Rıhtımı
+    region: liman
+    description: >
+      Sise gömülü iskeleler, katran ve balık kokusu, martı çığlıkları. Hamallar sandık taşıyor, satıcılar
+      bağırıyor. İskelenin ucunda bir kalabalık, ortada örtülü bir ceset; muhafızlar meraklıları itiyor.
+      Duvarda ödül ilanı: 'Rıhtım Canavarı'nı bulana yüz altın.'
+    gm_notes: Şehrin merkezi. Ceset incelenebilir. Herkesin bir teorisi var.
+    exits: [marti_meyhanesi, karakol, meclis, gumuscu, ay_tapinagi, balikci_mahallesi, eski_fener]
+    discoveries:
+      - id: cesedi_incele
+        hint: "Örtünün altından görünen el; tırnakları kırılmış."
+        check: {skill: medicine, dc: 12}
+        reveals: "Ceset bir bıçakla değil, devasa pençe ve dişlerle parçalanmış. Isırık izi insan ağzı genişliğinde ama kurt dişleriyle. Kurbanın elinde bir lonca jetonu sıkılı."
+        item: {name: "Lonca Jetonu", kind: quest, description: "Gölge Lonca'nın gri bakır jetonu; kurbanın elinde bulundu."}
+        xp: 50
+      - id: tellalin_listesi
+        hint: "Tellal kurbanların isimlerini sayıyor."
+        reveals: "Dört kurbanın hepsi tüccar ve hepsi son bir yılda Gölge Lonca'yla ödemeler yüzünden kavga etmiş."
+        xp: 25
+      - id: surukleme_izleri
+        hint: "İskele tahtalarında kurumuş kan izleri denize değil, kuzeye uzanıyor."
+        check: {skill: survival, dc: 13}
+        reveals: "Kan izleri kuzeydeki kayalık burna, terk edilmiş eski fenere doğru gidiyor."
+        leads_to: [eski_fener]
+        xp: 50
+
+  marti_meyhanesi:
+    name: Martı Meyhanesi
+    region: liman
+    description: >
+      Batık bir geminin gövdesinden yapılmış basık bir meyhane. Duman, rom, kaba şarkılar. Köşedeki masada
+      dövmeli kaçakçılar; ortada tek kulaklı iri bir yarı-ork zar atıyor.
+    gm_notes: Kanlı Martılar'ın yeri. Yabancılara şüpheyle bakarlar ama muhafızlardan nefret ettikleri için düşmanın düşmanı dost olabilir. Kurt otu satabilirler.
+    exits: [rihtim]
+    npcs: [martı_reis]
+    safe_rest: true
+    shop:
+      - {id: rations, price: 0.5}
+      - {id: antitoxin, price: 40}
+      - {id: alchemist_fire, price: 45}
+      - {id: caltrops, price: 1}
+      - {id: ball_bearings, price: 1}
+    discoveries:
+      - id: kurt_otu
+        hint: "Bir kaçakçının sandığından mor çiçekli kuru otlar taşmış."
+        check: {skill: nature, dc: 12}
+        reveals: "Kuru mor çiçekler kurt otu: zehirli ama lanetli kurtlara karşı efsanevi bir ilaç. Kaçakçılar bunu Doğu adalarından getiriyor."
+        item: {name: "Kurt Otu Demeti", kind: quest, description: "Lanet kaldırma ayini için gereken mor çiçekli ot."}
+        xp: 50
+      - id: sefanin_tanikligi
+        hint: "Reis Kara Sefa fenerden bahsedilince yüzünü buruşturuyor."
+        check: {skill: persuasion, dc: 14}
+        reveals: "Sefa: 'Bir gece fenerin oradan kaçarken gördüm onu. Bir ayı kadar iri bir kurt. Boynunda... boynunda kaptanlık madalyonu vardı. Kimseye söylemedim, kim inanır bir kaçakçıya?'"
+        xp: 75
+    encounters:
+      - id: meyhane_arbedesi
+        when: "Oyuncular kaçakçıları muhafız sanıp kavga çıkarır ya da Sefa'yı tehdit ederse"
+        enemies: [{monster: bandit_captain, count: 1, name: "Reis Kara Sefa"}, {monster: bandit, count: 3, name: "Kanlı Martı"}]
+        features:
+          - {name: "Rom fıçıları", description: "Kırılırsa yere yanıcı rom saçan fıçılar.", effect: hazard, damage: 2d6, damage_type: fire, rank: front}
+          - {name: "Asılı ağ", description: "Tavandan sarkan eski bir balık ağı.", effect: trap, damage: null, rank: front}
+
+  karakol:
+    name: Muhafız Karakolu
+    region: liman
+    description: >
+      Kalın taş duvarlı, rutubetli bir karakol. Hücrelerde yorgun mahkûmlar, masada rapor yığınları,
+      duvarda rıhtımın haritası; dört kırmızı iğne, hepsi kuzey burnunun yakınında.
+    gm_notes: Komutan Doruk dürüst; Meclis'in raporları değiştirdiğine kızgın. Kanıt getirenle işbirliği yapar.
+    exits: [rihtim]
+    npcs: [doruk]
+    discoveries:
+      - id: harita_igneleri
+        hint: "Duvardaki haritada dört kırmızı iğne."
+        reveals: "Dört cinayet yeri de kuzey burnundaki eski fenerin yakınında; cesetler oradan rıhtıma doğru sürüklenmiş."
+        leads_to: [eski_fener]
+        xp: 25
+      - id: degistirilmis_rapor
+        hint: "Komutan Doruk raporlara öfkeyle bakıyor."
+        check: {skill: insight, dc: 12}
+        reveals: "Doruk itiraf ediyor: adli rapor 'insan iriliğinde kurt ısırığı' diyordu; Meclis'ten Madam Vesna raporu 'kaçakçı bıçağı' diye değiştirtti."
+        xp: 75
+
+  meclis:
+    name: Tüccarlar Meclisi
+    region: sehir
+    description: >
+      Mermer sütunlu, altın varaklı bir salon. Kadife giysili tüccarlar alçak sesle pazarlık ediyor.
+      Kürsünün yanında kırmızı sakallı bir cüce kahkahalarla konuşuyor; karşısında yelpazeli zarif bir kadın onu izliyor.
+    gm_notes: Bora ve (bazen) Vesna burada. Ödül buradan alınır. Bora loncanın mektubunu gösterebilir.
+    exits: [rihtim, vesna_kosku]
+    npcs: [bora]
+    discoveries:
+      - id: boranin_mektubu
+        hint: "Bora cebinden bir mektup çıkarıp gururla sallıyor."
+        check: {skill: persuasion, dc: 10}
+        reveals: "Bora'nın mektubu: 'Dolunay gecesi, eski fenerde, gümrüksüz kalay. Yalnız gelin.' İmza yok, ama kâğıdın köşesinde lonca jetonunun deseni basılı."
+        xp: 50
+      - id: vesnanin_bakisi
+        hint: "Madam Vesna, Bora'nın mektubunu görünce yelpazesini kapatıyor."
+        check: {skill: insight, dc: 14}
+        reveals: "Vesna'nın yüzünde bir anlığına zafer gülümsemesi beliriyor. Bu mektuptan haberi var."
+        leads_to: [vesna_kosku]
+        xp: 50
+
+  gumuscu:
+    name: Nesrin'in Gümüş Atölyesi
+    region: sehir
+    description: >
+      Küçük, sıcak bir atölye; ocakta eriyen gümüş, duvarlarda kaplanmış hançerler ve kılıçlar. Tezgâhın
+      arkasında kocaman gözlüklü bir gnom ıslık çalıyor.
+    gm_notes: Gümüş kaplama silah satılır. Nesrin İlyas'ın gümüş zincir aldığını bilir.
+    exits: [rihtim]
+    npcs: [nesrin]
+    shop:
+      - {id: silvered_dagger, price: 102}
+      - {id: silvered_shortsword, price: 110}
+      - {id: silvered_longsword, price: 115}
+      - {id: silvered_mace, price: 105}
+      - {id: holy_water, price: 25}
+    discoveries:
+      - id: gumus_zincir
+        hint: "Tezgâhta 'İ.D.' baş harfli bir sipariş fişi."
+        check: {skill: investigation, dc: 11}
+        reveals: "Sipariş fişi: 'Kaptan İ. Demirgöz — altı arşın gümüş zincir, kilitli. Acil.' Liman kaptanı neden gümüş zincirle bir şey bağlamak istesin?"
+        leads_to: [ilyasin_evi]
+        xp: 50
+
+  ay_tapinagi:
+    name: Ay Tapınağı
+    region: sehir
+    description: >
+      Denize bakan beyaz taştan yuvarlak bir tapınak; tavanında ay evrelerini gösteren delikler. İçeride
+      tütsü, dalga sesi ve hilal muskası takmış gümüş saçlı bir rahibe.
+    gm_notes: "Güvenli yer. Rahibe Aysel lanet kaldırma ayinini bilir: kurt otu iksiri + dolunay + tapınak."
+    exits: [rihtim]
+    npcs: [rahibe_aysel]
+    safe_rest: true
+    shop:
+      - {id: potion_healing, price: 50}
+      - {id: holy_water, price: 25}
+    discoveries:
+      - id: lanet_ayini
+        hint: "Sunakta eski bir kitap, açık sayfada bir kurt ve bir ay çizimi."
+        reveals: "Kitap: 'Ay'ın laneti ayın altında çözülür. Kurt otu iksirini lanetliye dolunay doğarken içir; tapınağın ışığında ruhu geri çağrılır.' Lanetli öldürülmeden kurtarılabilir."
+        xp: 50
+
+  balikci_mahallesi:
+    name: Balıkçı Mahallesi
+    region: liman
+    description: >
+      Dar, eğri sokaklar, kurutulan balıklar, çamaşır ipleri. Çocuklar yabancıların peşinde koşuyor.
+      Mahallenin ucunda, denize bakan bakımlı bir taş ev ve bahçesinde bir kız çocuğu salıncağı — boş.
+    gm_notes: Dedikodu mahallesi. Çocuklar Mina'nın kaybolduğunu bilir. Kanalizasyon girişi burada.
+    exits: [rihtim, ilyasin_evi, kanalizasyon]
+    discoveries:
+      - id: cocuklarin_dedikodusu
+        hint: "Bir grup çocuk fısıldaşıp kaptanın evini gösteriyor."
+        reveals: "Çocuklar: 'Mina üç gündür yok! Gri giysili adamlar onu aldı, kanalizasyona indiler. Kaptan bağırıp ağladı ama muhafız çağırmadı.'"
+        leads_to: [kanalizasyon]
+        xp: 50
+
+  ilyasin_evi:
+    name: Kaptan İlyas'ın Evi
+    region: liman
+    description: >
+      Denize bakan taş bir ev. İçeride gemi maketleri, haritalar, bir kızın çizimleri. Bodrum kapısı
+      kilitli; kapının iç yüzünde derin pençe izleri ve yeni çakılmış gümüş halkalar.
+    gm_notes: >
+      İlyas gündüz burada. Sorgulanırsa önce yalan söyler, kanıtla yüzleştirilirse çöker ve itiraf eder;
+      kızının loncada rehin olduğunu anlatır. Dolunay gecesi saldırılırsa kurtadam olarak savaşır.
+    exits: [balikci_mahallesi]
+    npcs: [ilyas]
+    discoveries:
+      - id: bodrumun_sirri
+        hint: "Bodrum kapısının iç yüzünde pençe izleri."
+        check: {skill: investigation, dc: 12}
+        reveals: "Bodrumda duvara çakılmış gümüş zincirler, parçalanmış bir yatak ve kurumuş kan. Biri kendini burada bağlamaya çalışmış — ve zincirler kırılmış."
+        xp: 75
+      - id: lonca_mektuplari
+        hint: "İlyas'ın masasında mühürsüz, gri kâğıtlı mektuplar."
+        check: {skill: sleight_of_hand, dc: 13}
+        reveals: "Mektuplar: 'Mina'yı yaşatmak istiyorsan dolunayda zinciri takma. Gerisini biz hallederiz. — F.' Lonca, İlyas'ı kızıyla tehdit ediyor."
+        item: {name: "Fısıltı'nın Mektupları", kind: quest, description: "Gölge Lonca'nın İlyas'ı kızıyla tehdit ettiği mektuplar."}
+        xp: 75
+    encounters:
+      - id: dolunay_dönüşümü
+        when: "Dolunay gecesi İlyas'la karşılaşılırsa ya da Dolunay tehdidi tamamlandıysa"
+        enemies: [{monster: werewolf, count: 1, name: "Kurt Kaptan"}]
+        boss: true
+        features:
+          - {name: "Gümüş zincirler", description: "Bodrum duvarındaki kırık gümüş zincirler; kurdu bağlamak için kullanılabilir.", effect: trap, damage: null, rank: front}
+
+  kanalizasyon:
+    name: Tuz Kanalları
+    region: alt_sehir
+    hidden: true
+    outdoors: false
+    travel_hours: 1
+    description: >
+      Kemerli, deniz suyunun girip çıktığı eski taş kanallar. Dizlere kadar pis su, dev fareler, duvarlarda
+      lonca işaretleri: üç nokta ve bir hilal.
+    gm_notes: Loncanın gizli kuyusuna giden yol. İşaretleri okuyabilen doğru yolu bulur.
+    exits: [balikci_mahallesi, lonca_kuyusu]
+    discoveries:
+      - id: lonca_isaretleri
+        hint: "Duvarlarda tekrar eden üç nokta ve hilal işareti."
+        check: {skill: investigation, dc: 12}
+        reveals: "İşaretler bir yol tarifi: üç nokta sola, hilal aşağı. Bu yol loncanın gizli kuyusuna iniyor."
+        leads_to: [lonca_kuyusu]
+        xp: 50
+    encounters:
+      - id: kanal_fareleri
+        when: "Grup kanallarda oyalanırsa ya da gürültü yaparsa"
+        enemies: [{monster: giant_rat, count: 5, name: "Kanal Faresi"}]
+        features:
+          - {name: "Su kapağı", description: "Açılınca kanala deniz suyu boşaltan paslı bir kapak.", effect: push_hazard, damage: 1d6, damage_type: bludgeoning, rank: front}
+
+  lonca_kuyusu:
+    name: Fısıltı Kuyusu
+    region: alt_sehir
+    hidden: true
+    outdoors: false
+    travel_hours: 0
+    description: >
+      Kurumuş eski bir sarnıcın dibine kurulmuş gizli bir salon: halılar, mumlar, çalıntı tablolar. Ortada
+      kadife bir koltukta çocuk boyunda gri giysili bir kadın çay içiyor. Bir köşede, kilitli bir kafeste
+      denizci şapkalı bir kız.
+    gm_notes: >
+      Ada önce konuşur: pazarlık eder, oyunculara iş teklif eder, tehdit eder. Mina burada rehin. Kasa bir
+      taklitçi (mimic) — dokunanı yakalar. Ada köşeye sıkışırsa kaçmaya çalışır.
+    exits: [kanalizasyon]
+    npcs: [ada, mina]
+    discoveries:
+      - id: vesnanin_odemeleri
+        hint: "Ada'nın masasında mühürlü bir defter."
+        check: {skill: sleight_of_hand, dc: 15}
+        reveals: "Defter: 'V.A. — Bora Tuzcu işi için 300 altın, peşin.' Madam Vesna Altınkese loncaya Bora'nın ölümü için ödeme yapmış."
+        item: {name: "Lonca Defteri", kind: quest, description: "Vesna Altınkese'nin loncaya yaptığı ödemelerin kaydı."}
+        xp: 100
+    encounters:
+      - id: lonca_savasi
+        when: "Grup Ada'ya saldırır, Mina'yı zorla almaya çalışır ya da pazarlık bozulursa"
+        enemies: [{monster: spy, count: 1, name: "'Fısıltı' Ada"}, {monster: thug, count: 2, name: "Lonca Kabadayısı"}, {monster: mimic, count: 1, name: "Altın Kasa"}]
+        boss: true
+        features:
+          - {name: "Mum şamdanları", description: "Devrilirse halıları tutuşturacak dev şamdanlar.", effect: hazard, damage: 2d6, damage_type: fire, rank: front}
+          - {name: "Sarnıç kenarı", description: "Aşağısı karanlık ve derin bir sarnıç boşluğu.", effect: push_hazard, damage: 3d6, damage_type: bludgeoning, rank: front}
+
+  vesna_kosku:
+    name: Altınkese Köşkü
+    region: sehir
+    hidden: true
+    travel_hours: 1
+    description: >
+      Tepede, limana bakan beyaz bir köşk; bahçesinde portakal ağaçları, kapısında kiralık muhafızlar.
+      İçeride ipek perdeler, baharat kokusu ve çalışma odasında demir bir kasa.
+    gm_notes: Vesna'nın kasasında lonca ödemelerinin ikinci kopyası var. Kanıtla yüzleştirilirse rüşvet teklif eder.
+    exits: [meclis]
+    npcs: [vesna]
+    discoveries:
+      - id: vesnanin_kasasi
+        hint: "Çalışma odasındaki demir kasa."
+        check: {skill: sleight_of_hand, dc: 16}
+        reveals: "Kasada lonca jetonları, 300 altınlık bir makbuz ve Bora Tuzcu'nun gemilerinin satın alma sözleşmesi — 'ölümünden sonra geçerli'."
+        gold: 60
+        xp: 75
+    encounters:
+      - id: kosk_muhafizlari
+        when: "Grup köşke zorla girerse ya da Vesna'yı tehdit ederse"
+        enemies: [{monster: guard, count: 3, name: "Kiralık Muhafız"}, {monster: noble, count: 1, name: "Madam Vesna"}]
+
+  eski_fener:
+    name: Eski Fener
+    region: liman
+    hidden: true
+    travel_hours: 1
+    description: >
+      Kuzey burnunun ucunda, dalgaların dövdüğü terk edilmiş bir deniz feneri. Kapısı menteşesinden kopmuş,
+      merdivenlerde pençe izleri, tepesinde kırık bir mercek. Rüzgâr içeride bir uluma gibi dolaşıyor.
+    gm_notes: >
+      Cinayet yeri. Dolunay gecesi lonca kurbanı (Bora) buraya gönderir; İlyas burada dönüşür. Oyuncular
+      pusu kurabilir, Bora'yı uyarabilir, kurdu gümüşle bağlayabilir ya da tapınağa götürebilir.
+    exits: [rihtim]
+    discoveries:
+      - id: fenerdeki_izler
+        hint: "Merdivenlerde kurumuş kan ve dev pençe izleri."
+        check: {skill: investigation, dc: 12}
+        reveals: "Fenerin tepesinde yırtılmış bir kaptan ceketi ve kırık gümüş zincir halkaları. Burada biri kendini bağlamaya çalışmış ama başaramamış."
+        xp: 50
+    encounters:
+      - id: fener_pususu
+        when: "Dolunay gecesi fenerdeyken ya da Dolunay tehdidi tamamlandığında"
+        enemies: [{monster: werewolf, count: 1, name: "Kurt Kaptan"}, {monster: thug, count: 2, name: "Lonca Gözcüsü"}]
+        boss: true
+        features:
+          - {name: "Kırık mercek", description: "Tepeye kadar ışığı yansıtabilecek dev cam mercek.", effect: obscure, damage: null, rank: back}
+          - {name: "Fener merdiveni", description: "Dar, çürük döner merdiven.", effect: push_hazard, damage: 3d6, damage_type: bludgeoning, rank: front}
+
+endings:
+  - "LANETİN SONU: İlyas dolunayda tapınağa getirilir, kurt otu ve ayinle laneti kalkar; Mina babasına kavuşur, lonca ve Vesna ifşa olur."
+  - "ACI ADALET: Kurt Kaptan gümüşle öldürülür; cinayetler biter ama Mina yetim kalır, lonca güç kazanır."
+  - "LONCANIN GÖLGESİ: Grup Ada ile anlaşır; şehrin geceleri onların olur, kurt bir silah olarak kalır."
+  - "YANLIŞ ADALET: Kaçakçılar asılır, gerçek katil serbest kalır; Tuzlukıyı korkuyla yaşamaya devam eder."
+
+random_events:
+  - "Sisin içinden bir gemi çanı çalıyor; ama limanda hiçbir gemi hareket etmiyor."
+  - "Bir martı, gagasında gri bir lonca jetonuyla gruba bakıp uçup gidiyor."
+  - "Bir dilenci, birinin cebine bir not sıkıştırıp kalabalıkta kayboluyor: 'Ay dolmadan susun.'"
+  - "Uzaktan, şehrin üstünde, bir köpek ulumasına çok daha derin bir ses cevap veriyor."
+  - "Bir balıkçı kadın, kocasının ağlarında bir kurt yavrusunun dişini bulduğunu anlatıyor."

@@ -40,6 +40,12 @@ hand_crossbow: {name: El Arbaleti, type: weapon, category: martial_ranged, damag
 heavy_crossbow: {name: Ağır Arbalet, type: weapon, category: martial_ranged, damage: 1d10, damage_type: piercing, properties: [ammunition, heavy, loading, two_handed], range: [100, 400], ammo: bolt, value: 50, weight: 18}
 longbow:       {name: Uzun Yay, type: weapon, category: martial_ranged, damage: 1d8, damage_type: piercing, properties: [ammunition, heavy, two_handed], range: [150, 600], ammo: arrow, value: 50, weight: 2}
 
+# ─── Silvered weapons (bypass lycanthrope / fiend resistances; ~100 gp to silver) ──
+silvered_dagger:     {name: Gümüş Kaplama Hançer, type: weapon, category: simple_melee, damage: 1d4, damage_type: piercing, properties: [finesse, light, thrown], range: [20, 60], value: 102, weight: 1, rarity: uncommon}
+silvered_shortsword: {name: Gümüş Kaplama Kısa Kılıç, type: weapon, category: martial_melee, damage: 1d6, damage_type: piercing, properties: [finesse, light], value: 110, weight: 2, rarity: uncommon}
+silvered_longsword:  {name: Gümüş Kaplama Uzun Kılıç, type: weapon, category: martial_melee, damage: 1d8, damage_type: slashing, properties: [versatile], versatile: 1d10, value: 115, weight: 3, rarity: uncommon}
+silvered_mace:       {name: Gümüş Kaplama Topuz, type: weapon, category: simple_melee, damage: 1d6, damage_type: bludgeoning, properties: [], value: 105, weight: 4, rarity: uncommon}
+
 # ─── Ammunition ─────────────────────────────────────────────────
 arrow:         {name: Ok, type: ammo, stack: true, value: 0.05, weight: 0.05}
 bolt:          {name: Arbalet Oku, type: ammo, stack: true, value: 0.05, weight: 0.075}
