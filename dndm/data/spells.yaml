@@ -1,0 +1,55 @@
+# Spells — SRD 5.1 (CC-BY-4.0), adapted to the rank-based combat (front/back).
+# kind: attack | save | auto | heal | buff | debuff | utility | summon
+# target: enemy | enemies:N | rank (every enemy in one rank) | self | ally | allies:N | all_allies
+# cast: action | bonus | reaction
+# scale: cantrip damage dice added at character level 5; upcast: dice added per slot level above base
+
+# ─── Cantrips ───────────────────────────────────────────────────
+fire_bolt:        {name: Ateş Oku, level: 0, school: evocation, cast: action, kind: attack, target: enemy, ranged: true, damage: 1d10, damage_type: fire, scale: 1d10}
+ray_of_frost:     {name: Buz Işını, level: 0, school: evocation, cast: action, kind: attack, target: enemy, ranged: true, damage: 1d8, damage_type: cold, scale: 1d8, on_hit: {condition: slowed, rounds: 1}}
+shocking_grasp:   {name: Şok Dokunuşu, level: 0, school: evocation, cast: action, kind: attack, target: enemy, ranged: false, damage: 1d8, damage_type: lightning, scale: 1d8, advantage_vs_metal: true, on_hit: {condition: no_reactions, rounds: 1}}
+sacred_flame:     {name: Kutsal Alev, level: 0, school: evocation, cast: action, kind: save, save: dexterity, half: false, target: enemy, ranged: true, damage: 1d8, damage_type: radiant, scale: 1d8}
+vicious_mockery:  {name: Zalim Alay, level: 0, school: enchantment, cast: action, kind: save, save: wisdom, half: false, target: enemy, ranged: true, damage: 1d4, damage_type: psychic, scale: 1d4, on_fail: {condition: mocked, rounds: 1}}
+guidance:         {name: Rehberlik, level: 0, school: divination, cast: action, kind: buff, target: ally, effect: {check_bonus_die: 1d4}, concentration: true, utility: true}
+spare_the_dying:  {name: Ölüme Merhamet, level: 0, school: necromancy, cast: action, kind: heal, target: ally, effect: {stabilize: true}}
+mage_hand:        {name: Büyücü Eli, level: 0, school: conjuration, cast: action, kind: utility, utility: true}
+minor_illusion:   {name: Küçük Yanılsama, level: 0, school: illusion, cast: action, kind: utility, utility: true}
+
+# ─── Level 1 ────────────────────────────────────────────────────
+cure_wounds:      {name: Yaraları İyileştir, level: 1, school: evocation, cast: action, kind: heal, target: ally, heal: 1d8, add_mod: true, upcast: 1d8}
+healing_word:     {name: Şifa Sözü, level: 1, school: evocation, cast: bonus, kind: heal, target: ally, heal: 1d4, add_mod: true, upcast: 1d4}
+bless:            {name: Kutsama, level: 1, school: enchantment, cast: action, kind: buff, target: allies:3, concentration: true, rounds: 10, effect: {attack_bonus_die: 1d4, save_bonus_die: 1d4}}
+guiding_bolt:     {name: Yol Gösteren Işın, level: 1, school: evocation, cast: action, kind: attack, target: enemy, ranged: true, damage: 4d6, damage_type: radiant, upcast: 1d6, on_hit: {condition: illuminated, rounds: 1}}
+shield_of_faith:  {name: İnanç Kalkanı, level: 1, school: abjuration, cast: bonus, kind: buff, target: ally, concentration: true, rounds: 100, effect: {ac_bonus: 2}}
+inflict_wounds:   {name: Yara Aç, level: 1, school: necromancy, cast: action, kind: attack, target: enemy, ranged: false, damage: 3d10, damage_type: necrotic, upcast: 1d10}
+magic_missile:    {name: Sihirli Füze, level: 1, school: evocation, cast: action, kind: auto, target: enemies:3, missiles: 3, damage: 1d4+1, damage_type: force, upcast_missiles: 1}
+shield:           {name: Kalkan Büyüsü, level: 1, school: abjuration, cast: reaction, kind: buff, target: self, rounds: 1, effect: {ac_bonus: 5}, trigger: when_hit}
+sleep:            {name: Uyku, level: 1, school: enchantment, cast: action, kind: debuff, target: rank, pool: 5d8, upcast: 2d8, condition: asleep}
+burning_hands:    {name: Yakan Eller, level: 1, school: evocation, cast: action, kind: save, save: dexterity, half: true, target: enemies:3, ranged: false, front_only: true, damage: 3d6, damage_type: fire, upcast: 1d6}
+thunderwave:      {name: Gök Gürültüsü Dalgası, level: 1, school: evocation, cast: action, kind: save, save: constitution, half: true, target: enemies:3, ranged: false, front_only: true, damage: 2d8, damage_type: thunder, upcast: 1d8, on_fail: {push: true}}
+mage_armor:       {name: Büyü Zırhı, level: 1, school: abjuration, cast: action, kind: buff, target: self, rounds: 4800, effect: {base_ac: 13}}
+hunters_mark:     {name: Avcının İşareti, level: 1, school: divination, cast: bonus, kind: debuff, target: enemy, concentration: true, rounds: 600, effect: {extra_damage_from_caster: 1d6}}
+ensnaring_strike: {name: Dolayan Vuruş, level: 1, school: conjuration, cast: bonus, kind: buff, target: self, concentration: true, rounds: 10, effect: {next_hit: {save: strength, condition: restrained, damage_per_round: 1d6}}}
+thunderous_smite: {name: Gürleyen Darbe, level: 1, school: evocation, cast: bonus, kind: buff, target: self, concentration: true, rounds: 10, effect: {next_hit: {extra_damage: 2d6, damage_type: thunder, save: strength, condition: prone}}}
+dissonant_whispers: {name: Uyumsuz Fısıltılar, level: 1, school: enchantment, cast: action, kind: save, save: wisdom, half: true, target: enemy, ranged: true, damage: 3d6, damage_type: psychic, upcast: 1d6, on_fail: {condition: frightened, rounds: 1}}
+faerie_fire:      {name: Peri Ateşi, level: 1, school: evocation, cast: action, kind: debuff, save: dexterity, target: rank, concentration: true, rounds: 10, condition: outlined}
+heroism:          {name: Kahramanlık, level: 1, school: enchantment, cast: action, kind: buff, target: ally, concentration: true, rounds: 10, effect: {temp_hp_each_turn: mod, immune: [frightened]}}
+charm_person:     {name: İnsan Büyüleme, level: 1, school: enchantment, cast: action, kind: debuff, save: wisdom, target: enemy, humanoid_only: true, rounds: 600, condition: charmed, utility: true}
+
+# ─── Level 2 ────────────────────────────────────────────────────
+spiritual_weapon: {name: Ruhani Silah, level: 2, school: evocation, cast: bonus, kind: summon, target: enemy, rounds: 10, summon: {attack: spell, damage: 1d8, add_mod: true, damage_type: force, cast: bonus}, upcast_every_2: 1d8}
+hold_person:      {name: Kişiyi Dondur, level: 2, school: enchantment, cast: action, kind: debuff, save: wisdom, target: enemy, humanoid_only: true, concentration: true, rounds: 10, condition: paralyzed, save_ends: true}
+aid:              {name: Yardım, level: 2, school: abjuration, cast: action, kind: buff, target: allies:3, rounds: 4800, effect: {max_hp_bonus: 5}, upcast_effect: {max_hp_bonus: 5}}
+scorching_ray:    {name: Kavurucu Işın, level: 2, school: evocation, cast: action, kind: attack, target: enemies:3, rays: 3, ranged: true, damage: 2d6, damage_type: fire, upcast_rays: 1}
+misty_step:       {name: Sisli Adım, level: 2, school: conjuration, cast: bonus, kind: utility, target: self, effect: {teleport: true}}
+shatter:          {name: Parçala, level: 2, school: evocation, cast: action, kind: save, save: constitution, half: true, target: rank, ranged: true, damage: 3d8, damage_type: thunder, upcast: 1d8}
+pass_without_trace: {name: İz Bırakmadan Geç, level: 2, school: abjuration, cast: action, kind: buff, target: all_allies, concentration: true, rounds: 600, effect: {skill_bonus: {stealth: 10}}, utility: true}
+invisibility:     {name: Görünmezlik, level: 2, school: illusion, cast: action, kind: buff, target: ally, concentration: true, rounds: 600, condition: invisible, utility: true}
+
+# ─── Level 3 ────────────────────────────────────────────────────
+spirit_guardians: {name: Ruh Muhafızları, level: 3, school: conjuration, cast: action, kind: buff, target: self, concentration: true, rounds: 100, effect: {aura: {save: wisdom, half: true, damage: 3d8, damage_type: radiant, rank: front}}, upcast: 1d8}
+mass_healing_word: {name: Toplu Şifa Sözü, level: 3, school: evocation, cast: bonus, kind: heal, target: all_allies, heal: 1d4, add_mod: true, upcast: 1d4}
+revivify:         {name: Diriltme, level: 3, school: necromancy, cast: action, kind: heal, target: ally, effect: {revive: 1}, component_cost: 300}
+fireball:         {name: Ateş Topu, level: 3, school: evocation, cast: action, kind: save, save: dexterity, half: true, target: rank, ranged: true, damage: 8d6, damage_type: fire, upcast: 1d6}
+lightning_bolt:   {name: Şimşek, level: 3, school: evocation, cast: action, kind: save, save: dexterity, half: true, target: enemies:4, ranged: true, damage: 8d6, damage_type: lightning, upcast: 1d6}
+hypnotic_pattern: {name: Hipnotik Desen, level: 3, school: illusion, cast: action, kind: debuff, save: wisdom, target: rank, concentration: true, rounds: 10, condition: charmed_incapacitated}

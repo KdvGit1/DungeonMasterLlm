@@ -1,0 +1,121 @@
+# Item catalog — based on the D&D 5e SRD 5.1 (CC-BY-4.0), Turkish display names.
+# type: weapon | armor | shield | consumable | gear | tool | ammo | treasure | magic
+# value in gold pieces (gp); weight in lb (only for flavour / carry checks)
+
+# ─── Simple melee weapons ───────────────────────────────────────
+club:          {name: Sopa, type: weapon, category: simple_melee, damage: 1d4, damage_type: bludgeoning, properties: [light], value: 0.1, weight: 2}
+dagger:        {name: Hançer, type: weapon, category: simple_melee, damage: 1d4, damage_type: piercing, properties: [finesse, light, thrown], range: [20, 60], value: 2, weight: 1}
+greatclub:     {name: Büyük Sopa, type: weapon, category: simple_melee, damage: 1d8, damage_type: bludgeoning, properties: [two_handed], value: 0.2, weight: 10}
+handaxe:       {name: El Baltası, type: weapon, category: simple_melee, damage: 1d6, damage_type: slashing, properties: [light, thrown], range: [20, 60], value: 5, weight: 2}
+javelin:       {name: Cirit, type: weapon, category: simple_melee, damage: 1d6, damage_type: piercing, properties: [thrown], range: [30, 120], value: 0.5, weight: 2}
+light_hammer:  {name: Hafif Çekiç, type: weapon, category: simple_melee, damage: 1d4, damage_type: bludgeoning, properties: [light, thrown], range: [20, 60], value: 2, weight: 2}
+mace:          {name: Topuz, type: weapon, category: simple_melee, damage: 1d6, damage_type: bludgeoning, properties: [], value: 5, weight: 4}
+quarterstaff:  {name: Asa, type: weapon, category: simple_melee, damage: 1d6, damage_type: bludgeoning, properties: [versatile], versatile: 1d8, value: 0.2, weight: 4}
+sickle:        {name: Orak, type: weapon, category: simple_melee, damage: 1d4, damage_type: slashing, properties: [light], value: 1, weight: 2}
+spear:         {name: Mızrak, type: weapon, category: simple_melee, damage: 1d6, damage_type: piercing, properties: [thrown, versatile], versatile: 1d8, range: [20, 60], value: 1, weight: 3}
+
+# ─── Simple ranged ──────────────────────────────────────────────
+light_crossbow: {name: Hafif Arbalet, type: weapon, category: simple_ranged, damage: 1d8, damage_type: piercing, properties: [ammunition, loading, two_handed], range: [80, 320], ammo: bolt, value: 25, weight: 5}
+shortbow:      {name: Kısa Yay, type: weapon, category: simple_ranged, damage: 1d6, damage_type: piercing, properties: [ammunition, two_handed], range: [80, 320], ammo: arrow, value: 25, weight: 2}
+sling:         {name: Sapan, type: weapon, category: simple_ranged, damage: 1d4, damage_type: bludgeoning, properties: [ammunition], range: [30, 120], ammo: sling_bullet, value: 0.1, weight: 0}
+
+# ─── Martial melee ──────────────────────────────────────────────
+battleaxe:     {name: Savaş Baltası, type: weapon, category: martial_melee, damage: 1d8, damage_type: slashing, properties: [versatile], versatile: 1d10, value: 10, weight: 4}
+flail:         {name: Gürz, type: weapon, category: martial_melee, damage: 1d8, damage_type: bludgeoning, properties: [], value: 10, weight: 2}
+glaive:        {name: Teber, type: weapon, category: martial_melee, damage: 1d10, damage_type: slashing, properties: [heavy, reach, two_handed], value: 20, weight: 6}
+greataxe:      {name: Büyük Balta, type: weapon, category: martial_melee, damage: 1d12, damage_type: slashing, properties: [heavy, two_handed], value: 30, weight: 7}
+greatsword:    {name: Büyük Kılıç, type: weapon, category: martial_melee, damage: 2d6, damage_type: slashing, properties: [heavy, two_handed], value: 50, weight: 6}
+halberd:       {name: Kargı, type: weapon, category: martial_melee, damage: 1d10, damage_type: slashing, properties: [heavy, reach, two_handed], value: 20, weight: 6}
+longsword:     {name: Uzun Kılıç, type: weapon, category: martial_melee, damage: 1d8, damage_type: slashing, properties: [versatile], versatile: 1d10, value: 15, weight: 3}
+maul:          {name: Balyoz, type: weapon, category: martial_melee, damage: 2d6, damage_type: bludgeoning, properties: [heavy, two_handed], value: 10, weight: 10}
+morningstar:   {name: Çivili Gürz, type: weapon, category: martial_melee, damage: 1d8, damage_type: piercing, properties: [], value: 15, weight: 4}
+rapier:        {name: Meç, type: weapon, category: martial_melee, damage: 1d8, damage_type: piercing, properties: [finesse], value: 25, weight: 2}
+scimitar:      {name: Pala, type: weapon, category: martial_melee, damage: 1d6, damage_type: slashing, properties: [finesse, light], value: 25, weight: 3}
+shortsword:    {name: Kısa Kılıç, type: weapon, category: martial_melee, damage: 1d6, damage_type: piercing, properties: [finesse, light], value: 10, weight: 2}
+warhammer:     {name: Savaş Çekici, type: weapon, category: martial_melee, damage: 1d8, damage_type: bludgeoning, properties: [versatile], versatile: 1d10, value: 15, weight: 2}
+whip:          {name: Kırbaç, type: weapon, category: martial_melee, damage: 1d4, damage_type: slashing, properties: [finesse, reach], value: 2, weight: 3}
+
+# ─── Martial ranged ─────────────────────────────────────────────
+hand_crossbow: {name: El Arbaleti, type: weapon, category: martial_ranged, damage: 1d6, damage_type: piercing, properties: [ammunition, light, loading], range: [30, 120], ammo: bolt, value: 75, weight: 3}
+heavy_crossbow: {name: Ağır Arbalet, type: weapon, category: martial_ranged, damage: 1d10, damage_type: piercing, properties: [ammunition, heavy, loading, two_handed], range: [100, 400], ammo: bolt, value: 50, weight: 18}
+longbow:       {name: Uzun Yay, type: weapon, category: martial_ranged, damage: 1d8, damage_type: piercing, properties: [ammunition, heavy, two_handed], range: [150, 600], ammo: arrow, value: 50, weight: 2}
+
+# ─── Ammunition ─────────────────────────────────────────────────
+arrow:         {name: Ok, type: ammo, stack: true, value: 0.05, weight: 0.05}
+bolt:          {name: Arbalet Oku, type: ammo, stack: true, value: 0.05, weight: 0.075}
+sling_bullet:  {name: Sapan Taşı, type: ammo, stack: true, value: 0.002, weight: 0.075}
+
+# ─── Armor ──────────────────────────────────────────────────────
+padded:        {name: Dolgulu Zırh, type: armor, armor_type: light, ac: 11, dex_cap: null, stealth_disadvantage: true, value: 5, weight: 8}
+leather:       {name: Deri Zırh, type: armor, armor_type: light, ac: 11, dex_cap: null, value: 10, weight: 10}
+studded_leather: {name: Çivili Deri Zırh, type: armor, armor_type: light, ac: 12, dex_cap: null, value: 45, weight: 13}
+hide:          {name: Post Zırh, type: armor, armor_type: medium, ac: 12, dex_cap: 2, value: 10, weight: 12}
+chain_shirt:   {name: Zincir Gömlek, type: armor, armor_type: medium, ac: 13, dex_cap: 2, value: 50, weight: 20}
+scale_mail:    {name: Pullu Zırh, type: armor, armor_type: medium, ac: 14, dex_cap: 2, stealth_disadvantage: true, value: 50, weight: 45}
+breastplate:   {name: Göğüslük, type: armor, armor_type: medium, ac: 14, dex_cap: 2, value: 400, weight: 20}
+half_plate:    {name: Yarım Plaka, type: armor, armor_type: medium, ac: 15, dex_cap: 2, stealth_disadvantage: true, value: 750, weight: 40}
+ring_mail:     {name: Halkalı Zırh, type: armor, armor_type: heavy, ac: 14, dex_cap: 0, stealth_disadvantage: true, value: 30, weight: 40}
+chain_mail:    {name: Zincir Zırh, type: armor, armor_type: heavy, ac: 16, dex_cap: 0, str_req: 13, stealth_disadvantage: true, value: 75, weight: 55}
+splint:        {name: Lamelli Zırh, type: armor, armor_type: heavy, ac: 17, dex_cap: 0, str_req: 15, stealth_disadvantage: true, value: 200, weight: 60}
+plate:         {name: Tam Plaka Zırh, type: armor, armor_type: heavy, ac: 18, dex_cap: 0, str_req: 15, stealth_disadvantage: true, value: 1500, weight: 65}
+shield:        {name: Kalkan, type: shield, ac_bonus: 2, value: 10, weight: 6}
+
+# ─── Consumables ────────────────────────────────────────────────
+potion_healing:          {name: İyileştirme İksiri, type: consumable, effect: heal, amount: 2d4+2, rarity: common, value: 50, weight: 0.5, stack: true}
+potion_greater_healing:  {name: Büyük İyileştirme İksiri, type: consumable, effect: heal, amount: 4d4+4, rarity: uncommon, value: 150, weight: 0.5, stack: true}
+potion_superior_healing: {name: Üstün İyileştirme İksiri, type: consumable, effect: heal, amount: 8d4+8, rarity: rare, value: 500, weight: 0.5, stack: true}
+antitoxin:     {name: Panzehir, type: consumable, effect: cure_poison, value: 50, weight: 0, stack: true}
+potion_fire_breath: {name: Ateş Nefesi İksiri, type: consumable, effect: fire_breath, amount: 4d6, save: {ability: dexterity, dc: 13}, rarity: uncommon, value: 150, weight: 0.5, stack: true}
+potion_giant_strength: {name: Dev Gücü İksiri, type: consumable, effect: set_strength, amount: 21, duration_rounds: 600, rarity: uncommon, value: 200, weight: 0.5, stack: true}
+potion_invisibility: {name: Görünmezlik İksiri, type: consumable, effect: invisible, duration_rounds: 600, rarity: very_rare, value: 1500, weight: 0.5, stack: true}
+alchemist_fire: {name: Simya Ateşi, type: consumable, effect: throw_damage, amount: 1d4, damage_type: fire, ongoing: 1d4, value: 50, weight: 1, stack: true}
+acid_vial:     {name: Asit Şişesi, type: consumable, effect: throw_damage, amount: 2d6, damage_type: acid, value: 25, weight: 1, stack: true}
+holy_water:    {name: Kutsal Su, type: consumable, effect: throw_damage, amount: 2d6, damage_type: radiant, vs: [undead, fiend], value: 25, weight: 1, stack: true}
+rations:       {name: Erzak (1 gün), type: consumable, effect: food, value: 0.5, weight: 2, stack: true}
+healers_kit:   {name: Şifacı Çantası, type: consumable, effect: stabilize, charges: 10, value: 5, weight: 3}
+
+# ─── Adventuring gear ───────────────────────────────────────────
+backpack:      {name: Sırt Çantası, type: gear, value: 2, weight: 5}
+bedroll:       {name: Uyku Tulumu, type: gear, value: 1, weight: 7}
+torch:         {name: Meşale, type: gear, stack: true, value: 0.01, weight: 1}
+lantern:       {name: Fener, type: gear, value: 5, weight: 2}
+oil_flask:     {name: Yağ Şişesi, type: gear, stack: true, value: 0.1, weight: 1}
+rope_hempen:   {name: Kenevir Halat (15 m), type: gear, value: 1, weight: 10}
+grappling_hook: {name: Kanca, type: gear, value: 2, weight: 4}
+crowbar:       {name: Levye, type: gear, grants_advantage: [athletics_force], value: 2, weight: 5}
+waterskin:     {name: Matara, type: gear, value: 0.2, weight: 5}
+tinderbox:     {name: Çakmaktaşı Kutusu, type: gear, value: 0.5, weight: 1}
+mirror_steel:  {name: Çelik Ayna, type: gear, value: 5, weight: 0.5}
+chain_10ft:    {name: Zincir (3 m), type: gear, value: 5, weight: 10}
+manacles:      {name: Kelepçe, type: gear, value: 2, weight: 6}
+caltrops:      {name: Dikenli Demir, type: gear, value: 1, weight: 2}
+ball_bearings: {name: Bilye Torbası, type: gear, value: 1, weight: 2}
+spellbook:     {name: Büyü Kitabı, type: gear, value: 50, weight: 3}
+holy_symbol:   {name: Kutsal Sembol, type: gear, value: 5, weight: 1}
+arcane_focus:  {name: Arkana Odağı (Kristal), type: gear, value: 10, weight: 1}
+lute:          {name: Lavta, type: tool, value: 35, weight: 2}
+thieves_tools: {name: Hırsız Aletleri, type: tool, value: 25, weight: 1}
+herbalism_kit: {name: Şifalı Ot Takımı, type: tool, value: 5, weight: 3}
+
+# ─── Magic items (SRD) ──────────────────────────────────────────
+weapon_plus1:  {name: "+1 Silah", type: magic, template: weapon_bonus, bonus: 1, rarity: uncommon, value: 500}
+armor_plus1:   {name: "+1 Zırh", type: magic, template: armor_bonus, bonus: 1, rarity: rare, value: 1500}
+shield_plus1:  {name: "+1 Kalkan", type: magic, slot: off_hand, ac_bonus: 3, rarity: uncommon, value: 500, weight: 6}
+cloak_of_protection: {name: Koruma Pelerini, type: magic, slot: cloak, ac_bonus: 1, save_bonus: 1, rarity: uncommon, attune: true, value: 600}
+ring_of_protection: {name: Koruma Yüzüğü, type: magic, slot: ring, ac_bonus: 1, save_bonus: 1, rarity: rare, attune: true, value: 2000}
+boots_of_elvenkind: {name: Elf Çizmeleri, type: magic, slot: boots, grants_advantage: [stealth], rarity: uncommon, value: 500}
+cloak_of_elvenkind: {name: Elf Pelerini, type: magic, slot: cloak, grants_advantage: [stealth], rarity: uncommon, attune: true, value: 500}
+gauntlets_of_ogre_power: {name: Ogre Gücü Eldivenleri, type: magic, slot: hands, set_ability: {strength: 19}, rarity: uncommon, attune: true, value: 800}
+amulet_of_health: {name: Sağlık Muskası, type: magic, slot: neck, set_ability: {constitution: 19}, rarity: rare, attune: true, value: 2500}
+wand_of_magic_missiles: {name: Sihirli Füze Asası, type: magic, slot: none, spell: magic_missile, charges: 7, rarity: uncommon, value: 700}
+bag_of_holding: {name: Sınırsız Çanta, type: magic, slot: none, rarity: uncommon, value: 500, weight: 15}
+driftglobe:    {name: Süzülen Küre, type: magic, slot: none, rarity: uncommon, value: 300, weight: 1}
+flame_tongue:  {name: Alev Dili (Uzun Kılıç), type: magic, base: longsword, extra_damage: 2d6, extra_damage_type: fire, rarity: rare, attune: true, value: 5000}
+
+# ─── Treasure ───────────────────────────────────────────────────
+gem_10:        {name: Kuvars Parçası, type: treasure, value: 10, weight: 0, stack: true}
+gem_50:        {name: Ay Taşı, type: treasure, value: 50, weight: 0, stack: true}
+gem_100:       {name: Ametist, type: treasure, value: 100, weight: 0, stack: true}
+gem_500:       {name: Topaz, type: treasure, value: 500, weight: 0, stack: true}
+art_25:        {name: Gümüş Kadeh, type: treasure, value: 25, weight: 1}
+art_250:       {name: Altın Kakmalı Heykelcik, type: treasure, value: 250, weight: 2}

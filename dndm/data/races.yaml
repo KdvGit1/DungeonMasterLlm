@@ -1,0 +1,87 @@
+# Playable races — SRD 5.1 (CC-BY-4.0). Turkish display names.
+human:
+  name: İnsan
+  description: Her yere uyum sağlayan, hırslı ve çeşitli halk.
+  ability_bonus: {strength: 1, dexterity: 1, constitution: 1, intelligence: 1, wisdom: 1, charisma: 1}
+  speed: 30
+  traits: []
+  languages: [Ortak Dil, seçilen bir dil]
+
+elf:
+  name: Elf
+  description: Uzun ömürlü, zarif ve büyüye yatkın orman halkı (Yüksek Elf).
+  ability_bonus: {dexterity: 2, intelligence: 1}
+  speed: 30
+  darkvision: true
+  skill_proficiencies: [perception]
+  traits: [fey_ancestry, trance]
+  bonus_cantrip: true
+  languages: [Ortak Dil, Elfçe]
+
+dwarf:
+  name: Cüce
+  description: Dağların içinden gelen, inatçı ve dayanıklı zanaatkârlar (Tepe Cücesi).
+  ability_bonus: {constitution: 2, wisdom: 1}
+  speed: 25
+  darkvision: true
+  hp_per_level: 1
+  resistances: [poison]
+  traits: [dwarven_resilience, stonecunning]
+  languages: [Ortak Dil, Cücece]
+
+halfling:
+  name: Buçukluk
+  description: Küçük, neşeli ve şaşırtıcı derecede şanslı (Hafifayak).
+  ability_bonus: {dexterity: 2, charisma: 1}
+  speed: 25
+  traits: [lucky, brave, nimble]
+  languages: [Ortak Dil, Buçukluk Dili]
+
+half_orc:
+  name: Yarı-Ork
+  description: Ork kanının öfkesi ile insan iradesini birleştiren savaşçı soy.
+  ability_bonus: {strength: 2, constitution: 1}
+  speed: 30
+  darkvision: true
+  skill_proficiencies: [intimidation]
+  traits: [relentless_endurance, savage_attacks]
+  languages: [Ortak Dil, Orkça]
+
+half_elf:
+  name: Yarı-Elf
+  description: İki dünyanın arasında kalmış, karizmatik gezginler.
+  ability_bonus: {charisma: 2, dexterity: 1, constitution: 1}
+  speed: 30
+  darkvision: true
+  extra_skills: 2
+  traits: [fey_ancestry]
+  languages: [Ortak Dil, Elfçe]
+
+gnome:
+  name: Gnom
+  description: Meraklı, mucit ve sonsuz enerjili küçük halk (Kaya Gnomu).
+  ability_bonus: {intelligence: 2, constitution: 1}
+  speed: 25
+  darkvision: true
+  traits: [gnome_cunning, tinker]
+  languages: [Ortak Dil, Gnomca]
+
+dragonborn:
+  name: Ejderdoğan
+  description: Ejderhaların kanını taşıyan gururlu, pullu savaşçılar.
+  ability_bonus: {strength: 2, charisma: 1}
+  speed: 30
+  resistances: [fire]
+  traits: [breath_weapon]
+  breath: {damage: 2d6, damage_type: fire, save: dexterity}
+  languages: [Ortak Dil, Ejderce]
+
+tiefling:
+  name: Tiefling
+  description: Atalarından cehennem mirası taşıyan, boynuzlu ve dışlanmış soy.
+  ability_bonus: {charisma: 2, intelligence: 1}
+  speed: 30
+  darkvision: true
+  resistances: [fire]
+  traits: [hellish_resistance, infernal_legacy]
+  languages: [Ortak Dil, İblisçe]

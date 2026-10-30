@@ -1,0 +1,166 @@
+# Classes — SRD 5.1 (CC-BY-4.0) simplified for fast table play, levels 1-5.
+# features: {level: [feature ids]} — mechanics live in dndm/game/features.py
+# spellcasting: full | half | null ; spells known/prepared simplified to a fixed list unlocked by level.
+
+fighter:
+  name: Savaşçı
+  description: Her silahın ve zırhın ustası; ön safın çelik duvarı.
+  hit_die: 10
+  primary: [strength, dexterity]
+  saves: [strength, constitution]
+  armor: [light, medium, heavy, shield]
+  weapons: [simple, martial]
+  skill_choices: {count: 2, from: [acrobatics, animal_handling, athletics, history, insight, intimidation, perception, survival]}
+  features:
+    1: [fighting_style_defense, second_wind]
+    2: [action_surge]
+    3: [improved_critical]
+    5: [extra_attack]
+  resources:
+    second_wind: {uses: 1, recharge: short_rest}
+    action_surge: {uses: 1, recharge: short_rest, from_level: 2}
+  starting_equipment: [chain_mail, longsword, shield, light_crossbow, {bolt: 20}, backpack, bedroll, torch, rations]
+  default_rank: front
+
+barbarian:
+  name: Barbar
+  description: Öfkesini silaha çeviren, acıya meydan okuyan vahşi savaşçı.
+  hit_die: 12
+  primary: [strength, constitution]
+  saves: [strength, constitution]
+  armor: [light, medium, shield]
+  weapons: [simple, martial]
+  unarmored_defense: [dexterity, constitution]
+  skill_choices: {count: 2, from: [animal_handling, athletics, intimidation, nature, perception, survival]}
+  features:
+    1: [rage, unarmored_defense]
+    2: [reckless_attack, danger_sense]
+    3: [frenzy]
+    5: [extra_attack, fast_movement]
+  resources:
+    rage: {uses_by_level: {1: 2, 3: 3}, recharge: long_rest}
+  starting_equipment: [greataxe, {handaxe: 2}, {javelin: 4}, backpack, bedroll, torch, rations]
+  default_rank: front
+
+rogue:
+  name: Düzenbaz
+  description: Gölgelerin, kilitlerin ve sırtına hançer yemeyi bekleyenlerin ustası.
+  hit_die: 8
+  primary: [dexterity]
+  saves: [dexterity, intelligence]
+  armor: [light]
+  weapons: [simple, hand_crossbow, longsword, rapier, shortsword]
+  skill_choices: {count: 4, from: [acrobatics, athletics, deception, insight, intimidation, investigation, perception, performance, persuasion, sleight_of_hand, stealth]}
+  expertise: 2
+  features:
+    1: [sneak_attack, expertise, thieves_cant]
+    2: [cunning_action]
+    3: [fast_hands]
+    5: [uncanny_dodge]
+  starting_equipment: [rapier, shortbow, {arrow: 20}, leather, {dagger: 2}, thieves_tools, backpack, torch, rations]
+  default_rank: front
+
+ranger:
+  name: Korucu
+  description: Vahşi doğanın avcısı; iz sürer, okunu kaçırmaz.
+  hit_die: 10
+  primary: [dexterity, wisdom]
+  saves: [strength, dexterity]
+  armor: [light, medium, shield]
+  weapons: [simple, martial]
+  skill_choices: {count: 3, from: [animal_handling, athletics, insight, investigation, nature, perception, stealth, survival]}
+  spellcasting: {type: half, ability: wisdom, from_level: 2}
+  spells: {2: [hunters_mark, cure_wounds, ensnaring_strike], 5: [pass_without_trace]}
+  features:
+    1: [favored_enemy, natural_explorer]
+    2: [fighting_style_archery]
+    3: [colossus_slayer]
+    5: [extra_attack]
+  starting_equipment: [scale_mail, {shortsword: 2}, longbow, {arrow: 20}, backpack, bedroll, torch, rations]
+  default_rank: back
+
+paladin:
+  name: Paladin
+  description: Yeminine bağlı kutsal şövalye; kılıcında ilahi ışık yanar.
+  hit_die: 10
+  primary: [strength, charisma]
+  saves: [wisdom, charisma]
+  armor: [light, medium, heavy, shield]
+  weapons: [simple, martial]
+  skill_choices: {count: 2, from: [athletics, insight, intimidation, medicine, persuasion, religion]}
+  spellcasting: {type: half, ability: charisma, from_level: 2}
+  spells: {2: [bless, cure_wounds, shield_of_faith, thunderous_smite], 5: [aid]}
+  features:
+    1: [divine_sense, lay_on_hands]
+    2: [fighting_style_dueling, divine_smite]
+    3: [sacred_weapon]
+    5: [extra_attack]
+  resources:
+    lay_on_hands: {pool_per_level: 5, recharge: long_rest}
+    divine_sense: {uses_formula: 1+cha, recharge: long_rest}
+    sacred_weapon: {uses: 1, recharge: short_rest, from_level: 3}
+  starting_equipment: [chain_mail, longsword, shield, {javelin: 5}, holy_symbol, backpack, bedroll, torch, rations]
+  default_rank: front
+
+cleric:
+  name: Rahip
+  description: Tanrısının sesi ve eli; yaraları kapatır, ölüleri yerine yollar (Yaşam Alanı).
+  hit_die: 8
+  primary: [wisdom]
+  saves: [wisdom, charisma]
+  armor: [light, medium, heavy, shield]
+  weapons: [simple]
+  skill_choices: {count: 2, from: [history, insight, medicine, persuasion, religion]}
+  spellcasting: {type: full, ability: wisdom, from_level: 1}
+  cantrips: [sacred_flame, guidance, spare_the_dying]
+  spells: {1: [cure_wounds, healing_word, bless, guiding_bolt, shield_of_faith, inflict_wounds], 3: [spiritual_weapon, hold_person, aid], 5: [spirit_guardians, mass_healing_word, revivify]}
+  features:
+    1: [disciple_of_life]
+    2: [turn_undead, preserve_life]
+    5: [destroy_undead]
+  resources:
+    channel_divinity: {uses: 1, recharge: short_rest, from_level: 2}
+  starting_equipment: [mace, scale_mail, shield, light_crossbow, {bolt: 20}, holy_symbol, backpack, torch, rations]
+  default_rank: front
+
+wizard:
+  name: Büyücü
+  description: Kadim kitapların sırrını çözmüş, ateşi ve buzu emrine almış bilgin (Yıkım Okulu).
+  hit_die: 6
+  primary: [intelligence]
+  saves: [intelligence, wisdom]
+  armor: []
+  weapons: [dagger, quarterstaff, light_crossbow, sling]
+  skill_choices: {count: 2, from: [arcana, history, insight, investigation, medicine, religion]}
+  spellcasting: {type: full, ability: intelligence, from_level: 1}
+  cantrips: [fire_bolt, ray_of_frost, shocking_grasp, mage_hand]
+  spells: {1: [magic_missile, shield, sleep, burning_hands, thunderwave, mage_armor], 3: [scorching_ray, misty_step, hold_person, shatter], 5: [fireball, lightning_bolt]}
+  features:
+    1: [arcane_recovery]
+    2: [sculpt_spells]
+  resources:
+    arcane_recovery: {uses: 1, recharge: long_rest}
+  starting_equipment: [quarterstaff, {dagger: 1}, spellbook, arcane_focus, backpack, torch, rations]
+  default_rank: back
+
+bard:
+  name: Ozan
+  description: Sözüyle büyü yapan, şarkısıyla dost toplayan, alayla düşman yıkan sanatçı.
+  hit_die: 8
+  primary: [charisma]
+  saves: [dexterity, charisma]
+  armor: [light]
+  weapons: [simple, hand_crossbow, longsword, rapier, shortsword]
+  skill_choices: {count: 3, from: [acrobatics, animal_handling, arcana, athletics, deception, history, insight, intimidation, investigation, medicine, nature, perception, performance, persuasion, religion, sleight_of_hand, stealth, survival]}
+  spellcasting: {type: full, ability: charisma, from_level: 1}
+  cantrips: [vicious_mockery, minor_illusion]
+  spells: {1: [healing_word, dissonant_whispers, thunderwave, faerie_fire, heroism, charm_person], 3: [shatter, hold_person, invisibility], 5: [hypnotic_pattern, mass_healing_word]}
+  features:
+    1: [bardic_inspiration]
+    2: [jack_of_all_trades, song_of_rest]
+    3: [cutting_words]
+    5: [font_of_inspiration]
+  resources:
+    bardic_inspiration: {uses_formula: cha, recharge: long_rest, recharge_from_level_5: short_rest}
+  starting_equipment: [rapier, leather, {dagger: 1}, lute, backpack, bedroll, torch, rations]
+  default_rank: back
