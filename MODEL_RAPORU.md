@@ -22,6 +22,7 @@ Ham çıktılar: `.runtime/bench/*.json`
 | Gemma 4 12B Abliterated (huihui_ai) | %97,3 | İyi, ek hataları | 0 | 6/6 | 35 tok/sn | 0,40 sn | 9,0 GB | Yedek |
 | Qwen 3.5 9B Abliterated (huihui_ai) | %86,5 | Zayıf | 0 | 5/6 | 52 tok/sn | 0,25 sn | 7,4 GB | ❌ |
 | Rocinante-X 12B (TheDrummer, Mistral Nemo) | %100 | **İngilizce yazıyor** | 0 | 6/6 | 38 tok/sn | 0,15 sn | 8,5 GB | ❌ |
+| Gemma 4 26B MoE Abliterated (huihui_ai) | %97,3 | Zengin ama bozuk kelimeler | 0 | 6/6 | 28 tok/sn | 0,73 sn | 11 GB + ~6 GB RAM | 20 GB+ kart için |
 | Gemma 4 E4B Abliterated QAT (huihui_ai) | %100 | Orta (ek hataları, zaman kayması) | 0 | 5,5/6 | **69 tok/sn** | 0,17 sn | **5,1 GB** | ✅ Hafif mod (6–8 GB kart) |
 | Impish Bloodmoon 12B (Mistral Nemo) | — | — | — | — | — | — | — | İndirme 2 kez takıldı; aynı Nemo tabanı Türkçede başarısız |
 
@@ -34,6 +35,12 @@ Ham çıktılar: `.runtime/bench/*.json`
   Yedek olarak tutulabilir.
 - **Qwen 3.5 9B** en hızlısı ama Türkçesi anlamsızlaşıyor ("burjuva bir sessizlik",
   "Lira ise Lira'nın bakışlarını…"), geçmiş zamana kayıyor ve oyuncular adına konuşuyor.
+- **Gemma 4 26B MoE** (her adımda 4B parametre çalışan "uzmanlar karışımı") en zengin kelime
+  dağarcığını ve senaryoya en iyi bağlılığı gösterdi: 5 turluk gerçek oyunda 3 keşif bulup Eski Fener'e
+  ulaştı. Ama 17 GB'lık model 12 GB karta sığmıyor; kalan ~6 GB sistem belleğinde çalışıyor. Sonuç: tur
+  başına **~56 sn** (12B'de ~25–30 sn), ilk yükleme 4 dakika, ve ara sıra bozuk kelimeler
+  ("kollargetine", "kurbangetin"). Bu bilgisayarda değmez; 20–24 GB'lık bir kartta tamamen sığar ve
+  muhtemelen hem 12B'den hızlı hem daha iyi olur (orada denenmedi).
 - **Gemma 4 E4B (hafif)** mekanik testlerde şaşırtıcı derecede iyi (hakem %100, bilgi çıkarma tam) ve
   12B'nin iki katı hızlı, belleğin yarısını kullanıyor. Ama Türkçesi daha hatalı ("göğsinden",
   "alınını"), geçmiş/şimdiki zaman arasında kayıyor ve gerçek oyunda senaryoyu daha zayıf takip ediyor:
@@ -51,6 +58,11 @@ Ham çıktılar: `.runtime/bench/*.json`
   son düzenleme katmanı yazıldı (`dndm/gm/turkish.py`).
 - Gemma'nın kayan pencereli dikkati istem önbelleğini kullanamıyor; bu yüzden istemler kısa tutuldu
   (son 4 tur, eski anlatımlar kısaltılmış).
+
+## Sonuç
+Varsayılan: **Gemma 4 12B Heretic** (10 GB+ kart). Başlatıcı 6–8 GB kartlarda ve ekran kartı yoksa
+**E4B hafif modeli** seçer. Masa ekranındaki Ayarlar indirilmiş modeller arasında geçiş yapar;
+26B'yi uygulama içinden indirme seçeneği henüz yok (bkz. FIKIRLER.md).
 
 ## Gerçek oyun hızı (3 oyuncu, Gemma 4 12B Heretic)
 - Tur başına ortalama **~30 sn** (hakem + eşzamanlı zarlar + anlatım; bot oyuncuların yazma süresi dahil).

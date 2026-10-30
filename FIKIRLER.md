@@ -35,7 +35,10 @@ Geldiğinde sorarsan buradan anlatırım. ✅ = yaptım, 💬 = karar senin, �
 
 - 💬 **İsteğe bağlı bulut model:** OpenRouter/Claude gibi güçlü bir modelle çok daha iyi anlatım (ücretli, internet gerekir).
   Varsayılan yine yerel ve sansürsüz model kalır.
-- 💬 **Daha büyük yerel model:** Ekran kartı yükseltilirse (16-24 GB) 26-31B modeller belirgin şekilde daha iyi Türkçe yazar.
+- 💬 **Daha büyük yerel model:** Ekran kartı yükseltilirse (20-24 GB) Gemma 4 26B MoE tamamen karta sığar;
+  bu bilgisayarda denedim, senaryoyu en iyi o takip etti ama 12 GB kartta tur süresi 2 katına çıkıyor.
+- 💬 **Ayarlardan model indirme:** Masa ekranının Ayarlar penceresine "Önerilen / Hafif / Büyük" model
+  seçimi ve indirme çubuğu. Şu an yalnızca zaten indirilmiş modeller arasında geçiş yapılabiliyor.
 - 💬 **Kurulum dosyasını imzalamak:** Kendi yazdığım kurulum sihirbazı imzasız; Windows SmartScreen
   "tanınmayan uygulama" uyarısı gösterebilir ("Ek bilgi → Yine de çalıştır"). Kod imzalama sertifikası
   (yıllık ücretli) bunu kaldırır. (Not: Inno Setup ile kurulum yapmayı denedim ama internetten indirilen
