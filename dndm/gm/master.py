@@ -81,6 +81,10 @@ class GameMaster:
         items = ws.items_here()
         if items:
             lines.append("NOTABLE OBJECTS HERE: " + ", ".join(i.display_name() for i in items[:10]))
+        hooks = [d.hint for d in ws.available_discoveries(sc) if d.hint]
+        if hooks:
+            lines.append("HOOKS HERE (make these noticeable in your descriptions; never reveal what they mean): "
+                         + " | ".join(hooks[:6]))
         return "\n".join(lines)
 
     def party_block(self, party: list[Character]) -> str:

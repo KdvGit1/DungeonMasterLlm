@@ -75,6 +75,7 @@ class WorldState(BaseModel):
     scene_items: dict[str, list[ItemStack]] = Field(default_factory=dict)
     day: int = 1
     hour: int = 18
+    minute: int = 0
     last_long_rest_day: int = 0
     journal: list[JournalEntry] = Field(default_factory=list)
     summary: str = ""
@@ -342,9 +343,9 @@ class WorldState(BaseModel):
         """Move the clock; fronts advance. Returns narrator notes about threats escalating."""
         if hours <= 0:
             return []
-        total = self.hour + hours
-        days_passed = int(total // 24)
-        self.hour = int(total % 24)
+        total_min = self.hour * 60 + self.minute + int(round(hours * 60))
+        days_passed, rem = divmod(total_min, 24 * 60)
+        self.hour, self.minute = divmod(rem, 60)
         self.day += days_passed
         notes: list[str] = []
         if sc:

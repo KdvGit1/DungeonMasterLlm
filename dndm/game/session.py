@@ -16,6 +16,7 @@ fans them out over WebSockets). Each message is a dict with a ``t`` field.
 from __future__ import annotations
 
 import asyncio
+import re
 import json
 import logging
 import random
@@ -41,7 +42,7 @@ from dndm.paths import user_dir
 from dndm.rules import data
 from dndm.rules.core import DEGREE_TR, CheckResult, dc_label, resolve_check, skill_or_ability_name
 from dndm.rules.dice import DiceRoll, roll
-from dndm.text import similar
+from dndm.text import similar, tr_lower
 from dndm.world.scenario import Scenario, load_scenario, scenario_path
 from dndm.world.state import WorldState
 
@@ -775,18 +776,28 @@ class GameSession:
                 await self.toast(f"🪙 {to.name}: +{amt:g} altın", "item")
                 changed = True
         for p in ex.places_mentioned[:3]:
-            if not ws.find_location(sc, p.name):
+            if not _is_proper_place(p.name):
+                continue
+            loc = ws.find_location(sc, p.name) or ws.find_adjacent_hidden(sc, p.name)
+            if loc is not None:
+                if loc.id not in ws.known and not loc.hidden:
+                    ws.known.append(loc.id)
+                    ws.add_journal("place", f"Yeni bir yer duyuldu: {loc.name}")
+                    changed = True
+            elif sc is None:  # free mode: the world grows from the story
                 ws.add_dynamic_location(sc, p.name, p.description or p.name, travel_hours=2)
                 ws.add_journal("place", f"Yeni bir yer duyuldu: {p.name}")
                 changed = True
-            else:
-                loc = ws.find_location(sc, p.name)
-                if loc and loc.id not in ws.known and not loc.hidden:
-                    ws.known.append(loc.id)
         for f in ex.facts[:3]:
             ws.add_journal("clue", f)
             changed = True
-        for q in ex.quest_updates[:2]:
+        active_dynamic = sum(1 for k, v in ws.quests.items() if k.startswith("dq_") and v == "active")
+        for q in ex.quest_updates[:1]:
+            if q.status == "new" and (sc is not None and not any(similar(x.name, q.name) for x in sc.quests.values())):
+                # scenario mode: only the scenario's own quests (or ones an NPC explicitly hands out in free mode)
+                continue
+            if q.status == "new" and active_dynamic >= 4:
+                continue
             changed |= self._apply_quest_update(q.name, q.status, q.description)
         for a in ex.attitude_changes[:3]:
             npc = ws.find_npc(a.name)
@@ -1449,3 +1460,19 @@ def _log_task_error(task: asyncio.Task) -> None:
     exc = task.exception()
     if exc:
         log.error("background task failed", exc_info=exc)
+
+
+_GENERIC_PLACE = {"içeri", "içerisi", "dışarı", "orası", "burası", "şurası", "kapı", "köy", "yol", "orman", "ev",
+                  "oda", "yer", "meydan", "kasaba", "şehir", "kale", "mağara", "dağ", "ileri", "geri", "aşağı",
+                  "yukarı", "ötesi", "arka", "ön"}
+
+
+def _is_proper_place(name: str) -> bool:
+    """Reject generic words the extractor sometimes reports as places ('İçerisi', 'Muhafızın koruduğu yer')."""
+    n = (name or "").strip()
+    if len(n) < 3 or len(n) > 40 or not n[0].isupper():
+        return False
+    words = [w for w in re.split(r"\s+", n.lower()) if w]
+    if len(words) > 4:
+        return False
+    return not all(w.strip("'’.,") in _GENERIC_PLACE for w in words) and "yer" not in words[-1:]

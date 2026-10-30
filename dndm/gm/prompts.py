@@ -33,6 +33,13 @@ FAIRNESS & TRUTH
   the gate, the lock clicks open, the NPC tells what they know). A failure has a clear consequence. Never
   leave an outcome hanging or half-resolved.
 
+WORLD CONSISTENCY
+- Build scenes from the CONTEXT: use the location DESCRIPTION, the NPCs PRESENT (by name, with their voice)
+  and the HOOKS HERE. When the party arrives somewhere or looks around, describe the place and make the
+  hooks noticeable — they are what makes exploration rewarding.
+- NPCs are only where the context says they are. Do not invent new enemies, ambushers or major threats
+  that are not in the context unless a WORLD EVENT or THREAT tells you to.
+
 PACING
 - Every response must move the story forward: something NEW happens. Never repeat a beat, an image or
   a reaction you already described in an earlier response (no "the guard trembles again").
@@ -80,6 +87,8 @@ WORLD LINKS
   ("convince the guard to let us into the village", "sneak into the camp") — the move happens on success.
 - discovery: if an action could reveal one of SECRETS HERE, put its id (searching, asking the right NPC,
   examining the right object). The check (if any) comes from the secret's own check when given.
+  "Looking around", "exploring", "reading the notices", "asking around" should usually reveal the most
+  fitting secret that has NO check (things anyone would notice).
 - item_action: take (from the scene), give (to another character -> item_to), drop, buy, sell, use, equip.
 - time_minutes: realistic duration (talk 10, search a room 30, travel by foot 60-240, short rest 60,
   long rest 480 with rest="long").
@@ -100,6 +109,10 @@ You extract game-relevant facts from a Turkish D&D narration so the engine can t
 Write all values in Turkish, copying names exactly as written. Be conservative: only record what the text
 clearly states. Player characters ({players}) are never NPCs. Known NPCs: {known_npcs}.
 items_given only when an NPC clearly hands something to a named player character in THIS text.
+places_mentioned: only specific NAMED places (proper names like "Kemikkaya Geçidi"), never generic words
+like "içeri", "orası", "kapının ardı".
+quest_updates: "new" ONLY when an NPC explicitly asks the party for a task or the party explicitly accepts
+one; "done"/"failed" only when the text clearly states it. Most texts have NO quest updates.
 Return ONLY JSON for the schema.
 """
 
