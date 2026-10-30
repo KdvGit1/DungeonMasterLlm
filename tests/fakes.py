@@ -26,7 +26,7 @@ class FakeLLM:
         return LLMResult(text="Özet: grup ilerliyor.")
 
     async def stream(self, messages, *, system=None, temperature=0.8, max_tokens=600, stats=None) -> AsyncIterator[str]:
-        self.calls.append(("stream", messages[-1]["content"][:400]))
+        self.calls.append(("stream", messages[-1]["content"]))
         text = self.narrations.popleft() if self.narrations else "Rüzgâr uğulduyor ve herkes nefesini tutuyor."
         for word in text.split(" "):
             yield word + " "

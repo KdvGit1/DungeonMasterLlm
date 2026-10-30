@@ -236,3 +236,15 @@ async def test_whispered_action_stays_secret():
     assert len(private_msgs) == 1 and private_msgs[0][1] == [p2.id]
     checks = [(m, to) for m, to in rec.msgs if m.get("t") == "check_result"]
     assert checks and all(to == [p2.id] for _, to in checks)    # the secret roll only reached the thief
+
+
+async def test_stall_breaker_hands_out_a_clue():
+    s, llm, rec, (p1,) = make_session(1)
+    await s.start(scenario_id="degirmenkoyun_golgesi")
+    c = s.char_of_player(p1.id)
+    for i in range(3):   # three rounds of nothing happening
+        llm.queue("ExploreAdjudication", {"rulings": [{"player": c.name, "intent": "talk", "needs_check": False}]})
+        await s.submit_action(p1.id, f"Muhafıza havadan sudan konuşuyorum {i}")
+        await _drain(s)
+    assert len(s.world.found) == 1          # the easiest clue at the gate was delivered
+    assert any("NATURALLY" in call[1] or "Deliver this clue" in call[1] for call in llm.calls if call[0] == "stream")
