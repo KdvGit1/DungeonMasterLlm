@@ -206,6 +206,21 @@ guard:
   tags: [humanoid, human]
   behavior: {rank: front, morale: 0.4, tactics: [disciplined, surrender]}
 
+noble:
+  name: Soylu
+  cr: 0.125
+  xp: 25
+  ac: 15
+  hp: 2d8
+  abilities: {strength: 11, dexterity: 12, constitution: 11, intelligence: 12, wisdom: 14, charisma: 16}
+  skills: {deception: 5, insight: 4, persuasion: 5}
+  attacks:
+    - {id: rapier, name: Meç, hit: 3, dmg: 1d8+1, type: piercing}
+  traits: [parry]
+  tags: [humanoid, human, leader]
+  loot: {gold: 5d10, items: {art_25: 0.5}}
+  behavior: {rank: back, morale: 0.6, tactics: [cowardly, surrender, protect_self]}
+
 scout:
   name: İzci
   cr: 0.5

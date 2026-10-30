@@ -8,7 +8,7 @@ from pydantic import BaseModel
 
 from dndm.paths import user_dir
 
-DEFAULT_MODEL = "huihui_ai/gemma-4-abliterated:12b"
+DEFAULT_MODEL = "hf.co/igorls/gemma-4-12B-it-heretic-GGUF:Q4_K_M"
 
 
 class AppConfig(BaseModel):

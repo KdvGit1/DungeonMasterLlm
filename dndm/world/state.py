@@ -152,6 +152,21 @@ class WorldState(BaseModel):
                 return loc
         return None
 
+    def find_adjacent_hidden(self, sc: Scenario | None, query: str) -> Location | None:
+        """A secret place right next to the party that a player deliberately heads for ('down to the cellar')."""
+        if not query:
+            return None
+        here = self.loc(sc)
+        for ex in here.exits:
+            try:
+                t = self.loc(sc, ex)
+            except KeyError:
+                continue
+            if t.hidden and ex not in self.known and (ex == query or similar(t.name, query)
+                                                       or any(similar(w, query) for w in t.name.split() if len(w) > 3)):
+                return t
+        return None
+
     def can_travel(self, sc: Scenario | None, lid: str) -> bool:
         if lid == self.location:
             return False

@@ -1,0 +1,823 @@
+# Değirmenköy'ün Gölgesi — "Shadow Over Millhaven" senaryosunun açık dünya (sandbox) uyarlaması.
+title: "Değirmenköy'ün Gölgesi"
+pitch: >
+  Gümüş bir ejderhanın koruduğu vadide çocuklar kayboluyor. Kara Kurt haydutları haraç topluyor,
+  ormana zehirli bir sis çöküyor ve köyün içinde biri herkesi satmış. Kimi kurtaracağınıza siz karar verin.
+tone: "Karanlık, gergin, paranoyak bir köy gerilimi; umut ince bir ip."
+players: [1, 6]
+level_range: [1, 4]
+
+premise: |
+  Değirmenköy, yüzyıllardır Gümüşkanat adlı yaşlı bir gümüş ejderhanın koruduğu bir vadide kurulu.
+  Bir yıl önce Gümüşkanat sessizce kayboldu. Gerçekte, köyün Muhtarı Corvin Hale ile tarikat rahibi
+  Malakor ona ihanet etti: Malakor ejderhayı zehirledi, genç yeşil ejderha Xaradon da işini bitirdi —
+  ama savaşta ağır yaralandı ve hâlâ iyileşmedi. Xaradon şimdi Asit Tepeleri'ndeki inden vadiyi
+  yönetiyor. Kara Kurtlar (kurt maskeli haydut-tarikatçılar) onun eli: köyden haraç topluyor,
+  çocukları kaçırıp ormandaki kamplarındaki kafeslere kapatıyor. Malakor, Gümüşkanat'ın pullarını
+  karartan bir "Yükseliş Ayini" yürütüyor: tamamlanırsa Xaradon yaralarından kurtulacak ve vadi
+  zehirli sise gömülecek. Muhtar Corvin'e sonsuz yaşam vaat edildi; hancı Borin ise korkudan
+  haydutlara hangi evlerin savunmasız olduğunu fısıldıyor.
+truths:
+  - "Muhtar Corvin Hale ihanetin asıl sahibi; çocukların listesini o imzaladı (yeşil mürekkeple)."
+  - "Hancı Borin korkak bir suç ortağı: meyhaneyi korumak için haydutlara bilgi sızdırıyor."
+  - "Gümüşkanat öldü; kanadı Asit Tepeleri'nde demir zıpkınlarla kayaya çakılı."
+  - "Xaradon yaralı ve blöf yapıyor; ayin tamamlanmadan önce gerçek gücünün ancak yarısında."
+  - "Köydeki tapınağın altındaki mezarlık ile meyhanenin mahzeni, kampın arkasındaki sunağa giden eski bir kök tüneliyle bağlı."
+  - "Kampın komutanı Yaralı Varek düşmüş bir paladin; Xaradon'u 'Doğal Son'un tanrısı sanıyor. Ona gerçeği göstermek onu döndürebilir."
+start_location: koy_kapisi
+opening: >
+  Grup soğuk, doğaya aykırı bir yağmur altında Değirmenköy'ün çürüyen ahşap çit duvarına varıyor.
+  Kapıdaki iki muhafız mızraklarını yolculara değil, arkalarındaki karanlık ağaç hattına doğrultmuş.
+style_notes: |
+  - Korku ve şüphe atmosferi: kapılar sürgülü, köylüler göz teması kurmuyor, herkes bir şey saklıyor.
+  - Yeşil renk her zaman bozulmanın işaretidir (yeşil alev, yeşil sis, yeşil mürekkep, yeşil yosun).
+  - Çocukların korkusunu ve ailelerin acısını gerçek tut; ama oyunculara asla ne yapmaları gerektiğini söyleme.
+
+factions:
+  kara_kurtlar:
+    name: Kara Kurtlar
+    goal: Xaradon'a çocuk ve haraç toplamak, ayini korumak, köyü korkuyla yönetmek.
+    attitude: hostile
+    notes: Kurt maskesi takan haydut-tarikatçılar. Yüzük ya da maske taşıyanı kendilerinden sanırlar.
+  koy_meclisi:
+    name: Değirmenköy Meclisi
+    goal: Muhtar Corvin sırrını saklamak ve sonsuz yaşamına ulaşmak istiyor; diğer köylüler sadece hayatta kalmak.
+    attitude: neutral
+
+fronts:
+  yukselis_ayini:
+    name: Yükseliş Ayini
+    description: Malakor, Gümüşkanat'ın pullarını karartarak Xaradon'u iyileştiren ayini tamamlıyor.
+    clock: 6
+    per_day: 2
+    stages:
+      2: "Bir gece daha geçti: köyden bir çocuk daha kayboldu. Sabah bir annenin çığlığı tüm meydanı uyandırıyor."
+      4: "Yeşil sis ormandan taşıp köyün sokaklarına kadar iniyor; kuyuların suyu acılaşıyor, hayvanlar ölüyor."
+      5: "Asit Tepeleri'nden derin, keyifli bir ejderha kükremesi yankılanıyor — sesi artık yaralı değil."
+    on_complete: >
+      Ayin tamamlandı: Xaradon tüm gücüne kavuştu, kafesteki çocuklar dağa götürüldü. Ejderhanın ini
+      artık tam güçte bir canavarı barındırıyor ve vadi yavaş yavaş zehirli sise gömülüyor.
+  harac_baskini:
+    name: Kara Kurt Haracı
+    description: Haydutlar her birkaç günde bir köye inip haraç topluyor; ödenmezse kan dökülüyor.
+    clock: 4
+    per_day: 1
+    stages:
+      2: "Gece yarısı at nalı sesleri: kurt maskeli adamlar meydana girip kapıları yumrukluyor, haraç istiyorlar."
+      4: "Haraç ödenmedi: Kara Kurtlar bir evi ateşe verdi. Alevler meydanı turuncuya boyuyor."
+    on_complete: "Kara Kurtlar köyü tamamen avuçlarına aldı; artık açıkça sokaklarda dolaşıyorlar."
+
+quests:
+  kayip_cocuklar:
+    name: Kayıp Çocuklar
+    hook: "Meydandaki ilan tahtasında yırtık bir çocuk resmi ve 'Leo'yu gören var mı?' notu."
+    objectives: ["Çocukların nereye götürüldüğünü bul", "Çocukları kurtar", "Bunun arkasındaki gücü durdur"]
+    reward_xp: 300
+    reward_gold: 40
+    optional: false
+  hain_kim:
+    name: Köydeki Hain
+    hook: "Biri haydutlara hangi evlerin savunmasız olduğunu söylüyor."
+    objectives: ["Haydutlara bilgi sızdıranı bul", "Asıl elebaşını açığa çıkar"]
+    reward_xp: 200
+    optional: true
+  elaranin_ricasi:
+    name: Elara'nın Ricası
+    hook: "Dokumacı Elara, oğlu Leo'yu geri getirene aile yadigârını vereceğine yemin ediyor."
+    objectives: ["Leo'yu bul ve annesine götür"]
+    reward_xp: 150
+    reward_items: [ring_of_protection]
+    giver: elara
+  gumuskanadin_sirri:
+    name: Gümüşkanat'ın Sırrı
+    hook: "Yaşlı Silas, koruyucu ejderhanın 'uçup gitmediğini' fısıldıyor."
+    objectives: ["Gümüşkanat'a ne olduğunu öğren", "Pullarını ayinden kurtar"]
+    reward_xp: 150
+    optional: true
+
+npcs:
+  garret:
+    name: Garret
+    race: insan
+    role: Kapı muhafızı
+    appearance: Genç, solgun, gözlerinin altı mor; paslı zincir zırh, titreyen mızrak.
+    personality: Ürkek, kekeliyor, bir an önce kapıyı kilitlemek istiyor.
+    voice: "Kesik kesik, fısıltılı: 'G-gece burada durmayın... onlar sisle gelir.'"
+    wants: Sağ kalmak, ailesini korumak.
+    secret: Çocukların kaybolduğu gece ormana yeşil bir şimşeğin düştüğünü gördü; Muhtar susmasını emretti.
+    knows: ["Kara Kurtlar sisle gelir", "Muhtar ormana kimsenin gitmesini istemiyor"]
+    attitude: wary
+    location: koy_kapisi
+    monster: guard
+  borin:
+    name: Borin Taşelli
+    race: cüce
+    role: Paslı Testi meyhanesinin sahibi
+    appearance: Terli, şişman bir cüce; yağlı sakal, dar önlük, hep zaten temiz bir kupayı ovalıyor.
+    personality: Sahte neşeli, çabuk paniğe kapılır, konuyu sürekli değiştirir.
+    voice: "Fazla yüksek sesle güler: 'Ha ha! Yollar gündüz tamamen güvenli, dostlarım, tamamen!'"
+    wants: Meyhanesinin yakılmaması; oyuncuların haraç gecesinden önce gitmesi.
+    secret: Kara Kurtlara haraç ödüyor ve çocukların hangi evlerden alınacağını onlara o söyledi. Mahzeninde gizli bir sunak ve isim listesi var.
+    knows: ["Haraç her birkaç günde bir toplanır", "Mahzende bir tünel ağzı var"]
+    attitude: neutral
+    location: pasli_testi
+  silas:
+    name: Yaşlı Silas
+    race: insan
+    role: Meyhanenin sarhoşu, eski rahip
+    appearance: Paçavralar içinde, ucuz şarap kokulu, tek gözlü; boynunda kararmış gümüş bir pul.
+    personality: Bilmecelerle konuşur, insanların koluna yapışır, ayıkken şaşırtıcı derecede keskindir.
+    voice: "Hırıltılı ve şarkı gibi: 'Gümüş pullar paslandı, yeşil nefes kökleri boğdu...'"
+    wants: Birinin Gümüşkanat'ın intikamını alması; sonra da huzur içinde ölmek.
+    secret: Gümüş ejderhanın öldüğünü biliyor; tapınağın altındaki mezarlıkta bir tünel olduğunu da.
+    knows: ["Gümüşkanat öldü", "Tapınağın zincirleri içeriyi kilitlemek için", "Muhtar ejderhanın son gecesi tapınaktaydı"]
+    attitude: friendly
+    location: pasli_testi
+  elara:
+    name: Elara
+    race: insan
+    role: Dokumacı, kayıp Leo'nun annesi
+    appearance: Solgun, saçları dağınık, koyu bir şala sarınmış; kızarmış, boş bakan gözler.
+    personality: Yaslı, köyün hareketsizliğine öfkeli, umutsuz ama içinde hâlâ bir kıvılcım var.
+    voice: "Kırık ve sessiz, sonra birden öfkeyle yükselen: 'Kurt değildi. İnsan değildi!'"
+    wants: Oğlu Leo'yu geri almak; altın umurunda değil.
+    secret: O gece ne olduğunu gördü — ayı örten bir gölge, hastalık kokan bir rüzgâr ve önünde eğilen kurt maskeli adamlar.
+    knows: ["Leo'yu alan şey insan değildi", "Kurt maskeliler bir gölgenin önünde eğildi"]
+    attitude: wary
+    location: dokumaci_evi
+  corvin:
+    name: Muhtar Corvin Hale
+    race: insan
+    role: Değirmenköy muhtarı
+    appearance: Uzun boylu, gümüş saçlı, kusursuz giyimli; parmağında yeşil taşlı bir yüzük, elleri hep eldivenli.
+    personality: Kibar, sakin, ikna edici; gerçeğe yaklaşıldığında buz gibi tehditkâr.
+    voice: "Pürüzsüz ve sabırlı: 'Korkunuzu anlıyorum. Ama düzen... düzen her şeydir.'"
+    wants: Sonsuz yaşam vaadinin gerçekleşmesi; sırrının saklı kalması.
+    secret: Gümüşkanat'a ihanet etti, çocukların listesini imzaladı. Konağındaki çalışma odasında Xaradon'la yazışmaları var. Eldivenlerinin altındaki deri yeşile dönmeye başladı.
+    knows: ["Ayinin ne zaman tamamlanacağı", "Kampın yeri", "Ejderhanın yaralı olduğu"]
+    attitude: neutral
+    location: muhtar_konagi
+    monster: noble
+  tilda:
+    name: Tilda Sabun
+    race: buçukluk
+    role: Pazar tüccarı
+    appearance: Tombul yanaklı, kocaman bir sırt çantası, parmaklarında mürekkep lekeleri.
+    personality: Pazarlıkçı, dedikoducu, iyi kalpli; kayıp çocuklardan biri yeğeni.
+    voice: "Hızlı ve neşeli: 'Hepsi taze, hepsi kaliteli, hepsi neredeyse bedava!'"
+    wants: Yeğeni Pim'in bulunması; dükkanının ayakta kalması.
+    secret: Haydutlara gece yarısı erzak sattığını kimse bilmiyor — korkudan.
+    knows: ["Kurt maskeliler kuzeydeki uçurumlu yoldan geliyor", "Muhtarın konağına gece yabancılar giriyor"]
+    attitude: friendly
+    location: ana_meydan
+  yasli_budak:
+    name: Yaşlı Budak
+    race: ağaçadam
+    role: Can çekişen kadim bir ağaç bekçisi
+    appearance: Yüzü ağlayan dev bir meşe; kabuğu asitle eriyor, yeşil özsu damlıyor.
+    personality: Acı içinde, kadim, yaslı; yavaş ve derin konuşur.
+    voice: "Uzak bir gök gürültüsü gibi ağır: 'Gümüş... olan... uçmadı...'"
+    wants: Acısının bitmesi; ormanın kurtulması.
+    secret: Gümüşkanat'ın köyün içinden gelen bir ihanetle düşürüldüğünü biliyor — eldivenli bir adam ve kurt maskeli bir rahip.
+    knows: ["Gümüşkanat ihanetle öldürüldü", "Zehrin kaynağı tepelerdeki in"]
+    attitude: friendly
+    location: zehirli_koru
+  kraz:
+    name: Kraz
+    race: insan
+    role: Kara Kurt yol kesicilerinin başı
+    appearance: Uzun, sıska; boynunda insan kulağından bir kolye, ahşap kurt maskesi alnında.
+    personality: Zalim, geveze, Xaradon'a fanatikçe bağlı.
+    voice: "Alaycı ve uzun uzun: 'Efendi ormanında yürüyenlerden geçiş ücreti ister...'"
+    wants: Xaradon'un gözüne girmek, kurbanları canlı yakalamak.
+    secret: Cebinde kampın ve 'Kuluçkahane'nin yerini gösteren bir harita var.
+    attitude: hostile
+    location: kurt_patikasi
+    monster: thug
+    faction: kara_kurtlar
+  varek:
+    name: Yaralı Varek
+    race: insan
+    role: Kara Kurt kampının komutanı
+    appearance: Dev cüsseli, boğazında kocaman bir yara izi; kararmış, eski bir paladin zırhı.
+    personality: Acımasız, kısa sabırlı, büyücülerden nefret eder; derinde inancını kaybetmiş bir adam.
+    voice: "Boğuk ve kesik: 'Her şeyin bir sonu var. Ben sadece onu hızlandırıyorum.'"
+    wants: Anlam; Xaradon'un ona vaat ettiği 'Doğal Son'.
+    secret: Düşmüş bir paladin. Gümüşkanat'ın gerçekte nasıl öldüğünü (zehir ve ihanet) öğrenirse Xaradon'a karşı dönebilir.
+    attitude: hostile
+    location: kara_kurt_kampi
+    monster: veteran
+    faction: kara_kurtlar
+  leo:
+    name: Leo
+    race: insan
+    role: Elara'nın 8 yaşındaki oğlu
+    appearance: Dağınık sarı saçlı, yırtık bir tunik giymiş küçük bir çocuk.
+    personality: Cesur ama titrek; küçük çocukları korumaya çalışıyor.
+    voice: "Fısıldayarak ama dik: 'Ben korkmuyorum. Sadece... üşüyorum.'"
+    wants: Annesine dönmek; kafesteki diğer çocukların da kurtulması.
+    secret: Bir saat önce 'Ejder Efendisi' denen bir tarikatçının küçük Pim'i dağın zirvesine doğru götürdüğünü gördü.
+    attitude: friendly
+    location: kafesler
+  malakor:
+    name: Başrahip Malakor
+    race: insan
+    role: Kara Kurt tarikatının lideri
+    appearance: Sıska, solgun; gözleri hafif yeşil bir ışıkla parlıyor, cübbesinde ejderha pulları dikili.
+    personality: Fanatik, fısıltıyla konuşur, ejderhaya dönüştüğüne inanıyor.
+    voice: "Tıslar gibi fısıltı: 'Gümüş kararacak... ve ben ondan doğacağım.'"
+    wants: Ayini tamamlamak ve 'yükselmek'.
+    secret: Gümüşkanat'ı ilk zehirleyen odur; Muhtar Corvin ona tapınağın kapısını açmıştı.
+    attitude: hostile
+    location: zumrut_sunak
+    monster: cult_fanatic
+    faction: kara_kurtlar
+  xaradon:
+    name: Xaradon
+    race: yeşil ejderha
+    role: Vadinin yeni hükümdarı
+    appearance: Pürüzsüz zümrüt pullar, uzun boyun, tırtıklı boynuzlar, altın gözler; sol kanadında henüz kapanmamış derin bir yara.
+    personality: Son derece zeki, kibirli, manipülatif; öldürmeyi değil yozlaştırmayı sever.
+    voice: "Kadife gibi ve eğlenen: 'Köy borcunu ödemesi için yine kahraman mı yolladı? Yoksa... daha iyi bir anlaşma için mi geldiniz?'"
+    wants: Ayinin tamamlanması; yeni hizmetkârlar; gücünü geri kazanmak.
+    secret: Gümüşkanat'la savaştan beri yaralı ve gücünün sadece yarısında; blöf yapıyor.
+    attitude: wary
+    location: zumrut_yuva
+    monster: young_green_dragon
+
+locations:
+  koy_kapisi:
+    name: Köy Kapısı
+    region: degirmenkoy
+    description: >
+      Çamurlu yol, çürüyen ahşap çit duvara dayanıyor. Doğaya aykırı soğuk bir yağmur yağıyor. Ağır demir
+      kapının önünde pelerinlerine sarınmış iki muhafız titriyor; mızrakları yolculara değil, arkadaki karanlık
+      ağaç hattına dönük. Kapının ötesinde bir meyhane tabelası rüzgârda sallanıyor.
+    gm_notes: >
+      Paranoya atmosferi. Muhafızlar silahlı yabancıları içeri almak istemiyor ama dışarıda konuşmak da
+      istemiyorlar. Rüşvet (2 altın) kapıyı açar; ikna (ZS 12) ya da gözdağı (ZS 15, ama meyhaneye haber gider).
+    exits: [ana_meydan, orman_siniri]
+    npcs: [garret]
+    discoveries:
+      - id: asit_izleri
+        hint: "Çit duvarın kazıkları sıradan çürüme değil gibi."
+        check: {skill: investigation, dc: 13}
+        reveals: "Çit kazıklarında derin, yeşilimsi asit yanıkları var — çürüme değil, zehirli bir nefesin izi."
+        xp: 25
+      - id: garretin_sirri
+        hint: "Garret ormandan bahsedilince bir şey söylemek ister gibi."
+        check: {skill: persuasion, dc: 13}
+        reveals: "Garret çocukların kaybolduğu gece ormana yeşil bir şimşek düştüğünü gördüğünü, ama Muhtar'ın susmasını emrettiğini itiraf ediyor."
+        xp: 50
+
+  ana_meydan:
+    name: Köy Meydanı
+    region: degirmenkoy
+    description: >
+      Çamura gömülmüş taş bir meydan; ortada kurumuş bir kuyu, bir köşede ilan tahtası, etrafında kepenkleri
+      kapalı evler. Pazarda tek bir tezgâh açık: koca çantalı bir buçukluk tüccar. Kuzeyde muhtarın kibar konağı,
+      doğuda yıkık bir tapınak, batıda bir dokumacının küçük evi.
+    gm_notes: Köylüler göz teması kurmuyor. İlan tahtasında Leo'nun yırtık resmi. Tilda dedikodu yapmayı sever.
+    exits: [koy_kapisi, pasli_testi, gumus_pul_tapinagi, dokumaci_evi, muhtar_konagi]
+    npcs: [tilda]
+    shop:
+      - {id: potion_healing, price: 50}
+      - {id: antitoxin, price: 50}
+      - {id: holy_water, price: 25}
+      - {id: alchemist_fire, price: 50}
+      - {id: torch, price: 0.01}
+      - {id: rope_hempen, price: 1}
+      - {id: rations, price: 0.5}
+      - {id: arrow, price: 1}
+      - {id: bolt, price: 1}
+      - {id: dagger, price: 2}
+      - {id: shortsword, price: 10}
+      - {id: shield, price: 10}
+      - {id: leather, price: 10}
+      - {id: chain_shirt, price: 50}
+      - {id: healers_kit, price: 5}
+      - {id: crowbar, price: 2}
+    discoveries:
+      - id: ilan_tahtasi
+        hint: "İlan tahtasında yırtık bir çocuk resmi."
+        reveals: "Yırtık resmin altında: 'Dokumacı Elara'nın oğlu Leo. Gören var mı?' Altına titrek bir elle yedi isim daha eklenmiş."
+        xp: 10
+      - id: tildanin_dedikodusu
+        hint: "Tüccar Tilda bir şeyler anlatmaya can atıyor gibi."
+        check: {skill: persuasion, dc: 10}
+        reveals: "Tilda, kurt maskelilerin kuzeydeki uçurumlu yoldan geldiğini ve geceleri muhtarın konağına yabancıların girdiğini fısıldıyor."
+        leads_to: [haydut_yolu]
+        xp: 25
+
+  pasli_testi:
+    name: Paslı Testi Meyhanesi
+    region: degirmenkoy
+    description: >
+      Şaşırtıcı derecede sessiz bir meyhane. Birkaç köylü bira kupalarının üzerine kamburlaşmış, kimseyle göz göze
+      gelmiyor. Bayat bira ve yanık güveç kokusu. Tezgâhın arkasında terli, şişman bir cüce zaten temiz olan bir
+      kupayı hırsla ovalıyor. Köşede tek gözlü bir sarhoş kendi kendine şarkı mırıldanıyor.
+    gm_notes: >
+      Borin gergin; haraç gecesi gelmeden oyuncuların gitmesini istiyor, yolların gündüz güvenli olduğu yalanını
+      söyler. Oda 1 gümüş. Tezgâhın arkası araştırılırsa defter bulunur; mahzen kapısı kilitlidir.
+    exits: [ana_meydan, meyhane_mahzeni]
+    npcs: [borin, silas]
+    safe_rest: true
+    discoveries:
+      - id: koylu_fisiltilari
+        hint: "Köylüler alçak sesle bir şeyler fısıldaşıyor."
+        check: {skill: perception, dc: 13}
+        reveals: "Köylüler 'haraç gecesinin' yaklaştığını ve 'Dokumacının oğlunun da listede olduğunu' fısıldıyor. Liste mi?"
+        xp: 25
+      - id: borinin_defteri
+        hint: "Borin tezgâhın altına sürekli bakıyor."
+        check: {skill: sleight_of_hand, dc: 15}
+        reveals: "Tezgâhın altında gizli bir defter: tarihler, altın miktarları ve 'KK' baş harfli ödemeler. Arasına sıkışmış kaba bir ahşap kurt muskası."
+        item: {name: "Borin'in Kara Defteri", kind: quest, description: "Kara Kurtlara yapılan ödemelerin kaydı."}
+        xp: 50
+      - id: silasin_bilmecesi
+        hint: "Yaşlı Silas bir kolunuza yapışıp bir şey anlatmak istiyor."
+        reveals: "Silas fısıldıyor: 'Gümüş pullar paslandı, yeşil nefes kökleri boğdu. Tapınağın zincirleri dışarıyı değil, içeriyi kilitler.' Boynundaki kararmış gümüş pulu gösteriyor."
+        leads_to: [yeralti_mezarligi]
+        xp: 25
+    encounters:
+      - id: meyhane_kavgasi
+        when: "Oyuncular köylüleri kışkırtır ya da Borin'i tehdit edip zorla kavga çıkarırsa"
+        enemies: [{monster: thug, count: 2, name: "Sarhoş Oduncu"}]
+        features:
+          - {name: "Devrik masalar", description: "Arkasına saklanılabilecek ağır meşe masalar.", effect: cover, damage: null}
+          - {name: "Tavandaki avize", description: "Paslı zincirle asılı, mumlu demir bir avize.", effect: hazard, damage: 2d6, damage_type: bludgeoning, rank: front}
+
+  meyhane_mahzeni:
+    name: Meyhane Mahzeni
+    region: degirmenkoy
+    hidden: true
+    outdoors: false
+    description: >
+      Soğuk, nemli toprak ve ekşimiş bira kokusu. Duvarlar boyunca ağır fıçılar. En dipte, boş kasaların
+      arkasında, bir nakliye sandığından yapılma derme çatma bir sunakta küçük, yeşil bir mum titriyor.
+      Duvara köylülerin isimleriyle dolu bir liste iğnelenmiş.
+    gm_notes: Borin'in ihanetinin kanıtı. Fıçıların arkasında kök tüneline açılan dar bir delik var.
+    exits: [pasli_testi, kok_tuneli]
+    discoveries:
+      - id: isim_listesi
+        hint: "Duvardaki listenin altında farklı renkte bir imza var."
+        reveals: "Listede kaçırılan çocukların isimleri — ve en altta yeşil mürekkeple bir imza: Corvin Hale. Muhtar!"
+        item: {name: "Yeşil Mürekkepli Liste", kind: quest, description: "Muhtar Corvin'in imzasını taşıyan kurban listesi."}
+        xp: 75
+      - id: kurt_yuzugu
+        hint: "Sunağın üzerinde bir şey parlıyor."
+        reveals: "Sunakta kurt başı şeklinde bir yüzük: Kara Kurtların tanıma işareti. Takan biri haydutları kandırmada avantaj kazanabilir."
+        item: {name: "Kurt Başlı Yüzük", kind: quest, description: "Kara Kurtların tanıma yüzüğü; aldatma girişimlerinde avantaj sağlar."}
+        xp: 25
+      - id: tunel_agzi
+        hint: "Fıçıların arkasından soğuk bir hava akımı geliyor."
+        check: {skill: investigation, dc: 12}
+        reveals: "Fıçıların arkasında, köklerle kaplı, aşağı inen dar bir tünel ağzı."
+        leads_to: [kok_tuneli]
+        xp: 25
+
+  gumus_pul_tapinagi:
+    name: Gümüş Pul Tapınağı
+    region: degirmenkoy
+    description: >
+      Köyün kıyısında yıkık taş bir tapınak; çatısı çökmüş. Bir zamanlar gümüşe boyanmış görkemli bir ejderha
+      heykeli şimdi kalın, doğaya aykırı yeşil bir yosunla kaplı. Hava hafifçe çamaşır suyu ve asit kokuyor.
+      Aşağıdaki mezarlığa inen büyük demir kapılar dışarıdan zincirlenmiş.
+    gm_notes: >
+      Yosun aşındırıcı: dikkatsizce dokunan 1d4 asit hasarı alır. Zincirler bir şeyin İÇERİDE tutulduğunu
+      gösteriyor. Zincirleri kırmak Güç ZS 16 ya da kilit açmak El Çabukluğu ZS 14.
+    exits: [ana_meydan, yeralti_mezarligi]
+    discoveries:
+      - id: heykel
+        hint: "Heykelin kaidesinde silinmiş yazılar var."
+        check: {skill: religion, dc: 12}
+        reveals: "Kaide: 'Gümüşkanat, vadinin bekçisi. Kanatları altında kimse korkmaz.' Bu, köyün koruyucusu yaşlı gümüş ejderhaya adanmış bir tapınak."
+        xp: 25
+      - id: yesil_yosun
+        hint: "Yosunun kokusu tuhaf; bitki gibi değil."
+        check: {skill: nature, dc: 14}
+        reveals: "Bu yosun değil: bir yeşil ejderhanın zehirli nefesinin bıraktığı kalıntı. Burada bir ejderha nefes verdi."
+        xp: 50
+      - id: zincir_kilidi
+        hint: "Zincirlerin asma kilidinde bir sembol oyulmuş."
+        check: {skill: investigation, dc: 13}
+        reveals: "Asma kilitte bir kurt başı oyulmuş — Kara Kurtların işareti. Bu kapıyı onlar kilitledi."
+        xp: 25
+
+  yeralti_mezarligi:
+    name: Yeraltı Mezarlığı
+    region: degirmenkoy
+    hidden: true
+    outdoors: false
+    travel_hours: 0
+    description: >
+      Basamaklar karanlığa iniyor. Duvarlardaki nişlerde eski rahiplerin kemikleri, bazı nişler boş. Taşlarda
+      tırnak izleri. Derinlerden, yeşil köklerin tavanı deldiği bir koridor uzanıyor.
+    gm_notes: >
+      Kara Kurtlar buraya öldürdükleri rahipleri gömdü; Malakor'un karanlık büyüsü onları kıpırdattı. Mezarlığın
+      dibinde kök tüneline bağlanan bir geçit var.
+    exits: [gumus_pul_tapinagi, kok_tuneli]
+    discoveries:
+      - id: rahibin_gunlugu
+        hint: "Bir nişte çürümüş bir deri çanta."
+        reveals: "Son rahibin günlüğü: 'Muhtar o gece tapınağın kapısını açtı. Maskeli bir rahip içeri girdi, elinde yeşil bir şişe. Gümüşkanat'ın kükremesini hiç bu kadar acı dolu duymamıştım.'"
+        item: {name: "Rahibin Günlüğü", kind: quest, description: "Gümüşkanat'ın zehirlendiği gecenin tanıklığı."}
+        xp: 75
+    encounters:
+      - id: huzursuz_olular
+        when: "Oyuncular mezarlığa ilk indiğinde ya da nişleri karıştırdığında"
+        enemies: [{monster: skeleton, count: 3, name: "Huzursuz Rahip"}, {monster: zombie, count: 1, name: "Şişmiş Ceset"}]
+        features:
+          - {name: "Çürük tavan kirişi", description: "Çatlamış, her an çökebilecek bir taş kiriş.", effect: hazard, damage: 3d6, damage_type: bludgeoning, rank: front}
+          - {name: "Mezar nişleri", description: "Saklanmaya uygun derin nişler.", effect: cover, damage: null}
+
+  dokumaci_evi:
+    name: Dokumacının Evi
+    region: degirmenkoy
+    description: >
+      Küçük, bakımsız bir kulübe. Ocak soğuk. Her yerde iplik ve yarım kalmış kumaşlar. Sallanan sandalyede
+      oturan kadın yerdeki küçük, tahta bir oyuncak kılıca boş gözlerle bakıyor.
+    gm_notes: Duygusal ağırlık. Elara altınla ilgilenmiyor; sadece oğlunu istiyor. Leo'nun odasında ipuçları var.
+    exits: [ana_meydan]
+    npcs: [elara]
+    discoveries:
+      - id: surungen_izleri
+        hint: "Çocuğun odasının penceresinin altı çamurlu."
+        check: {skill: investigation, dc: 12}
+        reveals: "Pencerenin altındaki çamurda insan çizmesi değil, sürüngen pençesine benzeyen dev izler var — ve yanlarında kurt maskeli birinin ayak izleri."
+        xp: 50
+      - id: elaranin_tanikligi
+        hint: "Elara bir şey görmüş ama anlatmaya cesaret edemiyor."
+        check: {skill: insight, dc: 12}
+        reveals: "Elara anlatıyor: 'Kurt değildi. İnsan değildi. Bir gölge ayı örttü, rüzgâr hastalık kokuyordu. Kurt maskeli adamlar onun önünde eğildi.'"
+        xp: 50
+
+  muhtar_konagi:
+    name: Muhtar Konağı
+    region: degirmenkoy
+    description: >
+      Köyün tek taş binası: bakımlı bir bahçe, cilalı kapı tokmağı, perdeleri kapalı pencereler. Kapıda kibar
+      ama soğuk bir uşak. İçeride şömine yanıyor; çalışma odasının kapısı hep kilitli.
+    gm_notes: >
+      Corvin misafirleri nazikçe karşılar, oyuncuları "orman tehlikeli, burada bekleyin" diye oyalar. Çalışma
+      odasında Xaradon'la yazışmalar var. Yüzleşilirse önce inkâr eder, sonra muhafızlarını çağırır ya da kaçmaya çalışır.
+    exits: [ana_meydan]
+    npcs: [corvin]
+    safe_rest: false
+    discoveries:
+      - id: corvinin_eldivenleri
+        hint: "Muhtar eldivenlerini hiç çıkarmıyor; bileğinde garip bir renk."
+        check: {skill: insight, dc: 14}
+        reveals: "Corvin'in eldiveninin altından görünen bileği yeşile dönmüş, pul pul olmuş. Bir şey onu içeriden değiştiriyor."
+        xp: 50
+      - id: calisma_odasi
+        hint: "Çalışma odasının kapısı kilitli; altından yeşil bir ışık sızıyor."
+        check: {skill: sleight_of_hand, dc: 15}
+        reveals: "Çalışma odasında Xaradon'un mührünü taşıyan mektuplar: Muhtar'a çocuklar karşılığında 'sonsuz yaşam' vaat ediliyor. Haritada kamp ve Asit Tepeleri'ne giden gizli bir patika işaretli."
+        item: {name: "Ejderha Mühürlü Mektuplar", kind: quest, description: "Muhtar Corvin'in Xaradon'la anlaşmasının kanıtı."}
+        leads_to: [kara_kurt_kampi, asit_tepeleri]
+        xp: 100
+    encounters:
+      - id: muhtarin_muhafizlari
+        when: "Oyuncular Muhtar'ı açıkça suçlar ya da konakta yakalanırsa"
+        enemies: [{monster: guard, count: 3, name: "Konak Muhafızı"}]
+        features:
+          - {name: "Şömine", description: "Yanan odunlarla dolu büyük bir şömine.", effect: push_hazard, damage: 2d6, damage_type: fire, rank: front}
+
+  orman_siniri:
+    name: Fısıltılı Orman Sınırı
+    region: orman
+    travel_hours: 1
+    description: >
+      Köyün çitlerinden çıktığınız an gecenin doğal sesleri kesiliyor. Ağaçlar çarpık, yaprakları yağlı ve hasta
+      bir gri. Yere yapışık, ıslak toprak ve metal kokan kalın bir sis. Birkaç patika ayrılıyor; en derine gideni
+      kırık dallar ve ağır çizme izleriyle işaretli.
+    gm_notes: Orman canlı ve düşmanca hissettirmeli; ağaçlar oyunculara doğru eğiliyormuş gibi.
+    exits: [koy_kapisi, zehirli_koru, kurt_patikasi, haydut_yolu]
+    discoveries:
+      - id: cizme_izleri
+        hint: "Çamurda ağır çizme izleri."
+        check: {skill: survival, dc: 12}
+        reveals: "İzler en az beş kişiye ait; aralarında küçük, çıplak ayak izleri sürüklenmiş gibi. Kuzeydeki kurt patikasına gidiyorlar."
+        xp: 25
+      - id: leonun_tunigi
+        hint: "Bir dikenli çalıda kumaş parçası."
+        check: {skill: investigation, dc: 14}
+        reveals: "Dikenli çalıda Leo'nun tuniğinden yırtılmış bir parça. Çocuk buradan geçmiş — canlı."
+        item: {name: "Leo'nun Tunik Parçası", kind: quest, description: "Elara'nın tanıyacağı küçük bir kumaş parçası."}
+        xp: 25
+    encounters:
+      - id: sis_kurtlari
+        when: "Gece ormanda oyalanılırsa ya da gürültü yapılırsa"
+        enemies: [{monster: wolf, count: 3, name: "Sis Kurdu"}]
+        features:
+          - {name: "Yoğun sis", description: "Görüşü kesen yere yapışık bir sis.", effect: obscure, damage: null}
+
+  zehirli_koru:
+    name: Zehirli Koru
+    region: orman
+    travel_hours: 1
+    description: >
+      Bir açıklıkta küçük bir gölet: suyu kaynayan, parlak yeşil bir sıvıya dönmüş. Yüzeyde ölü balıklar,
+      kıyıda erimiş geyik iskeletleri. Göletin ortasında can çekişen dev bir ağaç bekçisi; kabuğu asitle eriyor.
+      Nefes almak zor.
+    gm_notes: >
+      Zehirli hava: burada uzun kalan ya da suya dokunan 1d4 zehir hasarı alır. Yaşlı Budak kurtarılır ya da
+      dinlenirse büyük bilgi verir. Merhametle öldürülürse "Ormanın Kutsaması" bırakır.
+    exits: [orman_siniri, haydut_yolu]
+    npcs: [yasli_budak]
+    discoveries:
+      - id: zehirli_su
+        hint: "Suyun rengi ve kokusu tanıdık geliyor mu?"
+        check: {skill: nature, dc: 15}
+        reveals: "Bu bir yeşil ejderhanın asitli zehri. Zehrin kaynağı rüzgârın estiği yer: kuzeydeki Asit Tepeleri."
+        leads_to: [asit_tepeleri]
+        xp: 50
+      - id: iskeletlerdeki_hazine
+        hint: "Erimiş iskeletlerin arasında bir şey parlıyor."
+        check: {skill: investigation, dc: 13}
+        reveals: "Eski bir maceracının kalıntıları: yarı erimiş bir kemer, birkaç altın ve sağlam kalmış bir iksir."
+        item: {id: potion_healing}
+        gold: 12
+        xp: 25
+      - id: budagin_sirri
+        hint: "Yaşlı Budak acı içinde bir şey söylemeye çalışıyor."
+        check: {skill: medicine, dc: 14}
+        reveals: "Yaşlı Budak'ın acısı biraz dinince fısıldıyor: 'Gümüş olan uçmadı. İçeriden bir ihanetle düşürüldü — eldivenli bir adam ve kurt maskeli bir rahip. Sonra yeşil olan geldi.'"
+        xp: 75
+    encounters:
+      - id: koru_orumcekleri
+        when: "Oyuncular gölete yaklaşınca ya da ağaçları karıştırınca"
+        enemies: [{monster: giant_spider, count: 1, name: "Zehir Dokuyan"}]
+        features:
+          - {name: "Asitli gölet", description: "Kaynayan, asitli yeşil su.", effect: push_hazard, damage: 2d6, damage_type: acid, rank: front}
+
+  kurt_patikasi:
+    name: Kurt Patikası
+    region: orman
+    travel_hours: 1
+    description: >
+      Patika iki kaya arasında daralıyor. Ağaçların arasında bir ıslık yankılanıyor. Sisin içinden kurt maskeli,
+      yırtık pelerinli adamlar çıkıyor; arbaletleri göğüslerinize doğrultulmuş.
+    gm_notes: >
+      Kraz ve adamları geçiş ücreti ister: ya tüm altınınız ya kanınız. Aldatma (ZS 15, kurt yüzüğüyle avantajlı)
+      ile "Efendiye katılmaya geldik" denirse kampa götürürler. Gözdağı ZS 16 bir haydudu kaçırtır. Kraz'ın cebinde harita var.
+    exits: [orman_siniri, kara_kurt_kampi]
+    npcs: [kraz]
+    discoveries:
+      - id: krazin_haritasi
+        hint: "Kraz'ın cebinden bir parşömen ucu görünüyor."
+        reveals: "Kraz'ın haritası: Kara Kurt kampının düzeni, kafeslerin yeri ve dağa çıkan 'Kuluçkahane' patikası."
+        item: {name: "Kraz'ın Haritası", kind: quest, description: "Kamp düzenini ve Asit Tepeleri patikasını gösterir."}
+        leads_to: [kara_kurt_kampi, asit_tepeleri]
+        xp: 50
+    encounters:
+      - id: kurt_tuzagi
+        when: "Oyuncular ücreti ödemeyi reddeder, saldırır ya da Ejderhadan/çocuklardan bahsederse"
+        enemies: [{monster: thug, count: 1, name: "Kraz"}, {monster: bandit, count: 2, name: "Kurt Maskeli Haydut"}]
+        features:
+          - {name: "Dar kaya geçidi", description: "İki kaya arasında daralan dar patika.", effect: cover, damage: null}
+          - {name: "Gevşek kayalar", description: "Yamaçta itilmeyi bekleyen gevşek kayalar.", effect: hazard, damage: 2d6, damage_type: bludgeoning, rank: back}
+
+  haydut_yolu:
+    name: Gölge Yolu
+    region: orman
+    travel_hours: 2
+    description: >
+      Dik kayalıklar arasında daralan bir yol. Uzakta titreşen meşaleler. Yamaçlarda nöbetçiler. Ağır demir
+      kafeslerin sürüklenme sesi ve bir çocuğun yürek parçalayan ağlaması duyuluyor.
+    gm_notes: Ağır korunan ana yaklaşım. Gizlilik ZS 15 ile nöbetçiler atlatılabilir; bir dikkat dağıtma işleri kolaylaştırır.
+    exits: [orman_siniri, zehirli_koru, kara_kurt_kampi]
+    discoveries:
+      - id: kampi_gozetle
+        hint: "Bir kayanın tepesinden kamp görülebilir."
+        check: {skill: perception, dc: 14}
+        reveals: "Yukarıdan kamp görünüyor: amfitiyatro biçimli bir kaya çanağı, ortada yeşil yanan bir şenlik ateşi, platformda demir kafesler, arkada büyük bir çadır ve kayaların ardında yeşil ışıklı bir sunak."
+        leads_to: [kara_kurt_kampi]
+        xp: 25
+    encounters:
+      - id: nobetciler
+        when: "Oyuncular gizlenmeden yaklaşırsa ya da gizlilik başarısız olursa"
+        enemies: [{monster: scout, count: 2, name: "Kurt Nöbetçisi"}]
+
+  kara_kurt_kampi:
+    name: Kara Kurt İni
+    region: kamp
+    hidden: false
+    travel_hours: 1
+    description: >
+      Doğal bir taş amfitiyatroya kurulmuş kamp. Düzinelerce siyah çadır, ürkütücü yeşil bir alevle yanan dev
+      bir şenlik ateşini çevreliyor. Haydutlar bıçak biliyor, girişte kara tüylü kurtlar kemik kemiriyor. Ortada
+      ahşap bir platform ve üzerinde ağır demir kafesler.
+    gm_notes: >
+      Çok riskli. Oyuncular yakalanırsa tüm kamp alarma geçer. Kurt maskesi/pelerini ile kılık değiştirme
+      (Aldatma ZS 14), ortak güvece zehir (El Çabukluğu ZS 13), kurtları salıp kargaşa (Hayvan İdaresi ZS 16)
+      gibi yaratıcı yollar ödüllendirilmeli. Varek, Gümüşkanat'ın ihanetle öldürüldüğünü kanıtla öğrenirse dönebilir.
+    exits: [haydut_yolu, kurt_patikasi, kafesler, komutan_cadiri, zumrut_sunak, asit_tepeleri]
+    npcs: [varek]
+    discoveries:
+      - id: varekin_gecmisi
+        hint: "Varek'in zırhında silinmiş bir kutsal arma var."
+        check: {skill: religion, dc: 13}
+        reveals: "Varek'in kararmış zırhındaki silinmiş arma bir paladin tarikatına ait. O bir zamanlar kutsal bir şövalyeydi; inancını kaybetmiş."
+        xp: 50
+    encounters:
+      - id: kamp_alarmi
+        when: "Kamp alarma geçerse ya da oyuncular açıkça saldırırsa"
+        enemies: [{monster: veteran, count: 1, name: "Yaralı Varek"}, {monster: bandit, count: 3, name: "Kara Kurt"}, {monster: wolf, count: 2, name: "Kamp Kurdu"}]
+        boss: true
+        features:
+          - {name: "Yeşil şenlik ateşi", description: "Zehirli yeşil alevlerle yanan dev ateş.", effect: push_hazard, damage: 3d6, damage_type: fire, rank: front}
+          - {name: "Çadır ipleri", description: "Kesilince çadırları çökertecek gergin halatlar.", effect: trap, damage: 1d6, damage_type: bludgeoning, rank: back}
+          - {name: "Kafes platformu", description: "Yüksekte, kenarından aşağı itilebilecek bir platform.", effect: high_ground, damage: null}
+
+  kafesler:
+    name: Demir Kafesler
+    region: kamp
+    hidden: false
+    travel_hours: 0
+    description: >
+      Yerden biraz yukarıda asılı üç demir kafes. En büyüğünde dört çocuk ısınmak için birbirine sokulmuş;
+      aralarında dizlerini kucaklamış sarı saçlı bir oğlan. Yakında bir muhafız, gözleri yeşil parlayan dev bir
+      kurda tembelce et atıyor.
+    gm_notes: >
+      Çocuklar çok korkmuş; önce sakinleştirilmezlerse (İkna/Hayvan İdaresi ZS 12) bağırırlar. Kilit
+      (El Çabukluğu ZS 14) ya da muhafızın anahtarı. Leo, Pim'in dağa götürüldüğünü bilir.
+    exits: [kara_kurt_kampi]
+    npcs: [leo]
+    discoveries:
+      - id: leonun_tanikligi
+        hint: "Leo bir şey anlatmak için titriyor."
+        reveals: "Leo: 'Bir saat önce Ejder Efendisi denen adam küçük Pim'i dağın tepesine götürdü. Pim çok küçük... lütfen.'"
+        leads_to: [asit_tepeleri]
+        xp: 50
+    encounters:
+      - id: kafes_bekcileri
+        when: "Oyuncular kafeslere gürültüyle yaklaşırsa ya da muhafız onları görürse"
+        enemies: [{monster: dire_wolf, count: 1, name: "Bozulmuş Dev Kurt"}, {monster: bandit, count: 1, name: "Kafes Muhafızı"}]
+
+  komutan_cadiri:
+    name: Komutan Çadırı
+    region: kamp
+    hidden: false
+    travel_hours: 0
+    outdoors: false
+    description: >
+      Çalıntı servetle dolu bir çadır, ama aynı zamanda tuhaf simya düzenekleri. Büyük bir meşe masada bölgenin
+      haritası; Değirmenköy yeşil bir mühürle üstü çizilmiş. Yarım yazılmış bir mektup açık duruyor. Hava kükürt ve
+      zehirli otlar kokuyor.
+    exits: [kara_kurt_kampi]
+    items:
+      - {id: gem_50, qty: 2}
+      - {id: art_25}
+    discoveries:
+      - id: yarim_mektup
+        hint: "Masada yarım kalmış bir mektup."
+        reveals: "Mektup Muhtar Corvin'e yazılmış: 'Son üç çocuk dolunaydan önce. Efendi yaralarından kurtulduğunda sözünü tutacak.' Kanıt elinizde."
+        xp: 50
+      - id: panzehir_sandigi
+        hint: "Simya düzeneklerinin altında kilitli bir sandık."
+        check: {skill: investigation, dc: 14}
+        reveals: "Sandıkta zehre karşı hazırlanmış şişeler: ejderhanın nefesine karşı hayat kurtarabilir."
+        item: {id: antitoxin, qty: 3}
+        xp: 50
+      - id: gizli_patika
+        hint: "Haritada dağa çıkan ince bir çizgi."
+        check: {skill: perception, dc: 13}
+        reveals: "Haritada Asit Tepeleri'ne çıkan, nöbetçilerin bilmediği gizli bir patika işaretli."
+        leads_to: [asit_tepeleri]
+        xp: 25
+
+  zumrut_sunak:
+    name: Zümrüt Nefes Sunağı
+    region: kamp
+    hidden: false
+    travel_hours: 0
+    description: >
+      Kampın arkasında, ejderha runlarıyla oyulmuş taş bir sunak. Kukuletalı bir rahip Ejderce ilahiler okuyarak
+      bir yığın gümüş ejderha pulunun üzerine yeşil bir sıvı döküyor. Pullar dumanlanıp kararıyor.
+    gm_notes: >
+      Ayin burada yürütülüyor. Malakor burada durdurulursa Yükseliş Ayini saati 2 geriler ve son savaş kolaylaşır.
+      Sunağı sabote etmek (Arkana ZS 15) patlama yaratır. Kök tüneli buraya çıkar.
+    exits: [kara_kurt_kampi, kok_tuneli]
+    npcs: [malakor]
+    discoveries:
+      - id: ilahinin_anlami
+        hint: "İlahinin kelimeleri tanıdık gelebilir."
+        check: {skill: history, dc: 14}
+        reveals: "Malakor Gümüşkanat'ın ruhunu 'çözüyor': pulların gücü ejderhayı iyileştiriyor. Pullar kurtarılırsa Xaradon'un iyileşmesi durur."
+        xp: 50
+      - id: gumus_pullar
+        hint: "Henüz kararmamış birkaç gümüş pul var."
+        reveals: "Kararmamış gümüş pulları topluyorsunuz. Sıcaklar; sanki hâlâ bir kalp atıyor."
+        item: {name: "Gümüşkanat'ın Pulları", kind: quest, description: "Henüz kararmamış ejderha pulları; ayini durdurur, belki daha fazlasını."}
+        xp: 75
+    encounters:
+      - id: ayin_savasi
+        when: "Oyuncular ayini bölerse ya da Malakor onları fark ederse"
+        enemies: [{monster: cult_fanatic, count: 1, name: "Başrahip Malakor"}, {monster: cultist, count: 3, name: "Kurt Maskeli Mürit"}]
+        boss: true
+        features:
+          - {name: "Yeşil sıvı kazanı", description: "Kaynayan zehirli ayin sıvısı.", effect: hazard, damage: 2d6, damage_type: poison, rank: front}
+          - {name: "Ejderha runlu sunak", description: "Kararsız büyülü enerjiyle titreyen sunak.", effect: trap, damage: 3d6, damage_type: force, rank: front}
+
+  kok_tuneli:
+    name: Kök Tüneli
+    region: kamp
+    hidden: true
+    outdoors: false
+    travel_hours: 2
+    description: >
+      Çürüyen kerestelerle desteklenmiş dar, elle kazılmış bir tünel. Yukarıdaki ormandan gelen parlak yeşil kökler
+      tavanı delmiş; yere düşünce cızırdayan asitli bir öz damlatıyor. Uzun, boğucu bir sürünme. Uzaktan ilahiler yankılanıyor.
+    gm_notes: Köyden kampın arkasındaki sunağa giden gizli kısayol. Damlayan öz tehlikeli (Akrobasi ZS 14 yoksa 1d6 asit).
+    exits: [meyhane_mahzeni, yeralti_mezarligi, zumrut_sunak]
+    discoveries:
+      - id: yanki
+        hint: "İlerideki sesler kelimelere dönüşüyor."
+        check: {skill: perception, dc: 13}
+        reveals: "Yankılanan ses Malakor'un: 'Bir gece daha... sonra Efendi yeniden uçacak.' Ayin yaklaşıyor."
+        xp: 25
+
+  asit_tepeleri:
+    name: Asit Tepeleri
+    region: dag
+    hidden: true
+    travel_hours: 3
+    description: >
+      Hava inceliyor ve sarıya dönüyor. Sivri kaya yüzlerinin etrafında kalın klor bulutları dönüyor. Bir zamanlar
+      görkemli bir gümüş ejderhanın kanadı, dev demir zıpkınlarla kayalığa çakılmış. Yukarıda, çığlık atan bir ağzı
+      andıran in girişi; önünde ağır zırhlı iki sessiz dev nöbet tutuyor.
+    gm_notes: >
+      Çevresel tehlike: her iki turda gaz yer değiştirir (koruması olmayana 1d6 zehir). Panzehir ya da zehir
+      direnci bunu önler. Uçurumu tırmanmak (Atletizm ZS 16) nöbetçileri atlatır. Kanadı incelemek (Arkana ZS 13),
+      Gümüşkanat'ın ruhunun yeşil sise güç verdiğini gösterir.
+    exits: [kara_kurt_kampi, zumrut_yuva]
+    discoveries:
+      - id: gumus_kanat
+        hint: "Kayalığa çakılı dev kanat hâlâ hafifçe parlıyor."
+        check: {skill: arcana, dc: 13}
+        reveals: "Gümüşkanat'ın ruhu kanadına hapsedilmiş ve yeşil sise güç veriyor. Zıpkınlar sökülürse ruh özgür kalır ve sis zayıflar."
+        xp: 75
+    encounters:
+      - id: sessizler
+        when: "Oyuncular in girişine doğrudan yaklaşırsa"
+        enemies: [{monster: wight, count: 1, name: "Sessiz Nöbetçi"}, {monster: skeleton, count: 2, name: "Zırhlı Kabuk"}]
+        features:
+          - {name: "Klor bulutu", description: "Rüzgârla yer değiştiren zehirli gaz.", effect: hazard, damage: 2d6, damage_type: poison, rank: back}
+          - {name: "Uçurum kenarı", description: "Aşağısı yüzlerce metre olan bir kenar.", effect: push_hazard, damage: 4d6, damage_type: bludgeoning, rank: front}
+
+  zumrut_yuva:
+    name: Zümrüt Yuva
+    region: dag
+    hidden: true
+    outdoors: false
+    travel_hours: 0
+    description: >
+      Dağın içi devasa bir mağara: paslı zırh yığınları ve aşınmış gümüş sikkeler. Ortada kaynayan yeşil bir asit
+      havuzu taht gibi duruyor. Bir hazine tepesinin üstünde zümrüt pullu, altın gözlü genç bir yeşil ejderha sizi
+      izliyor. Saldırmıyor; bir duman bulutu üfleyip kıkırdıyor.
+    gm_notes: >
+      Xaradon önce konuşur: yozlaştırmayı öldürmeye tercih eder. Altın (5000), unvan ya da köy yöneticilerinin
+      korkaklığı hakkındaki "gerçek" ile oyuncuları kandırmaya çalışır. Hakaret edilirse ya da arkadaki ayin
+      çemberine yaklaşılırsa saldırır. Küçük Pim arkadaki çemberde. Tavanda gevşek bir sarkıt var (Algı ZS 15).
+      Ayin tamamlanmadıysa Xaradon yaralıdır (daha az can).
+    exits: [asit_tepeleri]
+    npcs: [xaradon]
+    items:
+      - {id: gem_500}
+      - {id: gem_100, qty: 3}
+      - {id: cloak_of_protection}
+    discoveries:
+      - id: sarkit
+        hint: "Tavanda, ejderhanın tam üstünde çatlamış bir sarkıt."
+        check: {skill: perception, dc: 15}
+        reveals: "Ejderhanın başının üstündeki dev sarkıt çatlamış; doğru vuruşla düşürülebilir."
+        xp: 25
+      - id: ejderhanin_yarasi
+        hint: "Ejderha sol kanadını garip tutuyor."
+        check: {skill: insight, dc: 14}
+        reveals: "Xaradon'un sol kanadında kapanmamış derin bir yara var; hareketlerinde acı saklıyor. Blöf yapıyor — gücünün yarısında."
+        xp: 50
+    encounters:
+      - id: xaradon_savasi
+        when: "Xaradon'a hakaret edilirse, çembere yaklaşılırsa ya da oyuncular saldırırsa"
+        enemies: [{monster: young_green_dragon, count: 1, name: "Xaradon", hp_factor: 0.6}]
+        boss: true
+        features:
+          - {name: "Çatlak sarkıt", description: "Ejderhanın üstünde çatlamış dev bir taş sarkıt.", effect: hazard, damage: 4d6, damage_type: bludgeoning, rank: front, dc: 15}
+          - {name: "Asit havuzu", description: "Kaynayan yeşil asit havuzu.", effect: push_hazard, damage: 3d6, damage_type: acid, rank: front}
+          - {name: "Hazine tepesi", description: "Arkasına saklanılabilecek altın ve zırh yığını.", effect: cover, damage: null}
+
+endings:
+  - "KAHRAMANLIK: Xaradon yenilir, çocuklar ailelerine döner, Gümüşkanat'ın ruhu özgürleşir; vadi yeniden nefes alır ve tapınak yeniden inşa edilir."
+  - "KAÇIŞ: Grup vadiyi kaderine terk eder; Değirmenköy yeşil sise gömülür, Kara Kurtlar komşu krallıklara yayılır."
+  - "KARANLIK: Grup Xaradon'la anlaşır ya da tarikata katılır; ayin tamamlanır ve onlar yeni ejderha imparatorluğunun teğmenleri olur."
+  - "ADALET: Muhtar Corvin'in ihaneti tüm köyün önünde açığa çıkar; köy kendi hesabını sorar."
+
+random_events:
+  - "Uzaktan bir kurt ulumasına başka bir uluma cevap veriyor; sonra sessizlik."
+  - "Gökyüzünde, bulutların arasında dev kanatlı bir gölge bir anlığına beliriyor."
+  - "Yolun kenarında, kurt maskeli birinin düşürdüğü yarı yenmiş bir ekmek ve boş bir şarap tulumu."
+  - "Rüzgâr değişiyor; havada hafif, keskin bir klor kokusu."
+  - "Bir köylü çocuğu pencereden bakıp hemen perdeyi çekiyor."

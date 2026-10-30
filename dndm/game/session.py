@@ -533,6 +533,12 @@ class GameSession:
         assert ws
         loc = ws.find_location(sc, destination)
         if loc is None:
+            secret = ws.find_adjacent_hidden(sc, destination)
+            if secret is not None:
+                ws.known.append(secret.id)
+                ws.add_journal("place", f"Gizli bir yer bulundu: {secret.name}")
+                loc = secret
+        if loc is None:
             # unknown place: create it as an improvised location (freedom!)
             loc = ws.add_dynamic_location(sc, destination, f"{destination} — oyuncuların keşfettiği yeni bir yer.")
         if loc.id == ws.location:

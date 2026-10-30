@@ -58,8 +58,9 @@ class CombatEngine:
             mdef = data.monster(mid)
             count = max(1, min(int(spec.get("count", 1)), 8))
             base_name = (spec.get("name") or mdef.name).strip()
+            hp_factor = float(spec.get("hp_factor", 1.0))
             for n in range(count):
-                hp = max(1, roll(mdef.hp).total)
+                hp = max(1, round(roll(mdef.hp).total * hp_factor))
                 name = base_name if count == 1 else f"{base_name} {n + 1}"
                 rank = spec.get("rank") or mdef.behavior.get("rank", "front")
                 e = Enemy(monster_id=mid, name=name, label=LETTERS[idx % 26], hp=hp, max_hp=hp, rank=rank)
