@@ -28,9 +28,13 @@ Fikir/öneri notları: [FIKIRLER.md](FIKIRLER.md)
 - [x] Senaryolar: Değirmenköy'ün Gölgesi (eski senaryonun uyarlaması), Kül Kalesi'nin Laneti (özgün)
 - [x] Başlatıcı (DnDMaster.exe) + kendi kurulum sihirbazımız (DnDMaster-Setup.exe)
 
+- [x] 3. senaryo: Tuzlukıyı'nda Gümüş ve Kan (kurtadam, lonca, gümüş silahlar)
+- [x] Paketlenmiş exe gerçek modelle uçtan uca denendi (`tools/ws_smoke.py`)
+- [x] Gizli eylemler gerçekten gizli (özel zar + "sen" diliyle özel anlatım)
+- [x] Durgunluk kırıcı en kolay ipucunu NPC/olay ile veriyor; anlatıcı senaryo dışı mekân uydurmuyor
+- [x] Masa: sahne başlığı; telefon: hikâye özeti, standart yetenek sırası; README
+
 ## Sıradakiler
-- [ ] Son oyun testinin (20261030_05xx) transkriptini incele; Kül Kalesi'ni oyun testinden geçir
-- [ ] Paketlenmiş exe'nin gerçek denemesi (DNDM_OLLAMA_PORT=11434 ile), sonra temiz kurulum testi
-- [ ] Impish Bloodmoon + Gemma4-26B MoE + hafif model (e4b-qat) ölçümü → MODEL_RAPORU.md
-- [ ] 3. senaryo (liman şehri entrikası), PC masa ekranında görsel cilalama, özel karakter oluşturma testi
+- [ ] Gerçek modelle savaş oyun testi (Tuzlukıyı, kavgacı botlar) → sonuçları incele
+- [ ] Hafif model (e4b-qat) + 26B MoE ölçümü → MODEL_RAPORU.md'ye ekle
 - [ ] Not: Inno Setup'ı çalıştırmak otomatik izin denetimince engellendi → kendi kurulum sihirbazımızı yazdık
