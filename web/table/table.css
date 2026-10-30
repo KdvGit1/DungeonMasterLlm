@@ -105,3 +105,13 @@
 .modal { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7); display: grid; place-items: center; z-index: 80; }
 .modal-card { padding: 22px; display: flex; flex-direction: column; gap: 12px; align-items: center; }
 .modal-card img { width: 300px; height: 300px; background: #f3e7cc; border-radius: 12px; padding: 10px; }
+
+/* scene banner */
+.scene-banner { padding: 14px 18px; border-radius: 14px; border: 1px solid var(--border); flex: none;
+  background: radial-gradient(120% 140% at 0% 0%, rgba(217, 173, 85, 0.12), transparent 60%), linear-gradient(180deg, var(--panel2), var(--panel)); }
+.scene-title { font-family: var(--font-title); font-size: clamp(1.4rem, 2.2vw, 2.2rem); color: var(--gold2); letter-spacing: 0.05em; }
+.scene-sub { color: var(--muted); margin-top: 2px; }
+.scene-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.scene-chips .chip { font-size: 0.85em; }
+.scene-banner.combat { border-color: #6a2a22; background: radial-gradient(120% 140% at 0% 0%, rgba(192, 69, 63, 0.18), transparent 60%), linear-gradient(180deg, #24140f, #180d0a); }
+.booting { position: fixed; inset: 0; display: flex; gap: 12px; align-items: center; justify-content: center; color: var(--muted); }

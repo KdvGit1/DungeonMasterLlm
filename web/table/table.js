@@ -77,6 +77,7 @@ $("btn-full").onclick = () => document.fullscreenElement ? document.exitFullscre
 // ── state ────────────────────────────────────────────────────────────────
 net.on("state", (s) => {
   state = s;
+  $("booting")?.remove();
   const inLobby = s.mode === "lobby";
   $("lobby").classList.toggle("hidden", !inLobby);
   $("game").classList.toggle("hidden", inLobby);
@@ -123,6 +124,7 @@ function renderGame() {
     $("g-time").textContent = `🕯️ ${w.time}`;
   }
   const combat = state.mode === "combat" && state.combat;
+  renderScene(w, combat);
   $("g-mode").textContent = combat ? "⚔️ Savaş" : "🧭 Keşif";
   $("g-mode").className = "chip " + (combat ? "bad" : "ok");
   // history from server (on first load / reconnect)
@@ -135,6 +137,19 @@ function renderGame() {
   renderParty(combat);
   renderPending();
   renderCombat(combat);
+}
+
+function renderScene(w, combat) {
+  if (!w) return;
+  $("scene").classList.toggle("combat", !!combat);
+  $("sc-title").textContent = combat ? `⚔️ ${combat.title || w.location.name}` : w.location.name;
+  const exits = (w.exits || []).map((x) => x.name).join(" · ");
+  $("sc-sub").textContent = `${w.time}${exits ? "  —  Yollar: " + exits : ""}`;
+  const chips = $("sc-chips");
+  chips.innerHTML = "";
+  for (const n of w.npcs_here || []) chips.append(el("span", { class: "chip gold", title: n.appearance || "" }, `👤 ${n.name}${n.role ? " · " + n.role : ""}`));
+  for (const it of w.items_here || []) chips.append(el("span", { class: "chip" }, `✦ ${it.name}`));
+  for (const q of (w.quests || []).filter((q) => q.status === "active")) chips.append(el("span", { class: "chip ok", title: q.hook }, `📜 ${q.name}`));
 }
 
 function renderParty(combat) {

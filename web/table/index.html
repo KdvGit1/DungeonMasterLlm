@@ -9,8 +9,9 @@
   <link rel="stylesheet" href="/static/table/table.css">
 </head>
 <body>
+  <div id="booting" class="booting"><div class="spinner"></div><span>Masaya bağlanılıyor…</span></div>
   <!-- LOBBY -->
-  <section id="lobby" class="screen">
+  <section id="lobby" class="screen hidden">
     <header class="lobby-head">
       <h1 class="logo">DnD <span>Master</span></h1>
       <p class="muted tagline">Yapay zekâ anlatıcılı masa başı macera · 1–6 oyuncu</p>
@@ -68,6 +69,11 @@
     </header>
     <main class="board">
       <div class="story-col">
+        <section id="scene" class="scene-banner">
+          <div class="scene-title" id="sc-title">—</div>
+          <div class="scene-sub" id="sc-sub"></div>
+          <div class="scene-chips" id="sc-chips"></div>
+        </section>
         <div id="history" class="history scroll"></div>
         <article id="narration" class="parchment narr current"><p class="muted-ink">Macera başlamak üzere…</p></article>
         <div id="pending-bar" class="pending-bar"></div>
