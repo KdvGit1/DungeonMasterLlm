@@ -248,3 +248,20 @@ async def test_stall_breaker_hands_out_a_clue():
         await _drain(s)
     assert len(s.world.found) == 1          # the easiest clue at the gate was delivered
     assert any("NATURALLY" in call[1] or "Deliver this clue" in call[1] for call in llm.calls if call[0] == "stream")
+
+
+async def test_long_rest_is_shared_by_the_party():
+    s, llm, rec, (p1, p2) = make_session(2)
+    await s.start()
+    c1, c2 = s.char_of_player(p1.id), s.char_of_player(p2.id)
+    c1.hp, c2.hp = 1, 1
+    s.world.day = 2   # a new day: long rest allowed
+    llm.queue("ExploreAdjudication", {"rulings": [{"player": c1.name, "intent": "rest", "needs_check": False,
+                                                   "rest": "long", "time_minutes": 480}]})
+    llm.queue("ExploreAdjudication", {"rulings": [{"player": c2.name, "intent": "talk", "needs_check": False}]})
+    await s.submit_action(p1.id, "Kamp kurup sabaha kadar uyuyoruz")
+    await asyncio.sleep(0)
+    await s.submit_action(p2.id, "Ateşi besliyorum")
+    await _drain(s)
+    assert c1.hp == c1.effective_max_hp and c2.hp == c2.effective_max_hp
+    assert s.world.hour == (18 + 8) % 24

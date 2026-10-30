@@ -468,6 +468,7 @@ class GameSession:
 
         # ── phase 3: apply consequences in order ─────────────────
         private_out: dict[str, list[str]] = {n: [] for n in secret}
+        rest_kind: str | None = None
         for (ruling, ch, disc, spec), result in zip(plans, results):
             hours = max(hours, ruling.time_minutes / 60)
             is_secret = ch.name in secret
@@ -489,8 +490,18 @@ class GameSession:
                 line = self._apply_item_action(ch, ruling, success)
                 if line:
                     sink.append(line)
-            if ruling.rest != "none":
-                sink.append(self._rest(ch, ruling.rest))
+            if ruling.rest != "none" and not is_secret:
+                rest_kind = "long" if ruling.rest == "long" or rest_kind == "long" else "short"
+        # resting: game time is shared, so the whole party rests together
+        if rest_kind:
+            hours = max(hours, 8 if rest_kind == "long" else 1)
+            if rest_kind == "long" and ws.last_long_rest_day == ws.day and ws.day > 1:
+                outcomes.append("The party already had a long rest today; they only catch a short breather.")
+                rest_kind = "short"
+            lines = [self._rest(c, rest_kind, mark=False) for c in party]
+            if rest_kind == "long":
+                ws.last_long_rest_day = ws.day
+            outcomes.append(" / ".join(lines))
         # time & fronts
         notes += ws.advance_time(sc, hours)
         if moved_to:
@@ -771,16 +782,17 @@ class GameSession:
         ch.inventory.add_coins(gp=price)
         return f"{ch.name} sold {st.name} for {price:g} gold."
 
-    def _rest(self, ch: Character, kind: str) -> str:
+    def _rest(self, ch: Character, kind: str, *, mark: bool = True) -> str:
         ws = self.world
         assert ws
         if kind == "short":
             info = ch.short_rest()
             return f"{ch.name} took a short rest (healed {info['healed']})."
-        if ws.last_long_rest_day == ws.day and ws.day > 1:
+        if mark and ws.last_long_rest_day == ws.day and ws.day > 1:
             return f"{ch.name} cannot benefit from another long rest today."
         ch.long_rest()
-        ws.last_long_rest_day = ws.day
+        if mark:
+            ws.last_long_rest_day = ws.day
         return f"{ch.name} took a long rest and is fully restored."
 
     async def _post_narration(self, party: list[Character]) -> None:
