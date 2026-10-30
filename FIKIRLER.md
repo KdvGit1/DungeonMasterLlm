@@ -24,6 +24,10 @@ Geldiğinde sorarsan buradan anlatırım. ✅ = yaptım, 💬 = karar senin, �
   Büyücü, Ozan). Druid, Keşiş, Sihirbaz (Sorcerer) ve Cadı (Warlock) eklenebilir.
 - 💬 **Senaryo editörü:** Senaryoları YAML yerine masa ekranından form ile yazmak; ya da GM'e bir
   fikir verip tüm senaryoyu (mekânlar, NPC'ler, tehditler) yapay zekâya taslak olarak ürettirmek.
+- 💬 **Savaş repliği:** Telefonda saldırı seçerken isteğe bağlı tek satırlık bir söz ("Bu köy için!")
+  yazılabilsin; GM o vuruşu anlatırken repliği karakterin ağzından aktarsın. Savaşta rol yapmayı artırır.
+- 💬 **Savaş anlatım temposu ayarı:** Ayarlara "her vuruşu anlat / sadece önemli anları anlat (öldürme,
+  kritik, yere düşme)" seçeneği. Kalabalık savaşlarda bekleme süresini yarıya indirir.
 - 🕓 **Karakter portresi üretimi:** Yerel görsel modelle (ör. SDXL Turbo) karakter ve NPC resimleri.
   12 GB ekran kartında LLM ile aynı anda zor; sadece savaş dışında üretilebilir. Ağır, sonraya.
 

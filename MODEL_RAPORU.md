@@ -22,6 +22,7 @@ Ham çıktılar: `.runtime/bench/*.json`
 | Gemma 4 12B Abliterated (huihui_ai) | %97,3 | İyi, ek hataları | 0 | 6/6 | 35 tok/sn | 0,40 sn | 9,0 GB | Yedek |
 | Qwen 3.5 9B Abliterated (huihui_ai) | %86,5 | Zayıf | 0 | 5/6 | 52 tok/sn | 0,25 sn | 7,4 GB | ❌ |
 | Rocinante-X 12B (TheDrummer, Mistral Nemo) | %100 | **İngilizce yazıyor** | 0 | 6/6 | 38 tok/sn | 0,15 sn | 8,5 GB | ❌ |
+| Gemma 4 E4B Abliterated QAT (huihui_ai) | %100 | Orta (ek hataları, zaman kayması) | 0 | 5,5/6 | **69 tok/sn** | 0,17 sn | **5,1 GB** | ✅ Hafif mod (6–8 GB kart) |
 | Impish Bloodmoon 12B (Mistral Nemo) | — | — | — | — | — | — | — | İndirme 2 kez takıldı; aynı Nemo tabanı Türkçede başarısız |
 
 ### Yorumlar
@@ -33,6 +34,12 @@ Ham çıktılar: `.runtime/bench/*.json`
   Yedek olarak tutulabilir.
 - **Qwen 3.5 9B** en hızlısı ama Türkçesi anlamsızlaşıyor ("burjuva bir sessizlik",
   "Lira ise Lira'nın bakışlarını…"), geçmiş zamana kayıyor ve oyuncular adına konuşuyor.
+- **Gemma 4 E4B (hafif)** mekanik testlerde şaşırtıcı derecede iyi (hakem %100, bilgi çıkarma tam) ve
+  12B'nin iki katı hızlı, belleğin yarısını kullanıyor. Ama Türkçesi daha hatalı ("göğsinden",
+  "alınını"), geçmiş/şimdiki zaman arasında kayıyor ve gerçek oyunda senaryoyu daha zayıf takip ediyor:
+  6 turluk iki denemede 0 ve 1 keşif buldu (12B aynı senaryoda 10 turda 4 ipucuna ulaştı), bir denemede
+  boş alanlara "None" yazdı (artık kod tarafında temizleniyor). 8 GB ekran kartları için başlatıcı
+  bunu otomatik seçiyor; 12 GB kartta 12B Heretic her zaman daha iyi bir GM.
 - **Rocinante / Mistral Nemo tabanlı rol yapma modelleri** İngilizce rol yapmada çok iyi ama
   Türkçe istemeye rağmen anlatımı İngilizce yazıyor; Türkçe oyun için uygun değil.
 

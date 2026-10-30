@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import queue
 import shutil
 import socket
@@ -37,6 +38,29 @@ MODELS = {
 }
 
 
+_GPU_LINE = re.compile(r'msg="inference compute".*?library=(\w+).*?total="([\d.]+) (GiB|MiB)"')
+
+
+def gpu_from_ollama_log(path: Path) -> float | None:
+    """Parse Ollama's 'inference compute' lines (written at every start) for the biggest non-CPU device."""
+    text = _head(path)   # the log is fresh per start and the device lines come first
+    best = None
+    for lib, amount, unit in _GPU_LINE.findall(text):
+        if lib.lower() == "cpu":
+            continue
+        gb = float(amount) / (1024 if unit == "MiB" else 1)
+        best = gb if best is None or gb > best else best
+    return round(best, 1) if best is not None else None
+
+
+def _head(path: Path, size: int = 2_000_000) -> str:
+    try:
+        with open(path, "rb") as f:
+            return f.read(size).decode("utf-8", errors="replace")
+    except OSError:
+        return ""
+
+
 def install_root() -> Path:
     env = os.environ.get("DNDM_INSTALL_ROOT")
     if env:
@@ -60,22 +84,31 @@ class Runtime:
         self.ollama_url = f"http://127.0.0.1:{OLLAMA_PORT}"
 
     # ── GPU ─────────────────────────────────────────────────────
-    @staticmethod
-    def vram_gb() -> float | None:
+    def vram_gb(self, wait: float = 0) -> float | None:
+        """Largest GPU memory in GiB: nvidia-smi first, else what Ollama found at startup (AMD/ROCm, Vulkan).
+        Ollama logs its devices a little after it starts listening, so callers may ``wait`` for that line."""
         try:
             out = subprocess.run(["nvidia-smi", "--query-gpu=memory.total", "--format=csv,noheader,nounits"],
                                  capture_output=True, text=True, timeout=8,
                                  creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0)).stdout
             return round(int(out.strip().splitlines()[0]) / 1024, 1)
         except Exception:
-            return None
+            pass
+        log_path = self.root / "runtime" / "ollama.log"
+        deadline = time.time() + wait
+        while True:
+            found = gpu_from_ollama_log(log_path)
+            if found is not None or time.time() >= deadline or "inference compute" in _head(log_path):
+                return found
+            time.sleep(1)
 
     def pick_model(self) -> str:
         cfg_model = self.saved_model()
         if cfg_model:
             return cfg_model
-        vram = self.vram_gb()
-        key = "recommended" if (vram is None or vram >= MODELS["recommended"]["min_vram_gb"]) else "light"
+        vram = self.vram_gb(wait=45)
+        # no GPU at all: the light model is the only one that stays playable on the CPU
+        key = "recommended" if (vram is not None and vram >= MODELS["recommended"]["min_vram_gb"]) else "light"
         return MODELS[key]["name"]
 
     def saved_model(self) -> str | None:
@@ -131,7 +164,13 @@ class Runtime:
             "USERPROFILE": str(self.home_dir),   # keeps Ollama's key files inside the install folder
             "HOME": str(self.home_dir),
         })
-        log = open(self.root / "runtime" / "ollama.log", "ab")
+        log_path = self.root / "runtime" / "ollama.log"
+        if log_path.exists():   # one log per start (keeps the GPU line near the top), previous one kept
+            try:
+                log_path.replace(log_path.with_name("ollama.prev.log"))
+            except OSError:
+                pass
+        log = open(log_path, "ab")
         self.ollama_proc = subprocess.Popen(
             [str(self.ollama_exe()), "serve"], env=env, stdout=log, stderr=log,
             creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
@@ -277,6 +316,7 @@ def run_gui() -> None:
                 rt.download_ollama(progress)
             progress(None, "Yapay zekâ motoru başlatılıyor…")
             rt.start_ollama()
+            progress(None, "Ekran kartı denetleniyor…")
             model = rt.pick_model()
             if not rt.has_model(model):
                 rt.pull_model(model, progress)
@@ -293,7 +333,7 @@ def run_gui() -> None:
             ui_q.put(("ready", f"http://{lan_ip()}:{GAME_PORT}/play"))
             vram = rt.vram_gb()
             if vram is None or vram < 6:
-                ui_q.put(("warn", "Uyarı: uygun bir NVIDIA ekran kartı bulunamadı; anlatıcı işlemcide çalışacak "
+                ui_q.put(("warn", "Uyarı: uygun bir ekran kartı bulunamadı; anlatıcı işlemcide çalışacak "
                                   "ve çok yavaş olabilir."))
         except Exception as exc:  # pragma: no cover - surfaced to the user
             ui_q.put(("error", f"Hata: {exc}"))

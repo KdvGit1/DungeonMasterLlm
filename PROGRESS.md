@@ -6,10 +6,11 @@ Fikir/öneri notları: [FIKIRLER.md](FIKIRLER.md)
 - Kaynak: `D:\dndmaster` (git dalı `v2`); çalışma zamanı `D:\dndmaster\.runtime\` (venv, Ollama, modeller, önbellekler)
 - Her kabukta: `source scripts/devenv.sh`
 - Sunucu: `python -m dndm` (gerçek model) / `python -m dndm --port 8766 --fake-llm` (GPU'suz arayüz testi)
-- Testler: `python -m pytest -q` (117 test)
+- Testler: `python -m pytest -q` (125 test)
 - Otonom oyun testi: `python -m tools.playtest --players 3 --rounds 10 --personas investigator,thief,free_spirit`
 - Model karşılaştırma: `python -m tools.bench.run_bench MODEL...` → `.runtime/bench/`
 - Savaş dengesi: `python -m tools.sim_balance 150`
+- Gerçek modelle savaş denemesi: `python -m tools.combat_demo 2` (ya da `3 bandit_captain:1 bandit:2`)
 - Sürüm: `python -m tools.build_release` → `dist/DnDMaster-Setup.exe` (32,8 MB)
 
 ## Dallar
@@ -33,8 +34,10 @@ Fikir/öneri notları: [FIKIRLER.md](FIKIRLER.md)
 - [x] Gizli eylemler gerçekten gizli (özel zar + "sen" diliyle özel anlatım)
 - [x] Durgunluk kırıcı en kolay ipucunu NPC/olay ile veriyor; anlatıcı senaryo dışı mekân uydurmuyor
 - [x] Masa: sahne başlığı; telefon: hikâye özeti, standart yetenek sırası; README
+- [x] Gerçek modelle savaş testi: anlatıcıya ham Türkçe kayıt yerine net olgular (kim, kime, hangi silahla,
+      isabet/ıska) veriliyor; düşmanların silahları açılışta bildiriliyor; ölüm zarı vuruşu sadece yerdeki
+      karakteri anlatıyor. Vuruş başına ~3,8 sn, 3 kişilik seviye 2–3 savaşlar 75–90 sn
 
 ## Sıradakiler
-- [ ] Gerçek modelle savaş oyun testi (Tuzlukıyı, kavgacı botlar) → sonuçları incele
 - [ ] Hafif model (e4b-qat) + 26B MoE ölçümü → MODEL_RAPORU.md'ye ekle
 - [ ] Not: Inno Setup'ı çalıştırmak otomatik izin denetimince engellendi → kendi kurulum sihirbazımızı yazdık
