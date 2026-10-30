@@ -291,6 +291,10 @@ def run_gui() -> None:
                 time.sleep(0.25)
             state["server"] = srv
             ui_q.put(("ready", f"http://{lan_ip()}:{GAME_PORT}/play"))
+            vram = rt.vram_gb()
+            if vram is None or vram < 6:
+                ui_q.put(("warn", "Uyarı: uygun bir NVIDIA ekran kartı bulunamadı; anlatıcı işlemcide çalışacak "
+                                  "ve çok yavaş olabilir."))
         except Exception as exc:  # pragma: no cover - surfaced to the user
             ui_q.put(("error", f"Hata: {exc}"))
 
@@ -315,6 +319,8 @@ def run_gui() -> None:
                     hint.config(text="Aynı Wi-Fi'deki telefonlardan bu adrese girin (ya da masadaki QR kodu okutun).")
                     open_btn.config(state="normal")
                     webbrowser.open(f"http://localhost:{GAME_PORT}/table")
+                elif item[0] == "warn":
+                    hint.config(text=item[1], fg="#f0b46a")
                 elif item[0] == "error":
                     bar.stop()
                     status.config(text=item[1], fg="#f08f86")
