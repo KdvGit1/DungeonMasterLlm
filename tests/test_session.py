@@ -265,3 +265,27 @@ async def test_long_rest_is_shared_by_the_party():
     await _drain(s)
     assert c1.hp == c1.effective_max_hp and c2.hp == c2.effective_max_hp
     assert s.world.hour == (18 + 8) % 24
+
+
+async def test_combat_beat_facts_name_attacker_target_and_weapon():
+    from dndm.game.combat.state import Event
+    s, llm, rec, (p1, p2) = make_session(2)
+    await s.start()
+    s.settings.turn_timeout = 5
+    await s.start_combat([{"monster": "goblin", "count": 1}])
+    eng = s.engine
+    pc = f"pc:{s.char_of_player(p1.id).id}"
+    gob = eng.enc.active_enemies()[0]
+    facts = s._beat_facts([
+        Event(type="attack", actor=gob.ref, target=pc, data={"hit": True, "weapon": "Pala"}),
+        Event(type="damage", target=pc, data={"amount": 5, "type": "slashing", "hp": 7, "max_hp": 12}),
+        Event(type="attack", actor=pc, target=gob.ref, data={"hit": False, "spell": "fire_bolt"}),
+        Event(type="turn", actor=pc, text="Sıra"),
+    ])
+    pc_name, gob_name = eng.name_of(pc), eng.name_of(gob.ref)
+    assert facts[0] == f"{gob_name} attacks {pc_name} with Pala: HIT."
+    assert facts[1].startswith(f"{pc_name} takes 5 slashing damage")
+    assert "MISS" in facts[2] and "fire_bolt" not in facts[2]
+    assert len(facts) == 3
+    s.mode = "exploration"
+    await _drain(s)

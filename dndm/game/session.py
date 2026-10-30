@@ -1001,11 +1001,18 @@ class GameSession:
         for c in party.values():
             c.remove_condition("dodging")
         await self.broadcast_state()
-        foes = ", ".join(f"{e.name}" for e in enc.enemies)
+        groups: dict[str, list] = {}
+        for e in enc.enemies:
+            groups.setdefault(re.sub(r"\s+\d+$", "", e.name), []).append(e)
+        foes = ", ".join(
+            (f"{len(es)} x {base}" if len(es) > 1 else base)
+            + f" (armed with: {', '.join(a.name for a in es[0].mdef.attacks)})"
+            for base, es in groups.items())
         feats = "; ".join(f"{f.name} ({f.description})" for f in enc.features)
         actions_block, outcomes = lead_in or ("", [])
         instruction = (f"COMBAT STARTS NOW{' — AMBUSH! The enemies strike first.' if ambush else ''}. "
                        f"Describe the enemies ({foes}) appearing/attacking and the battlefield"
+                       " (give them exactly these weapons)"
                        f"{(' including: ' + feats) if feats else ''}. 60-130 words, Turkish, tense and cinematic. "
                        "Do not describe anyone's attack results yet.")
         await self._narrate(actions_block=actions_block, outcomes=outcomes, notes=[], instruction=instruction,
@@ -1044,7 +1051,7 @@ class GameSession:
                 e = eng.enc.enemy(ref)
                 events = enemy_turn(eng, e)
                 await self._emit_events(events)
-                pending_lines += [ev.text for ev in events if ev.text and ev.type not in ("turn", "round")]
+                pending_lines += self._beat_facts(events)
             if eng.enc.status != "active":
                 break
             end_events = eng.end_turn()
@@ -1066,7 +1073,7 @@ class GameSession:
             r = await self.request_roll(ch.id, "Ölüm zarı", purpose="death_save")
             events = eng.death_save(ch.id, d20=r)
             await self._emit_events(events)
-            await self._combat_beat([ev.text for ev in events])
+            await self._combat_beat(self._beat_facts(events))
             return
         if not ch.can_act or ch.hp <= 0:
             return
@@ -1074,7 +1081,7 @@ class GameSession:
             events = auto_pc_turn(eng, ch)
             await self._emit_events(events)
             if events:
-                await self._combat_beat([ev.text for ev in events if ev.text])
+                await self._combat_beat(self._beat_facts(events))
             return
         self._turn_waiter = asyncio.Event()
         await self.emit({"t": "your_turn", "char_id": ch.id, "options": self.combat_options(ch)}, [player.id])
@@ -1086,7 +1093,7 @@ class GameSession:
             events = auto_pc_turn(eng, ch)
             await self._emit_events(events)
             if events:
-                await self._combat_beat([ev.text for ev in events if ev.text])
+                await self._combat_beat(self._beat_facts(events))
         finally:
             self._turn_waiter = None
 
@@ -1199,7 +1206,7 @@ class GameSession:
             else:
                 raise CombatError("Bilinmeyen komut.")
             await self._emit_events(events)
-            lines = [ev.text for ev in events if ev.text]
+            lines = self._beat_facts(events)
             if lines:
                 await self._combat_beat(lines)
             t = eng.enc.turn
@@ -1253,6 +1260,56 @@ class GameSession:
                                  "auto": True, "quick": True}, None)
             await self.emit({"t": "combat_event", "event": d}, None)
         await self.broadcast_state()
+
+    def _beat_facts(self, events: list[Event]) -> list[str]:
+        """Unambiguous English facts for the narrator (who did what to whom)."""
+        out: list[str] = []
+        nm = self._name_for
+
+        def spell_name(sid: str | None) -> str:
+            try:
+                return data.spell(sid).name if sid else "a spell"
+            except KeyError:
+                return sid or "a spell"
+
+        for ev in events:
+            d, t = ev.data, ev.type
+            if t == "attack":
+                res = "CRITICAL HIT" if d.get("critical") else "HIT" if d.get("hit") else "MISS"
+                what = d.get("weapon") or (d.get("spell") and f"the spell {spell_name(d['spell'])}") or "an attack"
+                out.append(f"{nm(ev.actor)} attacks {nm(ev.target)} with {what}: {res}.")
+            elif t == "damage":
+                state = d.get("wound") or (f"{d.get('hp')}/{d.get('max_hp')} HP left" if "hp" in d else "")
+                out.append(f"{nm(ev.target)} takes {d.get('amount', 0)} {d.get('type', '')} damage"
+                           + (f" (now {state})" if state else "") + ".")
+            elif t == "dead":
+                out.append(f"{nm(ev.target)} DIES.")
+            elif t == "down":
+                out.append(f"{nm(ev.target)} collapses, unconscious and dying.")
+            elif t in ("heal", "revive"):
+                out.append(f"{nm(ev.target)} is healed ({d.get('amount', '')} HP)." if t == "heal"
+                           else f"{nm(ev.target)} wakes up from the brink of death.")
+            elif t == "spell":
+                out.append(f"{nm(ev.actor)} casts {spell_name(d.get('spell'))}.")
+            elif t == "save":
+                out.append(f"{nm(ev.target)} {'resists' if d.get('success') else 'fails to resist'}.")
+            elif t == "death_save":
+                res = d.get("result", "")
+                out.append(f"{nm(ev.actor)} lies unconscious and dying; nobody else acts in this beat. " + {
+                    "success": "Their breath steadies a little (a good sign).",
+                    "fail": "Their life slips further away.",
+                    "double_fail": "Their life slips away fast.",
+                    "revived": "MIRACLE: they open their eyes and rise!",
+                    "stable": "They stop bleeding and are now stable.",
+                    "dead": "They breathe their last and DIE.",
+                }.get(res, ""))
+            elif t in ("condition", "condition_end", "move", "flee", "surrender", "special", "feature",
+                       "item", "improvise", "feature_use", "check", "info", "action"):
+                who = nm(ev.actor or ev.target)
+                out.append(f"[{t}] {who}: {ev.text}")
+            elif t in ("victory", "defeat", "fled"):
+                out.append(t.upper())
+        return out[-14:]
 
     def _name_for(self, ref: str | None) -> str:
         if not ref or not self.engine:

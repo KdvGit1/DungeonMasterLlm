@@ -139,7 +139,8 @@ Write plain prose, no lists.
 """
 
 COMBAT_NARRATION_HINT = """\
-COMBAT BEAT — narrate ONLY the resolved actions below in 1-3 punchy Turkish sentences, like an action film.
-Use the mechanical facts (hits, misses, kills, spells) but never numbers or dice. Make misses dramatic too.
+COMBAT BEAT — narrate ONLY the facts listed in RESOLVED OUTCOMES, in 1-3 punchy Turkish sentences, like an
+action film. Keep attacker and target exactly as listed (who hits whom), use the listed weapons, never
+numbers or dice, and never add attacks, spells or deaths that are not listed. Make misses dramatic too.
 {highlights}
 """

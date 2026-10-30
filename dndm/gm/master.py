@@ -231,12 +231,12 @@ class GameMaster:
 
     async def narrate(self, party: list[Character], *, actions_block: str = "", outcomes: list[str] | None = None,
                       notes: list[str] | None = None, instruction: str = "Narrate now, in Turkish.",
-                      max_tokens: int = 420, record: bool = True) -> AsyncIterator[str]:
+                      max_tokens: int = 420, record: bool = True, temperature: float = 0.75) -> AsyncIterator[str]:
         msgs = self._narration_messages(party, actions_block, outcomes or [], notes or [], instruction)
         system = self.narrator_system(len(party))
         collected: list[str] = []
         try:
-            async for piece in self.llm.stream(msgs, system=system, temperature=0.75, max_tokens=max_tokens):
+            async for piece in self.llm.stream(msgs, system=system, temperature=temperature, max_tokens=max_tokens):
                 collected.append(piece)
                 yield piece
         except LLMError as exc:
@@ -252,7 +252,14 @@ class GameMaster:
 
     def polish(self, raw: str, party: list[Character]) -> str:
         """Clean meta text, drop a cut-off final fragment, fix Turkish suffixes on known names."""
-        names = [c.name for c in party] + [n.name for n in self.world.npcs.values()]
+        people = [c.name for c in party] + [n.name for n in self.world.npcs.values()]
+        names = [w for n in people for w in n.split()]  # "Yaşlı Silas" → also "Silas"
+        # town/place names: first word only ("Değirmenköy Meclisi" → "Değirmenköy"); the last word of a
+        # compound ("Kalesi") already carries a possessive and is left alone
+        places = [loc.name for loc in self.world.all_locations(self.scenario).values()]
+        if self.scenario:
+            places += [f.name for f in self.scenario.factions.values()]
+        names += [p.split()[0] for p in places if p.split()]
         return fix_common_tics(fix_name_suffixes(trim_to_sentence(clean_narration(raw)), names))
 
     @staticmethod
@@ -318,7 +325,7 @@ class GameMaster:
         hl = ("Dramatic beats to emphasise: " + "; ".join(highlights)) if highlights else ""
         instruction = prompts.COMBAT_NARRATION_HINT.format(highlights=hl)
         async for piece in self.narrate(party, actions_block="", outcomes=log_lines, notes=[],
-                                        instruction=instruction, max_tokens=160, record=False):
+                                        instruction=instruction, max_tokens=160, record=False, temperature=0.6):
             yield piece
 
     # ═══════════════════════════════════════════════════════════
