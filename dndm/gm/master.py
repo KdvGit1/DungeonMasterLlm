@@ -236,7 +236,7 @@ class GameMaster:
         system = self.narrator_system(len(party))
         collected: list[str] = []
         try:
-            async for piece in self.llm.stream(msgs, system=system, temperature=0.85, max_tokens=max_tokens):
+            async for piece in self.llm.stream(msgs, system=system, temperature=0.75, max_tokens=max_tokens):
                 collected.append(piece)
                 yield piece
         except LLMError as exc:

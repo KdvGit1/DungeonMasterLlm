@@ -112,7 +112,12 @@ _BIRER = re.compile(r"\b([Bb])irer\b(?!\s+(?:birer|tane|adet))")
 _BIRERER = re.compile(r"\b([Bb])irer(?:er)+\b")
 
 
+# glued garbage such as "birererik", "birerine" (sampling noise after the 'birer' tic)
+_BIRER_GLUED = re.compile(r"\b([Bb])irer(?:er)*(?=[a-zçğıöşü]{2,})(?!(?:ce|den|dir)\b)")
+
+
 def fix_common_tics(text: str) -> str:
     """Model-specific Turkish tics. Gemma overuses distributive 'birer' where plain 'bir' is meant."""
     text = _BIRERER.sub(lambda m: m.group(1) + "ir", text)
+    text = _BIRER_GLUED.sub(lambda m: m.group(1) + "ir", text)
     return _BIRER.sub(lambda m: m.group(1) + "ir", text)

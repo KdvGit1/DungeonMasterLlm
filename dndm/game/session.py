@@ -506,6 +506,14 @@ class GameSession:
             notes.append("THE SCENE HAS STALLED for several rounds. Resolve the current standoff decisively and "
                          "introduce a NEW development (someone arrives, the situation changes, an opportunity or "
                          f"threat appears).{(' Possible event: ' + twist) if twist else ''}")
+            # never let the story die on failed rolls: hand the party the easiest clue here
+            avail = sorted(ws.available_discoveries(sc), key=lambda d: d.check.dc if d.check else 0)
+            if avail and party:
+                clue = avail[0]
+                who = random.choice(party)
+                outcomes += await self._apply_discovery(who, clue)
+                notes.append(f"Deliver this clue NATURALLY through an NPC present or an event (not by luck of the "
+                             f"dice): {clue.reveals}")
         # combat?
         if adj.starts_combat:
             await self._begin_combat_from_adjudication(adj, by_name, outcomes)

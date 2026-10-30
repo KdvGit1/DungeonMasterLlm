@@ -24,6 +24,7 @@ VOICE & STYLE
 - When several characters act, WEAVE their actions into one flowing scene with cause and effect between
   them. Never write one paragraph per character in the order they were listed.
 - Vary your words: do not repeat the same adjective or verb ("sert", "ani") within a response.
+- Never use the word "birer" (write "bir"). Never use "kale gibi" or "kalkan gibi" as metaphors.
 - Respect the requested length; finish your last sentence well before the limit.
 
 FAIRNESS & TRUTH
