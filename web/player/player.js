@@ -454,8 +454,9 @@ function renderSheet(c) {
   host.innerHTML = "";
   const abil = el("div", { class: "abil" });
   const names = { strength: "GÜÇ", dexterity: "ÇEV", constitution: "DAY", intelligence: "ZEK", wisdom: "BİL", charisma: "KAR" };
-  for (const [k, v] of Object.entries(c.abilities || {})) {
-    if (k.startsWith("_")) continue;
+  for (const k of ["strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"]) {
+    const v = (c.abilities || {})[k];
+    if (v === undefined) continue;
     abil.append(el("div", {}, el("small", {}, names[k] || k), el("b", {}, (c.mods[k] >= 0 ? "+" : "") + c.mods[k]), el("small", {}, v)));
   }
   const xpPct = c.xp_next ? Math.min(100, (100 * c.xp) / c.xp_next) : 100;
