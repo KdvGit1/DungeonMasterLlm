@@ -42,7 +42,7 @@ from dndm.paths import user_dir
 from dndm.rules import data
 from dndm.rules.core import DEGREE_TR, CheckResult, dc_label, resolve_check, skill_or_ability_name
 from dndm.rules.dice import DiceRoll, roll
-from dndm.text import similar, tr_lower
+from dndm.text import fold, similar, tr_lower, tr_upper
 from dndm.world.scenario import Scenario, load_scenario, scenario_path
 from dndm.world.state import WorldState
 
@@ -616,7 +616,7 @@ class GameSession:
             if re.fullmatch(r"[a-z0-9_]+", destination.strip()) and "_" in destination:
                 return None
             name = destination.strip().strip(".")
-            name = name[0].upper() + name[1:] if name else name
+            name = tr_upper(name[0]) + name[1:] if name else name
             if not _is_proper_place(name) and sc is not None:
                 return None
             loc = ws.add_dynamic_location(sc, name, f"{name} — oyuncuların keşfettiği yeni bir yer.")
@@ -1481,7 +1481,8 @@ def _is_proper_place(name: str) -> bool:
     n = (name or "").strip()
     if len(n) < 3 or len(n) > 40 or not n[0].isupper():
         return False
-    words = [w for w in re.split(r"\s+", tr_lower(n)) if w]
+    words = [fold(w).strip("'’.,") for w in re.split(r"\s+", n) if w]
     if len(words) > 4:
         return False
-    return not all(w.strip("'’.,") in _GENERIC_PLACE for w in words) and "yer" not in words[-1:]
+    generic = {fold(g) for g in _GENERIC_PLACE}
+    return not all(w in generic for w in words) and "yer" not in words[-1:]

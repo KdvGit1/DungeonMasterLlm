@@ -164,3 +164,17 @@ def test_balance_specs_trims_deadly_encounters():
     specs = balance_specs([{"monster": "ogre", "count": 3}], party)
     assert sum(s["count"] for s in specs) < 3
     assert balance_specs([{"monster": "goblin", "count": 2}], party) == [{"monster": "goblin", "count": 2}]
+
+
+async def test_travel_rules_in_scenario():
+    s, llm, rec, (p1,) = make_session(1)
+    await s.start(scenario_id="degirmenkoyun_golgesi")
+    assert await s._travel("koridor_girisi") is None            # id-like invention from the referee: ignored
+    assert await s._travel("içerisi") is None                   # generic word: ignored
+    r = await s._travel("Köy Meydanı")                            # known place by name
+    assert r and s.world.location == "ana_meydan"
+    await s._travel("Paslı Testi Meyhanesi")
+    r = await s._travel("mahzen")                                 # deliberate move into the adjacent secret cellar
+    assert r and s.world.location == "meyhane_mahzeni"
+    r = await s._travel("Değirmencinin Ambarı")                   # a real new place the players head for
+    assert r and s.world.loc(s.scenario).name == "Değirmencinin Ambarı"
