@@ -402,6 +402,7 @@ class WorldState(BaseModel):
             "items_here": [s.to_public() for s in self.items_here()],
             "journal": [j.model_dump() for j in self.journal[-60:]],
             "quests": self.quest_list(sc),
+            "summary": self.summary,
         }
 
     def quest_list(self, sc: Scenario | None) -> list[dict]:

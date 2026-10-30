@@ -546,6 +546,7 @@ function renderJournal() {
   if (!w) return;
   host.append(el("div", { class: "card" }, el("h3", {}, `📍 ${w.location.name}`), el("div", { class: "muted small" }, w.time),
     w.exits.length ? el("div", { style: { marginTop: "6px" } }, "Buradan gidilebilir: ", w.exits.map((x) => x.name).join(", ")) : null));
+  if (w.summary) host.append(el("div", { class: "card" }, el("h3", {}, "Hikâye Şimdiye Kadar"), el("div", { class: "muted" }, w.summary)));
   if (w.quests.length) host.append(el("div", { class: "card" }, el("h3", {}, "Görevler"),
     el("div", { class: "list" }, ...w.quests.map((q) => el("div", { class: "journal-entry quest" }, el("b", {}, q.name), ` — ${q.status === "active" ? "sürüyor" : q.status === "done" ? "tamamlandı ✓" : "başarısız ✗"}`, el("div", { class: "muted small" }, q.hook))))));
   if (w.npcs_met.length) host.append(el("div", { class: "card" }, el("h3", {}, "Tanıdıklar"),
