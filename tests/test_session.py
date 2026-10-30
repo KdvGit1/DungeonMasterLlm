@@ -73,16 +73,19 @@ async def test_free_mode_start_and_round_with_check():
     await s.start()
     assert s.mode == "exploration" and rec.of("narration_end")
     c1, c2 = s.char_of_player(p1.id), s.char_of_player(p2.id)
+    # first submission is ruled on speculatively while player 2 is still typing ...
     llm.queue("ExploreAdjudication", {"rulings": [
         {"player": c1.name, "intent": "talk", "needs_check": True,
-         "check": {"skill": "persuasion", "dc": 12, "advantage": "none", "reason": "hancı şüpheci"}},
-        {"player": c2.name, "intent": "explore", "needs_check": False, "time_minutes": 30},
-    ]})
+         "check": {"skill": "persuasion", "dc": 12, "advantage": "none", "reason": "hancı şüpheci"}}]})
+    # ... the last one is ruled when the round resolves
+    llm.queue("ExploreAdjudication", {"rulings": [
+        {"player": c2.name, "intent": "explore", "needs_check": False, "time_minutes": 30}]})
     llm.queue("StoryExtraction", {"new_npcs": [{"name": "Hancı Mert", "role": "hancı", "description": "göbekli"}],
                                   "facts": ["Kuzey yolu haydutlarla dolu."],
                                   "items_given": [{"to": c1.name, "item": "Paslı Anahtar", "giver": "Hancı Mert"}]})
     await s.submit_action(p1.id, "Hancıyı ikna edip yolu soruyorum")
     assert not s.busy and c1.id in s.pending
+    await asyncio.sleep(0)  # let the speculative ruling run
     await s.submit_action(p2.id, "Etrafa bakıyorum")
     await _drain(s)
     checks = rec.of("check_result")

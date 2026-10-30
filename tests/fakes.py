@@ -35,5 +35,5 @@ class FakeLLM:
         name = schema.__name__
         self.calls.append(("structured:" + name, messages[-1]["content"][:400]))
         q = self.queues.get(name)
-        obj = q.popleft() if q else {}
+        obj = q.popleft() if q else ({"rulings": []} if name == "ExploreAdjudication" else {})
         return schema.model_validate(obj), LLMResult(text="{}")

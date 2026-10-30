@@ -116,6 +116,10 @@ class GameSession:
         self.busy = False                               # a round / beat is resolving
         self.lock = asyncio.Lock()
         self._turn_waiter: asyncio.Event | None = None
+        self._spec: dict[str, tuple[str, int, asyncio.Task]] = {}
+        self.round_no = 0
+        self._stall = 0
+        self._last_progress: tuple[int, int] = (0, 0)
         self._tasks: set[asyncio.Task] = set()
         self.created_at = time.time()
         self.title = "Yeni Macera"
@@ -377,6 +381,8 @@ class GameSession:
         await self.broadcast_state()
         if self._all_ready():
             self._spawn(self.resolve_round())
+        else:
+            self._speculate(ch, text)
 
     async def withdraw_action(self, player_id: str) -> None:
         ch = self.char_of_player(player_id)
@@ -417,67 +423,79 @@ class GameSession:
         party = self.living_party()
         by_name = {self.characters[cid].name: a for cid, a in actions.items()}
         await self.emit({"t": "thinking", "text": "GM düşünüyor..."}, None)
-        adj = await self.gm.adjudicate({n: a.text for n, a in by_name.items()}, party)
+        adj = await self._adjudicate_with_speculation(actions, party)
         outcomes: list[str] = []
         notes: list[str] = []
         hours = 0.0
         moved_to: str | None = None
 
-        # group checks: whole party rolls, success if at least half succeed
+        # ── phase 1: plan every check ────────────────────────────
         group = next((r for r in adj.rulings if r.group_check and r.needs_check and r.check), None)
-        group_done = False
-
+        plans: list[tuple[ExploreRuling, Character, Any, tuple[str, int, str] | None]] = []
         for ruling in adj.rulings:
             ch = next((c for c in party if c.name == ruling.player), None)
             if ch is None:
                 continue
-            act = by_name.get(ch.name)
-            hours = max(hours, ruling.time_minutes / 60)
-            result: CheckResult | None = None
             disc = None
             if ruling.discovery:
                 disc = next((d for d in ws.available_discoveries(sc) if d.id == ruling.discovery), None)
-            if group and ruling is group and not group_done:
-                group_done = True
-                outcomes += await self._group_check(party, group)
-                continue
-            if ruling.needs_check and ruling.check:
-                key, dc = ruling.check.skill, ruling.check.dc
-                if disc and disc.check:
-                    key, dc = disc.check.skill, disc.check.dc
-                result = await self.roll_check(ch, key, dc, ruling.check.advantage)
-                outcomes.append(f"{ch.name} — {skill_or_ability_name(key)} (ZS {dc}): "
-                                f"{DEGREE_TR[result.degree]} (zar {result.natural}, toplam {result.total})"
-                                f" — amaç: {ruling.check.reason}")
-            elif disc and disc.check:
-                result = await self.roll_check(ch, disc.check.skill, disc.check.dc)
-                outcomes.append(f"{ch.name} — {skill_or_ability_name(disc.check.skill)} (ZS {disc.check.dc}): "
-                                f"{DEGREE_TR[result.degree]}")
+            spec = None
+            if ruling is not group:
+                if ruling.needs_check and ruling.check:
+                    key, dc = ruling.check.skill, ruling.check.dc
+                    if disc and disc.check:
+                        key, dc = disc.check.skill, disc.check.dc
+                    spec = (key, dc, ruling.check.advantage)
+                elif disc and disc.check:
+                    spec = (disc.check.skill, disc.check.dc, "none")
+            plans.append((ruling, ch, disc, spec))
+
+        # ── phase 2: everyone rolls at the same time ─────────────
+        async def no_roll():
+            return None
+        jobs = [self.roll_check(ch, *spec) if spec else no_roll() for _, ch, _, spec in plans]
+        group_job = self._group_check(party, group) if group else no_roll()
+        results, group_lines = await asyncio.gather(asyncio.gather(*jobs), group_job)
+        if group_lines:
+            outcomes += group_lines
+
+        # ── phase 3: apply consequences in order ─────────────────
+        for (ruling, ch, disc, spec), result in zip(plans, results):
+            hours = max(hours, ruling.time_minutes / 60)
+            if result is not None:
+                reason = f" — amaç: {ruling.check.reason}" if ruling.check else ""
+                outcomes.append(f"{ch.name} — {skill_or_ability_name(spec[0])} (ZS {spec[1]}): "
+                                f"{DEGREE_TR[result.degree]} (zar {result.natural}, toplam {result.total}){reason}")
             success = result is None or result.success
-            # discoveries
             if disc and success:
                 outcomes += await self._apply_discovery(ch, disc)
-            # travel
             if ruling.destination and success and moved_to is None:
                 travel = await self._travel(ruling.destination)
                 if travel:
                     moved_to, h, line = travel
                     hours = max(hours, h)
                     outcomes.append(line)
-            # items
             if ruling.item_action != "none":
                 line = self._apply_item_action(ch, ruling, success)
                 if line:
                     outcomes.append(line)
-            # rest
             if ruling.rest != "none":
                 outcomes.append(self._rest(ch, ruling.rest))
-            if result is None and not ruling.needs_check and act is not None:
-                pass
         # time & fronts
         notes += ws.advance_time(sc, hours)
         if moved_to:
             notes.append(f"The party has arrived at: {ws.loc(sc).name}. Describe the arrival.")
+        # stall breaker: nothing changed for a while -> the world moves on its own
+        progress = (moved_to is not None or len(ws.found) != self._last_progress[0]
+                    or len(ws.journal) != self._last_progress[1] or adj.starts_combat)
+        self._stall = 0 if progress else self._stall + 1
+        self._last_progress = (len(ws.found), len(ws.journal))
+        if self._stall >= 3:
+            self._stall = 0
+            twist = random.choice(sc.random_events) if sc and sc.random_events else ""
+            notes.append("THE SCENE HAS STALLED for several rounds. Resolve the current standoff decisively and "
+                         "introduce a NEW development (someone arrives, the situation changes, an opportunity or "
+                         f"threat appears).{(' Possible event: ' + twist) if twist else ''}")
         # combat?
         if adj.starts_combat:
             await self._begin_combat_from_adjudication(adj, by_name, outcomes)
@@ -491,6 +509,55 @@ class GameSession:
                                         f"{words + 30}). Address every character's action within one flowing scene.",
                             kind="round", max_tokens=int(words * 2.6) + 80)
         await self._post_narration(party)
+
+    # ── speculative adjudication ───────────────────────────────
+    def _speculate(self, ch: Character, text: str) -> None:
+        """Rule on one player's action while the others are still typing (uses idle GPU time)."""
+        if self.gm is None or self.busy or len(self.living_party()) < 2:
+            return
+        old = self._spec.pop(ch.id, None)
+        if old and not old[2].done():
+            old[2].cancel()
+        task = self._spawn(self.gm.adjudicate({ch.name: text}, self.living_party()))
+        self._spec[ch.id] = (text, self.round_no, task)
+
+    async def _adjudicate_with_speculation(self, actions: dict[str, PendingAction],
+                                           party: list[Character]) -> ExploreAdjudication:
+        assert self.gm
+        rulings: list[ExploreRuling] = []
+        extras: list[ExploreAdjudication] = []
+        todo: dict[str, str] = {}
+        for cid, a in actions.items():
+            ch = self.characters[cid]
+            spec = self._spec.get(cid)
+            if spec and spec[0] == a.text and spec[1] == self.round_no:
+                try:
+                    pre = await asyncio.wait_for(asyncio.shield(spec[2]), timeout=60)
+                    r = next((x for x in pre.rulings if x.player == ch.name), None)
+                    if r is not None:
+                        rulings.append(r)
+                        extras.append(pre)
+                        continue
+                except Exception:
+                    pass
+            todo[ch.name] = a.text
+        self._spec.clear()
+        self.round_no += 1
+        if todo:
+            batch = await self.gm.adjudicate(todo, party)
+            rulings += batch.rulings
+            extras.append(batch)
+        order = {self.characters[cid].name: i for i, cid in enumerate(actions)}
+        rulings.sort(key=lambda r: order.get(r.player, 99))
+        merged = ExploreAdjudication(rulings=rulings)
+        fight = next((e for e in extras if e.starts_combat), None)
+        if fight is not None:
+            merged.starts_combat = True
+            merged.encounter_id = fight.encounter_id
+            merged.enemies = fight.enemies
+            merged.battlefield = fight.battlefield
+            merged.ambush = fight.ambush
+        return merged
 
     async def _group_check(self, party: list[Character], ruling: ExploreRuling) -> list[str]:
         assert ruling.check

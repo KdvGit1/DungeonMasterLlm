@@ -104,3 +104,11 @@ def trim_to_sentence(text: str) -> str:
         return t + "…"
     cut = t[: last + 2].rstrip()
     return cut
+
+
+_BIRER = re.compile(r"\b([Bb])irer\b(?!\s+(?:birer|tane|adet))")
+
+
+def fix_common_tics(text: str) -> str:
+    """Model-specific Turkish tics. Gemma overuses distributive 'birer' where plain 'bir' is meant."""
+    return _BIRER.sub(lambda m: m.group(1) + "ir", text)

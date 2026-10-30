@@ -37,6 +37,7 @@ PLAYER_SYSTEM = """\
 Bir D&D masasında bir oyuncusun. Karakterini oynuyorsun. Sadece karakterinin BU TUR ne yaptığını
 1-2 kısa Türkçe cümleyle yaz (birinci tekil şahıs, örn. "Hancıya yaklaşıp kayıp kızı soruyorum.").
 Zar atma, sonuç yazma, başkaları adına konuşma. Kısa ve somut ol. Bazen diyalog ekleyebilirsin.
+Bir önceki turda yaptığını tekrarlama; durum değiştiyse ona göre hareket et ve hikâyeyi ilerlet.
 Kişiliğin: {persona}
 """
 
@@ -71,7 +72,7 @@ async def run(args) -> Path:
     cfg = load_config()
     model = args.model or cfg.model
     gm_llm = OllamaClient(model, cfg.ollama_url, num_ctx=cfg.num_ctx, timeout=300)
-    pl_llm = OllamaClient(model, cfg.ollama_url, num_ctx=4096, timeout=300)
+    pl_llm = OllamaClient(model, cfg.ollama_url, num_ctx=cfg.num_ctx, timeout=300)  # same ctx: avoids reloads
     rec = Recorder()
     s = GameSession(gm_llm, emit=rec)
     s.settings.auto_roll = True

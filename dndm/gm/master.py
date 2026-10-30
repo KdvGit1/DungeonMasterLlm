@@ -13,7 +13,7 @@ from typing import AsyncIterator
 
 from dndm.game.character import Character
 from dndm.gm import prompts
-from dndm.gm.turkish import fix_name_suffixes, trim_to_sentence
+from dndm.gm.turkish import fix_common_tics, fix_name_suffixes, trim_to_sentence
 from dndm.llm.client import LLMClient, LLMError
 from dndm.llm.schemas import (ExploreAdjudication, ExploreRuling, ImprovisedRuling, StoryExtraction)
 from dndm.rules import data
@@ -22,7 +22,7 @@ from dndm.world.state import WorldState
 
 log = logging.getLogger("dndm.gm")
 
-HISTORY_TURNS = 6          # verbatim exchanges kept in the narration prompt
+HISTORY_TURNS = 4          # verbatim exchanges kept in the narration prompt
 SUMMARIZE_EVERY = 8        # fold older history into the summary every N exchanges
 
 ATTACK_WORDS = re.compile(r"\b(saldır|vur|öldür|kes|bıçakla|ok at|ateş et|attack|kill|stab|shoot|hücum)", re.I)
@@ -156,7 +156,7 @@ class GameMaster:
         try:
             adj, _ = await self.llm.structured([{"role": "user", "content": user}], ExploreAdjudication,
                                                system=system, temperature=0.15, max_tokens=900)
-        except LLMError as exc:
+        except Exception as exc:  # LLM down, bad JSON, anything: the table must never stall
             log.warning("adjudication failed, using fallback: %s", exc)
             return self._fallback_adjudication(actions)
         return self._sanitize_adjudication(adj, actions, party)
@@ -216,7 +216,12 @@ class GameMaster:
             "\nWORLD EVENTS TO WEAVE IN:\n" + "\n".join(f"- {n}" for n in notes) if notes else "",
             f"\n{instruction}",
         ]))
-        msgs = list(self.history[-2 * HISTORY_TURNS:])
+        msgs = []
+        recent = self.history[-2 * HISTORY_TURNS:]
+        for i, m in enumerate(recent):
+            # keep the latest exchange whole, shorten older ones (prompt size = latency)
+            limit = 1600 if i >= len(recent) - 2 else 700
+            msgs.append({"role": m["role"], "content": m["content"][:limit]})
         msgs.append({"role": "user", "content": turn})
         return msgs
 
@@ -244,7 +249,7 @@ class GameMaster:
     def polish(self, raw: str, party: list[Character]) -> str:
         """Clean meta text, drop a cut-off final fragment, fix Turkish suffixes on known names."""
         names = [c.name for c in party] + [n.name for n in self.world.npcs.values()]
-        return fix_name_suffixes(trim_to_sentence(clean_narration(raw)), names)
+        return fix_common_tics(fix_name_suffixes(trim_to_sentence(clean_narration(raw)), names))
 
     @staticmethod
     def words_for(n_actors: int) -> int:
