@@ -98,7 +98,9 @@ WORLD LINKS
   long rest 480 with rest="long").
 
 COMBAT
-- starts_combat=true only if a character clearly attacks, or enemies clearly attack now.
+- starts_combat=true if a character swings a weapon, shoots, casts a harmful spell or physically strikes a
+  creature (even "to push it back" or "in self-defence"), or if hostile creatures clearly attack now.
+  Threats, insults and drawn weapons alone are NOT combat.
 - If a POSSIBLE FIGHT matches, set encounter_id. Otherwise list enemies with kind from the monster list:
   {monsters}
 - Keep fights fair for the party (level {level}, {n_players} character(s)).
