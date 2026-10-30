@@ -1472,7 +1472,7 @@ def _is_proper_place(name: str) -> bool:
     n = (name or "").strip()
     if len(n) < 3 or len(n) > 40 or not n[0].isupper():
         return False
-    words = [w for w in re.split(r"\s+", n.lower()) if w]
+    words = [w for w in re.split(r"\s+", tr_lower(n)) if w]
     if len(words) > 4:
         return False
     return not all(w.strip("'’.,") in _GENERIC_PLACE for w in words) and "yer" not in words[-1:]
