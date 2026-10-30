@@ -37,7 +37,7 @@ from dndm.game.creation import create_character, make_pregen
 from dndm.game.inventory import InventoryError
 from dndm.gm.master import GameMaster
 from dndm.llm.client import LLMClient
-from dndm.llm.schemas import ExploreAdjudication, ExploreRuling, StoryExtraction
+from dndm.llm.schemas import ExploreAdjudication, ExploreRuling, StoryExtraction, _nullish
 from dndm.paths import user_dir
 from dndm.rules import data
 from dndm.rules.core import DEGREE_TR, CheckResult, dc_label, resolve_check, skill_or_ability_name
@@ -1597,7 +1597,7 @@ _GENERIC_PLACE = {"içeri", "içerisi", "dışarı", "orası", "burası", "şura
 def _is_proper_place(name: str) -> bool:
     """Reject generic words the extractor sometimes reports as places ('İçerisi', 'Muhafızın koruduğu yer')."""
     n = (name or "").strip()
-    if len(n) < 3 or len(n) > 40 or not n[0].isupper():
+    if _nullish(n) is None or len(n) < 3 or len(n) > 40 or not n[0].isupper():
         return False
     words = [fold(w).strip("'’.,") for w in re.split(r"\s+", n) if w]
     if len(words) > 4:

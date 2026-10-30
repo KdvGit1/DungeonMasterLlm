@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from typing import Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 Skill = Literal[
     # 5e skills
@@ -92,6 +92,16 @@ class BattlefieldFeature(BaseModel):
     description: str = Field(description="One short Turkish sentence")
 
 
+# small models sometimes write the *word* for "nothing" instead of null
+_NULLISH = {"", "none", "null", "nil", "n/a", "na", "unknown", "-", "yok", "hiçbiri", "bilinmiyor", "belirsiz"}
+
+
+def _nullish(v):
+    if isinstance(v, str) and v.strip().strip(".").lower() in _NULLISH:
+        return None
+    return v
+
+
 class ExploreRuling(BaseModel):
     player: str = Field(description="Character name exactly as listed")
     intent: Intent
@@ -107,6 +117,9 @@ class ExploreRuling(BaseModel):
     time_minutes: int = Field(10, ge=0, le=600, description="How long the action takes in game time")
     rest: Literal["none", "short", "long"] = "none"
 
+    _clean = field_validator("target_npc", "destination", "item", "item_to", "discovery", mode="before")(
+        lambda v: _nullish(v))
+
 
 class ExploreAdjudication(BaseModel):
     rulings: list[ExploreRuling]
@@ -116,6 +129,8 @@ class ExploreAdjudication(BaseModel):
     battlefield: list[BattlefieldFeature] = Field(default_factory=list,
                                                   description="If combat starts: 1-3 usable features of this place")
     ambush: bool = Field(False, description="true if the enemies attack the party by surprise")
+
+    _clean = field_validator("encounter_id", mode="before")(lambda v: _nullish(v))
 
 
 class GivenItem(BaseModel):

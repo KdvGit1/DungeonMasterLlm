@@ -289,3 +289,12 @@ async def test_combat_beat_facts_name_attacker_target_and_weapon():
     assert len(facts) == 3
     s.mode = "exploration"
     await _drain(s)
+
+
+def test_nullish_words_are_not_places_or_targets():
+    from dndm.game.session import _is_proper_place
+    from dndm.llm.schemas import ExploreRuling
+    assert not _is_proper_place("None") and not _is_proper_place("Unknown") and not _is_proper_place("Bilinmiyor")
+    assert _is_proper_place("Eski Fener")
+    r = ExploreRuling(player="Kael", intent="explore", needs_check=False, destination="null", item_to="None")
+    assert r.destination is None and r.item_to is None
