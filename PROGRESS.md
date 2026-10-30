@@ -6,7 +6,7 @@ Fikir/öneri notları: [FIKIRLER.md](FIKIRLER.md)
 - Kaynak: `D:\dndmaster` (git dalı `v2`); çalışma zamanı `D:\dndmaster\.runtime\` (venv, Ollama, modeller, önbellekler)
 - Her kabukta: `source scripts/devenv.sh`
 - Sunucu: `python -m dndm` (gerçek model) / `python -m dndm --port 8766 --fake-llm` (GPU'suz arayüz testi)
-- Testler: `python -m pytest -q` (125 test)
+- Testler: `python -m pytest -q` (128 test)
 - Otonom oyun testi: `python -m tools.playtest --players 3 --rounds 10 --personas investigator,thief,free_spirit`
 - Model karşılaştırma: `python -m tools.bench.run_bench MODEL...` → `.runtime/bench/`
 - Savaş dengesi: `python -m tools.sim_balance 150`
@@ -34,10 +34,11 @@ Fikir/öneri notları: [FIKIRLER.md](FIKIRLER.md)
 - [x] Gizli eylemler gerçekten gizli (özel zar + "sen" diliyle özel anlatım)
 - [x] Durgunluk kırıcı en kolay ipucunu NPC/olay ile veriyor; anlatıcı senaryo dışı mekân uydurmuyor
 - [x] Masa: sahne başlığı; telefon: hikâye özeti, standart yetenek sırası; README
+- [x] Hafif (E4B) ve 26B MoE modelleri ölçüldü → MODEL_RAPORU.md; başlatıcı AMD kartları Ollama kaydından
+      tanıyor, ekran kartı yoksa hafif modeli seçiyor; küçük modellerin "None" yazması zararsız hale getirildi
 - [x] Gerçek modelle savaş testi: anlatıcıya ham Türkçe kayıt yerine net olgular (kim, kime, hangi silahla,
       isabet/ıska) veriliyor; düşmanların silahları açılışta bildiriliyor; ölüm zarı vuruşu sadece yerdeki
       karakteri anlatıyor. Vuruş başına ~3,8 sn, 3 kişilik seviye 2–3 savaşlar 75–90 sn
 
 ## Sıradakiler
-- [ ] Hafif model (e4b-qat) + 26B MoE ölçümü → MODEL_RAPORU.md'ye ekle
 - [ ] Not: Inno Setup'ı çalıştırmak otomatik izin denetimince engellendi → kendi kurulum sihirbazımızı yazdık
