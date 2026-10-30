@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "dndmaster",
+      "runtimeExecutable": "D:\\dndmaster\\.runtime\\venv\\Scripts\\python.exe",
+      "runtimeArgs": ["-m", "dndm", "--port", "8765"],
+      "port": 8765
+    }
+  ]
+}

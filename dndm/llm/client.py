@@ -82,6 +82,44 @@ def _schema_for(model: type[BaseModel]) -> dict:
     return schema
 
 
+def schema_hint(model: type[BaseModel]) -> str:
+    """
+    Compact, human-readable field guide appended to the system prompt.
+
+    Ollama's ``format`` only constrains decoding — the model never sees the
+    schema text — so without this hint it cannot know what a field means and
+    tends to leave lists empty.
+    """
+    schema = model.model_json_schema()
+    defs = schema.get("$defs", {})
+    lines: list[str] = []
+
+    def describe(props: dict, indent: str, depth: int) -> None:
+        for name, spec in props.items():
+            ref = spec.get("$ref") or (spec.get("items") or {}).get("$ref")
+            any_of = spec.get("anyOf") or []
+            if not ref:
+                ref = next((a.get("$ref") for a in any_of if a.get("$ref")), None)
+                ref = ref or next(((a.get("items") or {}).get("$ref") for a in any_of if a.get("items")), None)
+            typ = spec.get("type") or next((a.get("type") for a in any_of if a.get("type") != "null"), "")
+            enum = spec.get("enum") or next((a.get("enum") for a in any_of if a.get("enum")), None)
+            desc = spec.get("description", "")
+            bits = [f"{indent}- {name}"]
+            if typ == "array":
+                bits.append("(list)")
+            if enum:
+                bits.append("one of: " + "|".join(map(str, enum)))
+            if desc:
+                bits.append(f"— {desc}")
+            lines.append(" ".join(bits))
+            if ref and depth < 2:
+                sub = defs.get(ref.split("/")[-1], {})
+                describe(sub.get("properties", {}), indent + "  ", depth + 1)
+
+    describe(schema.get("properties", {}), "", 0)
+    return "JSON FIELDS:\n" + "\n".join(lines)
+
+
 class OllamaClient:
     """Async client for a local Ollama server (``/api/chat``)."""
 
@@ -218,6 +256,7 @@ class OllamaClient:
                          temperature: float = 0.2, max_tokens: int = 800) -> tuple[T, LLMResult]:
         fmt = _schema_for(schema)
         msgs = list(messages)
+        system = f"{system}\n\n{schema_hint(schema)}" if system else schema_hint(schema)
         last_err = ""
         for attempt in range(2):
             started = time.perf_counter()

@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <meta name="theme-color" content="#0d0a08">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>DnD Master — Oyuncu</title>
+  <link rel="icon" href="/static/shared/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/shared/theme.css">
+  <link rel="stylesheet" href="/static/player/player.css">
+</head>
+<body>
+  <!-- JOIN -->
+  <section id="s-join" class="screen center">
+    <div class="join-box">
+      <h1 class="logo">DnD <span>Master</span></h1>
+      <p class="muted">Masaya katılmak için adını yaz.</p>
+      <input id="j-name" maxlength="20" placeholder="Adın (örn. Ayşe)" autocomplete="nickname">
+      <button id="j-go" class="btn primary big">Masaya Katıl</button>
+    </div>
+  </section>
+
+  <!-- CHARACTER -->
+  <section id="s-char" class="screen hidden">
+    <header class="sub-head"><h2>Karakterini Seç</h2><p class="muted small" id="c-hello"></p></header>
+    <div class="seg">
+      <button class="seg-b on" data-tab="pregen">Hazır Kahramanlar</button>
+      <button class="seg-b" data-tab="custom">Kendin Oluştur</button>
+    </div>
+    <div id="c-pregen" class="pregen-list"></div>
+    <div id="c-custom" class="custom hidden">
+      <label>İsim<input id="cc-name" maxlength="24" placeholder="Kahramanının adı"></label>
+      <label>Irk<select id="cc-race"></select></label>
+      <p id="cc-race-d" class="muted small"></p>
+      <label>Sınıf<select id="cc-class"></select></label>
+      <p id="cc-class-d" class="muted small"></p>
+      <div class="row2">
+        <label>Cinsiyet<select id="cc-gender"><option value="">—</option><option>kadın</option><option>erkek</option><option>diğer</option></select></label>
+        <label>Simge<select id="cc-portrait"></select></label>
+      </div>
+      <label>Görünüş<input id="cc-look" maxlength="200" placeholder="Örn. dağınık kızıl saç, sol kaşında yara izi"></label>
+      <label>Kişilik<input id="cc-pers" maxlength="200" placeholder="Örn. meraklı, alaycı, sadık"></label>
+      <label>Geçmiş<textarea id="cc-back" rows="2" maxlength="400" placeholder="Kısaca nereden geliyor, neyi arıyor?"></textarea></label>
+      <div id="cc-preview" class="muted small"></div>
+      <button id="cc-go" class="btn primary big">Bu Karakterle Oyna</button>
+    </div>
+    <div id="c-wait" class="wait hidden">
+      <div class="chosen" id="c-chosen"></div>
+      <p class="muted">Masa maceranın başlamasını bekliyor…</p>
+      <button class="btn ghost" id="c-change">Karakteri değiştir</button>
+    </div>
+  </section>
+
+  <!-- GAME -->
+  <section id="s-game" class="screen hidden">
+    <header class="me-bar">
+      <div class="me-portrait" id="me-portrait">🙂</div>
+      <div class="grow">
+        <div class="me-name" id="me-name">—</div>
+        <div class="hpbar good"><div id="me-hp" style="width:100%"></div></div>
+        <div class="me-sub"><span id="me-hptext">—</span> · 🛡️ <span id="me-ac">—</span> · <span id="me-loc"></span></div>
+      </div>
+      <div id="me-mode" class="chip">🧭</div>
+    </header>
+
+    <main class="tabs">
+      <!-- STORY -->
+      <div id="t-story" class="tab on">
+        <div id="feed" class="feed scroll"></div>
+        <div id="combat-box" class="combat-box hidden"></div>
+        <div id="composer" class="composer">
+          <div id="sent-note" class="sent-note hidden"></div>
+          <div class="quick" id="quick"></div>
+          <div class="row">
+            <textarea id="act" rows="2" maxlength="600" placeholder="Ne yapıyorsun? (örn. Hancıya kayıp kızı soruyorum)"></textarea>
+          </div>
+          <div class="row">
+            <label class="whisper"><input type="checkbox" id="act-private"> 🤫 Gizli (sadece GM görür)</label>
+            <span class="grow"></span>
+            <button id="act-send" class="btn primary">Gönder</button>
+          </div>
+        </div>
+      </div>
+      <!-- SHEET -->
+      <div id="t-sheet" class="tab scroll"></div>
+      <!-- BAG -->
+      <div id="t-bag" class="tab scroll"></div>
+      <!-- JOURNAL -->
+      <div id="t-journal" class="tab scroll"></div>
+    </main>
+
+    <nav class="tabbar">
+      <button data-tab="t-story" class="on">📜<span>Hikâye</span></button>
+      <button data-tab="t-sheet">🧙<span>Karakter</span></button>
+      <button data-tab="t-bag">🎒<span>Çanta</span></button>
+      <button data-tab="t-journal">📖<span>Günlük</span></button>
+    </nav>
+  </section>
+
+  <!-- roll modal -->
+  <div id="roll-modal" class="roll-modal hidden">
+    <div class="roll-card">
+      <div class="r-label" id="r-label"></div>
+      <div class="r-diff" id="r-diff"></div>
+      <button id="r-btn" class="d20-btn"><span>🎲</span><b>ZAR AT</b></button>
+      <div class="r-result hidden" id="r-result"><div class="r-num" id="r-num"></div><div class="r-out" id="r-out"></div></div>
+      <div class="r-timer"><div id="r-timer"></div></div>
+    </div>
+  </div>
+
+  <!-- sheet picker -->
+  <div id="picker" class="picker hidden">
+    <div class="picker-card">
+      <div class="picker-title" id="pk-title"></div>
+      <div class="picker-list" id="pk-list"></div>
+      <button class="btn ghost" id="pk-cancel">Vazgeç</button>
+    </div>
+  </div>
+  <script type="module" src="/static/player/player.js"></script>
+</body>
+</html>

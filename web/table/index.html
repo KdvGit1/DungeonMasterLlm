@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DnD Master — Masa</title>
+  <link rel="icon" href="/static/shared/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/shared/theme.css">
+  <link rel="stylesheet" href="/static/table/table.css">
+</head>
+<body>
+  <!-- LOBBY -->
+  <section id="lobby" class="screen">
+    <header class="lobby-head">
+      <h1 class="logo">DnD <span>Master</span></h1>
+      <p class="muted tagline">Yapay zekâ anlatıcılı masa başı macera · 1–6 oyuncu</p>
+    </header>
+    <div class="lobby-grid">
+      <div class="panel join-card">
+        <h2>Masaya Katıl</h2>
+        <p class="muted">Aynı Wi-Fi ağındaki telefonla QR kodu okut ya da adresi yaz.</p>
+        <div class="qr-wrap"><img id="qr" alt="QR kod"></div>
+        <div id="join-url" class="join-url">…</div>
+        <div id="other-urls" class="faint small"></div>
+        <a class="btn ghost small" href="/play" target="_blank">🖥️ Bu bilgisayardan da oyna</a>
+      </div>
+      <div class="panel players-card">
+        <h2>Oyuncular <span id="player-count" class="chip gold">0/6</span></h2>
+        <div id="lobby-players" class="lobby-players"></div>
+        <p id="lobby-hint" class="muted small">Oyuncular katıldıkça burada görünecek.</p>
+      </div>
+      <div class="panel setup-card">
+        <h2>Macera</h2>
+        <div id="scenario-list" class="scenario-list"></div>
+        <div class="free-premise hidden" id="free-premise">
+          <label class="muted small">Serbest macera fikri (isteğe bağlı)</label>
+          <textarea id="premise" rows="3" placeholder="Örn: Kuzeydeki buzul kalesinde kaybolan bir prensesi arayan paralı askerler..."></textarea>
+        </div>
+        <details class="saves">
+          <summary>📜 Kayıtlı oyunlar</summary>
+          <div id="save-list" class="save-list"></div>
+        </details>
+        <div class="settings-row">
+          <label><input type="checkbox" id="opt-autoroll"> Zarları otomatik at</label>
+          <label><input type="checkbox" id="opt-showdc"> Zorluk sayılarını göster</label>
+          <label><input type="checkbox" id="opt-mercy" checked> Merhamet modu</label>
+        </div>
+        <div class="row">
+          <span id="llm-status" class="chip">Model kontrol ediliyor…</span>
+          <span class="grow"></span>
+          <button id="start-btn" class="btn primary" disabled>⚔️ Maceraya Başla</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GAME -->
+  <section id="game" class="screen hidden">
+    <header class="topbar">
+      <div class="title" id="g-title">—</div>
+      <div class="chip gold" id="g-location">📍 —</div>
+      <div class="chip" id="g-time">🕯️ —</div>
+      <div class="chip" id="g-mode">Keşif</div>
+      <span class="grow"></span>
+      <button class="btn small ghost" id="btn-join">📱 Katıl</button>
+      <button class="btn small ghost" id="btn-save">💾 Kaydet</button>
+      <button class="btn small ghost" id="btn-full">⛶</button>
+    </header>
+    <main class="board">
+      <div class="story-col">
+        <div id="history" class="history scroll"></div>
+        <article id="narration" class="parchment narr current"><p class="muted-ink">Macera başlamak üzere…</p></article>
+        <div id="pending-bar" class="pending-bar"></div>
+      </div>
+      <aside class="side-col scroll">
+        <div id="combat-panel" class="panel combat-panel hidden">
+          <h3>⚔️ Savaş <span id="c-round" class="chip">1. tur</span></h3>
+          <div id="initiative" class="initiative"></div>
+          <div id="enemies" class="enemies"></div>
+          <div id="features" class="features"></div>
+        </div>
+        <div id="party" class="party"></div>
+        <div class="panel log-panel">
+          <h3>Olaylar</h3>
+          <div id="event-log" class="event-log scroll"></div>
+        </div>
+      </aside>
+    </main>
+  </section>
+
+  <!-- dice overlay -->
+  <div id="dice-layer" class="dice-layer">
+    <div id="dice-canvas" class="dice-canvas"></div>
+    <div id="dice-banner" class="dice-banner hidden">
+      <div class="who" id="db-who"></div>
+      <div class="what" id="db-what"></div>
+      <div class="total" id="db-total"></div>
+      <div class="outcome" id="db-outcome"></div>
+    </div>
+  </div>
+  <div id="roll-wait" class="roll-wait hidden"></div>
+  <div id="join-modal" class="modal hidden">
+    <div class="panel modal-card">
+      <h2>Masaya Katıl</h2>
+      <img id="qr2" alt="QR">
+      <div id="join-url2" class="join-url"></div>
+      <button class="btn" onclick="document.getElementById('join-modal').classList.add('hidden')">Kapat</button>
+    </div>
+  </div>
+  <script type="module" src="/static/table/table.js"></script>
+</body>
+</html>
