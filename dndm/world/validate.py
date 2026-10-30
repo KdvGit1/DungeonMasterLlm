@@ -17,7 +17,7 @@ from dndm.world.scenario import Scenario
 
 ANACHRONISMS = [
     # modern tech
-    "telefon", "bilgisayar", "internet", "elektrik", "araba", "otomobil", "otobüs", "uçak", "tren", "televizyon",
+    "telefon", "bilgisayar", "internet", "elektrik", "otomobil", "otobüs", "uçak", "tren", "televizyon",
     "radyo", "tabanca", "tüfek", "silah sesi", "mermi", "bomba", "roket", "lazer", "robot", "plastik", "beton",
     "asfalt", "fabrika", "polis", "ambulans", "hastane", "kamera", "fotoğraf", "saat kulesi elektrikli",
     "smartphone", "computer", "electricity", "pistol", "rifle", "bullet", "gunpowder", "laser", "robot", "police",

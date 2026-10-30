@@ -1,0 +1,575 @@
+# Kül Kalesi'nin Laneti — özgün gotik korku senaryosu (seviye 2-5)
+title: "Kül Kalesi'nin Laneti"
+pitch: >
+  Karakaya Dağları'nda ilk kar düştüğünde vadinin ölüleri mezarlarından kalkıp yanık bir kaleye yürür.
+  Bu yıl durmadılar. Soğukpınar köyü her gece kapılarını ölülere karşı tutuyor — ve birileri bundan memnun.
+tone: "Gotik korku; karlı, sessiz, yas dolu. Ölülerin bile bir hikâyesi var."
+players: [1, 6]
+level_range: [2, 5]
+
+premise: |
+  Kırk yıl önce Karakaya Baronu Aldemar Kuzgun, kalesiyle birlikte yandı. Halk onu adil ama sert bir
+  efendi olarak hatırlar. Kızı Seraphine o gece kurtuldu ve yıllarca yasını içinde büyüttü. Üç yıl önce
+  'Solgun Işık' adlı bir tarikatın ruhbazı Morvan ona bir vaatte bulundu: babasını geri getirebilirdi.
+  Morvan, kalenin mahzenine 'Kara Kandil' adlı bir ruh lambası kurdu. Her ilk karda vadinin ölüleri
+  uyanıp kaleye yürür ve ruhlarının bir parçası kandile akar. Kandil dolduğunda Baron geri dönecek —
+  ama Seraphine'in sandığı gibi değil: Morvan'ın emrinde, ruhu çürümüş bir mezar lordu olarak. Bu yıl
+  kandil neredeyse dolu; ölüler artık sadece yürümüyor, yaşayanları da yanlarına almaya çalışıyor.
+  Kaleyi kırk yıldır koruyan Kuzgun Muhafızları — baronun ölümsüz şövalyeleri — efendilerinin bu şekilde
+  döndürülmesine karşı, ama yemin bağıyla kaleden çıkamıyorlar. Köyde mezar soyguncuları kaostan
+  faydalanıyor; köyün yaşlı rahibesi ise ölüleri dinlendirecek eski bir duayı hatırlamaya çalışıyor.
+truths:
+  - "Kara Kandil kırılırsa ruhlar serbest kalır ve ölüler yeniden uyur. Kandil yalnızca kutsal ateş, ışık hasarı ya da Seraphine'in kendi eliyle kırılabilir."
+  - "Seraphine kötü değil; yas ve suçluluk içinde. Babasının ruhunun nasıl çarpıtılacağını öğrenirse Morvan'a karşı döner."
+  - "Kuzgun Muhafızları, Baronun mührünü taşıyana saldırmaz ve ona yardım bile edebilir. Mühür kalenin yanık kütüphanesinde."
+  - "Yangını Baron'un kendisi çıkarmıştı: Morvan'ın ilk girişimini durdurmak için kendi kalesini yaktı. Kanıt eski kale kâtibinin günlüğünde."
+  - "Mezarcı Kâzım, Morvan'a ceset ve mezar eşyası satıyor; karşılığında ölüler onun evine dokunmuyor."
+start_location: soguk_pinar
+opening: >
+  Grup tipiden kaçarken Soğukpınar köyünün kazıklı duvarına ulaşıyor. Duvarın üzerinde meşaleler,
+  meşalelerin arkasında korkudan yorgun yüzler. Uzakta, karlı yamacın tepesinde kapkara bir kale silueti;
+  ve yamaçtan aşağı, ağır ağır, sallanarak inen insan biçimli gölgeler.
+style_notes: |
+  - Sessizlik ve kar: sesler boğuk, ayak izleri kayboluyor, nefes buhar oluyor.
+  - Ölülerin trajik yanını göster: bir anne ölü bebeğini arar gibi yürür, bir asker hâlâ selam verir.
+  - Korku, kan ve çürümeyle gelir ama asla ucuz şok değil; yas ve özlem her şeyin altında.
+
+factions:
+  koyluler:
+    name: Soğukpınar Köylüleri
+    goal: Kışı sağ atlatmak; yeter ki biri bu laneti bitirsin.
+    attitude: wary
+  solgun_isik:
+    name: Solgun Işık Tarikatı
+    goal: Kara Kandil'i doldurup Baron'u Morvan'a kul bir mezar lordu olarak geri getirmek.
+    attitude: hostile
+  kuzgun_muhafizlari:
+    name: Kuzgun Muhafızları
+    goal: Baronun onurunu korumak; kaleyi istilacılardan ve Morvan'dan arındırmak. Yeminleri yüzünden kaleden çıkamazlar.
+    attitude: wary
+  mezarcilar:
+    name: Mezarcılar
+    goal: Kaostan para kazanmak; mezar eşyası çalıp tarikata ceset satmak.
+    attitude: neutral
+
+fronts:
+  kara_kandil:
+    name: Kara Kandil
+    description: Ruh lambası doluyor; dolduğunda Baron, Morvan'ın kulu bir mezar lordu olarak uyanacak.
+    clock: 6
+    per_day: 1.5
+    stages:
+      2: "O gece ölüler köyün duvarına her zamankinden çok yığılıyor; bazıları artık tırmanmayı öğrenmiş."
+      4: "Kalenin pencerelerinde soluk mavi bir ışık yanıyor; ölüler köylülerin isimlerini fısıldamaya başlıyor."
+      5: "Mezarlıktaki yeni gömülmüş köylüler de kalkıyor — dün gömülen değirmenci bile."
+    on_complete: >
+      Kara Kandil doldu. Baron Aldemar, gözlerinde soluk ateşle tahtından kalkıyor; Morvan'ın sesiyle
+      konuşuyor. Vadinin ölüleri artık onun ordusu ve kalenin kapıları açılıyor.
+  koy_dusuyor:
+    name: Kuşatma
+    description: Her gece ölüler duvara saldırıyor; savunma zayıflıyor.
+    clock: 5
+    per_day: 1
+    stages:
+      2: "Kuzey duvarının bir bölümü çöktü; köylüler arabalarla barikat kuruyor."
+      4: "Köy muhtarı kaçış planı yapıyor: yaşlılar ve çocuklar tipiye rağmen yola çıkacak."
+    on_complete: "Soğukpınar düştü. Hayatta kalanlar tapınağa sığındı; geri kalanı ölülerin arasında yürüyor."
+
+quests:
+  laneti_bitir:
+    name: Kül Kalesi'nin Laneti
+    hook: "Köy ihtiyarları, ölüleri durduracak birine köyün bütün birikimini vaat ediyor."
+    objectives: ["Ölülerin neden uyandığını öğren", "Laneti kaynağında bitir"]
+    reward_xp: 600
+    reward_gold: 150
+    optional: false
+  rahibenin_duasi:
+    name: Unutulmuş Dua
+    hook: "Rahibe Selvi, ölüleri dinlendirecek eski duanın sayfalarının kalede kaldığını söylüyor."
+    objectives: ["Kalenin kütüphanesinde dua sayfalarını bul", "Sayfaları Rahibe Selvi'ye getir"]
+    reward_xp: 250
+    reward_items: [holy_water, holy_water, potion_greater_healing]
+    giver: selvi
+  kayip_avci:
+    name: Kayıp Avcı
+    hook: "Avcı Tormund'un oğlu Eren iki gün önce ormana gitti ve dönmedi."
+    objectives: ["Eren'i bul"]
+    reward_xp: 150
+    reward_items: [longbow]
+    giver: tormund
+  mezarcinin_sirri:
+    name: Mezarcının Sırrı
+    hook: "Ölüler neden Mezarcı Kâzım'ın evine hiç dokunmuyor?"
+    objectives: ["Kâzım'ın tarikatla bağını ortaya çıkar"]
+    reward_xp: 150
+    optional: true
+
+npcs:
+  ihtiyar_derya:
+    name: İhtiyar Derya
+    race: insan
+    role: Soğukpınar'ın köy ihtiyarı
+    appearance: Yetmişlerinde, kar beyazı örgülü saç, kurt postundan pelerin, ucunda demir olan bir baston.
+    personality: Dik başlı, pratik, umudunu kaybetmemek için öfkeye sarılmış.
+    voice: "Kısa ve sert: 'Laf istemem. Ölüleri durdurabilecek misiniz, durduramayacak mısınız?'"
+    wants: Köyün hayatta kalması; yardım edene köyün bütün birikimini vermeye hazır.
+    secret: Gençliğinde Baron'un kalesinde hizmetçiydi; yangın gecesi Baron'un 'Onu içeri almamalıydık' diye bağırdığını duydu.
+    knows: ["Ölüler kaleye yürür", "Baron yanarak öldü", "Seraphine hanım yıllardır kimseyle görüşmüyor"]
+    attitude: wary
+    location: soguk_pinar
+  selvi:
+    name: Rahibe Selvi
+    race: yarı-elf
+    role: Kırık Çan Tapınağı'nın rahibesi
+    appearance: Uzun boylu, solgun; gözlerinin altında uykusuzluk, ellerinde mum yağı yanıkları.
+    personality: Şefkatli, bitkin, inancına sıkı sıkı tutunan biri.
+    voice: "Yumuşak ve yorgun: 'Ölüler kötü değil, evlat. Sadece... huzur bulamıyorlar.'"
+    wants: Ölüleri dinlendirmek; tapınağa sığınanları korumak.
+    secret: Ölüleri dinlendirecek 'Kar Ninnisi' duasının sayfaları kalenin kütüphanesinde; kendisi gitmeye cesaret edemedi.
+    knows: ["Kar Ninnisi diye eski bir dua var", "Ölülere ışık ve kutsal su işler"]
+    attitude: friendly
+    location: kirik_can
+  tormund:
+    name: Avcı Tormund
+    race: insan
+    role: Köyün en iyi avcısı
+    appearance: İri, sakallı, bir gözünde bıçak izi; sırtında uzun yay.
+    personality: Az konuşan, sert, oğlu için deliren bir baba.
+    voice: "Boğuk: 'Ormanda bir şey var. Kurtlar bile kaçıyor.'"
+    wants: Oğlu Eren'i bulmak.
+    secret: Ormanda soluk mavi ışıklarla dolu bir mağara gördü ama içeri girmeye korktu.
+    knows: ["Kurt sürüleri dağdan kaçıyor", "Ormanda mavi ışıklar dolaşıyor", "Kaleye çıkan eski bir av patikası var"]
+    attitude: neutral
+    location: soguk_pinar
+  kazim:
+    name: Mezarcı Kâzım
+    race: insan
+    role: Köyün mezarcısı
+    appearance: Kambur, çekik yüzlü; tırnaklarının altı hep toprak; boynunda soluk mavi bir taş.
+    personality: Yağcı, korkak, açgözlü; her soruya bir soruyla cevap verir.
+    voice: "Sinsi ve tatlı: 'Ölüler mi? Ah, ölüler sessiz komşulardır, efendim... çoğunlukla.'"
+    wants: Para; hayatta kalmak; tarikattan aldığı korumanın sürmesi.
+    secret: Solgun Işık'a ceset ve mezar eşyası satıyor. Boynundaki mavi taş ölülerin onu tanımasını sağlıyor. Evinin altında tarikata giden bir gizli geçit var.
+    knows: ["Morvan'ın adını", "Kalenin mahzen girişinin mezarlıktan geçtiğini"]
+    attitude: neutral
+    location: mezarlik
+    monster: thug
+    faction: mezarcilar
+  seraphine:
+    name: Leydi Seraphine Kuzgun
+    race: insan
+    role: Ölü Baron'un kızı
+    appearance: Kırklarında, siyah yas elbiseli, yüzünde yangından kalma eski bir yanık izi; elinde hep gümüş bir madalyon.
+    personality: Kibar, mesafeli, kırık; babasının adı geçince gözleri dolar.
+    voice: "Alçak ve titrek: 'Babam... babam bu vadinin kalbiydi. Kalp yeniden atmalı.'"
+    wants: Babasını geri getirmek; yangın gecesinin suçluluğundan kurtulmak.
+    secret: Kara Kandil'i kuran ayini Morvan'la birlikte başlattı. Babasının nasıl bir şeye dönüşeceğini bilmiyor. Madalyonun içinde babasının son mektubu var — hiç açmadı.
+    knows: ["Morvan'ın kalenin mahzeninde olduğunu", "Kandilin neredeyse dolduğunu"]
+    attitude: wary
+    location: seraphine_koskü
+    monster: noble
+  morvan:
+    name: Ruhbaz Morvan
+    race: insan
+    role: Solgun Işık tarikatının lideri, ölü büyücüsü
+    appearance: Kemik gibi zayıf, saçsız, teni mum gibi soluk; göz bebekleri soluk mavi bir ateşle yanıyor.
+    personality: Kibar, sabırlı, ürkütücü derecede sakin; ölümü bir 'yükseliş' olarak görüyor.
+    voice: "Fısıltılı ve şefkatli: 'Ağlamayın. Hiçbiriniz gerçekten ölmeyeceksiniz. Asla.'"
+    wants: Baron'u kul bir mezar lordu olarak uyandırıp vadiyi ölülerin krallığı yapmak.
+    secret: Seraphine'i kullanıyor; ayin tamamlanınca onu kandilin son ruhu yapacak.
+    attitude: hostile
+    location: kul_mahzeni
+    monster: mage
+    faction: solgun_isik
+  sir_halvard:
+    name: Sör Halvard
+    race: insan (ölümsüz)
+    role: Kuzgun Muhafızlarının komutanı
+    appearance: Yanık zırhlı, kara pelerinli bir şövalye iskeleti; miğferinin içinde iki soğuk kıvılcım.
+    personality: Onurlu, katı, yemine bağlı; konuşması eski ve resmî.
+    voice: "Paslı ve ağır: 'Kuzgun'un evine kim girer? Mührünü göster ya da kılıcına bak.'"
+    wants: Baron'un onurunu korumak; Morvan'ı kaleden atmak. Yemini yüzünden kaleden çıkamıyor.
+    secret: "Baron'un yangından önceki son emrini biliyor — 'Kızımı koruyun. Ve beni asla geri getirmeyin.'"
+    attitude: wary
+    location: kale_avlusu
+    monster: knight
+    faction: kuzgun_muhafizlari
+  eren:
+    name: Eren
+    race: insan
+    role: Tormund'un oğlu, genç avcı
+    appearance: On altı yaşında, donmuş parmaklar, yırtık kürk; yüzünde dehşet.
+    personality: Cesur, inatçı, babasına kendini kanıtlamak isteyen.
+    voice: "Dişleri takırdayarak: 'Ben... ben izini sürüyordum. Sonra ışıklar... beni çağırdı.'"
+    wants: Eve dönmek.
+    secret: Mavi ışıkların arasında Kâzım'ı tarikatçılarla konuşurken gördü.
+    attitude: friendly
+    location: mavi_isik_magarasi
+
+locations:
+  soguk_pinar:
+    name: Soğukpınar Köyü
+    region: koy
+    description: >
+      Kazıklı bir duvarla çevrili, karla kaplı küçük bir dağ köyü. Taş bacalardan ince dumanlar yükseliyor,
+      evlerin kapıları sürgülü. Meydanda bir ateş çukuru, etrafında silahlı köylüler; yüzlerinde günlerdir
+      uyumamış insanların bakışı. Kuzey duvarında yeni kazıklarla yamanmış bir gedik var.
+    gm_notes: >
+      Köylüler korkmuş ama düşmanca değil; yabancılara umutla ve şüpheyle bakıyorlar. İhtiyar Derya ve
+      Avcı Tormund burada. Gece olursa ölüler duvara saldırır.
+    exits: [kirik_can, mezarlik, han_kurt_postu, cam_ormani, kale_yolu, seraphine_koskü]
+    npcs: [ihtiyar_derya, tormund]
+    discoveries:
+      - id: duvardaki_izler
+        hint: "Kuzey duvarının gediğinde tuhaf izler var."
+        check: {skill: investigation, dc: 12}
+        reveals: "Gedikteki kazıklar dışarıdan değil, İÇERİDEN gevşetilmiş. Biri köyün içinden ölülere yol açmış."
+        xp: 50
+      - id: olu_yuruyusu
+        hint: "Yamaçtan inen ölülerin hepsi aynı yöne yürüyor."
+        reveals: "Ölüler köye değil, köyü geçip kaleye doğru yürüyor; sadece önlerine çıkana saldırıyorlar. Bazıları yüzyıllık, bazıları geçen kış gömülmüş."
+        leads_to: [kale_yolu]
+        xp: 25
+      - id: dereyanin_hatirasi
+        hint: "İhtiyar Derya kaleye bakarken dudakları kıpırdıyor."
+        check: {skill: insight, dc: 13}
+        reveals: "Derya itiraf ediyor: gençken kalede hizmetçiydi. Yangın gecesi Baron'un 'Onu içeri almamalıydık!' diye bağırdığını duydu. Yangını belki de Baron kendisi çıkardı."
+        xp: 75
+    encounters:
+      - id: gece_kusatmasi
+        when: "Gece olursa ve grup duvarda ya da köyün dışındaysa; ya da Kuşatma tehdidi ilerlediğinde"
+        enemies: [{monster: zombie, count: 4, name: "Donmuş Ölü"}, {monster: skeleton, count: 2, name: "Eski Köylü İskeleti"}]
+        features:
+          - {name: "Ateş çukuru", description: "Meydandaki büyük ateş çukuru; ölüler ateşten korkuyor.", effect: push_hazard, damage: 2d6, damage_type: fire, rank: front}
+          - {name: "Barikat arabaları", description: "Gediğe dayanmış devrik arabalar.", effect: cover, damage: null}
+
+  kirik_can:
+    name: Kırık Çan Tapınağı
+    region: koy
+    description: >
+      Çan kulesi yıkılmış küçük bir taş tapınak. İçeride yüzlerce mum, sıralarda battaniyelere sarılmış
+      çocuklar ve yaşlılar. Sunağın önünde, mum yağından elleri yanmış bir rahibe dua ediyor.
+    gm_notes: Güvenli sığınak. Selvi kutsal su verebilir, yaraları sarar. Kar Ninnisi'nin hikâyesini bilir.
+    exits: [soguk_pinar]
+    npcs: [selvi]
+    safe_rest: true
+    shop:
+      - {id: holy_water, price: 25}
+      - {id: potion_healing, price: 50}
+      - {id: healers_kit, price: 5}
+      - {id: torch, price: 0.01}
+    discoveries:
+      - id: kar_ninnisi
+        hint: "Sunağın arkasındaki duvarda yarısı silinmiş bir dua yazılı."
+        reveals: "Duvardaki yazı 'Kar Ninnisi'nin ilk dizeleri: ölüleri uyutan eski bir dua. Selvi'ye göre duanın tamamı kalenin kütüphanesinde, Baron'un kendi eliyle yazılmış bir kitapta."
+        xp: 25
+      - id: selvinin_korkusu
+        hint: "Selvi kaleden bahsedilince ürperiyor."
+        check: {skill: persuasion, dc: 12}
+        reveals: "Selvi, Leydi Seraphine'in son üç yıldır her dolunayda tapınağa gelip babası için dua ettiğini, son gelişinde ise 'artık duaya gerek kalmayacak' dediğini anlatıyor."
+        leads_to: [seraphine_koskü]
+        xp: 50
+
+  han_kurt_postu:
+    name: Kurt Postu Hanı
+    region: koy
+    description: >
+      Duvarlarında av trofeleri olan, alçak tavanlı bir han. Ocak harıl harıl yanıyor; ama masalar boş,
+      sadece köşede kafası önünde bir ozan ve tezgâhta dedikoducu bir hancı kadın.
+    gm_notes: Dedikodu ve dinlenme yeri. Hancı Nermin her şeyi duyar. Ozan Pelin kale hakkında eski bir türkü bilir.
+    exits: [soguk_pinar]
+    safe_rest: true
+    shop:
+      - {id: rations, price: 0.5}
+      - {id: oil_flask, price: 0.1}
+      - {id: alchemist_fire, price: 50}
+      - {id: rope_hempen, price: 1}
+      - {id: arrow, price: 1}
+    discoveries:
+      - id: kazimin_dedikodusu
+        hint: "Hancı kadın Mezarcı Kâzım'ın adını alçak sesle söylüyor."
+        reveals: "Hancı Nermin: 'Ölüler bütün köyün kapısını tırmalıyor ama Kâzım'ın evine bir kez bile uğramadılar. Bu adam ya bir aziz ya da bir şeytan.'"
+        xp: 25
+      - id: kale_turkusu
+        hint: "Köşedeki ozan hüzünlü bir türkü mırıldanıyor."
+        check: {skill: performance, dc: 11}
+        reveals: "Ozanın türküsü: 'Kuzgun yaktı kendi yuvasını / gölgeyi içeri alan kızın yüzünden...' Türküye göre kalenin arka duvarında, eski av patikasının bittiği yerde bir kapı var."
+        leads_to: [kale_yolu]
+        xp: 50
+
+  mezarlik:
+    name: Karlı Mezarlık
+    region: koy
+    description: >
+      Köyün dışında, eğri mezar taşlarıyla dolu bir yamaç. Mezarların çoğu içeriden açılmış; toprak karın
+      üstüne saçılmış. Ortada mezarcının kulübesi; bacasından duman tütüyor ve etrafında tek bir ayak izi yok.
+    gm_notes: >
+      Kâzım'ın evi ölülere dokunulmamış tek yer. Evin altında tarikata giden bir geçit var; geçit kalenin
+      mahzenine bağlanıyor. Kâzım sıkıştırılırsa yalan söyler, korkutulursa itiraf eder.
+    exits: [soguk_pinar, mezarci_gecidi]
+    npcs: [kazim]
+    discoveries:
+      - id: acik_mezarlar
+        hint: "Bazı mezarlar içeriden değil, dışarıdan kazılmış gibi."
+        check: {skill: investigation, dc: 13}
+        reveals: "Bazı mezarlar kürekle açılmış — ölüler kalkmadan önce. Cesetler çalınmış, mezar eşyaları yok. Kürek izleri mezarcının kulübesine gidiyor."
+        xp: 50
+      - id: mavi_tas
+        hint: "Kâzım'ın boynundaki soluk mavi taş kandil ışığı gibi titriyor."
+        check: {skill: arcana, dc: 14}
+        reveals: "Mavi taş bir 'ölü işareti': ölüler onu taşıyanı kendilerinden biri sanıyor. Aynı ışık kalenin pencerelerinde de yanıyor."
+        xp: 50
+      - id: kulubenin_bodrumu
+        hint: "Kulübenin halısının altından soğuk bir hava esiyor."
+        check: {skill: perception, dc: 13}
+        reveals: "Halının altında bir kapak: aşağıda tarikatın sembolleriyle işaretli dar bir geçit, kaleye doğru uzanıyor."
+        leads_to: [mezarci_gecidi]
+        xp: 50
+    encounters:
+      - id: mezarcilar_kavga
+        when: "Kâzım'ın sırrı açığa çıkar ve köşeye sıkıştırılırsa"
+        enemies: [{monster: thug, count: 1, name: "Mezarcı Kâzım"}, {monster: bandit, count: 2, name: "Mezar Soyguncusu"}]
+        features:
+          - {name: "Açık mezar", description: "Derin ve karla dolu açık bir mezar çukuru.", effect: push_hazard, damage: 2d6, damage_type: bludgeoning, rank: front}
+
+  mezarci_gecidi:
+    name: Mezarcı Geçidi
+    region: kale
+    hidden: true
+    outdoors: false
+    travel_hours: 2
+    description: >
+      Kulübenin altından inen, kemik ve toprak kokan dar bir tünel. Duvarlara soluk mavi taşlar gömülmüş;
+      her biri bir kalp atışı gibi yanıp sönüyor. Uzaktan bir ilahi ve zincir sesi.
+    gm_notes: Kalenin mahzenine giden gizli yol. Tarikatçılar burada ceset taşıyor.
+    exits: [mezarlik, kul_mahzeni]
+    discoveries:
+      - id: ceset_kafilesi
+        hint: "İleride, zincirlere bağlı cesetleri sürükleyen figürler."
+        check: {skill: stealth, dc: 14}
+        reveals: "Gizlice yaklaşıyorsunuz: iki tarikatçı köyden çalınmış cesetleri mahzene sürüklüyor. Konuşmalarından kandilin 'iki gece sonra' dolacağı anlaşılıyor."
+        xp: 50
+    encounters:
+      - id: gecit_tarikatcilari
+        when: "Tarikatçılar grubu fark ederse"
+        enemies: [{monster: cultist, count: 3, name: "Solgun Işık Müridi"}, {monster: zombie, count: 2, name: "Zincirli Ölü"}]
+        features:
+          - {name: "Mavi taşlı duvar", description: "Kırılırsa soluk bir patlama yapan ruh taşları.", effect: trap, damage: 2d6, damage_type: necrotic, rank: front}
+
+  cam_ormani:
+    name: Çam Ormanı
+    region: orman
+    travel_hours: 1
+    description: >
+      Karın ağırlığıyla bükülmüş kara çamlar. Sessizlik o kadar derin ki kendi kalp atışınızı
+      duyuyorsunuz. Ağaçların arasında arada bir soluk mavi bir ışık süzülüp kayboluyor.
+    gm_notes: Mavi ışıklar bataklık fenerleri; insanları mağaraya çeker. Kurtlar dağdan kaçmış, aç ve gergin.
+    exits: [soguk_pinar, kale_yolu, mavi_isik_magarasi]
+    discoveries:
+      - id: erenin_izleri
+        hint: "Karda tek kişilik, aceleci ayak izleri."
+        check: {skill: survival, dc: 12}
+        reveals: "Genç birinin izleri; düz bir çizgide, sanki uyurgezer gibi ormanın derinliklerine, mavi ışıkların yoğunlaştığı yere gidiyor."
+        leads_to: [mavi_isik_magarasi]
+        xp: 50
+    encounters:
+      - id: ac_kurtlar
+        when: "Grup ormanda oyalanır ya da kan kokusu taşırsa"
+        enemies: [{monster: dire_wolf, count: 1, name: "Sürü Lideri"}, {monster: wolf, count: 3, name: "Aç Kurt"}]
+        features:
+          - {name: "Karla yüklü dallar", description: "Sarsılınca üstüne kar ve buz yağdıran dallar.", effect: hazard, damage: 1d6, damage_type: cold, rank: front}
+
+  mavi_isik_magarasi:
+    name: Mavi Işık Mağarası
+    region: orman
+    hidden: true
+    travel_hours: 1
+    outdoors: false
+    description: >
+      Buzdan sarkıtlarla dolu bir mağara. Havada süzülen soluk mavi ışıklar bir şarkı gibi titriyor. En dipte,
+      buzdan bir duvara yaslanmış, dişleri takırdayan genç bir avcı.
+    gm_notes: Bataklık fenerlerinin yuvası. Eren burada büyülenmiş halde; ışıklar onu yavaş yavaş tüketiyor.
+    exits: [cam_ormani]
+    npcs: [eren]
+    discoveries:
+      - id: erenin_tanikligi
+        hint: "Eren titreyerek bir şey anlatmaya çalışıyor."
+        reveals: "Eren: 'Mezarcı Kâzım'ı gördüm! Burada, mavi ışıkların arasında, cübbeli adamlara bir torba altın dişi veriyordu. Bana fark etmediler sanmıştım...'"
+        xp: 50
+    encounters:
+      - id: fener_yuvasi
+        when: "Grup Eren'e yaklaşırsa ya da ışıklara saldırırsa"
+        enemies: [{monster: will_o_wisp, count: 2, name: "Bataklık Feneri"}]
+        features:
+          - {name: "Buz sarkıtları", description: "Tavanda sallanan sivri buz sarkıtları.", effect: hazard, damage: 2d6, damage_type: piercing, rank: back}
+
+  kale_yolu:
+    name: Kuzgun Yokuşu
+    region: kale
+    travel_hours: 2
+    description: >
+      Kaleye tırmanan, karla gömülü eski bir yol. Yol boyunca diz çöküp donmuş ölüler; hepsi başlarını
+      kaleye çevirmiş. Rüzgâr, yanık taşların arasından inleyerek esiyor.
+    gm_notes: Ölüler burada saldırgan değil, tören halinde bekliyorlar — kışkırtılmadıkça. Av patikası arka kapıya çıkıyor.
+    exits: [cam_ormani, soguk_pinar, kale_avlusu, yanik_kutuphane, seraphine_koskü]
+    discoveries:
+      - id: av_patikasi
+        hint: "Yolun kenarında, kayaların arasında eski bir av patikası."
+        check: {skill: survival, dc: 13}
+        reveals: "Eski av patikası kalenin arka duvarındaki kütüphane penceresine kadar çıkıyor — ön kapıyı ve muhafızları atlatmanın yolu."
+        leads_to: [yanik_kutuphane]
+        xp: 50
+    encounters:
+      - id: yokus_olulerin_uyanisi
+        when: "Ölülere saldırılır ya da kutsal bir şey gösterilirse"
+        enemies: [{monster: ghoul, count: 2, name: "Aç Ölü"}, {monster: zombie, count: 3, name: "Donmuş Hacı"}]
+
+  kale_avlusu:
+    name: Kül Kalesi Avlusu
+    region: kale
+    travel_hours: 0
+    description: >
+      Yanık taş duvarlar, çökmüş bir çatı, avluda kar altında kalmış at iskeletleri. Kapının iki yanında
+      kara zırhlı, hareketsiz şövalyeler — biri başını yavaşça size çeviriyor. Gözlerinde soğuk kıvılcımlar.
+    gm_notes: >
+      Kuzgun Muhafızları. Baron'un mührünü gösterene saldırmazlar; konuşmaya açıklar ama yemin bağıyla
+      yabancıları içeri almazlar. Morvan'dan nefret ederler. Sör Halvard ikna edilirse yardım eder.
+    exits: [kale_yolu, yanik_kutuphane, kul_mahzeni]
+    npcs: [sir_halvard]
+    discoveries:
+      - id: muhafizlarin_yemini
+        hint: "Şövalyelerin kalkanlarında yanık bir kuzgun arması ve kazınmış bir yemin."
+        check: {skill: history, dc: 13}
+        reveals: "Yemin: 'Kuzgun'un kanını ve mührünü koruyacağız, ölümden sonra bile.' Mührü taşıyana itaat ederler; Seraphine'i de korumak zorundalar."
+        xp: 50
+      - id: halvardin_sozu
+        hint: "Sör Halvard sizi tartıyor; bir şey söylemek istiyor gibi."
+        check: {skill: persuasion, dc: 15}
+        reveals: "Halvard: 'Efendimin son emri iki taneydi. Kızını koruyun. Ve onu asla geri getirmeyin. Mahzendeki solgun adam ikisini birden çiğniyor.'"
+        xp: 75
+    encounters:
+      - id: kuzgun_muhafizlari
+        when: "Grup mühür olmadan zorla içeri girmeye çalışır ya da muhafızlara saldırırsa"
+        enemies: [{monster: knight, count: 1, name: "Sör Halvard"}, {monster: skeleton, count: 2, name: "Kuzgun Muhafızı"}]
+        boss: true
+        features:
+          - {name: "Çökük çatı kirişi", description: "Avlunun üstünde sallanan yanık bir kiriş.", effect: hazard, damage: 3d6, damage_type: bludgeoning, rank: front}
+
+  yanik_kutuphane:
+    name: Yanık Kütüphane
+    region: kale
+    hidden: true
+    travel_hours: 0
+    outdoors: false
+    description: >
+      Kitap rafları kömüre dönmüş; tavandan kar yağıyor. Ama bir köşede, taş bir nişte yanmamış birkaç
+      kitap ve kuzgun başlı bir mühür. Duvarda Baron'un yarısı yanmış portresi size bakıyor.
+    gm_notes: Kar Ninnisi'nin tam metni, Baron'un mührü ve kâtibin günlüğü burada. Gölgeler kütüphaneyi koruyor.
+    exits: [kale_avlusu, kale_yolu]
+    items:
+      - {id: spellbook}
+      - {id: gem_100}
+    discoveries:
+      - id: kar_ninnisi_kitabi
+        hint: "Taş nişte yanmamış, kuzgun desenli bir kitap."
+        reveals: "Baron'un kendi el yazısıyla 'Kar Ninnisi'nin tam metni. Kandilin yanında okunursa ruhları kandilden çağırıp dinlendirebilir."
+        item: {name: "Kar Ninnisi Kitabı", kind: quest, description: "Ölüleri dinlendiren eski dua. Kara Kandil'in yanında okunmalı."}
+        xp: 100
+      - id: baronun_muhru
+        hint: "Kuzgun başlı ağır bir mühür yüzüğü."
+        reveals: "Baron Aldemar'ın mührü. Kuzgun Muhafızları bunu taşıyana itaat eder."
+        item: {name: "Kuzgun Mührü", kind: quest, description: "Baron'un mührü; Kuzgun Muhafızları taşıyana itaat eder."}
+        xp: 75
+      - id: katibin_gunlugu
+        hint: "Kömürleşmiş bir masanın altında deri kaplı bir günlük."
+        check: {skill: investigation, dc: 12}
+        reveals: "Kâtibin son yazısı: 'Efendim solgun adamın gerçek niyetini anladı. Leydi Seraphine'i kurtardıktan sonra kendi eliyle kaleyi ateşe verdi. Ölüm onu bile bağlayamasın diye.'"
+        item: {name: "Kâtibin Günlüğü", kind: quest, description: "Yangının gerçeği: Baron, Morvan'ı durdurmak için kaleyi kendisi yaktı."}
+        xp: 75
+    encounters:
+      - id: kutuphane_golgeleri
+        when: "Grup kitaplara dokunduğunda ya da kütüphanede ışık yaktığında"
+        enemies: [{monster: shadow, count: 3, name: "Kül Gölgesi"}]
+        features:
+          - {name: "Yanık raflar", description: "Hâlâ için için yanan, devrilmeye hazır raflar.", effect: push_hazard, damage: 2d6, damage_type: fire, rank: front}
+
+  seraphine_koskü:
+    name: Seraphine'in Köşkü
+    region: koy
+    hidden: true
+    travel_hours: 1
+    description: >
+      Köyün dışında, çam ağaçlarının arasında gri taştan bir köşk. Bütün pencereler perdeli; içeride
+      yüzlerce mum ve duvarlarda Baron'un portreleri. Şöminenin üstünde gümüş bir çerçevede yarım yanmış
+      bir aile resmi.
+    gm_notes: >
+      Seraphine burada. Konuşmaya açık ama babası hakkında savunmacı. Kâtibin günlüğü, Halvard'ın sözü ya
+      da madalyondaki mektup onu ikna edebilir (İkna ZS 15, kanıtla avantajlı). İkna olursa Morvan'a karşı
+      döner ve kandili kendi eliyle kırabileceğini söyler.
+    exits: [soguk_pinar, kale_yolu]
+    npcs: [seraphine]
+    discoveries:
+      - id: madalyon
+        hint: "Seraphine'in elinden düşürmediği gümüş madalyon."
+        check: {skill: persuasion, dc: 15}
+        reveals: "Seraphine madalyonu açıyor: içinde babasının son mektubu. 'Kızım, eğer biri beni geri getirmek isterse bil ki dönen ben olmayacağım. Bırak gideyim.' Seraphine hıçkırarak yıkılıyor."
+        xp: 100
+      - id: ayin_notlari
+        hint: "Masada Morvan'ın el yazısıyla notlar."
+        check: {skill: arcana, dc: 13}
+        reveals: "Notlar ayinin son adımını anlatıyor: 'Son ruh, kanı Kuzgun olan biri olmalı.' Morvan, Seraphine'i kandile kurban edecek."
+        xp: 75
+    encounters:
+      - id: kosk_muhafizlari
+        when: "Grup Seraphine'i tehdit ederse ya da zorla girerse"
+        enemies: [{monster: specter, count: 2, name: "Yas Hayaleti"}]
+
+  kul_mahzeni:
+    name: Kül Mahzeni
+    region: kale
+    hidden: true
+    outdoors: false
+    travel_hours: 0
+    description: >
+      Kalenin altında, tavanı kemiklerle desteklenmiş geniş bir mahzen. Ortada, siyah bir taş kaidenin
+      üstünde içi soluk mavi ateşle dolu bir kandil: Kara Kandil. Etrafında diz çökmüş, ağızları kıpırdayan
+      ölüler. Arkada, yanık bir tahtta oturan zırhlı bir iskelet — Baron. Önünde, mum gibi soluk bir adam
+      ellerini açmış, şarkı söylüyor.
+    gm_notes: >
+      Final. Morvan önce konuşur; grubu tarikata davet eder ya da Seraphine'i kalkan olarak kullanır.
+      Kandil kırılırsa (ışık/kutsal hasar ya da Seraphine'in eli, ya da Kar Ninnisi okunursa) ruhlar
+      serbest kalır, ölüler çöker. Kara Kandil tehdidi tamamlandıysa Baron (mezar lordu) da savaşa katılır.
+    exits: [kale_avlusu, mezarci_gecidi]
+    npcs: [morvan]
+    discoveries:
+      - id: kandilin_zaafi
+        hint: "Kandilin camında ince bir çatlak; içindeki ateş ışık değdikçe titriyor."
+        check: {skill: arcana, dc: 14}
+        reveals: "Kandil ışıktan ve kutsal güçten korkuyor: ışık hasarı ya da kutsal su ile kırılabilir. Kırılırsa içindeki ruhlar serbest kalır."
+        xp: 75
+    encounters:
+      - id: son_ayin
+        when: "Grup Morvan'ı reddeder, kandile saldırır ya da Morvan sabrını yitirirse"
+        enemies: [{monster: mage, count: 1, name: "Ruhbaz Morvan"}, {monster: ghast, count: 2, name: "Mahzen Bekçisi"}, {monster: zombie, count: 2, name: "Diz Çökmüş Ölü"}]
+        boss: true
+        features:
+          - {name: "Kara Kandil", description: "Ruhlarla dolu soluk mavi kandil; kırılırsa ruhlar patlayarak serbest kalır.", effect: hazard, damage: 4d6, damage_type: radiant, rank: front, dc: 14}
+          - {name: "Kemik sütunlar", description: "Tavanı taşıyan çürük kemik sütunlar.", effect: hazard, damage: 3d6, damage_type: bludgeoning, rank: back}
+          - {name: "Yanık taht", description: "Baron'un tahtı; arkasına saklanılabilir.", effect: cover, damage: null}
+      - id: mezar_lordu
+        when: "Kara Kandil tehdidi tamamlandıysa: Baron uyanır"
+        enemies: [{monster: wight, count: 1, name: "Baron Aldemar, Mezar Lordu", hp_factor: 2.5}, {monster: mage, count: 1, name: "Ruhbaz Morvan"}]
+        boss: true
+
+endings:
+  - "HUZUR: Kara Kandil kırılır, Kar Ninnisi okunur; ölüler karın altında sonsuza dek uyur. Seraphine babasını bırakır; Kuzgun Muhafızları son kez selam verip toza dönüşür."
+  - "KURTULUŞ AMA YARA: Morvan durdurulur ama kandil yanlış kırılır; ruhlar dağılır, vadi yıllarca hayaletlerle yaşar."
+  - "KARANLIK ANLAŞMA: Grup Morvan'a katılır ya da Baron'u kendileri kontrol etmeye çalışır; vadi ölülerin krallığı olur."
+  - "KAÇIŞ: Grup köyü terk eder; Soğukpınar düşer, ölüler bir sonraki vadiye yürür."
+
+random_events:
+  - "Rüzgâr bir an duruyor ve tamamen sessizlikte, uzaktan bir kadının ninni söylediği duyuluyor."
+  - "Karın üstünde, hiçbir yere gitmeyen tek sıra çıplak ayak izi."
+  - "Bir ölü, grubun önünden geçerken başını çevirip eski bir alışkanlıkla şapkasını çıkarır gibi elini kaldırıyor."
+  - "Kaleden soluk mavi bir ışık yükselip bulutların arasında kayboluyor; köpekler aynı anda ulumaya başlıyor."
+  - "Bir köylü kadın, kızının dün gece pencerenin önünde durup içeri baktığını söyleyerek ağlıyor. Kızı geçen kış öldü."

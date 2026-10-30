@@ -572,6 +572,8 @@ class GameSession:
     async def _apply_discovery(self, ch: Character, disc) -> list[str]:
         ws, sc = self.world, self.scenario
         assert ws
+        if disc.id in ws.found:  # two characters went for the same secret this round
+            return [f"{ch.name} also sees it."]
         out = [f"{ch.name} DISCOVERED (reveal this): {disc.reveals}"]
         revealed = ws.discover(sc, disc)
         if revealed:

@@ -26,7 +26,7 @@ import httpx
 
 OLLAMA_RELEASE_API = "https://api.github.com/repos/ollama/ollama/releases/latest"
 OLLAMA_ASSET = "ollama-windows-amd64.zip"
-OLLAMA_PORT = 11435            # private port: never collides with a system-wide Ollama on 11434
+OLLAMA_PORT = int(os.environ.get("DNDM_OLLAMA_PORT", "11435"))  # private port: never collides with a system Ollama
 GAME_PORT = 8765
 
 MODELS = {
@@ -340,6 +340,10 @@ def run_gui() -> None:
 
 
 def main() -> None:
+    if "--uninstall" in sys.argv:
+        from dndm.setup_wizard import run_uninstall_dialog
+        run_uninstall_dialog(install_root())
+        return
     if "--server-only" in sys.argv:
         rt = Runtime()
         rt.start_ollama()

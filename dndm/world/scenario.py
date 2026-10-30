@@ -93,7 +93,7 @@ class Front(BaseModel):
     name: str
     description: str
     clock: int = 6
-    per_day: int = 1
+    per_day: float = 1
     stages: dict[int, str] = Field(default_factory=dict)
     on_complete: str = ""
 
