@@ -142,7 +142,7 @@ async def bench_model(model: str, runs: int, out_dir: Path) -> dict:
             ex, res = await client.structured(
                 [{"role": "user", "content": f"Extract story elements from this Turkish GM narration:\n\n"
                                              f"{cases.EXTRACTION_TEXT}"}],
-                Extraction, system="You extract structured data from RPG narration. Keep names as written.",
+                Extraction, system="You extract structured data from Turkish RPG narration. Write every value in TURKISH, copying names exactly as written in the text. places_mentioned must list every named place, region, river, pass or building mentioned.",
                 temperature=0.1, max_tokens=600)
             npcs = {n.name.lower() for n in ex.new_npcs}
             items = " ".join(i.name.lower() for i in ex.items_in_scene)

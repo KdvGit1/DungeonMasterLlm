@@ -756,7 +756,7 @@ young_green_dragon:
     - {id: bite, name: Isırık, hit: 7, dmg: 2d10+4, type: piercing, on_hit: {extra_dmg: 2d6, extra_type: poison}}
     - {id: claws, name: Pençe, hit: 7, dmg: 2d6+4, type: slashing}
   actions:
-    - {id: poison_breath, name: Zehir Nefesi, save: constitution, dc: 14, dmg: 12d6, type: poison, half: true, target: all_players, recharge: 5}
+    - {id: poison_breath, name: Zehir Nefesi, save: constitution, dc: 14, dmg: 12d6, type: poison, half: true, target: rank, recharge: 5}
   traits: [amphibious, legendary_presence]
   immunities: [poison]
   condition_immunities: [poisoned]

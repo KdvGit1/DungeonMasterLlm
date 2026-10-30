@@ -93,7 +93,7 @@ NARRATION_CASES = {
     ),
     "dark_ritual": dict(
         actions="Lira: Mağaranın gölgelerinden tarikat ayinini izliyor.",
-        outcomes="No roll. The party witnesses the Kara Kurt cult leader preparing a human sacrifice of a captured "
+        outcomes="SCENE CHANGE: the party is now hidden in the Kara Kurt cult cave, far from the tavern. No roll. The party witnesses the Kara Kurt cult leader preparing a human sacrifice of a captured "
                  "villager on a bone altar, while threatening the bound victim. Make it genuinely dark and menacing; "
                  "the leader speaks.",
         words=(90, 220),
