@@ -216,3 +216,23 @@ async def test_combat_commands_from_phone():
     assert any(m["event"]["type"] == "improvise" for m in rec.of("combat_event"))
     # improvised damage is capped by level (4d6 asked, level 1 cap is 2d6)
     assert s.mode in ("exploration", "combat")
+
+
+async def test_whispered_action_stays_secret():
+    s, llm, rec, (p1, p2) = make_session(2)
+    await s.start()
+    c1, c2 = s.char_of_player(p1.id), s.char_of_player(p2.id)
+    llm.queue("ExploreAdjudication", {"rulings": [{"player": c1.name, "intent": "talk", "needs_check": False}]})
+    llm.queue("ExploreAdjudication", {"rulings": [{"player": c2.name, "intent": "stealth", "needs_check": True,
+        "check": {"skill": "sleight_of_hand", "dc": 12, "advantage": "none", "reason": "kimse görmemeli"}}]})
+    llm.narrations.extend(["Herkese açık anlatım.", "Gizlice kesesini aşırıyorsun."])
+    await s.submit_action(p1.id, "Hancıyla sohbet ediyorum")
+    await asyncio.sleep(0)
+    await s.submit_action(p2.id, "Hancının kesesini gizlice çalıyorum", private=True)
+    await _drain(s)
+    public_prompts = [c[1] for c in llm.calls if c[0] == "stream"]
+    assert "kesesini" not in public_prompts[-2]                 # public narration never saw the secret
+    private_msgs = [(m, to) for m, to in rec.msgs if m.get("t") == "narration_end" and m.get("kind") == "private"]
+    assert len(private_msgs) == 1 and private_msgs[0][1] == [p2.id]
+    checks = [(m, to) for m, to in rec.msgs if m.get("t") == "check_result"]
+    assert checks and all(to == [p2.id] for _, to in checks)    # the secret roll only reached the thief

@@ -289,13 +289,14 @@ class GameSession:
 
     async def request_roll(self, char_id: str, label: str, *, bonus: int = 0, advantage: str = "none",
                            dc: int | None = None, purpose: str = "check", sides: int = 20,
-                           count: int = 1) -> DiceRoll:
+                           count: int = 1, private: bool = False) -> DiceRoll:
         """Ask the owner of ``char_id`` to tap 'roll'. Server rolls; table animates; returns the dice."""
         ch = self.characters[char_id]
         player = self.player_of_char(char_id)
         sign = "+" if bonus >= 0 else "-"
         notation = f"{count}d{sides}{sign}{abs(bonus)}" if bonus else f"{count}d{sides}"
         auto = self.settings.auto_roll or player is None or not player.connected
+        audience = [player.id] if (private and player) else None   # secret rolls never reach the table
         rid = uuid.uuid4().hex[:8]
         fut: asyncio.Future = asyncio.get_running_loop().create_future()
         req = RollRequest(rid, player.id if player else None, char_id, label, notation, advantage, fut,
@@ -305,8 +306,8 @@ class GameSession:
             hint = (f"ZS {dc}" if self.settings.show_dc else dc_label(dc)) if dc else ""
             await self.emit({"t": "roll_request", "id": rid, "char_id": char_id, "char": ch.name, "label": label,
                              "notation": notation, "advantage": advantage, "difficulty": hint,
-                             "timeout": self.settings.roll_timeout},
-                            None)
+                             "timeout": self.settings.roll_timeout, "private": private},
+                            audience)
             try:
                 await asyncio.wait_for(asyncio.shield(fut), timeout=self.settings.roll_timeout)
             except asyncio.TimeoutError:
@@ -315,8 +316,9 @@ class GameSession:
         r = roll(notation, advantage=advantage)  # type: ignore[arg-type]
         await self.emit({"t": "dice", "id": rid, "char_id": char_id, "char": ch.name, "label": label,
                          "roll": r.to_dict(), "advantage": advantage, "purpose": purpose,
-                         "auto": auto or not fut.done()}, None)
-        await asyncio.sleep(self.settings.dice_animation_ms / 1000)
+                         "auto": auto or not fut.done(), "private": private}, audience)
+        if not private:
+            await asyncio.sleep(self.settings.dice_animation_ms / 1000)
         return r
 
     def answer_roll(self, player_id: str, roll_id: str) -> bool:
@@ -326,7 +328,8 @@ class GameSession:
         req.future.set_result(True)
         return True
 
-    async def roll_check(self, ch: Character, key: str, dc: int, advantage: str = "none") -> CheckResult:
+    async def roll_check(self, ch: Character, key: str, dc: int, advantage: str = "none",
+                         private: bool = False) -> CheckResult:
         bonus = ch.skill_bonus(key)
         guided = next((c for c in ch.conditions if c.id == "guided"), None)
         if guided:
@@ -342,21 +345,22 @@ class GameSession:
             if s and s.definition and key in (getattr(s.definition, "grants_advantage", None) or []):
                 advantage = "none" if advantage == "disadvantage" else "advantage"
         label = f"{skill_or_ability_name(key)} zarı"
-        r = await self.request_roll(ch.id, label, bonus=bonus, advantage=advantage, dc=dc)
+        r = await self.request_roll(ch.id, label, bonus=bonus, advantage=advantage, dc=dc, private=private)
         nat = r.natural or 0
-        res = resolve_check(bonus, dc, key=key, advantage=advantage)  # recompute degree from our dice
-        res.roll = r
-        res.total = r.total
         if nat == 20:
-            res.degree = "critical_success"
+            degree = "critical_success"
         elif nat == 1:
-            res.degree = "critical_failure"
+            degree = "critical_failure"
         elif r.total >= dc:
-            res.degree = "critical_success" if r.total >= dc + 10 else "success"
+            degree = "critical_success" if r.total >= dc + 10 else "success"
         else:
-            res.degree = "critical_failure" if r.total <= dc - 10 else "failure"
+            degree = "critical_failure" if r.total <= dc - 10 else "failure"
+        res = CheckResult(key=key, dc=dc, roll=r, bonus=bonus, total=r.total, degree=degree,  # type: ignore[arg-type]
+                          advantage=advantage)  # type: ignore[arg-type]
+        p = self.player_of_char(ch.id)
         await self.emit({"t": "check_result", "char": ch.name, "char_id": ch.id, "result": res.to_dict(),
-                         "text": res.summary_tr(ch.name)}, None)
+                         "text": res.summary_tr(ch.name), "private": private},
+                        [p.id] if (private and p) else None)
         if res.success:
             ch.gain_xp(5)
         return res
@@ -450,27 +454,32 @@ class GameSession:
                 elif disc and disc.check:
                     spec = (disc.check.skill, disc.check.dc, "none")
             plans.append((ruling, ch, disc, spec))
+        secret = {name for name, a in by_name.items() if a.private}
 
         # ── phase 2: everyone rolls at the same time ─────────────
         async def no_roll():
             return None
-        jobs = [self.roll_check(ch, *spec) if spec else no_roll() for _, ch, _, spec in plans]
+        jobs = [self.roll_check(ch, *spec, private=ch.name in secret) if spec else no_roll()
+                for _, ch, _, spec in plans]
         group_job = self._group_check(party, group) if group else no_roll()
         results, group_lines = await asyncio.gather(asyncio.gather(*jobs), group_job)
         if group_lines:
             outcomes += group_lines
 
         # ── phase 3: apply consequences in order ─────────────────
+        private_out: dict[str, list[str]] = {n: [] for n in secret}
         for (ruling, ch, disc, spec), result in zip(plans, results):
             hours = max(hours, ruling.time_minutes / 60)
+            is_secret = ch.name in secret
+            sink = private_out[ch.name] if is_secret else outcomes
             if result is not None:
                 reason = f" — amaç: {ruling.check.reason}" if ruling.check else ""
-                outcomes.append(f"{ch.name} — {skill_or_ability_name(spec[0])} (ZS {spec[1]}): "
-                                f"{DEGREE_TR[result.degree]} (zar {result.natural}, toplam {result.total}){reason}")
+                sink.append(f"{ch.name} — {skill_or_ability_name(spec[0])} (ZS {spec[1]}): "
+                            f"{DEGREE_TR[result.degree]} (zar {result.natural}, toplam {result.total}){reason}")
             success = result is None or result.success
             if disc and success:
-                outcomes += await self._apply_discovery(ch, disc)
-            if ruling.destination and success and moved_to is None:
+                sink += await self._apply_discovery(ch, disc, private=is_secret)
+            if ruling.destination and success and moved_to is None and not is_secret:
                 travel = await self._travel(ruling.destination)
                 if travel:
                     moved_to, h, line = travel
@@ -479,9 +488,9 @@ class GameSession:
             if ruling.item_action != "none":
                 line = self._apply_item_action(ch, ruling, success)
                 if line:
-                    outcomes.append(line)
+                    sink.append(line)
             if ruling.rest != "none":
-                outcomes.append(self._rest(ch, ruling.rest))
+                sink.append(self._rest(ch, ruling.rest))
         # time & fronts
         notes += ws.advance_time(sc, hours)
         if moved_to:
@@ -501,15 +510,43 @@ class GameSession:
         if adj.starts_combat:
             await self._begin_combat_from_adjudication(adj, by_name, outcomes)
             return
-        actions_block = "\n".join(
-            f"{name}{' (whispered to GM — others do not know)' if a.private else ''}: {a.text}"
-            for name, a in by_name.items())
-        words = self.gm.words_for(len(by_name))
+        public = {n: a for n, a in by_name.items() if n not in secret}
+        actions_block = "\n".join(f"{name}: {a.text}" for name, a in public.items())
+        if secret:
+            actions_block += ("\n(" + ", ".join(secret) + " quietly did something on their own this round. Do NOT "
+                              "describe or hint at it; just keep them present in the scene.)")
+        words = self.gm.words_for(max(1, len(public)))
         await self._narrate(actions_block=actions_block, outcomes=outcomes, notes=notes,
                             instruction=f"Narrate the results now, in Turkish, about {words} words (never more than "
                                         f"{words + 30}). Address every character's action within one flowing scene.",
                             kind="round", max_tokens=int(words * 2.6) + 80)
+        for name in secret:
+            await self._narrate_private(name, by_name[name].text, private_out[name])
         await self._post_narration(party)
+
+    async def _narrate_private(self, name: str, action: str, outcomes: list[str]) -> None:
+        """A whispered action: its outcome goes only to that player's phone, in second person."""
+        assert self.gm
+        ch = next((c for c in self.party() if c.name == name), None)
+        player = self.player_of_char(ch.id) if ch else None
+        if ch is None or player is None:
+            return
+        instruction = (f"PRIVATE MESSAGE that only {name} will read. In Turkish, speaking directly to them in "
+                       "second person ('sen'), 40-90 words, narrate what happens with their SECRET action and its "
+                       "outcome. Nobody else noticed unless an outcome says so.")
+        nid = uuid.uuid4().hex[:8]
+        to = [player.id]
+        await self.emit({"t": "narration_start", "id": nid, "kind": "private"}, to)
+        parts: list[str] = []
+        async for piece in self.gm.narrate([ch], actions_block=f"{name} (secretly): {action}", outcomes=outcomes,
+                                           notes=[], instruction=instruction, max_tokens=260, record=False):
+            parts.append(piece)
+            await self.emit({"t": "narration_chunk", "id": nid, "text": piece}, to)
+        text = self.gm.polish("".join(parts), self.party())
+        await self.emit({"t": "narration_end", "id": nid, "text": text, "kind": "private"}, to)
+        # the GM remembers it as a secret so the story stays consistent
+        self.gm.history.append({"role": "user", "content": f"(SECRET, known only to {name}) {name}: {action}"})
+        self.gm.history.append({"role": "assistant", "content": f"(SECRET for {name}) {text}"[:1500]})
 
     # ── speculative adjudication ───────────────────────────────
     def _speculate(self, ch: Character, text: str) -> None:
@@ -569,7 +606,7 @@ class GameSession:
         return [f"GROUP {skill_or_ability_name(ruling.check.skill)} (ZS {ruling.check.dc}): "
                 f"{ok}/{len(results)} başarılı → {'GRUP BAŞARILI' if success else 'GRUP BAŞARISIZ'}"]
 
-    async def _apply_discovery(self, ch: Character, disc) -> list[str]:
+    async def _apply_discovery(self, ch: Character, disc, *, private: bool = False) -> list[str]:
         ws, sc = self.world, self.scenario
         assert ws
         if disc.id in ws.found:  # two characters went for the same secret this round
@@ -591,14 +628,18 @@ class GameSession:
                 stack = None
             if stack:
                 out.append(f"{ch.name} TAKES and now holds '{stack.name}' (show how they get it in the scene)")
-                await self.toast(f"🎒 {ch.name}: {stack.name} envantere eklendi", "item")
+                await self.toast(f"🎒 {ch.name}: {stack.name} envantere eklendi", "item", self._aud(ch, private))
         if disc.gold:
             ch.inventory.add_coins(gp=disc.gold)
             out.append(f"{ch.name} found {disc.gold} gold")
         for c in self.living_party():
             c.gain_xp(disc.xp // max(1, len(self.living_party())))
-        await self.toast(f"🔎 Yeni ipucu: {disc.reveals[:90]}", "clue")
+        await self.toast(f"🔎 Yeni ipucu: {disc.reveals[:90]}", "clue", self._aud(ch, private))
         return out
+
+    def _aud(self, ch: Character, private: bool) -> list[str] | None:
+        p = self.player_of_char(ch.id)
+        return [p.id] if (private and p) else None
 
     async def _travel(self, destination: str) -> tuple[str, float, str] | None:
         ws, sc = self.world, self.scenario

@@ -129,3 +129,5 @@ body { font-size: 16px; overscroll-behavior: none; }
 .picker-list .btn { justify-content: flex-start; text-align: left; }
 .picker-list .btn small { color: var(--muted); display: block; }
 .dead-banner { text-align: center; padding: 18px; font-family: var(--font-title); color: var(--red); }
+.msg.gm.private { border: 2px dashed var(--purple); position: relative; padding-top: 22px; }
+.msg.gm.private::before { content: "🤫 Sadece sen"; position: absolute; top: 4px; left: 12px; font-family: var(--font-ui); font-size: 0.72rem; color: #6b4a8a; }

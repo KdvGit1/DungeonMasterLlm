@@ -211,7 +211,7 @@ function addMine(text, priv) {
 function addGM(id, text, kind, streaming) {
   let node = feedItems[id];
   if (!node) {
-    node = el("div", { class: "msg gm parchment" + (kind?.startsWith("combat") ? " combat" : "") });
+    node = el("div", { class: "msg gm parchment" + (kind?.startsWith("combat") ? " combat" : "") + (kind === "private" ? " private" : "") });
     feedItems[id] = node;
     $("feed").append(node);
   }
