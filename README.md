@@ -10,7 +10,9 @@ telefonlarından tarayıcıyla bağlanır. Her şey bilgisayarında, internetsiz
    onay penceresini kabul et.
 3. İlk açılışta yapay zekâ motoru (~1,6 GB) ve anlatıcı model (~7,4 GB) indirilir. Bir kez yapılır.
 
-Önerilen donanım: NVIDIA ekran kartı (12 GB ideal, 8 GB'ta hafif model), 16 GB RAM, ~12 GB boş disk.
+Önerilen donanım: 10 GB+ belleği olan ekran kartı (12 GB ideal), 16 GB RAM, ~12 GB boş disk.
+Daha küçük kartlarda (6–8 GB) ya da ekran kartı yoksa başlatıcı otomatik olarak daha hızlı ama daha
+basit Türkçe yazan **hafif modeli** (~6,3 GB) seçer. Ayrıntılar: [MODEL_RAPORU.md](MODEL_RAPORU.md).
 
 ## Nasıl oynanır
 - **DnD Master**'ı aç → masa ekranı tarayıcıda açılır. Ekrandaki QR kodu telefonla okut
