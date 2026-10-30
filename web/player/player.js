@@ -236,6 +236,16 @@ net.on("check_result", (m) => {
   if (pendingRoll && pendingRoll.char_id === m.char_id && pendingRoll.done) showRollOutcome(m.result);
 });
 
+// show hit / miss on the roll card for my own attacks
+net.on("combat_event", (m) => {
+  const ev = m.event;
+  const c = mine();
+  if (!pendingRoll || !c || ev.type !== "attack" || ev.actor !== `pc:${c.id}`) return;
+  const out = $("r-out");
+  out.textContent = ev.data.critical ? "KRİTİK VURUŞ!" : ev.data.hit ? "İSABET!" : "ISKA";
+  out.className = "r-out " + (ev.data.hit ? "ok" : "bad");
+});
+
 // ── combat ──────────────────────────────────────────────────────────────
 net.on("your_turn", (m) => {
   turnOptions = m.options;

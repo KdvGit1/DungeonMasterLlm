@@ -80,7 +80,7 @@ class ItemStack(BaseModel):
             "kind": self.kind, "description": self.description, "value": self.value,
             "rarity": self.rarity, "rarity_tr": RARITY_TR.get(self.rarity, self.rarity),
             "magic_bonus": self.magic_bonus, "charges": self.charges,
-            "usable": bool(d and d.type == "consumable"),
+            "usable": bool(d and d.type == "consumable" and d.effect in ("heal", "cure_poison")),
             "equippable": slot_for(self) is not None,
             "damage": (self.weapon_def.damage if self.weapon_def else None),
         }

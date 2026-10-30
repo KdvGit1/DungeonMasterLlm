@@ -13,6 +13,7 @@ from typing import AsyncIterator
 
 from dndm.game.character import Character
 from dndm.gm import prompts
+from dndm.gm.turkish import fix_name_suffixes, trim_to_sentence
 from dndm.llm.client import LLMClient, LLMError
 from dndm.llm.schemas import (ExploreAdjudication, ExploreRuling, ImprovisedRuling, StoryExtraction)
 from dndm.rules import data
@@ -235,10 +236,19 @@ class GameMaster:
                 fallback = self._fallback_narration(outcomes or [], notes or [])
                 collected.append(fallback)
                 yield fallback
-        text = clean_narration("".join(collected))
+        text = self.polish("".join(collected), party)
         if record:
             self.record_exchange(actions_block, outcomes or [], text)
         self.last_narration = text
+
+    def polish(self, raw: str, party: list[Character]) -> str:
+        """Clean meta text, drop a cut-off final fragment, fix Turkish suffixes on known names."""
+        names = [c.name for c in party] + [n.name for n in self.world.npcs.values()]
+        return fix_name_suffixes(trim_to_sentence(clean_narration(raw)), names)
+
+    @staticmethod
+    def words_for(n_actors: int) -> int:
+        return min(240, 70 + 45 * max(1, n_actors))
 
     def record_exchange(self, actions_block: str, outcomes: list[str], narration: str) -> None:
         user = actions_block or "(scene)"

@@ -6,6 +6,12 @@
       "runtimeExecutable": "D:\\dndmaster\\.runtime\\venv\\Scripts\\python.exe",
       "runtimeArgs": ["-m", "dndm", "--port", "8765"],
       "port": 8765
+    },
+    {
+      "name": "dndmaster-fake",
+      "runtimeExecutable": "D:\\dndmaster\\.runtime\\venv\\Scripts\\python.exe",
+      "runtimeArgs": ["-m", "dndm", "--port", "8766", "--fake-llm"],
+      "port": 8766
     }
   ]
 }

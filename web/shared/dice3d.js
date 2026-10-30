@@ -261,8 +261,27 @@ export class DiceTray {
       this.duration = duration;
       this.onDone = resolve;
       this.elapsed = 0;
+      // browsers pause requestAnimationFrame in background tabs: never let the dice queue hang
+      clearTimeout(this.watchdog);
+      this.watchdog = setTimeout(() => this.finish(), (duration + 1.0) * 1000);
       if (!this.running) { this.running = true; this.last = performance.now(); requestAnimationFrame((t) => this.tick(t)); }
     });
+  }
+
+  /** Snap every die onto its result face and resolve immediately. */
+  finish() {
+    for (const d of this.dice) {
+      d.mesh.quaternion.copy(d.target);
+      d.mesh.position.set(d.settleX, d.radius, d.settleZ);
+      if (d.spec.kept === false) d.mesh.material.forEach((m) => { m.opacity = 0.35; });
+      d.done = true;
+    }
+    this.elapsed = this.duration + 1;
+    this.renderer.render(this.scene, this.camera);
+    this.running = false;
+    const cb = this.onDone;
+    this.onDone = null;
+    if (cb) cb();
   }
 
   tick(now) {
@@ -313,9 +332,11 @@ export class DiceTray {
       }
     }
     this.renderer.render(this.scene, this.camera);
+    if (!this.onDone) { this.running = false; return; }
     if (this.elapsed < T + 0.05) {
       requestAnimationFrame((t) => this.tick(t));
     } else {
+      clearTimeout(this.watchdog);
       this.running = false;
       const cb = this.onDone;
       this.onDone = null;

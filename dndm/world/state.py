@@ -19,7 +19,9 @@ from dndm.rules import data
 from dndm.text import norm_key, similar
 from dndm.world.scenario import Discovery, Location, Scenario
 
-TIME_OF_DAY = [(5, "şafak"), (8, "sabah"), (12, "öğle"), (15, "ikindi"), (18, "akşam"), (21, "gece"), (24, "gece yarısı")]
+# (start hour, label): a period runs from its start hour until the next one begins
+TIME_OF_DAY = [(0, "gece yarısı"), (3, "gece"), (5, "şafak"), (8, "sabah"), (12, "öğle"), (15, "ikindi"),
+               (18, "akşam"), (21, "gece")]
 
 
 def _slug(name: str) -> str:
@@ -326,11 +328,10 @@ class WorldState(BaseModel):
 
     # ── time & fronts ───────────────────────────────────────────
     def time_label(self) -> str:
-        label = TIME_OF_DAY[-1][1]
+        label = TIME_OF_DAY[0][1]
         for h, name in TIME_OF_DAY:
-            if self.hour < h:
+            if self.hour >= h:
                 label = name
-                break
         return f"{self.day}. gün, {label}"
 
     @property

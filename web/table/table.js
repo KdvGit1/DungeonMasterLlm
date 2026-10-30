@@ -188,7 +188,7 @@ function renderCombat(combat) {
   $("combat-panel").classList.toggle("hidden", !combat);
   $("narration").classList.toggle("combat", !!combat);
   if (!combat) return;
-  $("c-round").textContent = `${combat.round}. tur`;
+  $("c-round").textContent = combat.round > 0 ? `${combat.round}. tur` : "Hazırlık";
   const ini = $("initiative");
   ini.innerHTML = "";
   for (const o of combat.order) {
@@ -327,9 +327,14 @@ async function pumpDice() {
     const quick = m.quick && diceQueue.length > 0;
     const specs = m.roll.dice.map((d) => ({ sides: d.sides, value: d.value, kept: d.kept }));
     banner(m, null);
-    await tray.roll(specs, { color, duration: quick ? 1.1 : m.quick ? 1.6 : 2.3 });
-    banner(m, true);
-    await sleep(quick ? 500 : 1900);
+    if (document.hidden) {
+      banner(m, true);              // nobody is watching: no animation, keep the queue moving
+      await sleep(150);
+    } else {
+      await tray.roll(specs, { color, duration: quick ? 1.1 : m.quick ? 1.6 : 2.3 });
+      banner(m, true);
+      await sleep(quick ? 500 : 1900);
+    }
     $("dice-banner").classList.add("hidden");
     tray.clear();
     tray.renderer.render(tray.scene, tray.camera);

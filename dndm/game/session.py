@@ -485,9 +485,11 @@ class GameSession:
         actions_block = "\n".join(
             f"{name}{' (whispered to GM — others do not know)' if a.private else ''}: {a.text}"
             for name, a in by_name.items())
+        words = self.gm.words_for(len(by_name))
         await self._narrate(actions_block=actions_block, outcomes=outcomes, notes=notes,
-                            instruction="Narrate the results now, in Turkish. Address every character's action.",
-                            kind="round")
+                            instruction=f"Narrate the results now, in Turkish, about {words} words (never more than "
+                                        f"{words + 30}). Address every character's action within one flowing scene.",
+                            kind="round", max_tokens=int(words * 2.6) + 80)
         await self._post_narration(party)
 
     async def _group_check(self, party: list[Character], ruling: ExploreRuling) -> list[str]:
@@ -790,18 +792,18 @@ class GameSession:
     # ═══════════════════════════════════════════════════════════
 
     async def _narrate(self, *, actions_block: str, outcomes: list[str], notes: list[str], instruction: str,
-                       kind: str = "round", stream_fn=None) -> str:
+                       kind: str = "round", stream_fn=None, max_tokens: int = 520) -> str:
         assert self.gm
         nid = uuid.uuid4().hex[:8]
         await self.emit({"t": "narration_start", "id": nid, "kind": kind}, None)
         parts: list[str] = []
         gen = stream_fn if stream_fn is not None else self.gm.narrate(
             self.living_party() or self.party(), actions_block=actions_block, outcomes=outcomes, notes=notes,
-            instruction=instruction)
+            instruction=instruction, max_tokens=max_tokens)
         async for piece in gen:
             parts.append(piece)
             await self.emit({"t": "narration_chunk", "id": nid, "text": piece}, None)
-        text = self.gm.last_narration if stream_fn is None else "".join(parts).strip()
+        text = self.gm.last_narration if stream_fn is None else self.gm.polish("".join(parts), self.party())
         entry = {"id": nid, "text": text, "kind": kind, "at": time.time()}
         self.narration_log.append(entry)
         if len(self.narration_log) > 200:

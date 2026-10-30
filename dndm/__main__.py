@@ -16,6 +16,7 @@ def main() -> None:
     ap.add_argument("--port", type=int)
     ap.add_argument("--host")
     ap.add_argument("--model")
+    ap.add_argument("--fake-llm", action="store_true", help="UI development without a GPU")
     args = ap.parse_args()
     cfg = load_config()
     if args.port:
@@ -25,7 +26,13 @@ def main() -> None:
     if args.model:
         cfg.model = args.model
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
-    uvicorn.run(create_app(cfg), host=cfg.host, port=cfg.port, log_level="info", ws_ping_interval=20)
+    app = create_app(cfg)
+    if args.fake_llm:
+        from dndm.llm.devfake import DevLLM
+        hub = app.state.hub
+        hub.llm = DevLLM()
+        hub.session.llm = hub.llm
+    uvicorn.run(app, host=cfg.host, port=cfg.port, log_level="info", ws_ping_interval=20)
 
 
 if __name__ == "__main__":
