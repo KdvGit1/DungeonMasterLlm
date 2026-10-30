@@ -10,6 +10,7 @@ Her GM cevabından sonra çalışır:
 import json
 import re
 from llm_client import ask_llm
+from game.llm_utils import extract_json_array
 
 
 def extract_npcs_from_response(gm_response, recent_messages, existing_npc_names, player_names):
@@ -67,18 +68,14 @@ If there are NO new NPCs: []"""
     try:
         answer = ask_llm([{"role": "user", "content": prompt}]).strip()
 
-        print(f"\n🔎 NPC Extractor — AI ham cevap: {answer[:200]}")
+        print(f"\n🔎 NPC Extractor — AI ham cevap: {answer[:300]}")
 
-        # Markdown temizle
-        answer = re.sub(r'```json|```', '', answer).strip()
+        # Robust JSON array extraction (handles think blocks, markdown, single objects)
+        data = extract_json_array(answer)
 
-        # JSON array'i bul
-        match = re.search(r'\[.*\]', answer, re.DOTALL)
-        if not match:
+        if data is None:
             print("🔎 NPC Extractor — JSON array bulunamadı, NPC yok")
             return []
-
-        data = json.loads(match.group(0))
 
         if not isinstance(data, list):
             print("🔎 NPC Extractor — Geçersiz format, liste değil")
@@ -107,9 +104,6 @@ If there are NO new NPCs: []"""
 
         return valid_npcs
 
-    except json.JSONDecodeError as e:
-        print(f"🔎 NPC Extractor — JSON parse hatası: {e}")
-        return []
     except Exception as e:
         print(f"🔎 NPC Extractor — Hata: {e}")
         return []

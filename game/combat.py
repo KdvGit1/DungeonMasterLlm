@@ -161,6 +161,8 @@ def enemy_turn_all(game_state, player_targets, session_id):
     if not encounter or not encounter.is_active:
         print(f"🐞 DEBUG [Combat]: enemy_turn_all aborted. No active encounter.")
         return []
+    if not game_state.is_combat:
+        return []
 
     print(f"🐞 DEBUG [Combat]: Triggering enemy_turn_all for session {session_id}.")
     results = enemy_turn(encounter, player_targets)

@@ -100,3 +100,10 @@ def display_inventory(session_id, player_name=""):
     print(f"🎒 {player_name} envanter:")
     for item in items:
         print(f"   • {item['item_name']} x{item['quantity']}  — {item['value']}gp")
+
+# Pickup difficulty by rarity (used by /api/game/pickup)
+RARITY_DC = {"common": 6, "uncommon": 10, "rare": 14, "very_rare": 18}
+
+
+def get_pickup_dc(rarity):
+    return RARITY_DC.get(rarity, 8)

@@ -1,2 +1,8 @@
 /ui/translator_models
 api_keys.json
+hf_token.txt
+__pycache__/
+*.pyc
+.idea/
+.runtime/
+.work/

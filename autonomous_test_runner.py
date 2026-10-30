@@ -70,6 +70,10 @@ from game.xp_manager import (
     grant_quest_rewards, apply_damage, add_gold, format_player_status,
 )
 from game.quest_manager import init_quests, check_node_quests
+from game.xp_manager import get_player_stats
+from game.encounter_manager import (
+    create_encounter, get_alive_enemies, get_total_xp, generate_combat_summary,
+)
 from game.combat_events import check_combat_events, apply_event
 from prompts.system_prompt import build_system_prompt
 

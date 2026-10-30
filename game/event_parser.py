@@ -1,6 +1,7 @@
 import re
 import json
 from llm_client import ask_llm
+from game.llm_utils import extract_json_object
 
 # ─── GM CEVABINI ANALİZ ET ───────────────────────────────────────────────────
 
@@ -9,7 +10,7 @@ def parse_gm_events(gm_response, context=""):
     GM cevabını analiz eder: eşya, altın, quest ipuçları.
     Döner:
     {
-        "item_found": {"name": "Rusty Key", "value": 5} veya None,
+        "item_found": {"name": "Rusty Key", "rarity": "common", "value": 5} veya None,
         "gold_found": 0,
         "quest_hint": ""
     }
@@ -24,12 +25,12 @@ Extract ONLY what is explicitly described as:
 2. Gold/coins the player FINDS or RECEIVES
 3. A quest-related discovery (finding a clue, a person, a location tied to a task)
 
-For items: estimate approximate gold value.
+For items: estimate rarity (common/uncommon/rare/very_rare) and approximate gold value.
 If nothing is found, return nulls/zeros.
 
 Respond ONLY with valid JSON:
 {{
-    "item_found": {{"name": "Rusty Key", "value": 5}},
+    "item_found": {{"name": "Rusty Key", "rarity": "common", "value": 5}},
     "gold_found": 0,
     "quest_hint": ""
 }}
@@ -42,17 +43,14 @@ or if nothing:
 
     try:
         answer = ask_llm([{"role": "user", "content": prompt}]).strip()
-        answer = re.sub(r'```json|```', '', answer).strip()
-        match = re.search(r'\{.*\}', answer, re.DOTALL)
-        if match:
-            data = json.loads(match.group(0))
-            # Guard: ensure it's a dict, not a list
-            if isinstance(data, dict):
-                return {
-                    "item_found": data.get("item_found"),
-                    "gold_found": int(data.get("gold_found", 0)),
-                    "quest_hint": data.get("quest_hint", "")
-                }
+
+        data = extract_json_object(answer)
+        if data is not None:
+            return {
+                "item_found": data.get("item_found"),
+                "gold_found": int(data.get("gold_found", 0)),
+                "quest_hint": data.get("quest_hint", "")
+            }
     except Exception as e:
         print(f"   ❌ parse_gm_events HATA: {e}")
 

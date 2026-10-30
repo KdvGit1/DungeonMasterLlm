@@ -18,7 +18,7 @@ from game.combat import player_attack, enemy_attack, format_encounter_status
 from game.encounter_manager import (
     parse_encounter_block, strip_encounter_block, create_encounter,
     get_alive_enemies, is_encounter_over, get_total_xp, generate_combat_summary,
-    is_combat_finished, enemy_turn
+    is_combat_finished, enemy_turn, record_damage
 )
 from game.event_parser import parse_encounter_from_response, strip_encounter_from_response
 from game.inventory_manager import use_item, add_item, display_inventory
@@ -464,7 +464,7 @@ def process_combat_turn(game_state, player_name, action, session_id, user, playe
             # Enemy turn
             player_targets = _build_player_targets(game_state, session_id, user)
             if player_targets:
-                enemy_results = enemy_turn(encounter, player_targets, session_id)
+                enemy_results = enemy_turn(encounter, player_targets)
                 for er in enemy_results:
                     if er["damage"] > 0 and er.get("target_player"):
                         is_down, new_hp = apply_damage(session_id, er["target_player"], er["damage"])
@@ -501,7 +501,7 @@ def process_combat_turn(game_state, player_name, action, session_id, user, playe
     # ── ENEMY TURN ──
     player_targets = _build_player_targets(game_state, session_id, user)
 
-    enemy_results = enemy_turn(encounter, player_targets, session_id)
+    enemy_results = enemy_turn(encounter, player_targets)
 
     # Apply enemy damage to players
     for er in enemy_results:

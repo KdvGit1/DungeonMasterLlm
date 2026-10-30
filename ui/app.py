@@ -16,6 +16,7 @@ if PROJECT_ROOT not in sys.path:
 
 from flask import Flask, request, jsonify, send_from_directory, Response
 import requests as http_requests
+from requests.exceptions import Timeout as requests_timeout
 
 from db.database import initialize_db
 from db.user_manager import register_user, login_user
@@ -37,11 +38,12 @@ from game.encounter_manager import (
     format_encounter_display, is_combat_finished
 )
 from game.event_parser import parse_encounter_from_response, strip_encounter_from_response
-from game.inventory_manager import use_item, add_item, get_inventory
+from game.inventory_manager import use_item, add_item, get_inventory, get_pickup_dc
 from game.monster_data import MONSTER_TABLE
 from game.skill_data import get_skills_for_class, get_initial_skill_levels, get_all_skill_info, get_skill_by_id, calculate_skill_damage, calculate_skill_heal, get_skill_cooldown_value
 from game.xp_manager import init_player_stats, grant_general_xp, grant_ability_xp, grant_combat_xp, apply_damage, add_gold, format_player_status, grant_quest_rewards, get_player_stats
 from game.quest_manager import init_quests, check_node_quests
+from game.llm_utils import extract_json_object
 from game.event_parser import parse_gm_events
 from game.combat_events import check_combat_events, apply_event
 from game.room_manager import create_room, join_room, get_room, get_room_for_user, get_room_code_for_user, leave_room
@@ -136,14 +138,9 @@ If no roll:     {{"needed": false}}"""
 
     try:
         answer = ask_llm([{"role": "user", "content": prompt}]).strip()
-        answer = re.sub(r"```json|```", "", answer).strip()
-        match = re.search(r"\{.*?\}", answer, re.DOTALL)
-        if match:
-            answer = match.group(0)
-        else:
+        data = extract_json_object(answer)
+        if data is None:
             return {"needed": False}
-
-        data = json.loads(answer)
         if data.get("needed"):
             return {
                 "needed": True,
@@ -254,37 +251,96 @@ def _check_item_acquisition(action):
 
 # ─── COMBAT INTENT KONTROLÜ ──────────────────────────────────────────────────
 
+# Combat intent keyword fallback — if LLM fails to produce JSON, check action words
+COMBAT_KEYWORDS = [
+    "attack", "fight", "kill", "stab", "slash", "strike", "punch", "hit", "shoot",
+    "swing", "charge", "assault", "ambush", "battle", "duel", "slay",
+    "saldır", "öldür", "vur", "dövüş", "savaş",
+]
+
+
 def _check_for_combat_intent(actions_str, recent_messages):
     """
     Oyuncu aksiyonlarının bir savaş başlatıp başlatmadığını LLM'e sorar.
     Eğer evet ise {"is_combat": True} döner.
+    Keyword fallback: if LLM can't produce valid JSON, fall back to keyword detection.
     """
+    # Build a more compact recent context for the intent analyzer
+    context_summary = ""
+    if recent_messages:
+        last_msgs = recent_messages[-10:]
+        for m in last_msgs:
+            role = "GM" if m["role"] == "assistant" else "Player"
+            content = m["content"][:200] + ("..." if len(m["content"]) > 200 else "")
+            context_summary += f"{role}: {content}\n"
+
     prompt = f"""You are a D&D intent analyzer. Look at the recent context and the player's new actions.
 Does the player's action initiate combat, an attack, or a fight?
 
 RECENT CONTEXT:
-{recent_messages[-2000:] if recent_messages else "None"}
+{context_summary if context_summary else "No recent context."}
 
-PLAYER ACTIONS:
+PLAYER ACTIONS THIS ROUND:
 {actions_str}
 
-If NO combat is initiated, respond with:
+Analyze the player actions. If they are attacking, threatening, or initiating a fight, combat SHOULD start.
+
+If NO combat is initiated, respond with ONLY this JSON:
 {{"is_combat": false}}
 
-If COMBAT IS initiated, you MUST also determine the enemies from the context. Use a generic type from this list if possible: {', '.join(MONSTER_TABLE.keys())}. 
-If none fit, fallback to a sensible one. Max 4 enemies.
-Respond ONLY with valid JSON:
-{{"is_combat": true, "enemies": ["dragon"], "context": "player attacks the dragon"}}
+If COMBAT IS initiated, you MUST also determine the enemies from the context.
+Use a generic type from this list: {', '.join(MONSTER_TABLE.keys())}.
+Respond ONLY with valid JSON (one line, no markdown):
+{{"is_combat": true, "enemies": ["bandit"], "context": "player attacks the guards"}}
 """
     try:
-        answer = ask_llm([{"role": "user", "content": prompt}]).strip()
-        answer = re.sub(r"```json|```", "", answer).strip()
-        match = re.search(r"\{.*?\}", answer, re.DOTALL)
-        if match:
-            data = json.loads(match.group(0))
+        answer = (ask_llm([{"role": "user", "content": prompt}], timeout=35) or "").strip()
+
+        print(f"   🔍 Combat Intent — raw LLM response: {repr(answer[:200])}")
+
+        # Empty or very short response — use keyword fallback
+        if not answer or len(answer) < 5:
+            print("   ⚠️  Combat Intent — empty/short LLM response, using keyword fallback")
+            return _keyword_combat_fallback(actions_str)
+
+        # Try to extract JSON
+        data = extract_json_object(answer)
+        if data is not None:
+            val = data.get("is_combat", False)
+            if isinstance(val, str):
+                data["is_combat"] = val.lower() in ("true", "1", "yes")
             return data
+
+        # JSON parse failed — check raw text for hints
+        answer_lower = answer.lower()
+        if any(pat in answer_lower for pat in ('"is_combat": true', "is_combat: true",
+                                                 "combat is initiated", "combat initiated",
+                                                 "combat should start", "combat starts")):
+            print("   ⚠️  Combat Intent — JSON parse failed but text suggests combat")
+            return _keyword_combat_fallback(actions_str)
+
+        # No combat signal found
+        print("   ⚠️  Combat Intent — no combat detected, falling back")
+        return {"is_combat": False}
+
+    except requests_timeout:
+        print("   ⚠️  Combat Intent — LLM timeout, using keyword fallback")
+        return _keyword_combat_fallback(actions_str)
     except Exception as e:
-        print(f"⚠️ Combat intent check hatası: {e}")
+        print(f"   ⚠️  Combat intent check hatası: {e}, using keyword fallback")
+        return _keyword_combat_fallback(actions_str)
+
+
+def _keyword_combat_fallback(actions_str):
+    """
+    Fallback combat detection using keywords in the player action.
+    Only triggers if the action clearly contains attack-like words.
+    """
+    actions_lower = actions_str.lower()
+    for kw in COMBAT_KEYWORDS:
+        if kw in actions_lower:
+            print(f"   ⚔️ Keyword fallback triggered on '{kw}' — starting combat")
+            return {"is_combat": True, "enemies": ["guard"], "context": f"Player action: {actions_str}"}
     return {"is_combat": False}
 
 

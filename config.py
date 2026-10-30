@@ -40,7 +40,8 @@ PROVIDER = 'ollama'  # default
 AVAILABLE_MODELS = {
     "light_model": "qwen3.5:2b-q4_K_M",
     "recommended_model": "qwen3.5:9b",
-    "heavy_model": "qwen3.5:17b"
+    "heavy_model": "qwen3.5:17b",
+    "cloud_model": "minimax-m2.7:cloud"
 }
 AVAILABLE_TRANSLATOR_MODELS = {
     "no_model": "none",

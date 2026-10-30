@@ -5,6 +5,7 @@ from game.inventory_manager import format_inventory_for_prompt, format_all_inven
 from game.quest_manager import format_quests_for_prompt
 from game.xp_manager import format_stats_for_prompt
 from game.monster_data import get_monster_type_list
+from game.encounter_manager import get_encounter_status_for_prompt
 import config
 
 # ─── GM KİŞİLİĞİ ─────────────────────────────────────────────────────────────
