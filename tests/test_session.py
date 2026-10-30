@@ -178,3 +178,41 @@ async def test_travel_rules_in_scenario():
     assert r and s.world.location == "meyhane_mahzeni"
     r = await s._travel("Değirmencinin Ambarı")                   # a real new place the players head for
     assert r and s.world.loc(s.scenario).name == "Değirmencinin Ambarı"
+
+
+async def test_combat_commands_from_phone():
+    s, llm, rec, (p1, p2) = make_session(2)
+    await s.start()
+    s.settings.turn_timeout = 5
+    await s.start_combat([{"monster": "goblin", "count": 2}])
+    c1 = s.char_of_player(p1.id)
+    seen = set()
+    for _ in range(400):
+        await asyncio.sleep(0.01)
+        if s.mode != "combat":
+            break
+        eng = s.engine
+        cur = eng.current() if eng else None
+        if not cur or not cur.startswith("pc:") or s.busy or s._turn_waiter is None:
+            continue
+        ch = eng.pc(cur)
+        pid = s.player_of_char(ch.id).id
+        foes = eng.enc.active_enemies()
+        if not foes:
+            continue
+        if "improvise" not in seen and ch.id == c1.id:
+            llm.queue("ImprovisedRuling", {"feasible": True, "explanation": "", "effect": "damage_condition",
+                                           "damage": "4d6", "damage_type": "bludgeoning", "condition": "prone",
+                                           "target": foes[0].label,
+                                           "check": {"skill": "athletics", "dc": 10, "advantage": "none", "reason": "x"}})
+            await s.combat_command(pid, {"type": "improvise", "text": "Masayı tekmeleyip goblinin üstüne deviriyorum"})
+            seen.add("improvise")
+        else:
+            await s.combat_command(pid, {"type": "attack", "target": foes[0].uid})
+            seen.add("attack")
+        await s.combat_command(pid, {"type": "end_turn"})
+    await _drain(s)
+    assert {"attack", "improvise"} <= seen
+    assert any(m["event"]["type"] == "improvise" for m in rec.of("combat_event"))
+    # improvised damage is capped by level (4d6 asked, level 1 cap is 2d6)
+    assert s.mode in ("exploration", "combat")
