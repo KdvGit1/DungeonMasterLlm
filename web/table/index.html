@@ -65,6 +65,7 @@
       <span class="grow"></span>
       <button class="btn small ghost" id="btn-join">📱 Katıl</button>
       <button class="btn small ghost" id="btn-save">💾 Kaydet</button>
+      <button class="btn small ghost" id="btn-settings">⚙️</button>
       <button class="btn small ghost" id="btn-full">⛶</button>
     </header>
     <main class="board">
@@ -105,6 +106,21 @@
     </div>
   </div>
   <div id="roll-wait" class="roll-wait hidden"></div>
+  <div id="settings-modal" class="modal hidden">
+    <div class="panel modal-card settings-card">
+      <h2>Ayarlar</h2>
+      <label class="setrow"><input type="checkbox" id="s-autoroll"> Zarları otomatik at</label>
+      <label class="setrow"><input type="checkbox" id="s-showdc"> Zorluk sayılarını göster</label>
+      <label class="setrow"><input type="checkbox" id="s-mercy"> Merhamet modu (grup yenilirse ölmez, esir düşer)</label>
+      <label class="setcol">Anlatıcı model<select id="s-model"></select></label>
+      <div class="setcol"><span>Oyuncular</span><div id="s-players" class="col"></div></div>
+      <div class="row">
+        <button class="btn danger small" id="s-new">Yeni oyun</button>
+        <span class="grow"></span>
+        <button class="btn" id="s-close">Kapat</button>
+      </div>
+    </div>
+  </div>
   <div id="join-modal" class="modal hidden">
     <div class="panel modal-card">
       <h2>Masaya Katıl</h2>

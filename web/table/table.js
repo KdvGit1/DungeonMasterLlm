@@ -71,6 +71,38 @@ for (const [id, key] of [["opt-autoroll", "auto_roll"], ["opt-showdc", "show_dc"
   $(id).onchange = (e) => net.send({ op: "settings", settings: { [key]: e.target.checked } });
 }
 $("btn-save").onclick = () => net.send({ op: "save" });
+$("btn-settings").onclick = openSettings;
+$("s-close").onclick = () => $("settings-modal").classList.add("hidden");
+$("s-new").onclick = () => {
+  if (confirm("Mevcut oyun kaydedilip yeni bir oyun başlatılsın mı?")) {
+    net.send({ op: "save" });
+    net.send({ op: "new_session" });
+    $("settings-modal").classList.add("hidden");
+  }
+};
+for (const [id, key] of [["s-autoroll", "auto_roll"], ["s-showdc", "show_dc"], ["s-mercy", "mercy"]]) {
+  $(id).onchange = (e) => net.send({ op: "settings", settings: { [key]: e.target.checked } });
+}
+$("s-model").onchange = (e) => net.send({ op: "set_model", model: e.target.value });
+
+async function openSettings() {
+  $("s-autoroll").checked = state.settings.auto_roll;
+  $("s-showdc").checked = state.settings.show_dc;
+  $("s-mercy").checked = state.settings.mercy;
+  const cfg = await (await fetch("/api/config")).json();
+  const sel = $("s-model");
+  sel.innerHTML = "";
+  for (const m of cfg.models.length ? cfg.models : [cfg.model]) sel.append(el("option", { value: m, selected: m === cfg.model }, m));
+  const host = $("s-players");
+  host.innerHTML = "";
+  for (const p of state.players) {
+    const ch = state.party.find((c) => c.player_id === p.id);
+    host.append(el("div", { class: "kick-row" }, `${p.connected ? "🟢" : "⚪"} ${p.name}${ch ? " — " + ch.name : ""}`,
+      el("button", { class: "btn small ghost", onclick: () => { if (confirm(`${p.name} masadan çıkarılsın mı?`)) net.send({ op: "kick", player_id: p.id }); } }, "Çıkar")));
+  }
+  $("settings-modal").classList.remove("hidden");
+}
+
 let pcSeats = 1;
 $("pc-seat").onclick = (e) => { e.preventDefault(); window.open(`/play?seat=pc${pcSeats++}`, "_blank"); };
 $("btn-join").onclick = () => $("join-modal").classList.remove("hidden");
