@@ -1,37 +1,36 @@
 # DnD Master v2 — İlerleme Günlüğü
 
-Bu dosya otonom geliştirme sırasında nerede kalındığını takip eder.
-Fikir/öneri notları için: [FIKIRLER.md](FIKIRLER.md)
+Fikir/öneri notları: [FIKIRLER.md](FIKIRLER.md)
 
 ## Ortam (her şey D:'de)
-- Kaynak: `D:\dndmaster` (git, dal: `v2`)
-- Çalışma zamanı: `D:\dndmaster\.runtime\` (git dışı)
-  - `venv\` geliştirme Python 3.12 ortamı
-  - `ollama\` taşınabilir Ollama v0.40.13, `models\` model dosyaları, `ollama-home\`
-  - `pip-cache\`, `hf-cache\`, `tmp\`, `downloads\`
+- Kaynak: `D:\dndmaster` (git dalı `v2`); çalışma zamanı `D:\dndmaster\.runtime\` (venv, Ollama, modeller, önbellekler)
 - Her kabukta: `source scripts/devenv.sh`
-- Ollama başlatma: `USERPROFILE=<.runtime\ollama-home> OLLAMA_FLASH_ATTENTION=1 OLLAMA_KV_CACHE_TYPE=q8_0 .runtime/ollama/ollama.exe serve`
-- Donanım: RTX 3060 12GB, Ryzen 5 1600, 16GB RAM
+- Sunucu: `python -m dndm` (gerçek model) / `python -m dndm --port 8766 --fake-llm` (GPU'suz arayüz testi)
+- Testler: `python -m pytest -q` (117 test)
+- Otonom oyun testi: `python -m tools.playtest --players 3 --rounds 10 --personas investigator,thief,free_spirit`
+- Model karşılaştırma: `python -m tools.bench.run_bench MODEL...` → `.runtime/bench/`
+- Savaş dengesi: `python -m tools.sim_balance 150`
+- Sürüm: `python -m tools.build_release` → `dist/DnDMaster-Setup.exe` (32,8 MB)
 
 ## Dallar
-- `main` — orijinal (bozuk merge 8d40b8b dahil)
-- `legacy-fix` — merge doğru yapıldı (eb75b47), eski sürüm açılıyor, 28 test geçiyor
-- `v2` — yeni sürüm geliştirmesi
+- `main` orijinal · `legacy-fix` merge düzeltilmiş eski sürüm · `v2` yeni sürüm
 
-## Aşamalar
-- [x] 0. Hazırlık (klasör düzeni, venv, Ollama)
-- [x] 1. Bozuk merge kurtarıldı → `legacy-fix`
-- [ ] 2. Model araştırması, benchmark, seçim → `MODEL_RAPORU.md`
-- [ ] 3. Oyun motoru çekirdeği (kurallar, karakter, zar)
-- [ ] 4. Envanter
-- [ ] 5. AI GM katmanı
-- [ ] 6. Savaş
-- [ ] 7. Sunucu + çok oyunculu
-- [ ] 8. Arayüzler (PC masa ekranı + telefon) + 3D zar
-- [ ] 9. Senaryolar + doğrulama
-- [ ] 10. Uçtan uca testler
-- [ ] 11. Kurulum exe
-- [ ] 12. Cilalama
+## Bitenler
+- [x] Bozuk merge kurtarıldı (`legacy-fix`)
+- [x] Model karşılaştırması: Gemma4-12B heretic önde (hakem %100, en iyi Türkçe); Qwen3.5-9B ve Rocinante elendi
+- [x] Kural motoru, zar, karakter, 8 sınıf/9 ırk, 98 eşya, 42 büyü, 51 canavar (SRD 5.1)
+- [x] Envanter (kuşanma, yığın, ver/al/bırak/yerden al, para, dükkân)
+- [x] Savaş motoru + düşman yapay zekâsı + denge simülasyonu
+- [x] Açık dünya senaryo formatı + doğrulayıcı (yapı + klasik D&D/çağ dışı kontrolü)
+- [x] GM katmanı (hakem / anlatıcı / çıkarıcı / özet), Türkçe ek düzeltici, durgunluk kırıcı
+- [x] Oturum: eşzamanlı zarlar, erken hakemlik, kayıt/yükleme
+- [x] FastAPI + WebSocket sunucu, PC masa ekranı (3D zar), telefon arayüzü (savaş menüsü dahil)
+- [x] Senaryolar: Değirmenköy'ün Gölgesi (eski senaryonun uyarlaması), Kül Kalesi'nin Laneti (özgün)
+- [x] Başlatıcı (DnDMaster.exe) + kendi kurulum sihirbazımız (DnDMaster-Setup.exe)
 
-## Günlük
-- 2026-10-30: Repo klonlandı, analiz yapıldı, plan onaylandı. Merge düzeltildi (`legacy-fix`). v2 dalı açıldı.
+## Sıradakiler
+- [ ] Son oyun testinin (20261030_05xx) transkriptini incele; Kül Kalesi'ni oyun testinden geçir
+- [ ] Paketlenmiş exe'nin gerçek denemesi (DNDM_OLLAMA_PORT=11434 ile), sonra temiz kurulum testi
+- [ ] Impish Bloodmoon + Gemma4-26B MoE + hafif model (e4b-qat) ölçümü → MODEL_RAPORU.md
+- [ ] 3. senaryo (liman şehri entrikası), PC masa ekranında görsel cilalama, özel karakter oluşturma testi
+- [ ] Not: Inno Setup'ı çalıştırmak otomatik izin denetimince engellendi → kendi kurulum sihirbazımızı yazdık
