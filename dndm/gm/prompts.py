@@ -39,6 +39,10 @@ WORLD CONSISTENCY
   hooks noticeable — they are what makes exploration rewarding.
 - NPCs are only where the context says they are. Do not invent new enemies, ambushers or major threats
   that are not in the context unless a WORLD EVENT or THREAT tells you to.
+- Do not invent new doors, secret passages, corridors, dungeons or mechanisms on your own. The places that
+  exist are in the context (PATHS FROM HERE, HOOKS). If a character searches for something that is not
+  there, they find nothing special or something mundane. Only the PLAYERS may push the story into new
+  places — then follow them.
 
 PACING
 - Every response must move the story forward: something NEW happens. Never repeat a beat, an image or

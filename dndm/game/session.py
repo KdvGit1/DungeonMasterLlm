@@ -611,8 +611,15 @@ class GameSession:
                 ws.add_journal("place", f"Gizli bir yer bulundu: {secret.name}")
                 loc = secret
         if loc is None:
-            # unknown place: create it as an improvised location (freedom!)
-            loc = ws.add_dynamic_location(sc, destination, f"{destination} — oyuncuların keşfettiği yeni bir yer.")
+            # unknown place: create it as an improvised location (freedom!) — but only for a real,
+            # player-given name; id-like inventions from the referee ("koridor_girisi") are ignored
+            if re.fullmatch(r"[a-z0-9_]+", destination.strip()) and "_" in destination:
+                return None
+            name = destination.strip().strip(".")
+            name = name[0].upper() + name[1:] if name else name
+            if not _is_proper_place(name) and sc is not None:
+                return None
+            loc = ws.add_dynamic_location(sc, name, f"{name} — oyuncuların keşfettiği yeni bir yer.")
         if loc.id == ws.location:
             return None
         if not ws.can_travel(sc, loc.id):
